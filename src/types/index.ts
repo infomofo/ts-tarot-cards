@@ -124,12 +124,15 @@ export interface BaseTarotCard {
   uprightMeaning: string;
   reversedMeaning: string;
   description: string;
+  arcana: Arcana; // Overridden by extensions
+  numericValue: number; // Overridden by extensions - unified numeric system
 }
 
 // Major Arcana card
 export interface MajorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Major;
   number: MajorArcana;
+  numericValue: MajorArcana; // 0-21, overrides base
 }
 
 // Minor Arcana card
@@ -137,6 +140,7 @@ export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;
+  numericValue: MinorNumber; // 1-14, overrides base
 }
 
 // Union type for any tarot card
@@ -151,7 +155,7 @@ export interface CardPosition {
 export interface SpreadPosition {
   position: number;
   name: string;
-  meaning: string;
+  positionSignificance: string; // What this position represents in the spread context
   dealOrder: number; // Order in which this position is dealt
 }
 
@@ -164,7 +168,7 @@ export interface Spread {
   preferredStrategy?: string; // Preferred card selection strategy name
 }
 
-export interface Interpretation {
+export interface CardInterpretation {
   position: SpreadPosition;
   card: TarotCard;
   isReversed: boolean;
@@ -175,7 +179,10 @@ export interface Interpretation {
 export interface SpreadReading {
   spread: Spread;
   cards: CardPosition[];
-  interpretations?: Interpretation[];
+  cardInterpretations?: CardInterpretation[];
+  overallInterpretation?: string; // Interpretation of the entire spread reading
+  userContext?: string; // User-provided context like "what area of life to explore"
+  allowReversals: boolean; // Whether this specific reading allows reversals
   timestamp: Date;
 }
 

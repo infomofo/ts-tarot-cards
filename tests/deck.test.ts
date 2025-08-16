@@ -161,8 +161,8 @@ describe('SpreadReader', () => {
       'Custom Test',
       'A test spread',
       [
-        { position: 1, name: 'First', meaning: 'First position', dealOrder: 1 },
-        { position: 2, name: 'Second', meaning: 'Second position', dealOrder: 2 }
+        { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
+        { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
       ]
     );
 
@@ -269,8 +269,8 @@ describe('SpreadReader', () => {
       'Custom Strategy Test',
       'A test spread with strategy',
       [
-        { position: 1, name: 'First', meaning: 'First position', dealOrder: 1 },
-        { position: 2, name: 'Second', meaning: 'Second position', dealOrder: 2 }
+        { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
+        { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
       ],
       true,
       undefined,
@@ -294,7 +294,7 @@ describe('SpreadReader', () => {
     const customSpread = reader.createCustomSpread(
       'Default Strategy Test',
       'A test spread',
-      [{ position: 1, name: 'Only', meaning: 'Only position', dealOrder: 1 }]
+      [{ position: 1, name: 'Only', positionSignificance: 'Only position', dealOrder: 1 }]
     );
 
     const reading = reader.performCustomReading(customSpread);

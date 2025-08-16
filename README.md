@@ -1,15 +1,38 @@
 # TypeScript Tarot Cards
 
-A TypeScript library for modeling and working with Rider-Waite-Smith Tarot deck, including deck management, card spreads, and reading functionality.
+A comprehensive TypeScript library for modeling and working with Rider-Waite-Smith Tarot deck, featuring a robust type system, flexible card selection strategies, and advanced spread modeling capabilities.
+
+## Core Architecture & Philosophy
+
+This library is built on several key architectural principles that make it both powerful and extensible:
+
+### Unified Type System
+- **Base Card Model**: All tarot cards inherit from `BaseTarotCard` with unified `numericValue` and `arcana` properties
+- **Proper Numeric Values**: Major Arcana (0-21), Minor Arcana (1-14) with clear numeric progression
+- **Type Safety**: Clean union types eliminate confusion from optional fields
+- **Extensibility**: Easy to extend from archetype examples to full 78-card deck
+
+### Flexible Reading Configuration
+- **Multi-Level Reversal Control**: Configure at spread level, with per-reading overrides
+- **User Context Integration**: Support for reader questions like "what area of life to explore"
+- **Comprehensive Interpretation System**: Both individual card meanings and overall spread analysis
+- **Visual Representation**: Programmatic spread layouts using Graphviz DOT notation
+
+### Generalizable Card Selection
+- **Strategy Pattern**: Multiple selection methods (deal, fanpick) with unified interface
+- **Hierarchical Configuration**: Default → Spread Preferred → Call Override
+- **Backward Compatibility**: Legacy boolean parameters still supported
+- **Extensible**: Easy to add new selection strategies
 
 ## Features
 
-- **Core Types & Enums**: Complete type definitions for tarot cards, suits, arcana, and spreads
+- **Enhanced Type System**: Complete type definitions with proper numeric associations and clean union types
 - **Suit Properties**: Element associations and meanings for each suit (Cups/Water, Pentacles/Earth, Swords/Air, Wands/Fire)
 - **Extensible Card System**: Archetype examples for major and minor arcana, designed to be extended to full 78-card deck
-- **Deck Logic**: Shuffling, dealing, and fan pick functionality with stub for biometric randomness
-- **Spread Modeling**: Pre-defined spreads (3-card, cross) with custom spread creation
-- **Reading Support**: Complete reading workflow with card positions and reversal handling
+- **Advanced Deck Logic**: Shuffling, dealing, and fan pick functionality with stub for biometric randomness
+- **Sophisticated Spread Modeling**: Pre-defined spreads with visual representations, reversal control, and preferred strategies
+- **Comprehensive Reading Support**: Complete reading workflow with card positions, interpretations, and user context
+- **Flexible Card Selection**: Multiple strategies with hierarchical configuration and backward compatibility
 
 ## Installation
 
@@ -111,6 +134,32 @@ const customSpread = reader.createCustomSpread(
 );
 
 const customReading = reader.performCustomReading(customSpread);
+```
+
+### Enhanced Reading Features
+
+The library provides comprehensive reading support with user context and interpretations:
+
+```typescript
+// Reading with user context
+const reading = reader.performReading('threeCard', 'fanpick', 'Career guidance for the next year');
+
+// Generate interpretations
+const interpretations = reader.generateInterpretations(reading);
+
+// Access reading properties
+console.log(reading.userContext); // "Career guidance for the next year"
+console.log(reading.allowReversals); // true/false based on spread and override
+console.log(reading.overallInterpretation); // Holistic reading summary (if provided)
+
+// Individual card interpretations
+interpretations.forEach(cardInterpretation => {
+  console.log(`Position: ${cardInterpretation.position.name}`);
+  console.log(`Significance: ${cardInterpretation.position.positionSignificance}`);
+  console.log(`Card: ${cardInterpretation.card.name}`);
+  console.log(`Meaning: ${cardInterpretation.meaning}`);
+  console.log(`Reversed: ${cardInterpretation.isReversed}`);
+});
 ```
 
 ### Working with Suits

@@ -1,4 +1,4 @@
-import { Spread, SpreadPosition, SpreadReading, CardPosition, Interpretation, CardSelectionStrategy } from '../types';
+import { Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation, CardSelectionStrategy } from '../types';
 import { TarotDeck } from '../deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../deck/strategies';
 
@@ -16,9 +16,9 @@ digraph ThreeCardSpread {
   "1. Past" -> "2. Present" -> "3. Future";
 }`,
     positions: [
-      { position: 1, name: 'Past', meaning: 'Past influences and events that led to the current situation', dealOrder: 1 },
-      { position: 2, name: 'Present', meaning: 'Current situation and immediate influences', dealOrder: 2 },
-      { position: 3, name: 'Future', meaning: 'Potential outcome and future influences', dealOrder: 3 }
+      { position: 1, name: 'Past', positionSignificance: 'Past influences and events that led to the current situation', dealOrder: 1 },
+      { position: 2, name: 'Present', positionSignificance: 'Current situation and immediate influences', dealOrder: 2 },
+      { position: 3, name: 'Future', positionSignificance: 'Potential outcome and future influences', dealOrder: 3 }
     ]
   },
   crossSpread: {
@@ -42,11 +42,11 @@ digraph CrossSpread {
   "1. Present" -> "5. Outcome" [style=dotted];
 }`,
     positions: [
-      { position: 1, name: 'Present Situation', meaning: 'The heart of the matter, current situation', dealOrder: 1 },
-      { position: 2, name: 'Challenge/Cross', meaning: 'What crosses you, obstacles or challenges', dealOrder: 2 },
-      { position: 3, name: 'Distant Past/Foundation', meaning: 'Foundation of the situation, distant past', dealOrder: 3 },
-      { position: 4, name: 'Recent Past', meaning: 'Recent events and influences', dealOrder: 4 },
-      { position: 5, name: 'Possible Outcome', meaning: 'Potential future outcome', dealOrder: 5 }
+      { position: 1, name: 'Present Situation', positionSignificance: 'The heart of the matter, current situation', dealOrder: 1 },
+      { position: 2, name: 'Challenge/Cross', positionSignificance: 'What crosses you, obstacles or challenges', dealOrder: 2 },
+      { position: 3, name: 'Distant Past/Foundation', positionSignificance: 'Foundation of the situation, distant past', dealOrder: 3 },
+      { position: 4, name: 'Recent Past', positionSignificance: 'Recent events and influences', dealOrder: 4 },
+      { position: 5, name: 'Possible Outcome', positionSignificance: 'Potential future outcome', dealOrder: 5 }
     ]
   },
   // Example spread that doesn't use reversals
@@ -62,8 +62,8 @@ digraph SimplePastPresent {
   "1. Past" -> "2. Present";
 }`,
     positions: [
-      { position: 1, name: 'Past', meaning: 'What has led to this moment', dealOrder: 1 },
-      { position: 2, name: 'Present', meaning: 'What you need to know right now', dealOrder: 2 }
+      { position: 1, name: 'Past', positionSignificance: 'What has led to this moment', dealOrder: 1 },
+      { position: 2, name: 'Present', positionSignificance: 'What you need to know right now', dealOrder: 2 }
     ]
   }
 };
@@ -81,7 +81,8 @@ export class SpreadReader {
    */
   performReading(
     spreadName: keyof typeof SPREADS, 
-    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean
+    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean,
+    userContext?: string
   ): SpreadReading {
     const spread = SPREADS[spreadName];
     if (!spread) {
@@ -102,9 +103,23 @@ export class SpreadReader {
       }
 
       return {
+
+
         spread,
+
+
         cards,
+
+
+        allowReversals: spread.allowReversals,
+
+
+        userContext,
+
+
         timestamp: new Date()
+
+
       };
     }
 
@@ -134,9 +149,23 @@ export class SpreadReader {
     const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
 
     return {
+
+
       spread,
+
+
       cards,
+
+
+      allowReversals: spread.allowReversals,
+
+
+      userContext,
+
+
       timestamp: new Date()
+
+
     };
   }
 
@@ -146,7 +175,8 @@ export class SpreadReader {
    */
   performCustomReading(
     spread: Spread, 
-    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean
+    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean,
+    userContext?: string
   ): SpreadReading {
     const cardCount = spread.positions.length;
     
@@ -162,9 +192,23 @@ export class SpreadReader {
       }
 
       return {
+
+
         spread,
+
+
         cards,
+
+
+        allowReversals: spread.allowReversals,
+
+
+        userContext,
+
+
         timestamp: new Date()
+
+
       };
     }
 
@@ -194,16 +238,30 @@ export class SpreadReader {
     const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
 
     return {
+
+
       spread,
+
+
       cards,
+
+
+      allowReversals: spread.allowReversals,
+
+
+      userContext,
+
+
       timestamp: new Date()
+
+
     };
   }
 
   /**
    * Generate interpretations for a reading
    */
-  generateInterpretations(reading: SpreadReading): Interpretation[] {
+  generateInterpretations(reading: SpreadReading): CardInterpretation[] {
     return reading.cards.map((cardPosition, index) => {
       const position = reading.spread.positions[index];
       return {
@@ -213,7 +271,7 @@ export class SpreadReader {
         meaning: cardPosition.isReversed 
           ? cardPosition.card.reversedMeaning 
           : cardPosition.card.uprightMeaning,
-        additionalNotes: `Card drawn for position "${position.name}". ${position.meaning}`
+        additionalNotes: `Card drawn for position "${position.name}". ${position.positionSignificance}`
       };
     });
   }

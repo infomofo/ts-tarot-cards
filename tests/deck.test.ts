@@ -28,7 +28,7 @@ describe('TarotDeck', () => {
       expect(typeof cardPosition.isReversed).toBe('boolean');
       expect(cardPosition.card).toBeDefined();
       expect(cardPosition.card.id).toBeDefined();
-      expect(cardPosition.card.name).toBeDefined();
+      expect(cardPosition.card.getName()).toBeDefined();
     });
   });
 
@@ -330,5 +330,22 @@ describe('Card Types', () => {
       expect(minorCard.number).toBeDefined();
       expect(typeof minorCard.number).toBe('number');
     }
+  });
+
+  test('should support localization-ready getName() method', () => {
+    const deck = new TarotDeck();
+    const cards = deck.deal(5);
+    
+    cards.forEach(cardPosition => {
+      const card = cardPosition.card;
+      
+      // getName() should return a string
+      expect(typeof card.getName()).toBe('string');
+      expect(card.getName().length).toBeGreaterThan(0);
+      
+      // getName() should accept optional locale parameter
+      expect(typeof card.getName('en')).toBe('string');
+      expect(card.getName('en')).toBe(card.getName()); // Currently returns same since no localization implemented yet
+    });
   });
 });

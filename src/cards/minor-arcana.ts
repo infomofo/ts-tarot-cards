@@ -1,5 +1,42 @@
 import { MinorArcanaCard, Arcana, Suit, MinorNumber, getMinorNumberName } from '../types';
 
+// Concrete implementation of MinorArcanaCard with localization support
+class MinorArcanaCardImpl implements MinorArcanaCard {
+  public readonly id: string;
+  public readonly arcana: Arcana.Minor = Arcana.Minor;
+  public readonly suit: Suit;
+  public readonly number: MinorNumber;
+  public readonly numericValue: MinorNumber;
+  public readonly keywords: string[];
+  public readonly uprightMeaning: string;
+  public readonly reversedMeaning: string;
+  public readonly description: string;
+
+  constructor(
+    suit: Suit,
+    number: MinorNumber,
+    keywords: string[],
+    uprightMeaning: string,
+    reversedMeaning: string,
+    description: string
+  ) {
+    this.id = `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
+    this.suit = suit;
+    this.number = number;
+    this.numericValue = number; // Automatically use the enum value
+    this.keywords = keywords;
+    this.uprightMeaning = uprightMeaning;
+    this.reversedMeaning = reversedMeaning;
+    this.description = description;
+  }
+
+  getName(locale?: string): string {
+    // Future localization can be added here based on locale parameter
+    // For now, default to English
+    return `${getMinorNumberName(this.number)} of ${this.suit}`;
+  }
+}
+
 // Helper function to create a complete MinorArcanaCard with auto-generated properties
 function createMinorArcanaCard(
   suit: Suit,
@@ -9,18 +46,7 @@ function createMinorArcanaCard(
   reversedMeaning: string,
   description: string
 ): MinorArcanaCard {
-  return {
-    id: `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`,
-    name: `${getMinorNumberName(number)} of ${suit}`,
-    arcana: Arcana.Minor,
-    suit,
-    number,
-    numericValue: number, // Automatically use the enum value
-    keywords,
-    uprightMeaning,
-    reversedMeaning,
-    description
-  };
+  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeaning, reversedMeaning, description);
 }
 
 // Example minor arcana cards - extensible to full deck

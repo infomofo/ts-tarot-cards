@@ -119,13 +119,15 @@ export interface SuitProperties {
 // Base interface for all tarot cards
 export interface BaseTarotCard {
   id: string;
-  name: string;
   keywords: string[];
   uprightMeaning: string;
   reversedMeaning: string;
   description: string;
   arcana: Arcana; // Overridden by extensions
   numericValue: number; // Overridden by extensions - unified numeric system
+  
+  // Dynamic name generation for localization support
+  getName(locale?: string): string;
 }
 
 // Major Arcana card

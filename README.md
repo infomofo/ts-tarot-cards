@@ -40,6 +40,39 @@ console.log(`${deck.getRemainingCount()} cards remaining`);
 deck.reset();
 ```
 
+### Card Selection Strategies
+
+The library supports multiple card selection methods through a flexible strategy pattern:
+
+```typescript
+import { TarotDeck, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards';
+
+// Initialize deck with a default strategy
+const deck = new TarotDeck(CARD_SELECTION_STRATEGIES.fanpick);
+
+// Use the default strategy
+const cards1 = deck.selectCards(3); // Uses fanpick
+
+// Override with a specific strategy
+const cards2 = deck.selectCards(3, true, CARD_SELECTION_STRATEGIES.deal);
+
+// Change default strategy
+deck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);
+
+// Get available strategies
+const strategies = deck.getAvailableStrategies();
+console.log(Object.keys(strategies)); // ['deal', 'fanpick']
+```
+
+**Available Strategies:**
+- **`deal`**: Sequential dealing from the top of the shuffled deck (traditional)
+- **`fanpick`**: Random selection from fanned cards (intuitive selection)
+
+**Strategy Selection Priority:**
+1. Explicit strategy parameter (highest priority)
+2. Spread's preferred strategy
+3. Deck's default strategy (lowest priority)
+
 ### Performing Spreads
 
 ```typescript
@@ -47,24 +80,34 @@ import { SpreadReader } from 'ts-tarot-cards';
 
 const reader = new SpreadReader();
 
-// Three-card spread
+// Three-card spread (uses preferred strategy: 'deal')
 const threeCardReading = reader.performReading('threeCard');
 console.log('Past:', threeCardReading.cards[0]);
 console.log('Present:', threeCardReading.cards[1]);
 console.log('Future:', threeCardReading.cards[2]);
 
-// Cross spread
+// Cross spread (uses preferred strategy: 'fanpick')
 const crossReading = reader.performReading('crossSpread');
 
-// Custom spread
+// Override spread's preferred strategy
+const dealReading = reader.performReading('crossSpread', 'deal');
+const fanpickReading = reader.performReading('threeCard', 'fanpick');
+
+// Legacy support - boolean parameter still works
+const legacyReading = reader.performReading('threeCard', false); // Uses fanpick
+
+// Custom spread with preferred strategy
 const customSpread = reader.createCustomSpread(
   'Relationship Spread',
   'Insight into relationship dynamics',
   [
-    { position: 1, name: 'You', meaning: 'Your role in the relationship' },
-    { position: 2, name: 'Partner', meaning: 'Their role in the relationship' },
-    { position: 3, name: 'Relationship', meaning: 'The relationship itself' }
-  ]
+    { position: 1, name: 'You', meaning: 'Your role in the relationship', dealOrder: 1 },
+    { position: 2, name: 'Partner', meaning: 'Their role in the relationship', dealOrder: 2 },
+    { position: 3, name: 'Relationship', meaning: 'The relationship itself', dealOrder: 3 }
+  ],
+  true, // allow reversals
+  undefined, // no visual representation
+  'fanpick' // preferred strategy
 );
 
 const customReading = reader.performCustomReading(customSpread);

@@ -1,12 +1,15 @@
-import { TarotCard, CardPosition } from '../types';
+import { TarotCard, CardPosition, CardSelectionStrategy } from '../types';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
+import { CARD_SELECTION_STRATEGIES, DealStrategy } from './strategies';
 
 export class TarotDeck {
   private cards: TarotCard[] = [];
   private shuffled: TarotCard[] = [];
+  private defaultStrategy: CardSelectionStrategy;
 
-  constructor() {
+  constructor(defaultStrategy?: CardSelectionStrategy) {
+    this.defaultStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
     this.initializeDeck();
     this.shuffle();
   }
@@ -102,6 +105,41 @@ export class TarotDeck {
     this.shuffled = this.shuffled.filter(card => !pickedCardIds.has(card.id));
 
     return pickedCards;
+  }
+
+  /**
+   * Select cards using a specified strategy
+   */
+  selectCards(count: number, allowReversals: boolean = true, strategy?: CardSelectionStrategy): CardPosition[] {
+    const selectedStrategy = strategy || this.defaultStrategy;
+    const selectedCards = selectedStrategy.selectCards([...this.shuffled], count, allowReversals);
+    
+    // Remove selected cards from deck
+    const selectedCardIds = new Set(selectedCards.map(cp => cp.card.id));
+    this.shuffled = this.shuffled.filter(card => !selectedCardIds.has(card.id));
+    
+    return selectedCards;
+  }
+
+  /**
+   * Set the default card selection strategy
+   */
+  setDefaultStrategy(strategy: CardSelectionStrategy): void {
+    this.defaultStrategy = strategy;
+  }
+
+  /**
+   * Get the current default strategy
+   */
+  getDefaultStrategy(): CardSelectionStrategy {
+    return this.defaultStrategy;
+  }
+
+  /**
+   * Get available card selection strategies
+   */
+  getAvailableStrategies(): Record<string, CardSelectionStrategy> {
+    return CARD_SELECTION_STRATEGIES;
   }
 
   /**

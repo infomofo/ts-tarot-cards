@@ -161,6 +161,7 @@ export interface Spread {
   description: string;
   visualRepresentation?: string; // Graphviz DOT notation or ASCII art
   allowReversals: boolean; // Whether this spread uses reversals
+  preferredStrategy?: string; // Preferred card selection strategy name
 }
 
 export interface Interpretation {
@@ -176,4 +177,11 @@ export interface SpreadReading {
   cards: CardPosition[];
   interpretations?: Interpretation[];
   timestamp: Date;
+}
+
+// Card Selection Strategy Interface
+export interface CardSelectionStrategy {
+  name: string;
+  description: string;
+  selectCards(deck: TarotCard[], count: number, allowReversals: boolean): CardPosition[];
 }

@@ -1,4 +1,5 @@
 import { TarotDeck } from '../src/deck/deck';
+import { CARD_SELECTION_STRATEGIES } from '../src/deck/strategies';
 import { SpreadReader, SPREADS } from '../src/spreads/spreads';
 import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCard } from '../src/types';
 
@@ -75,6 +76,43 @@ describe('TarotDeck', () => {
     
     // This test might occasionally fail due to randomness, but very unlikely
     expect(sameOrder).toBe(false);
+  });
+
+  test('should support strategy-based card selection', () => {
+    const deck = new TarotDeck();
+    const strategies = deck.getAvailableStrategies();
+    
+    expect(strategies).toHaveProperty('deal');
+    expect(strategies).toHaveProperty('fanpick');
+    
+    const cards1 = deck.selectCards(3, true, strategies.deal);
+    expect(cards1).toHaveLength(3);
+    
+    deck.reset();
+    const cards2 = deck.selectCards(3, true, strategies.fanpick);
+    expect(cards2).toHaveLength(3);
+  });
+
+  test('should set and get default strategy', () => {
+    const deck = new TarotDeck();
+    const strategies = deck.getAvailableStrategies();
+    
+    // Default should be deal strategy
+    expect(deck.getDefaultStrategy().name).toBe('deal');
+    
+    deck.setDefaultStrategy(strategies.fanpick);
+    expect(deck.getDefaultStrategy().name).toBe('fanpick');
+    
+    // Test using default strategy
+    const cards = deck.selectCards(2);
+    expect(cards).toHaveLength(2);
+  });
+
+  test('should initialize with custom default strategy', () => {
+    const strategies = CARD_SELECTION_STRATEGIES;
+    const deck = new TarotDeck(strategies.fanpick);
+    
+    expect(deck.getDefaultStrategy().name).toBe('fanpick');
   });
 });
 
@@ -186,6 +224,81 @@ describe('SpreadReader', () => {
     const spread2 = reader.getSpread('crossSpread');
     expect(spread2.visualRepresentation).toBeDefined();
     expect(spread2.visualRepresentation).toContain('digraph');
+  });
+
+  test('should support new strategy-based card selection', () => {
+    // Test with specific strategy override
+    const readingWithDeal = reader.performReading('threeCard', 'deal');
+    expect(readingWithDeal.cards).toHaveLength(3);
+    
+    reader.resetDeck(); // Reset deck for second test
+    const readingWithFanpick = reader.performReading('threeCard', 'fanpick');
+    expect(readingWithFanpick.cards).toHaveLength(3);
+  });
+
+  test('should use preferred strategy from spread', () => {
+    const threeCardSpread = reader.getSpread('threeCard');
+    expect(threeCardSpread.preferredStrategy).toBe('deal');
+    
+    const crossSpread = reader.getSpread('crossSpread');
+    expect(crossSpread.preferredStrategy).toBe('fanpick');
+    
+    // Reading should use preferred strategy when no override provided
+    const reading = reader.performReading('threeCard');
+    expect(reading.cards).toHaveLength(3);
+  });
+
+  test('should get available strategies', () => {
+    const strategies = reader.getAvailableStrategies();
+    expect(strategies).toHaveProperty('deal');
+    expect(strategies).toHaveProperty('fanpick');
+    expect(strategies.deal.name).toBe('deal');
+    expect(strategies.fanpick.name).toBe('fanpick');
+  });
+
+  test('should support custom strategy objects', () => {
+    const strategies = reader.getAvailableStrategies();
+    const dealStrategy = strategies.deal;
+    
+    const reading = reader.performReading('threeCard', dealStrategy);
+    expect(reading.cards).toHaveLength(3);
+  });
+
+  test('should create custom spread with preferred strategy', () => {
+    const customSpread = reader.createCustomSpread(
+      'Custom Strategy Test',
+      'A test spread with strategy',
+      [
+        { position: 1, name: 'First', meaning: 'First position', dealOrder: 1 },
+        { position: 2, name: 'Second', meaning: 'Second position', dealOrder: 2 }
+      ],
+      true,
+      undefined,
+      'fanpick'
+    );
+
+    expect(customSpread.preferredStrategy).toBe('fanpick');
+    
+    const reading = reader.performCustomReading(customSpread);
+    expect(reading.cards).toHaveLength(2);
+  });
+
+  test('should throw error for unknown strategy', () => {
+    expect(() => reader.performReading('threeCard', 'unknownStrategy')).toThrow();
+  });
+
+  test('should set default strategy', () => {
+    reader.setDefaultStrategy('fanpick');
+    
+    // Create a spread without preferred strategy to test default
+    const customSpread = reader.createCustomSpread(
+      'Default Strategy Test',
+      'A test spread',
+      [{ position: 1, name: 'Only', meaning: 'Only position', dealOrder: 1 }]
+    );
+
+    const reading = reader.performCustomReading(customSpread);
+    expect(reading.cards).toHaveLength(1);
   });
 });
 

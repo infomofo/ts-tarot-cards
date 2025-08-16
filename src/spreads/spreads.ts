@@ -1,5 +1,6 @@
-import { Spread, SpreadPosition, SpreadReading, CardPosition, Interpretation } from '../types';
+import { Spread, SpreadPosition, SpreadReading, CardPosition, Interpretation, CardSelectionStrategy } from '../types';
 import { TarotDeck } from '../deck/deck';
+import { CARD_SELECTION_STRATEGIES } from '../deck/strategies';
 
 // Pre-defined spread templates
 export const SPREADS: Record<string, Spread> = {
@@ -7,6 +8,7 @@ export const SPREADS: Record<string, Spread> = {
     name: 'Three Card Spread',
     description: 'A simple three-card spread representing past, present, and future.',
     allowReversals: true,
+    preferredStrategy: 'deal', // Traditional sequential dealing
     visualRepresentation: `
 digraph ThreeCardSpread {
   rankdir=LR;
@@ -23,6 +25,7 @@ digraph ThreeCardSpread {
     name: 'Cross Spread',
     description: 'A five-card cross spread for deeper insight into a situation.',
     allowReversals: true,
+    preferredStrategy: 'fanpick', // More intuitive selection for complex spreads
     visualRepresentation: `
 digraph CrossSpread {
   node [shape=rectangle, style=filled, fillcolor=lightgreen];
@@ -51,6 +54,7 @@ digraph CrossSpread {
     name: 'Simple Past-Present',
     description: 'A two-card spread without reversals for straightforward guidance.',
     allowReversals: false,
+    preferredStrategy: 'deal', // Simple dealing for simple spread
     visualRepresentation: `
 digraph SimplePastPresent {
   rankdir=LR;
@@ -73,21 +77,61 @@ export class SpreadReader {
 
   /**
    * Perform a reading using a predefined spread
+   * Supports both legacy boolean parameter and new strategy parameter
    */
-  performReading(spreadName: keyof typeof SPREADS, useDealing: boolean = true): SpreadReading {
+  performReading(
+    spreadName: keyof typeof SPREADS, 
+    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean
+  ): SpreadReading {
     const spread = SPREADS[spreadName];
     if (!spread) {
       throw new Error(`Unknown spread: ${spreadName}`);
     }
 
     const cardCount = spread.positions.length;
-    let cards: CardPosition[];
+    
+    // Handle legacy boolean parameter
+    if (typeof strategyOrLegacyBoolean === 'boolean') {
+      const useDealing = strategyOrLegacyBoolean;
+      let cards: CardPosition[];
 
-    if (useDealing) {
-      cards = this.deck.deal(cardCount, spread.allowReversals);
-    } else {
-      cards = this.deck.fanPick(cardCount, spread.allowReversals);
+      if (useDealing) {
+        cards = this.deck.deal(cardCount, spread.allowReversals);
+      } else {
+        cards = this.deck.fanPick(cardCount, spread.allowReversals);
+      }
+
+      return {
+        spread,
+        cards,
+        timestamp: new Date()
+      };
     }
+
+    // Handle new strategy parameter
+    let strategy: CardSelectionStrategy;
+
+    // Determine strategy to use
+    if (strategyOrLegacyBoolean) {
+      if (typeof strategyOrLegacyBoolean === 'string') {
+        strategy = CARD_SELECTION_STRATEGIES[strategyOrLegacyBoolean];
+        if (!strategy) {
+          throw new Error(`Unknown strategy: ${strategyOrLegacyBoolean}`);
+        }
+      } else {
+        strategy = strategyOrLegacyBoolean;
+      }
+    } else if (spread.preferredStrategy) {
+      strategy = CARD_SELECTION_STRATEGIES[spread.preferredStrategy];
+      if (!strategy) {
+        throw new Error(`Unknown preferred strategy for spread: ${spread.preferredStrategy}`);
+      }
+    } else {
+      // Fallback to deck's default strategy
+      strategy = this.deck.getDefaultStrategy();
+    }
+
+    const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
 
     return {
       spread,
@@ -98,16 +142,56 @@ export class SpreadReader {
 
   /**
    * Perform a reading using a custom spread
+   * Supports both legacy boolean parameter and new strategy parameter
    */
-  performCustomReading(spread: Spread, useDealing: boolean = true): SpreadReading {
+  performCustomReading(
+    spread: Spread, 
+    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean
+  ): SpreadReading {
     const cardCount = spread.positions.length;
-    let cards: CardPosition[];
+    
+    // Handle legacy boolean parameter
+    if (typeof strategyOrLegacyBoolean === 'boolean') {
+      const useDealing = strategyOrLegacyBoolean;
+      let cards: CardPosition[];
 
-    if (useDealing) {
-      cards = this.deck.deal(cardCount, spread.allowReversals);
-    } else {
-      cards = this.deck.fanPick(cardCount, spread.allowReversals);
+      if (useDealing) {
+        cards = this.deck.deal(cardCount, spread.allowReversals);
+      } else {
+        cards = this.deck.fanPick(cardCount, spread.allowReversals);
+      }
+
+      return {
+        spread,
+        cards,
+        timestamp: new Date()
+      };
     }
+
+    // Handle new strategy parameter
+    let strategy: CardSelectionStrategy;
+
+    // Determine strategy to use
+    if (strategyOrLegacyBoolean) {
+      if (typeof strategyOrLegacyBoolean === 'string') {
+        strategy = CARD_SELECTION_STRATEGIES[strategyOrLegacyBoolean];
+        if (!strategy) {
+          throw new Error(`Unknown strategy: ${strategyOrLegacyBoolean}`);
+        }
+      } else {
+        strategy = strategyOrLegacyBoolean;
+      }
+    } else if (spread.preferredStrategy) {
+      strategy = CARD_SELECTION_STRATEGIES[spread.preferredStrategy];
+      if (!strategy) {
+        throw new Error(`Unknown preferred strategy for spread: ${spread.preferredStrategy}`);
+      }
+    } else {
+      // Fallback to deck's default strategy
+      strategy = this.deck.getDefaultStrategy();
+    }
+
+    const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
 
     return {
       spread,
@@ -155,14 +239,44 @@ export class SpreadReader {
   /**
    * Create a custom spread
    */
-  createCustomSpread(name: string, description: string, positions: SpreadPosition[], allowReversals: boolean = true, visualRepresentation?: string): Spread {
+  createCustomSpread(
+    name: string, 
+    description: string, 
+    positions: SpreadPosition[], 
+    allowReversals: boolean = true, 
+    visualRepresentation?: string,
+    preferredStrategy?: string
+  ): Spread {
     return {
       name,
       description,
       positions,
       allowReversals,
-      visualRepresentation
+      visualRepresentation,
+      preferredStrategy
     };
+  }
+
+  /**
+   * Get available card selection strategies
+   */
+  getAvailableStrategies(): Record<string, CardSelectionStrategy> {
+    return CARD_SELECTION_STRATEGIES;
+  }
+
+  /**
+   * Set the deck's default strategy
+   */
+  setDefaultStrategy(strategy: string | CardSelectionStrategy): void {
+    if (typeof strategy === 'string') {
+      const strategyObj = CARD_SELECTION_STRATEGIES[strategy];
+      if (!strategyObj) {
+        throw new Error(`Unknown strategy: ${strategy}`);
+      }
+      this.deck.setDefaultStrategy(strategyObj);
+    } else {
+      this.deck.setDefaultStrategy(strategy);
+    }
   }
 
   /**

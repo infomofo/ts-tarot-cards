@@ -1,10 +1,10 @@
-import { TarotCard, Arcana, Suit, MinorNumber } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, getMinorNumberName } from '../types';
 
 // Example minor arcana cards - extensible to full deck
-export const MINOR_ARCANA_CARDS: Partial<Record<string, TarotCard>> = {
+export const MINOR_ARCANA_CARDS: Partial<Record<string, MinorArcanaCard>> = {
   'cups-ace': {
     id: 'minor-cups-ace',
-    name: 'Ace of Cups',
+    name: `${getMinorNumberName(MinorNumber.Ace)} of ${Suit.Cups}`,
     arcana: Arcana.Minor,
     suit: Suit.Cups,
     number: MinorNumber.Ace,
@@ -15,7 +15,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, TarotCard>> = {
   },
   'swords-three': {
     id: 'minor-swords-three',
-    name: 'Three of Swords',
+    name: `${getMinorNumberName(MinorNumber.Three)} of ${Suit.Swords}`,
     arcana: Arcana.Minor,
     suit: Suit.Swords,
     number: MinorNumber.Three,
@@ -26,7 +26,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, TarotCard>> = {
   },
   'wands-ten': {
     id: 'minor-wands-ten',
-    name: 'Ten of Wands',
+    name: `${getMinorNumberName(MinorNumber.Ten)} of ${Suit.Wands}`,
     arcana: Arcana.Minor,
     suit: Suit.Wands,
     number: MinorNumber.Ten,
@@ -37,11 +37,11 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, TarotCard>> = {
   }
 };
 
-export function getMinorArcanaCard(suit: Suit, number: MinorNumber): TarotCard | undefined {
-  const key = `${suit.toLowerCase()}-${number.toLowerCase()}`;
+export function getMinorArcanaCard(suit: Suit, number: MinorNumber): MinorArcanaCard | undefined {
+  const key = `${suit.toLowerCase()}-${getMinorNumberName(number).toLowerCase()}`;
   return MINOR_ARCANA_CARDS[key];
 }
 
 export function createMinorArcanaId(suit: Suit, number: MinorNumber): string {
-  return `minor-${suit.toLowerCase()}-${number.toLowerCase()}`;
+  return `minor-${suit.toLowerCase()}-${getMinorNumberName(number).toLowerCase()}`;
 }

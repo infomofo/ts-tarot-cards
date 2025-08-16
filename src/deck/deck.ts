@@ -49,7 +49,7 @@ export class TarotDeck {
   /**
    * Deal a specified number of cards from the top of the deck
    */
-  deal(count: number): CardPosition[] {
+  deal(count: number, allowReversals: boolean = true): CardPosition[] {
     if (count > this.shuffled.length) {
       throw new Error(`Cannot deal ${count} cards, only ${this.shuffled.length} available`);
     }
@@ -58,7 +58,7 @@ export class TarotDeck {
     
     for (let i = 0; i < count; i++) {
       const card = this.shuffled.shift()!;
-      const isReversed = this.getBiometricRandomIndex(2) === 1; // 50% chance of reversal
+      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
       
       dealtCards.push({
         card,
@@ -74,7 +74,7 @@ export class TarotDeck {
    * Fan pick - allow selection of cards from a fanned deck
    * Returns cards in random positions as if picked from a fan
    */
-  fanPick(count: number): CardPosition[] {
+  fanPick(count: number, allowReversals: boolean = true): CardPosition[] {
     if (count > this.shuffled.length) {
       throw new Error(`Cannot pick ${count} cards, only ${this.shuffled.length} available`);
     }
@@ -88,7 +88,7 @@ export class TarotDeck {
       const cardIndex = availableIndices.splice(randomIndexPosition, 1)[0];
       
       const card = this.shuffled[cardIndex];
-      const isReversed = this.getBiometricRandomIndex(2) === 1; // 50% chance of reversal
+      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
       
       pickedCards.push({
         card,

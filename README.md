@@ -151,6 +151,7 @@ npm run dev
 ⚠️ **This library is for educational, entertainment, and software development purposes only.**
 
 - Tarot card interpretations provided in this library are traditional meanings and should not be considered as professional advice
+- Some interpretations included are the author's own and may vary from other sources or traditions  
 - This software is not intended to provide medical, psychological, financial, or legal guidance
 - Any decisions made based on tarot readings should not replace professional consultation
 - The developers are not responsible for any decisions made using this library

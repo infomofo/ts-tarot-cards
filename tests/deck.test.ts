@@ -1,6 +1,6 @@
 import { TarotDeck } from '../src/deck/deck';
 import { SpreadReader, SPREADS } from '../src/spreads/spreads';
-import { Arcana, Suit, MinorNumber, MajorArcana } from '../src/types';
+import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCard } from '../src/types';
 
 describe('TarotDeck', () => {
   let deck: TarotDeck;
@@ -123,8 +123,8 @@ describe('SpreadReader', () => {
       'Custom Test',
       'A test spread',
       [
-        { position: 1, name: 'First', meaning: 'First position' },
-        { position: 2, name: 'Second', meaning: 'Second position' }
+        { position: 1, name: 'First', meaning: 'First position', dealOrder: 1 },
+        { position: 2, name: 'Second', meaning: 'Second position', dealOrder: 2 }
       ]
     );
 
@@ -150,6 +150,43 @@ describe('SpreadReader', () => {
     const infoAfter = reader.getDeckInfo();
     expect(infoAfter.remaining).toBe(info.remaining - 3);
   });
+
+  test('should generate interpretations for readings', () => {
+    const reading = reader.performReading('threeCard');
+    const interpretations = reader.generateInterpretations(reading);
+    
+    expect(interpretations).toHaveLength(3);
+    
+    interpretations.forEach((interpretation, index) => {
+      expect(interpretation.position).toBe(reading.spread.positions[index]);
+      expect(interpretation.card).toBe(reading.cards[index].card);
+      expect(interpretation.isReversed).toBe(reading.cards[index].isReversed);
+      expect(interpretation.meaning).toBeDefined();
+      expect(interpretation.additionalNotes).toBeDefined();
+    });
+  });
+
+  test('should respect reversal settings for spreads', () => {
+    const readingWithReversals = reader.performReading('threeCard');
+    const readingWithoutReversals = reader.performReading('simplePastPresent');
+    
+    // simplePastPresent spread doesn't allow reversals
+    expect(readingWithoutReversals.cards.every(card => !card.isReversed)).toBe(true);
+    expect(readingWithoutReversals.spread.allowReversals).toBe(false);
+    
+    // threeCard spread allows reversals
+    expect(readingWithReversals.spread.allowReversals).toBe(true);
+  });
+
+  test('should include visual representation in spreads', () => {
+    const spread = reader.getSpread('threeCard');
+    expect(spread.visualRepresentation).toBeDefined();
+    expect(spread.visualRepresentation).toContain('digraph');
+    
+    const spread2 = reader.getSpread('crossSpread');
+    expect(spread2.visualRepresentation).toBeDefined();
+    expect(spread2.visualRepresentation).toContain('digraph');
+  });
 });
 
 describe('Card Types', () => {
@@ -165,20 +202,20 @@ describe('Card Types', () => {
     
     // Check major arcana card structure
     if (majorCards.length > 0) {
-      const majorCard = majorCards[0].card;
+      const majorCard = majorCards[0].card as MajorArcanaCard;
       expect(majorCard.arcana).toBe(Arcana.Major);
-      expect(majorCard.majorArcana).toBeDefined();
-      expect(majorCard.suit).toBeUndefined();
-      expect(majorCard.number).toBeUndefined();
+      expect(majorCard.number).toBeDefined();
+      expect(typeof majorCard.number).toBe('number');
+      expect('suit' in majorCard).toBe(false);
     }
     
     // Check minor arcana card structure
     if (minorCards.length > 0) {
-      const minorCard = minorCards[0].card;
+      const minorCard = minorCards[0].card as MinorArcanaCard;
       expect(minorCard.arcana).toBe(Arcana.Minor);
       expect(minorCard.suit).toBeDefined();
       expect(minorCard.number).toBeDefined();
-      expect(minorCard.majorArcana).toBeUndefined();
+      expect(typeof minorCard.number).toBe('number');
     }
   });
 });

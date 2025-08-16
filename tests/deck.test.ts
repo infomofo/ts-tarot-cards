@@ -1,0 +1,184 @@
+import { TarotDeck } from '../src/deck/deck';
+import { SpreadReader, SPREADS } from '../src/spreads/spreads';
+import { Arcana, Suit, MinorNumber, MajorArcana } from '../src/types';
+
+describe('TarotDeck', () => {
+  let deck: TarotDeck;
+
+  beforeEach(() => {
+    deck = new TarotDeck();
+  });
+
+  test('should initialize with cards', () => {
+    expect(deck.getTotalCount()).toBeGreaterThan(0);
+    expect(deck.getRemainingCount()).toBe(deck.getTotalCount());
+  });
+
+  test('should deal cards correctly', () => {
+    const initialCount = deck.getRemainingCount();
+    const dealtCards = deck.deal(3);
+
+    expect(dealtCards).toHaveLength(3);
+    expect(deck.getRemainingCount()).toBe(initialCount - 3);
+    
+    // Each card should have a position and reversal status
+    dealtCards.forEach((cardPosition, index) => {
+      expect(cardPosition.position).toBe(index + 1);
+      expect(typeof cardPosition.isReversed).toBe('boolean');
+      expect(cardPosition.card).toBeDefined();
+      expect(cardPosition.card.id).toBeDefined();
+      expect(cardPosition.card.name).toBeDefined();
+    });
+  });
+
+  test('should fan pick cards correctly', () => {
+    const initialCount = deck.getRemainingCount();
+    const pickedCards = deck.fanPick(2);
+
+    expect(pickedCards).toHaveLength(2);
+    expect(deck.getRemainingCount()).toBe(initialCount - 2);
+    
+    // Each card should have a position and reversal status
+    pickedCards.forEach((cardPosition, index) => {
+      expect(cardPosition.position).toBe(index + 1);
+      expect(typeof cardPosition.isReversed).toBe('boolean');
+      expect(cardPosition.card).toBeDefined();
+    });
+  });
+
+  test('should throw error when dealing more cards than available', () => {
+    const availableCards = deck.getRemainingCount();
+    expect(() => deck.deal(availableCards + 1)).toThrow();
+  });
+
+  test('should reset deck correctly', () => {
+    const originalCount = deck.getTotalCount();
+    deck.deal(2);
+    expect(deck.getRemainingCount()).toBe(originalCount - 2);
+    
+    deck.reset();
+    expect(deck.getRemainingCount()).toBe(originalCount);
+  });
+
+  test('should shuffle deck (cards should be in different order)', () => {
+    const deck1 = new TarotDeck();
+    const deck2 = new TarotDeck();
+    
+    const cards1 = deck1.deal(4);
+    const cards2 = deck2.deal(4);
+    
+    // While theoretically possible for shuffles to be identical, 
+    // it's extremely unlikely with 4 cards
+    const sameOrder = cards1.every((card, index) => 
+      card.card.id === cards2[index].card.id
+    );
+    
+    // This test might occasionally fail due to randomness, but very unlikely
+    expect(sameOrder).toBe(false);
+  });
+});
+
+describe('SpreadReader', () => {
+  let reader: SpreadReader;
+
+  beforeEach(() => {
+    reader = new SpreadReader();
+  });
+
+  test('should perform three card reading', () => {
+    const reading = reader.performReading('threeCard');
+    
+    expect(reading.cards).toHaveLength(3);
+    expect(reading.spread.name).toBe('Three Card Spread');
+    expect(reading.spread.positions).toHaveLength(3);
+    expect(reading.timestamp).toBeInstanceOf(Date);
+    
+    // Verify positions are correctly assigned
+    expect(reading.cards[0].position).toBe(1);
+    expect(reading.cards[1].position).toBe(2);
+    expect(reading.cards[2].position).toBe(3);
+  });
+
+  test('should perform cross spread reading', () => {
+    const reading = reader.performReading('crossSpread');
+    
+    expect(reading.cards).toHaveLength(5);
+    expect(reading.spread.name).toBe('Cross Spread');
+    expect(reading.spread.positions).toHaveLength(5);
+  });
+
+  test('should perform reading with fan pick', () => {
+    const reading = reader.performReading('threeCard', false);
+    
+    expect(reading.cards).toHaveLength(3);
+    expect(reading.spread.name).toBe('Three Card Spread');
+  });
+
+  test('should throw error for unknown spread', () => {
+    expect(() => reader.performReading('unknownSpread' as any)).toThrow();
+  });
+
+  test('should create custom spread', () => {
+    const customSpread = reader.createCustomSpread(
+      'Custom Test',
+      'A test spread',
+      [
+        { position: 1, name: 'First', meaning: 'First position' },
+        { position: 2, name: 'Second', meaning: 'Second position' }
+      ]
+    );
+
+    expect(customSpread.name).toBe('Custom Test');
+    expect(customSpread.positions).toHaveLength(2);
+    
+    const reading = reader.performCustomReading(customSpread);
+    expect(reading.cards).toHaveLength(2);
+  });
+
+  test('should get available spreads', () => {
+    const spreads = reader.getAvailableSpreads();
+    expect(spreads).toContain('threeCard');
+    expect(spreads).toContain('crossSpread');
+  });
+
+  test('should get deck info', () => {
+    const info = reader.getDeckInfo();
+    expect(info.total).toBeGreaterThan(0);
+    expect(info.remaining).toBe(info.total);
+    
+    reader.performReading('threeCard');
+    const infoAfter = reader.getDeckInfo();
+    expect(infoAfter.remaining).toBe(info.remaining - 3);
+  });
+});
+
+describe('Card Types', () => {
+  test('should have correct card structure for major arcana', () => {
+    const deck = new TarotDeck();
+    const cards = deck.deal(deck.getTotalCount());
+    
+    const majorCards = cards.filter(cp => cp.card.arcana === Arcana.Major);
+    const minorCards = cards.filter(cp => cp.card.arcana === Arcana.Minor);
+    
+    expect(majorCards.length).toBeGreaterThan(0);
+    expect(minorCards.length).toBeGreaterThan(0);
+    
+    // Check major arcana card structure
+    if (majorCards.length > 0) {
+      const majorCard = majorCards[0].card;
+      expect(majorCard.arcana).toBe(Arcana.Major);
+      expect(majorCard.majorArcana).toBeDefined();
+      expect(majorCard.suit).toBeUndefined();
+      expect(majorCard.number).toBeUndefined();
+    }
+    
+    // Check minor arcana card structure
+    if (minorCards.length > 0) {
+      const minorCard = minorCards[0].card;
+      expect(minorCard.arcana).toBe(Arcana.Minor);
+      expect(minorCard.suit).toBeDefined();
+      expect(minorCard.number).toBeDefined();
+      expect(minorCard.majorArcana).toBeUndefined();
+    }
+  });
+});

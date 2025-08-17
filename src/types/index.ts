@@ -120,9 +120,11 @@ export interface SuitProperties {
 export interface BaseTarotCard {
   id: string;
   keywords: string[];
-  uprightMeaning: string;
-  reversedMeaning: string;
-  description: string;
+  uprightMeanings: string[]; // Changed from string to array for better structure
+  reversedMeanings: string[]; // Changed from string to array for better structure
+  visualDescription: string; // Description of the traditional Smith artwork
+  significance: string; // Card's significance and place in the journey
+  description: string; // General description
   arcana: Arcana; // Overridden by extensions
   numericValue: number; // Overridden by extensions - unified numeric system
   

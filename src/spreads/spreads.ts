@@ -269,8 +269,8 @@ export class SpreadReader {
         card: cardPosition.card,
         isReversed: cardPosition.isReversed,
         meaning: cardPosition.isReversed 
-          ? cardPosition.card.reversedMeaning 
-          : cardPosition.card.uprightMeaning,
+          ? cardPosition.card.reversedMeanings.join(', ')
+          : cardPosition.card.uprightMeanings.join(', '),
         additionalNotes: `Card drawn for position "${position.name}". ${position.positionSignificance}`
       };
     });

@@ -1,4 +1,4 @@
-import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol } from '../types';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -12,6 +12,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly uprightMeanings: string[];
   public readonly reversedMeanings: string[];
   public readonly visualDescription: string;
+  public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
 
@@ -22,6 +23,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     uprightMeanings: string[],
     reversedMeanings: string[],
     visualDescription: string,
+    symbols: CardSymbol[],
     significance: string,
     description: string
   ) {
@@ -34,6 +36,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.uprightMeanings = uprightMeanings;
     this.reversedMeanings = reversedMeanings;
     this.visualDescription = visualDescription;
+    this.symbols = symbols;
     this.significance = significance;
     this.description = description;
   }
@@ -53,10 +56,11 @@ function createMinorArcanaCard(
   uprightMeanings: string[],
   reversedMeanings: string[],
   visualDescription: string,
+  symbols: CardSymbol[],
   significance: string,
   description: string
 ): MinorArcanaCard {
-  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, significance, description);
+  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, symbols, significance, description);
 }
 
 // Example minor arcana cards - extensible to full deck
@@ -83,6 +87,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
       'Closed heart and difficulty connecting'
     ],
     'A hand emerges from a cloud, holding a golden chalice overflowing with water. Five streams of water pour from the cup, with a dove descending toward it carrying a communion wafer. Lotus blossoms float on the water below.',
+    ['hand', 'cloud', 'chalice', 'water', 'dove', 'communion wafer', 'lotus'],
     'The Ace of Cups represents the beginning of the emotional and spiritual journey in the suit of Cups. As the first card in the suit of Water/Emotions, it embodies pure emotional potential and the opening of the heart. It marks the start of the emotional journey through love, relationships, and spiritual awakening.',
     'The Ace of Cups represents new love, new relationships, new beginnings in love, spiritual awakening, intuitive awareness, compassion, creativity, and overflowing feelings.'
   ),
@@ -108,6 +113,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
       'Releasing pain and finding peace'
     ],
     'A large red heart pierced by three swords against a stormy gray sky filled with heavy clouds. Rain falls steadily, representing tears and emotional release.',
+    ['heart', 'swords', 'storm', 'clouds', 'rain'],
     'The Three of Swords represents a crucial point in the suit of Swords\' journey through the realm of thoughts and communication. In the Air element\'s progression, this card shows how mental clarity sometimes requires painful truth and the cutting away of illusions. It teaches that heartbreak can lead to wisdom and that pain often precedes growth.',
     'The Three of Swords represents heartbreak, emotional pain, sorrow, grief, hurt, trauma, sadness, rejection, separation, and loss.'
   ),
@@ -133,6 +139,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
       'Learning to ask for help'
     ],
     'A figure struggling to carry ten heavy wands toward a nearby village. The person is bent over with the weight but can see their destination ahead. The burden is almost overwhelming, but the goal is within reach.',
+    ['figure', 'wands', 'village', 'burden', 'destination'],
     'The Ten of Wands represents the culmination of the Fire element\'s journey in the suit of Wands. This card shows the final stage before completion, where the creative energy and passion that began with the Ace has grown into a significant responsibility. It teaches that success often requires carrying heavy loads and that achievement comes through perseverance.',
     'The Ten of Wands represents burden, extra responsibility, hard work, stress, achievement, and carrying a heavy load.'
   )

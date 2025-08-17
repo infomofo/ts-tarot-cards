@@ -1,4 +1,4 @@
-import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral } from '../types';
+import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral, CardSymbol } from '../types';
 
 // Concrete implementation of MajorArcanaCard with localization support
 class MajorArcanaCardImpl implements MajorArcanaCard {
@@ -11,6 +11,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly uprightMeanings: string[];
   public readonly reversedMeanings: string[];
   public readonly visualDescription: string;
+  public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
 
@@ -20,6 +21,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     uprightMeanings: string[],
     reversedMeanings: string[],
     visualDescription: string,
+    symbols: CardSymbol[],
     significance: string,
     description: string
   ) {
@@ -32,6 +34,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     this.uprightMeanings = uprightMeanings;
     this.reversedMeanings = reversedMeanings;
     this.visualDescription = visualDescription;
+    this.symbols = symbols;
     this.significance = significance;
     this.description = description;
   }
@@ -50,10 +53,11 @@ function createMajorArcanaCard(
   uprightMeanings: string[],
   reversedMeanings: string[],
   visualDescription: string,
+  symbols: CardSymbol[],
   significance: string,
   description: string
 ): MajorArcanaCard {
-  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, significance, description);
+  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, symbols, significance, description);
 }
 
 // Example major arcana cards - extensible to full deck
@@ -78,6 +82,7 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
       'Foolish choices',
     ],
     'A young figure stands at the edge of a cliff, about to step into the unknown. Dressed in colorful robes with a small bag on a stick, accompanied by a white dog. The sun shines brightly overhead, and mountains stretch into the distance.',
+    ['cliff', 'sun', 'dog', 'mountains', 'bag', 'youth'],
     'The beginning of the Major Arcana journey - the soul\'s first step into physical incarnation. As card 0, it embodies pure potential and naive courage to begin.',
     'Represents new beginnings, blind faith in the future, inexperience, beginner\'s luck, and improvisation. Ignorance is bliss.'
   ),
@@ -104,6 +109,7 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
       'Arrogance',
     ],
     'A figure stands before an altar with the four suit symbols (cup, pentacle, sword, wand) representing the four elements. One hand points to heaven, the other to earth, with an infinity symbol above the head. Red and white robes symbolize passion and purity.',
+    ['hand', 'heaven', 'earth', 'altar', 'cup', 'pentacle', 'sword', 'wand', 'infinity', 'robes'],
     'The soul\'s first conscious act of will after the leap of faith. As card 1, it transforms potential into directed energy and teaches us to harness our will to manifest desires.',
     'Represents manifestation, resourcefulness, personal power, willpower, and having the tools to accomplish your goals. As above, so below.'
   )

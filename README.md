@@ -55,7 +55,6 @@ const dealtCards = deck.selectCards(3);
 
 // Select cards with specific options (fan pick with no reversals)
 const fanPicked = deck.selectCards(1, { 
-  allowReversals: false, 
   strategy: CARD_SELECTION_STRATEGIES.fanpick 
 });
 
@@ -84,12 +83,11 @@ const cards1 = defaultDeck.selectCards(3); // Uses deal strategy
 
 // Override with a specific strategy for this selection
 const cards2 = defaultDeck.selectCards(3, { 
-  allowReversals: true, 
   strategy: CARD_SELECTION_STRATEGIES.fanpick 
 });
 
 // Change default card selection strategy
-defaultDeck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);
+defaultDeck.setDefaultCardSelectionStrategy(CARD_SELECTION_STRATEGIES.deal);
 
 // Shuffle the deck manually using default shuffle strategy
 defaultDeck.shuffle();
@@ -98,18 +96,18 @@ defaultDeck.shuffle();
 defaultDeck.shuffle(SHUFFLE_STRATEGIES.riffle);
 
 // Change default shuffle strategy
-defaultDeck.setDefaultShuffleStrategy(SHUFFLE_STRATEGIES['fisher-yates']);
+defaultDeck.setDefaultShuffleStrategy(SHUFFLE_STRATEGIES.fisherYates);
 
 // Reset and shuffle the deck
 defaultDeck.reset();
 
 // Get available card selection strategies
-const selectionStrategies = defaultDeck.getAvailableStrategies();
+const selectionStrategies = defaultDeck.getAvailableCardSelectionStrategies();
 console.log(Object.keys(selectionStrategies)); // ['deal', 'fanpick']
 
 // Get available shuffle strategies
 const shuffleStrategies = defaultDeck.getAvailableShuffleStrategies();
-console.log(Object.keys(shuffleStrategies)); // ['fisher-yates', 'riffle']
+console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 ```
 
 **Available Card Selection Strategies:**
@@ -117,13 +115,49 @@ console.log(Object.keys(shuffleStrategies)); // ['fisher-yates', 'riffle']
 - **`fanpick`**: Random selection from fanned cards (intuitive selection)
 
 **Available Shuffle Strategies:**
-- **`fisher-yates`**: Traditional Fisher-Yates shuffle algorithm for random distribution
+- **`fisherYates`**: Traditional Fisher-Yates shuffle algorithm for random distribution
 - **`riffle`**: Simulates physical riffle shuffling with multiple passes
 
 **Card Selection Strategy Priority:**
 1. Explicit strategy parameter (highest priority)
 2. Spread's preferred strategy
 3. Deck's default strategy (lowest priority)
+
+### Reversal Logic
+
+Card reversals are now handled at the **reader and spread level**, not at the card selection level. This provides a more accurate model of how tarot readings work:
+
+```typescript
+import { SpreadReader, SPREADS } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+
+// Reversals are determined by the spread's allowReversals setting
+const reading = reader.performReading('threeCard'); // Uses spread's reversal setting
+console.log(reading.allowReversals); // true (from spread definition)
+
+// Individual card positions show if they're reversed
+reading.cards.forEach(cardPosition => {
+  console.log(`${cardPosition.card.getName()}: ${cardPosition.isReversed ? 'Reversed' : 'Upright'}`);
+});
+
+// Create custom spread with specific reversal setting
+const customSpread = reader.createCustomSpread(
+  'Simple Guidance',
+  'A single card for quick guidance',
+  [{ position: 1, name: 'Guidance', positionSignificance: 'What you need to know', dealOrder: 1 }],
+  false // No reversals for this spread
+);
+
+const simpleReading = reader.performCustomReading(customSpread);
+console.log(simpleReading.allowReversals); // false
+```
+
+**Reversal Architecture:**
+- **Deck level**: Card selection strategies return cards in upright position
+- **Reader level**: SpreadReader applies reversal logic based on spread settings
+- **Spread level**: Each spread defines whether it allows reversals
+- **Position level**: Individual card positions track their reversed state
 
 ### Performing Spreads
 
@@ -212,11 +246,40 @@ import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';
 
 const fool = getMajorArcanaCard(MajorArcana.TheFool);
 if (fool) {
-  console.log(fool.uprightMeaning);
-  console.log(fool.reversedMeaning);
+  console.log(fool.uprightMeanings);
+  console.log(fool.reversedMeanings);
   console.log(fool.keywords);
+  console.log(fool.visualDescription); // Traditional Rider-Waite-Smith imagery
+  console.log(fool.symbols); // ['cliff', 'sun', 'dog', 'mountains', 'bag', 'youth']
+  console.log(fool.significance); // Journey context
 }
 ```
+
+### Card Symbols
+
+Each card includes a hierarchical symbol structure for detailed visual analysis:
+
+```typescript
+// Symbols are freeform strings that can represent visual elements
+const symbols = fool.symbols; // ['cliff', 'sun', 'dog', 'mountains', 'bag', 'youth']
+
+// Symbols can be hierarchical (e.g., 'bird', 'dove', 'bird:dove')
+// This allows for flexible categorization and filtering
+const aceOfCups = getMinorArcanaCard(MinorArcana.AceOfCups);
+console.log(aceOfCups.symbols); // ['hand', 'cloud', 'chalice', 'water', 'dove', 'communion wafer', 'lotus']
+
+// Symbols enable advanced card analysis and cross-referencing
+const allCards = [...Object.values(MAJOR_ARCANA_CARDS), ...Object.values(MINOR_ARCANA_CARDS)];
+const waterSymbols = allCards.filter(card => 
+  card && card.symbols.some(symbol => symbol.includes('water'))
+);
+```
+
+**Symbol Structure Benefits:**
+- **Visual Analysis**: Identify common themes across cards
+- **Cross-referencing**: Find cards sharing visual elements
+- **Study Aid**: Track symbolic evolution through spreads
+- **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
 ## Current Card Set
 

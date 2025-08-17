@@ -11,7 +11,7 @@ export class TarotDeck {
 
   constructor(defaultStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
     this.defaultStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
-    this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES['fisher-yates'];
+    this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES.fisherYates;
     this.initializeDeck();
     this.shuffle();
   }
@@ -49,52 +49,59 @@ export class TarotDeck {
    * Select cards using a specified strategy or options
    */
   selectCards(count: number, options?: CardSelectionOptions): CardPosition[] {
-    const allowReversals = options?.allowReversals ?? true;
     const strategy = options?.strategy || this.defaultStrategy;
     
-    const selectedCards = strategy.selectCards([...this.shuffled], count, allowReversals);
+    const selectedCards = strategy.selectCards([...this.shuffled], count);
+    
+    // Convert TarotCard[] to CardPosition[] with position numbering
+    // Reversal logic will be handled at the reader/spread level
+    const cardPositions: CardPosition[] = selectedCards.map((card, index) => ({
+      card,
+      position: index + 1,
+      isReversed: false // Default to upright, reversal handled by reader
+    }));
     
     // Remove selected cards from deck
-    const selectedCardIds = new Set(selectedCards.map(cp => cp.card.id));
+    const selectedCardIds = new Set(selectedCards.map(card => card.id));
     this.shuffled = this.shuffled.filter(card => !selectedCardIds.has(card.id));
     
-    return selectedCards;
+    return cardPositions;
   }
 
   /**
    * Deal cards from the top of the deck
    * @deprecated Use selectCards() with deal strategy instead
    */
-  deal(count: number, allowReversals: boolean = true): CardPosition[] {
-    return this.selectCards(count, { allowReversals, strategy: CARD_SELECTION_STRATEGIES.deal });
+  deal(count: number): CardPosition[] {
+    return this.selectCards(count, { strategy: CARD_SELECTION_STRATEGIES.deal });
   }
 
   /**
    * Fan pick - random selection from the deck
    * @deprecated Use selectCards() with fanpick strategy instead
    */
-  fanPick(count: number, allowReversals: boolean = true): CardPosition[] {
-    return this.selectCards(count, { allowReversals, strategy: CARD_SELECTION_STRATEGIES.fanpick });
+  fanPick(count: number): CardPosition[] {
+    return this.selectCards(count, { strategy: CARD_SELECTION_STRATEGIES.fanpick });
   }
 
   /**
    * Set the default card selection strategy
    */
-  setDefaultStrategy(strategy: CardSelectionStrategy): void {
+  setDefaultCardSelectionStrategy(strategy: CardSelectionStrategy): void {
     this.defaultStrategy = strategy;
   }
 
   /**
-   * Get the current default strategy
+   * Get the current default card selection strategy
    */
-  getDefaultStrategy(): CardSelectionStrategy {
+  getDefaultCardSelectionStrategy(): CardSelectionStrategy {
     return this.defaultStrategy;
   }
 
   /**
    * Get available card selection strategies
    */
-  getAvailableStrategies(): Record<string, CardSelectionStrategy> {
+  getAvailableCardSelectionStrategies(): Record<string, CardSelectionStrategy> {
     return CARD_SELECTION_STRATEGIES;
   }
 

@@ -80,28 +80,28 @@ describe('TarotDeck', () => {
 
   test('should support strategy-based card selection', () => {
     const deck = new TarotDeck();
-    const strategies = deck.getAvailableStrategies();
+    const strategies = deck.getAvailableCardSelectionStrategies();
     
     expect(strategies).toHaveProperty('deal');
     expect(strategies).toHaveProperty('fanpick');
     
-    const cards1 = deck.selectCards(3, { allowReversals: true, strategy: strategies.deal });
+    const cards1 = deck.selectCards(3, { strategy: strategies.deal });
     expect(cards1).toHaveLength(3);
     
     deck.reset();
-    const cards2 = deck.selectCards(3, { allowReversals: true, strategy: strategies.fanpick });
+    const cards2 = deck.selectCards(3, { strategy: strategies.fanpick });
     expect(cards2).toHaveLength(3);
   });
 
   test('should set and get default strategy', () => {
     const deck = new TarotDeck();
-    const strategies = deck.getAvailableStrategies();
+    const strategies = deck.getAvailableCardSelectionStrategies();
     
     // Default should be deal strategy
-    expect(deck.getDefaultStrategy().name).toBe('deal');
+    expect(deck.getDefaultCardSelectionStrategy().name).toBe('deal');
     
-    deck.setDefaultStrategy(strategies.fanpick);
-    expect(deck.getDefaultStrategy().name).toBe('fanpick');
+    deck.setDefaultCardSelectionStrategy(strategies.fanpick);
+    expect(deck.getDefaultCardSelectionStrategy().name).toBe('fanpick');
     
     // Test using default strategy
     const cards = deck.selectCards(2);
@@ -112,7 +112,7 @@ describe('TarotDeck', () => {
     const strategies = CARD_SELECTION_STRATEGIES;
     const deck = new TarotDeck(strategies.fanpick);
     
-    expect(deck.getDefaultStrategy().name).toBe('fanpick');
+    expect(deck.getDefaultCardSelectionStrategy().name).toBe('fanpick');
   });
 });
 
@@ -288,7 +288,7 @@ describe('SpreadReader', () => {
   });
 
   test('should set default strategy', () => {
-    reader.setDefaultStrategy('fanpick');
+    reader.setDefaultCardSelectionStrategy('fanpick');
     
     // Create a spread without preferred strategy to test default
     const customSpread = reader.createCustomSpread(
@@ -374,7 +374,7 @@ describe('Shuffle Strategies', () => {
     
     // Reset and shuffle with Fisher-Yates
     deck.reset();
-    deck.shuffle(SHUFFLE_STRATEGIES['fisher-yates']);
+    deck.shuffle(SHUFFLE_STRATEGIES.fisherYates);
     const fisherYatesOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
     
     // Reset and shuffle with Riffle
@@ -393,7 +393,7 @@ describe('Shuffle Strategies', () => {
     
     // Should have default shuffle strategy
     expect(deck.getDefaultShuffleStrategy()).toBeDefined();
-    expect(deck.getDefaultShuffleStrategy().name).toBe('fisher-yates');
+    expect(deck.getDefaultShuffleStrategy().name).toBe('fisherYates');
     
     // Should be able to change default shuffle strategy
     deck.setDefaultShuffleStrategy(SHUFFLE_STRATEGIES.riffle);
@@ -405,9 +405,9 @@ describe('Shuffle Strategies', () => {
     const strategies = deck.getAvailableShuffleStrategies();
     
     expect(strategies).toBeDefined();
-    expect(Object.keys(strategies)).toContain('fisher-yates');
+    expect(Object.keys(strategies)).toContain('fisherYates');
     expect(Object.keys(strategies)).toContain('riffle');
-    expect(strategies['fisher-yates'].name).toBe('fisher-yates');
+    expect(strategies.fisherYates.name).toBe('fisherYates');
     expect(strategies.riffle.name).toBe('riffle');
   });
 

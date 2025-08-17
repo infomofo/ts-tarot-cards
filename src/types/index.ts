@@ -57,6 +57,9 @@ export enum Element {
   Fire = 'Fire'
 }
 
+// Symbol type for hierarchical tagging of visual elements
+export type CardSymbol = string; // Freeform strings like "bird", "fruit", "sun", "mountain", etc.
+
 export enum MinorNumber {
   Ace = 1,
   Two = 2,
@@ -227,6 +230,7 @@ export interface BaseTarotCard {
   uprightMeanings: string[]; // Changed from string to array for better structure
   reversedMeanings: string[]; // Changed from string to array for better structure
   visualDescription: string; // Description of the traditional Smith artwork
+  symbols: CardSymbol[]; // Hierarchical symbol tags for visual elements
   significance: string; // Card's significance and place in the journey
   description: string; // General description
   arcana: Arcana; // Overridden by extensions
@@ -296,7 +300,6 @@ export interface SpreadReading {
 }
 
 export interface CardSelectionOptions {
-  allowReversals?: boolean;
   strategy?: CardSelectionStrategy;
 }
 
@@ -304,7 +307,7 @@ export interface CardSelectionOptions {
 export interface CardSelectionStrategy {
   name: string;
   description: string;
-  selectCards(deck: TarotCard[], count: number, allowReversals: boolean): CardPosition[];
+  selectCards(deck: TarotCard[], count: number): TarotCard[];
 }
 
 // Shuffle Strategy Interface

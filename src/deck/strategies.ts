@@ -4,7 +4,7 @@ import { CardSelectionStrategy, ShuffleStrategy, TarotCard, CardPosition } from 
  * Fisher-Yates shuffle strategy - the traditional shuffle algorithm
  */
 export class FisherYatesShuffleStrategy implements ShuffleStrategy {
-  name = 'fisher-yates';
+  name = 'fisherYates';
   description = 'Traditional Fisher-Yates shuffle algorithm for random distribution';
 
   shuffle(cards: TarotCard[]): TarotCard[] {
@@ -82,30 +82,12 @@ export class DealStrategy implements CardSelectionStrategy {
   name = 'deal';
   description = 'Deals cards sequentially from the top of the shuffled deck';
 
-  selectCards(deck: TarotCard[], count: number, allowReversals: boolean): CardPosition[] {
+  selectCards(deck: TarotCard[], count: number): TarotCard[] {
     if (count > deck.length) {
       throw new Error(`Cannot deal ${count} cards, only ${deck.length} available`);
     }
 
-    const selectedCards: CardPosition[] = [];
-    
-    for (let i = 0; i < count; i++) {
-      const card = deck[i];
-      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
-      
-      selectedCards.push({
-        card,
-        position: i + 1,
-        isReversed
-      });
-    }
-
-    return selectedCards;
-  }
-
-  private getBiometricRandomIndex(max: number): number {
-    // TODO: Integrate with biometric randomness source
-    return Math.floor(Math.random() * max);
+    return deck.slice(0, count);
   }
 }
 
@@ -116,12 +98,12 @@ export class FanPickStrategy implements CardSelectionStrategy {
   name = 'fanpick';
   description = 'Allows selection of cards from random positions as if picked from a fanned deck';
 
-  selectCards(deck: TarotCard[], count: number, allowReversals: boolean): CardPosition[] {
+  selectCards(deck: TarotCard[], count: number): TarotCard[] {
     if (count > deck.length) {
       throw new Error(`Cannot pick ${count} cards, only ${deck.length} available`);
     }
 
-    const selectedCards: CardPosition[] = [];
+    const selectedCards: TarotCard[] = [];
     const availableIndices = Array.from({ length: deck.length }, (_, i) => i);
 
     for (let i = 0; i < count; i++) {
@@ -130,13 +112,7 @@ export class FanPickStrategy implements CardSelectionStrategy {
       const cardIndex = availableIndices.splice(randomIndexPosition, 1)[0];
       
       const card = deck[cardIndex];
-      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
-      
-      selectedCards.push({
-        card,
-        position: i + 1,
-        isReversed
-      });
+      selectedCards.push(card);
     }
 
     return selectedCards;
@@ -155,6 +131,6 @@ export const CARD_SELECTION_STRATEGIES: Record<string, CardSelectionStrategy> = 
 };
 
 export const SHUFFLE_STRATEGIES: Record<string, ShuffleStrategy> = {
-  'fisher-yates': new FisherYatesShuffleStrategy(),
-  'riffle': new RiffleShuffleStrategy()
+  fisherYates: new FisherYatesShuffleStrategy(),
+  riffle: new RiffleShuffleStrategy()
 };

@@ -76,6 +76,28 @@ export class SpreadReader {
   }
 
   /**
+   * Apply reversal logic to cards based on spread settings
+   */
+  private applyReversals(cards: CardPosition[], allowReversals: boolean): CardPosition[] {
+    if (!allowReversals) {
+      return cards.map(cp => ({ ...cp, isReversed: false }));
+    }
+
+    return cards.map(cp => ({
+      ...cp,
+      isReversed: this.getBiometricRandomIndex(2) === 1 // 50% chance of reversal
+    }));
+  }
+
+  /**
+   * Biometric randomness stub - could integrate with hardware or biometric data
+   */
+  private getBiometricRandomIndex(max: number): number {
+    // TODO: Integrate with biometric randomness source
+    return Math.floor(Math.random() * max);
+  }
+
+  /**
    * Perform a reading using a predefined spread
    * Supports both legacy boolean parameter and new strategy parameter
    */
@@ -97,29 +119,20 @@ export class SpreadReader {
       let cards: CardPosition[];
 
       if (useDealing) {
-        cards = this.deck.deal(cardCount, spread.allowReversals);
+        cards = this.deck.deal(cardCount);
       } else {
-        cards = this.deck.fanPick(cardCount, spread.allowReversals);
+        cards = this.deck.fanPick(cardCount);
       }
 
+      // Apply reversal logic at the reader level
+      cards = this.applyReversals(cards, spread.allowReversals);
+
       return {
-
-
         spread,
-
-
         cards,
-
-
         allowReversals: spread.allowReversals,
-
-
         userContext,
-
-
         timestamp: new Date()
-
-
       };
     }
 
@@ -143,29 +156,20 @@ export class SpreadReader {
       }
     } else {
       // Fallback to deck's default strategy
-      strategy = this.deck.getDefaultStrategy();
+      strategy = this.deck.getDefaultCardSelectionStrategy();
     }
 
-    const cards = this.deck.selectCards(cardCount, { allowReversals: spread.allowReversals, strategy });
+    let cards = this.deck.selectCards(cardCount, { strategy });
+    
+    // Apply reversal logic at the reader level
+    cards = this.applyReversals(cards, spread.allowReversals);
 
     return {
-
-
       spread,
-
-
       cards,
-
-
       allowReversals: spread.allowReversals,
-
-
       userContext,
-
-
       timestamp: new Date()
-
-
     };
   }
 
@@ -186,29 +190,20 @@ export class SpreadReader {
       let cards: CardPosition[];
 
       if (useDealing) {
-        cards = this.deck.deal(cardCount, spread.allowReversals);
+        cards = this.deck.deal(cardCount);
       } else {
-        cards = this.deck.fanPick(cardCount, spread.allowReversals);
+        cards = this.deck.fanPick(cardCount);
       }
 
+      // Apply reversal logic at the reader level
+      cards = this.applyReversals(cards, spread.allowReversals);
+
       return {
-
-
         spread,
-
-
         cards,
-
-
         allowReversals: spread.allowReversals,
-
-
         userContext,
-
-
         timestamp: new Date()
-
-
       };
     }
 
@@ -232,29 +227,20 @@ export class SpreadReader {
       }
     } else {
       // Fallback to deck's default strategy
-      strategy = this.deck.getDefaultStrategy();
+      strategy = this.deck.getDefaultCardSelectionStrategy();
     }
 
-    const cards = this.deck.selectCards(cardCount, { allowReversals: spread.allowReversals, strategy });
+    let cards = this.deck.selectCards(cardCount, { strategy });
+    
+    // Apply reversal logic at the reader level
+    cards = this.applyReversals(cards, spread.allowReversals);
 
     return {
-
-
       spread,
-
-
       cards,
-
-
       allowReversals: spread.allowReversals,
-
-
       userContext,
-
-
       timestamp: new Date()
-
-
     };
   }
 
@@ -323,17 +309,17 @@ export class SpreadReader {
   }
 
   /**
-   * Set the deck's default strategy
+   * Set the deck's default card selection strategy
    */
-  setDefaultStrategy(strategy: string | CardSelectionStrategy): void {
+  setDefaultCardSelectionStrategy(strategy: string | CardSelectionStrategy): void {
     if (typeof strategy === 'string') {
       const strategyObj = CARD_SELECTION_STRATEGIES[strategy];
       if (!strategyObj) {
         throw new Error(`Unknown strategy: ${strategy}`);
       }
-      this.deck.setDefaultStrategy(strategyObj);
+      this.deck.setDefaultCardSelectionStrategy(strategyObj);
     } else {
-      this.deck.setDefaultStrategy(strategy);
+      this.deck.setDefaultCardSelectionStrategy(strategy);
     }
   }
 

@@ -4,13 +4,13 @@ import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
 import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES, DealStrategy } from './strategies';
 
 export class TarotDeck {
-  private cards: TarotCard[] = [];
-  private shuffled: TarotCard[] = [];
-  private defaultStrategy: CardSelectionStrategy;
+  private initialDeck: TarotCard[] = [];
+  private currentDeck: TarotCard[] = [];
+  private defaultCardSelectionStrategy: CardSelectionStrategy;
   private defaultShuffleStrategy: ShuffleStrategy;
 
   constructor(defaultStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
-    this.defaultStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
+    this.defaultCardSelectionStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
     this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES.fisherYates;
     this.initializeDeck();
     this.shuffle();
@@ -18,13 +18,13 @@ export class TarotDeck {
 
   private initializeDeck(): void {
     // Clear existing cards
-    this.cards = [];
+    this.initialDeck = [];
     
     // Add available major arcana cards
-    this.cards.push(...Object.values(MAJOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
+    this.initialDeck.push(...Object.values(MAJOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
     
     // Add available minor arcana cards
-    this.cards.push(...Object.values(MINOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
+    this.initialDeck.push(...Object.values(MINOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
   }
 
   /**
@@ -32,7 +32,7 @@ export class TarotDeck {
    */
   shuffle(shuffleStrategy?: ShuffleStrategy): void {
     const strategy = shuffleStrategy || this.defaultShuffleStrategy;
-    this.shuffled = strategy.shuffle(this.cards);
+    this.currentDeck = strategy.shuffle(this.initialDeck);
   }
 
   /**
@@ -49,9 +49,9 @@ export class TarotDeck {
    * Select cards using a specified strategy or options
    */
   selectCards(count: number, options?: CardSelectionOptions): CardPosition[] {
-    const strategy = options?.strategy || this.defaultStrategy;
+    const strategy = options?.strategy || this.defaultCardSelectionStrategy;
     
-    const selectedCards = strategy.selectCards([...this.shuffled], count);
+    const selectedCards = strategy.selectCards([...this.currentDeck], count);
     
     // Convert TarotCard[] to CardPosition[] with position numbering
     // Reversal logic will be handled at the reader/spread level
@@ -63,7 +63,7 @@ export class TarotDeck {
     
     // Remove selected cards from deck
     const selectedCardIds = new Set(selectedCards.map(card => card.id));
-    this.shuffled = this.shuffled.filter(card => !selectedCardIds.has(card.id));
+    this.currentDeck = this.currentDeck.filter(card => !selectedCardIds.has(card.id));
     
     return cardPositions;
   }
@@ -88,14 +88,14 @@ export class TarotDeck {
    * Set the default card selection strategy
    */
   setDefaultCardSelectionStrategy(strategy: CardSelectionStrategy): void {
-    this.defaultStrategy = strategy;
+    this.defaultCardSelectionStrategy = strategy;
   }
 
   /**
    * Get the current default card selection strategy
    */
   getDefaultCardSelectionStrategy(): CardSelectionStrategy {
-    return this.defaultStrategy;
+    return this.defaultCardSelectionStrategy;
   }
 
   /**
@@ -130,14 +130,14 @@ export class TarotDeck {
    * Get the number of cards remaining in the deck
    */
   getRemainingCount(): number {
-    return this.shuffled.length;
+    return this.currentDeck.length;
   }
 
   /**
    * Get total number of cards in the deck
    */
   getTotalCount(): number {
-    return this.cards.length;
+    return this.initialDeck.length;
   }
 
   /**

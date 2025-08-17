@@ -2,7 +2,7 @@
 export * from './types';
 
 // Card definitions and utilities
-export * from './cards/suits';
+export * from './cards/suit';
 export * from './cards/major-arcana';
 export * from './cards/minor-arcana';
 

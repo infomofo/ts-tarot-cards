@@ -19,7 +19,9 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 ### Naming Conventions
 - **Methods**: Use descriptive method names that clearly indicate their purpose
 - **Properties**: Use clear, unambiguous property names (e.g., `positionSignificance` vs `meaning`)
+- **Variables**: Use clear, self-documenting names that eliminate ambiguity (e.g., `initialDeck` vs `cards`, `currentDeck` vs `shuffled`)
 - **Files**: Use kebab-case for file names, PascalCase for classes, camelCase for functions/variables
+- **Type Files**: Use singular naming convention for type definition files (e.g., `suit.ts` not `suits.ts`)
 
 ### Architecture Principles
 - **Localization Ready**: Design interfaces to support future internationalization

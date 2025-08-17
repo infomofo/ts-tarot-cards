@@ -1,6 +1,6 @@
 # TypeScript Tarot Cards
 
-A comprehensive TypeScript library for modeling and working with Rider-Waite-Smith Tarot deck, featuring a robust type system, flexible card selection strategies, and advanced spread modeling capabilities.
+A comprehensive TypeScript library for modeling and working with a tarot deck, featuring a robust type system, flexible card selection strategies, and advanced spread modeling capabilities. By default the card descriptions conform to those of the [Rider-Waite-Smith Tarot](https://en.wikipedia.org/wiki/Rider%E2%80%93Waite%E2%80%93Smith_tarot) deck, but these can be overridden.
 
 ## Core Architecture & Philosophy
 
@@ -13,7 +13,7 @@ This library is built on several key architectural principles that make it both 
 - **Extensibility**: Easy to extend from archetype examples to full 78-card deck
 
 ### Flexible Reading Configuration
-- **Multi-Level Reversal Control**: Configure at spread level, with per-reading overrides
+- **Use of Reversals based on reader preferences**: Configure at reader or spread level, with per-reading overrides
 - **User Context Integration**: Support for reader questions like "what area of life to explore"
 - **Comprehensive Interpretation System**: Both individual card meanings and overall spread analysis
 - **Visual Representation**: Programmatic spread layouts using Graphviz DOT notation
@@ -21,18 +21,17 @@ This library is built on several key architectural principles that make it both 
 ### Generalizable Card Selection
 - **Strategy Pattern**: Multiple selection methods (deal, fanpick) with unified interface
 - **Hierarchical Configuration**: Default → Spread Preferred → Call Override
-- **Backward Compatibility**: Legacy boolean parameters still supported
 - **Extensible**: Easy to add new selection strategies
 
 ## Features
 
 - **Enhanced Type System**: Complete type definitions with proper numeric associations and clean union types
 - **Suit Properties**: Element associations and meanings for each suit (Cups/Water, Pentacles/Earth, Swords/Air, Wands/Fire)
-- **Extensible Card System**: Archetype examples for major and minor arcana, designed to be extended to full 78-card deck
-- **Advanced Deck Logic**: Shuffling, dealing, and fan pick functionality with stub for biometric randomness
+- **Extensible Card System**: Archetype examples for major and minor arcana, designed to be extended to full 78-card deck and beyond
+- **Advanced Deck Logic**: Shuffling, dealing, and fan pick functionality with biometric randomness integration
 - **Sophisticated Spread Modeling**: Pre-defined spreads with visual representations, reversal control, and preferred strategies
 - **Comprehensive Reading Support**: Complete reading workflow with card positions, interpretations, and user context
-- **Flexible Card Selection**: Multiple strategies with hierarchical configuration and backward compatibility
+- **Flexible Card Selection**: Multiple strategies with hierarchical configuration
 
 ## Installation
 
@@ -347,6 +346,22 @@ npm run dev
 - Random number generation, even with biometric enhancement, cannot predict future events
 
 Use responsibly and with an understanding that tarot is a tool for reflection and entertainment, not prediction or professional guidance.
+
+## Upcoming Feature Roadmap
+
+This library is designed to be extensible and support multiple tarot traditions. Future enhancements include:
+
+### Alternative Tarot Deck Support
+- **[Thoth Tarot](https://en.wikipedia.org/wiki/Thoth_tarot_deck)**: Aleister Crowley's esoteric deck with unique interpretations and imagery
+- **[Marseille Tarot](https://en.wikipedia.org/wiki/Tarot_of_Marseilles)**: Traditional French tarot with historical significance
+- **[Visconti-Sforza Tarot](https://en.wikipedia.org/wiki/Visconti-Sforza_tarot_deck)**: Renaissance-era deck with artistic and historical importance
+
+### Extended Functionality
+- **Complete 78-Card Deck**: Full implementation of all Rider-Waite-Smith cards
+- **Multi-Language Support**: Localization for card names and interpretations
+- **Enhanced Biometric Randomness**: Integration with various entropy sources
+- **Advanced Spread Builder**: Visual spread editor and custom position creation
+- **Reading History**: Persistent storage and analysis of past readings
 
 ## License
 

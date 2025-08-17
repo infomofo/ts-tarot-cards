@@ -1,6 +1,6 @@
 import { Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation, CardSelectionStrategy } from '../types';
 import { TarotDeck } from '../deck/deck';
-import { CARD_SELECTION_STRATEGIES } from '../deck/strategies';
+import { CARD_SELECTION_STRATEGIES } from '../deck/card-selection-strategies';
 
 // Pre-defined spread templates
 export const SPREADS: Record<string, Spread> = {

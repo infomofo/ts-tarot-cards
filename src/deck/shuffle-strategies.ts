@@ -1,11 +1,11 @@
 import { ShuffleStrategy, TarotCard } from '../types';
 
 /**
- * Fisher-Yates shuffle strategy - the traditional shuffle algorithm
+ * Modern shuffle algorithm that ensures each card has an equal probability of ending up in any position
  */
 export class FisherYatesShuffleStrategy implements ShuffleStrategy {
   name = 'fisherYates';
-  description = 'Traditional Fisher-Yates shuffle algorithm for random distribution';
+  description = 'Modern shuffle algorithm that ensures each card has an equal probability of ending up in any position';
 
   shuffle(cards: TarotCard[]): TarotCard[] {
     const shuffled = [...cards];
@@ -26,11 +26,11 @@ export class FisherYatesShuffleStrategy implements ShuffleStrategy {
 }
 
 /**
- * Riffle shuffle strategy - simulates physical riffle shuffling
+ * Physical card shuffling simulation that mimics the traditional method of dividing the deck and interleaving cards
  */
 export class RiffleShuffleStrategy implements ShuffleStrategy {
   name = 'riffle';
-  description = 'Simulates physical riffle shuffling with multiple passes';
+  description = 'Physical card shuffling simulation that mimics the traditional method of dividing the deck and interleaving cards';
 
   shuffle(cards: TarotCard[]): TarotCard[] {
     let shuffled = [...cards];

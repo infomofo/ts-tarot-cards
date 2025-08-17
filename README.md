@@ -125,7 +125,7 @@ console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 
 ### Reversal Logic
 
-Card reversals are now handled at the **reader and spread level**, not at the card selection level. This provides a more accurate model of how tarot readings work:
+Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not.
 
 ```typescript
 import { SpreadReader, SPREADS } from 'ts-tarot-cards';

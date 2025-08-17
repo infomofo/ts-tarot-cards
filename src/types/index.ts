@@ -303,16 +303,37 @@ export interface CardSelectionOptions {
   strategy?: CardSelectionStrategy;
 }
 
-// Card Selection Strategy Interface
+/**
+ * Interface for card selection strategies that determine how cards are chosen from a deck.
+ * Developers can implement this interface to create custom card selection methods.
+ */
 export interface CardSelectionStrategy {
+  /** Unique identifier for the strategy */
   name: string;
+  /** Human-readable description of how the strategy works */
   description: string;
+  /**
+   * Given an ordered deck of TarotCard, select the specified number of cards according to the strategy's logic.
+   * @param deck - The ordered deck of tarot cards to select from
+   * @param count - The number of cards to select
+   * @returns An array of selected tarot cards
+   */
   selectCards(deck: TarotCard[], count: number): TarotCard[];
 }
 
-// Shuffle Strategy Interface
+/**
+ * Interface for shuffle strategies that determine how a deck of cards is randomized.
+ * Developers can implement this interface to create custom shuffling algorithms.
+ */
 export interface ShuffleStrategy {
+  /** Unique identifier for the strategy */
   name: string;
+  /** Human-readable description of how the strategy works */
   description: string;
+  /**
+   * Randomize the order of cards in the deck according to the strategy's algorithm.
+   * @param cards - The deck of tarot cards to shuffle
+   * @returns A new array with the cards in randomized order
+   */
   shuffle(cards: TarotCard[]): TarotCard[];
 }

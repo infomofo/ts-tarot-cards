@@ -1,5 +1,43 @@
 // Core enums and types for Tarot deck modeling
 
+/**
+ * Convert numeric value to roman numeral
+ */
+export function toRomanNumeral(num: number): string {
+  // Special case for 0 (The Fool)
+  if (num === 0) {
+    return '0'; // The Fool is traditionally represented as 0 or sometimes without a number
+  }
+
+  const values = [
+    { value: 1000, numeral: 'M' },
+    { value: 900, numeral: 'CM' },
+    { value: 500, numeral: 'D' },
+    { value: 400, numeral: 'CD' },
+    { value: 100, numeral: 'C' },
+    { value: 90, numeral: 'XC' },
+    { value: 50, numeral: 'L' },
+    { value: 40, numeral: 'XL' },
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' }
+  ];
+
+  let result = '';
+  let remaining = num;
+
+  for (const { value, numeral } of values) {
+    while (remaining >= value) {
+      result += numeral;
+      remaining -= value;
+    }
+  }
+
+  return result;
+}
+
 export enum Arcana {
   Major = 'Major',
   Minor = 'Minor'
@@ -127,6 +165,7 @@ export interface BaseTarotCard {
   description: string; // General description
   arcana: Arcana; // Overridden by extensions
   numericValue: number; // Overridden by extensions - unified numeric system
+  romanNumeral: string; // Derived from numericValue during initialization
   
   // Dynamic name generation for localization support
   getName(locale?: string): string;
@@ -195,4 +234,11 @@ export interface CardSelectionStrategy {
   name: string;
   description: string;
   selectCards(deck: TarotCard[], count: number, allowReversals: boolean): CardPosition[];
+}
+
+// Shuffle Strategy Interface
+export interface ShuffleStrategy {
+  name: string;
+  description: string;
+  shuffle(cards: TarotCard[]): TarotCard[];
 }

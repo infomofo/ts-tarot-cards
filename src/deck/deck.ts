@@ -1,15 +1,17 @@
-import { TarotCard, CardPosition, CardSelectionStrategy } from '../types';
+import { TarotCard, CardPosition, CardSelectionStrategy, ShuffleStrategy } from '../types';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
-import { CARD_SELECTION_STRATEGIES, DealStrategy } from './strategies';
+import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES, DealStrategy } from './strategies';
 
 export class TarotDeck {
   private cards: TarotCard[] = [];
   private shuffled: TarotCard[] = [];
   private defaultStrategy: CardSelectionStrategy;
+  private defaultShuffleStrategy: ShuffleStrategy;
 
-  constructor(defaultStrategy?: CardSelectionStrategy) {
+  constructor(defaultStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
     this.defaultStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
+    this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES['fisher-yates'];
     this.initializeDeck();
     this.shuffle();
   }
@@ -26,17 +28,11 @@ export class TarotDeck {
   }
 
   /**
-   * Shuffle the deck using Fisher-Yates algorithm
-   * In a real implementation, this could integrate with biometric randomness
+   * Shuffle the deck using the specified or default shuffle strategy
    */
-  shuffle(): void {
-    this.shuffled = [...this.cards];
-    
-    // Fisher-Yates shuffle algorithm
-    for (let i = this.shuffled.length - 1; i > 0; i--) {
-      const j = this.getBiometricRandomIndex(i + 1);
-      [this.shuffled[i], this.shuffled[j]] = [this.shuffled[j], this.shuffled[i]];
-    }
+  shuffle(shuffleStrategy?: ShuffleStrategy): void {
+    const strategy = shuffleStrategy || this.defaultShuffleStrategy;
+    this.shuffled = strategy.shuffle(this.cards);
   }
 
   /**
@@ -140,6 +136,27 @@ export class TarotDeck {
    */
   getAvailableStrategies(): Record<string, CardSelectionStrategy> {
     return CARD_SELECTION_STRATEGIES;
+  }
+
+  /**
+   * Set the default shuffle strategy
+   */
+  setDefaultShuffleStrategy(strategy: ShuffleStrategy): void {
+    this.defaultShuffleStrategy = strategy;
+  }
+
+  /**
+   * Get the current default shuffle strategy
+   */
+  getDefaultShuffleStrategy(): ShuffleStrategy {
+    return this.defaultShuffleStrategy;
+  }
+
+  /**
+   * Get available shuffle strategies
+   */
+  getAvailableShuffleStrategies(): Record<string, ShuffleStrategy> {
+    return SHUFFLE_STRATEGIES;
   }
 
   /**

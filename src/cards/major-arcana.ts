@@ -1,4 +1,4 @@
-import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName } from '../types';
+import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral } from '../types';
 
 // Concrete implementation of MajorArcanaCard with localization support
 class MajorArcanaCardImpl implements MajorArcanaCard {
@@ -6,6 +6,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly arcana: Arcana.Major = Arcana.Major;
   public readonly number: MajorArcana;
   public readonly numericValue: MajorArcana;
+  public readonly romanNumeral: string;
   public readonly keywords: string[];
   public readonly uprightMeanings: string[];
   public readonly reversedMeanings: string[];
@@ -26,6 +27,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     this.id = `major-${number.toString().padStart(2, '0')}-${getMajorArcanaName(number).toLowerCase().replace(/\s+/g, '-')}`;
     this.number = number;
     this.numericValue = number;
+    this.romanNumeral = toRomanNumeral(number);
     this.keywords = keywords;
     this.uprightMeanings = uprightMeanings;
     this.reversedMeanings = reversedMeanings;

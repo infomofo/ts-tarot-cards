@@ -1,5 +1,5 @@
 import { TarotDeck } from '../src/deck/deck';
-import { CARD_SELECTION_STRATEGIES } from '../src/deck/strategies';
+import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES } from '../src/deck/strategies';
 import { SpreadReader, SPREADS } from '../src/spreads/spreads';
 import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCard } from '../src/types';
 
@@ -347,5 +347,72 @@ describe('Card Types', () => {
       expect(typeof card.getName('en')).toBe('string');
       expect(card.getName('en')).toBe(card.getName()); // Currently returns same since no localization implemented yet
     });
+  });
+
+  test('should have roman numerals derived from numeric values', () => {
+    const deck = new TarotDeck();
+    const cards = deck.deal(deck.getTotalCount());
+    
+    cards.forEach(cardPosition => {
+      const card = cardPosition.card;
+      
+      // Every card should have a romanNumeral property
+      expect(card.romanNumeral).toBeDefined();
+      expect(typeof card.romanNumeral).toBe('string');
+      expect(card.romanNumeral.length).toBeGreaterThan(0);
+      
+      // Should use valid roman numeral characters or be "0" for The Fool
+      expect(card.romanNumeral).toMatch(/^[IVXLCDM0]+$/);
+    });
+  });
+});
+
+describe('Shuffle Strategies', () => {
+  test('should support different shuffle strategies', () => {
+    const deck = new TarotDeck();
+    const originalOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    
+    // Reset and shuffle with Fisher-Yates
+    deck.reset();
+    deck.shuffle(SHUFFLE_STRATEGIES['fisher-yates']);
+    const fisherYatesOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    
+    // Reset and shuffle with Riffle
+    deck.reset();
+    deck.shuffle(SHUFFLE_STRATEGIES.riffle);
+    const riffleOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    
+    // Orders should be different (with very high probability)
+    expect(fisherYatesOrder.join(',')).not.toBe(originalOrder.join(','));
+    expect(riffleOrder.join(',')).not.toBe(originalOrder.join(','));
+    expect(fisherYatesOrder.join(',')).not.toBe(riffleOrder.join(','));
+  });
+
+  test('should set and get default shuffle strategy', () => {
+    const deck = new TarotDeck();
+    
+    // Should have default shuffle strategy
+    expect(deck.getDefaultShuffleStrategy()).toBeDefined();
+    expect(deck.getDefaultShuffleStrategy().name).toBe('fisher-yates');
+    
+    // Should be able to change default shuffle strategy
+    deck.setDefaultShuffleStrategy(SHUFFLE_STRATEGIES.riffle);
+    expect(deck.getDefaultShuffleStrategy().name).toBe('riffle');
+  });
+
+  test('should get available shuffle strategies', () => {
+    const deck = new TarotDeck();
+    const strategies = deck.getAvailableShuffleStrategies();
+    
+    expect(strategies).toBeDefined();
+    expect(Object.keys(strategies)).toContain('fisher-yates');
+    expect(Object.keys(strategies)).toContain('riffle');
+    expect(strategies['fisher-yates'].name).toBe('fisher-yates');
+    expect(strategies.riffle.name).toBe('riffle');
+  });
+
+  test('should initialize with custom shuffle strategy', () => {
+    const deck = new TarotDeck(CARD_SELECTION_STRATEGIES.deal, SHUFFLE_STRATEGIES.riffle);
+    expect(deck.getDefaultShuffleStrategy().name).toBe('riffle');
   });
 });

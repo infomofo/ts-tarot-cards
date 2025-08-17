@@ -1,4 +1,4 @@
-import { MinorArcanaCard, Arcana, Suit, MinorNumber, getMinorNumberName } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, getMinorNumberName, toRomanNumeral } from '../types';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -7,6 +7,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly suit: Suit;
   public readonly number: MinorNumber;
   public readonly numericValue: MinorNumber;
+  public readonly romanNumeral: string;
   public readonly keywords: string[];
   public readonly uprightMeanings: string[];
   public readonly reversedMeanings: string[];
@@ -28,6 +29,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.suit = suit;
     this.number = number;
     this.numericValue = number; // Automatically use the enum value
+    this.romanNumeral = toRomanNumeral(number);
     this.keywords = keywords;
     this.uprightMeanings = uprightMeanings;
     this.reversedMeanings = reversedMeanings;

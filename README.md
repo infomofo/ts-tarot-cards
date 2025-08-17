@@ -68,7 +68,7 @@ deck.reset();
 The library supports multiple card selection methods through a flexible strategy pattern:
 
 ```typescript
-import { TarotDeck, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards';
+import { TarotDeck, CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES } from 'ts-tarot-cards';
 
 // Initialize deck with default strategy (deal)
 const defaultDeck = new TarotDeck();
@@ -82,25 +82,39 @@ const cards1 = defaultDeck.selectCards(3); // Uses deal strategy
 // Override with a specific strategy for this selection
 const cards2 = defaultDeck.selectCards(3, true, CARD_SELECTION_STRATEGIES.fanpick);
 
-// Change default strategy
+// Change default card selection strategy
 defaultDeck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);
 
-// Shuffle the deck manually
+// Shuffle the deck manually using default shuffle strategy
 defaultDeck.shuffle();
+
+// Shuffle with a specific shuffle strategy
+defaultDeck.shuffle(SHUFFLE_STRATEGIES.riffle);
+
+// Change default shuffle strategy
+defaultDeck.setDefaultShuffleStrategy(SHUFFLE_STRATEGIES['fisher-yates']);
 
 // Reset and shuffle the deck
 defaultDeck.reset();
 
-// Get available strategies
-const strategies = defaultDeck.getAvailableStrategies();
-console.log(Object.keys(strategies)); // ['deal', 'fanpick']
+// Get available card selection strategies
+const selectionStrategies = defaultDeck.getAvailableStrategies();
+console.log(Object.keys(selectionStrategies)); // ['deal', 'fanpick']
+
+// Get available shuffle strategies
+const shuffleStrategies = defaultDeck.getAvailableShuffleStrategies();
+console.log(Object.keys(shuffleStrategies)); // ['fisher-yates', 'riffle']
 ```
 
-**Available Strategies:**
+**Available Card Selection Strategies:**
 - **`deal`**: Sequential dealing from the top of the shuffled deck (traditional)
 - **`fanpick`**: Random selection from fanned cards (intuitive selection)
 
-**Strategy Selection Priority:**
+**Available Shuffle Strategies:**
+- **`fisher-yates`**: Traditional Fisher-Yates shuffle algorithm for random distribution
+- **`riffle`**: Simulates physical riffle shuffling with multiple passes
+
+**Card Selection Strategy Priority:**
 1. Explicit strategy parameter (highest priority)
 2. Spread's preferred strategy
 3. Deck's default strategy (lowest priority)

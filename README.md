@@ -70,20 +70,29 @@ The library supports multiple card selection methods through a flexible strategy
 ```typescript
 import { TarotDeck, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards';
 
-// Initialize deck with a default strategy
-const deck = new TarotDeck(CARD_SELECTION_STRATEGIES.fanpick);
+// Initialize deck with default strategy (deal)
+const defaultDeck = new TarotDeck();
 
-// Use the default strategy
-const cards1 = deck.selectCards(3); // Uses fanpick
+// Initialize deck with a specific strategy
+const fanPickDeck = new TarotDeck(CARD_SELECTION_STRATEGIES.fanpick);
 
-// Override with a specific strategy
-const cards2 = deck.selectCards(3, true, CARD_SELECTION_STRATEGIES.deal);
+// Use the deck's default strategy
+const cards1 = defaultDeck.selectCards(3); // Uses deal strategy
+
+// Override with a specific strategy for this selection
+const cards2 = defaultDeck.selectCards(3, true, CARD_SELECTION_STRATEGIES.fanpick);
 
 // Change default strategy
-deck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);
+defaultDeck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);
+
+// Shuffle the deck manually
+defaultDeck.shuffle();
+
+// Reset and shuffle the deck
+defaultDeck.reset();
 
 // Get available strategies
-const strategies = deck.getAvailableStrategies();
+const strategies = defaultDeck.getAvailableStrategies();
 console.log(Object.keys(strategies)); // ['deal', 'fanpick']
 ```
 
@@ -99,25 +108,29 @@ console.log(Object.keys(strategies)); // ['deal', 'fanpick']
 ### Performing Spreads
 
 ```typescript
-import { SpreadReader } from 'ts-tarot-cards';
+import { SpreadReader, SPREADS, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards';
 
 const reader = new SpreadReader();
 
+// Using available spread keys
+const spreadKeys = Object.keys(SPREADS); // ['threeCard', 'crossSpread', 'simplePastPresent']
+const strategyKeys = Object.keys(CARD_SELECTION_STRATEGIES); // ['deal', 'fanpick']
+
 // Three-card spread (uses preferred strategy: 'deal')
-const threeCardReading = reader.performReading('threeCard');
+const threeCardReading = reader.performReading(spreadKeys[0]); // 'threeCard'
 console.log('Past:', threeCardReading.cards[0]);
 console.log('Present:', threeCardReading.cards[1]);
 console.log('Future:', threeCardReading.cards[2]);
 
 // Cross spread (uses preferred strategy: 'fanpick')
-const crossReading = reader.performReading('crossSpread');
+const crossReading = reader.performReading(spreadKeys[1]); // 'crossSpread'
 
 // Override spread's preferred strategy
-const dealReading = reader.performReading('crossSpread', 'deal');
-const fanpickReading = reader.performReading('threeCard', 'fanpick');
+const dealReading = reader.performReading(spreadKeys[1], strategyKeys[0]); // 'deal'
+const fanpickReading = reader.performReading(spreadKeys[0], strategyKeys[1]); // 'fanpick'
 
 // Legacy support - boolean parameter still works
-const legacyReading = reader.performReading('threeCard', false); // Uses fanpick
+const legacyReading = reader.performReading(spreadKeys[0], false); // Uses fanpick
 
 // Custom spread with preferred strategy
 const customSpread = reader.createCustomSpread(
@@ -130,7 +143,7 @@ const customSpread = reader.createCustomSpread(
   ],
   true, // allow reversals
   undefined, // no visual representation
-  'fanpick' // preferred strategy
+  strategyKeys[1] // 'fanpick' preferred strategy
 );
 
 const customReading = reader.performCustomReading(customSpread);
@@ -142,7 +155,7 @@ The library provides comprehensive reading support with user context and interpr
 
 ```typescript
 // Reading with user context
-const reading = reader.performReading('threeCard', 'fanpick', 'Career guidance for the next year');
+const reading = reader.performReading(spreadKeys[0], strategyKeys[1], 'Career guidance for the next year');
 
 // Generate interpretations
 const interpretations = reader.generateInterpretations(reading);

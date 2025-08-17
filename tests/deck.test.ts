@@ -85,11 +85,11 @@ describe('TarotDeck', () => {
     expect(strategies).toHaveProperty('deal');
     expect(strategies).toHaveProperty('fanpick');
     
-    const cards1 = deck.selectCards(3, true, strategies.deal);
+    const cards1 = deck.selectCards(3, { allowReversals: true, strategy: strategies.deal });
     expect(cards1).toHaveLength(3);
     
     deck.reset();
-    const cards2 = deck.selectCards(3, true, strategies.fanpick);
+    const cards2 = deck.selectCards(3, { allowReversals: true, strategy: strategies.fanpick });
     expect(cards2).toHaveLength(3);
   });
 

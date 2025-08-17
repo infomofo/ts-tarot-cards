@@ -99,6 +99,72 @@ export enum MajorArcana {
   TheWorld = 21
 }
 
+export enum MinorArcana {
+  // Cups
+  AceOfCups = 'ace-of-cups',
+  TwoOfCups = 'two-of-cups',
+  ThreeOfCups = 'three-of-cups',
+  FourOfCups = 'four-of-cups',
+  FiveOfCups = 'five-of-cups',
+  SixOfCups = 'six-of-cups',
+  SevenOfCups = 'seven-of-cups',
+  EightOfCups = 'eight-of-cups',
+  NineOfCups = 'nine-of-cups',
+  TenOfCups = 'ten-of-cups',
+  PageOfCups = 'page-of-cups',
+  KnightOfCups = 'knight-of-cups',
+  QueenOfCups = 'queen-of-cups',
+  KingOfCups = 'king-of-cups',
+  
+  // Pentacles
+  AceOfPentacles = 'ace-of-pentacles',
+  TwoOfPentacles = 'two-of-pentacles',
+  ThreeOfPentacles = 'three-of-pentacles',
+  FourOfPentacles = 'four-of-pentacles',
+  FiveOfPentacles = 'five-of-pentacles',
+  SixOfPentacles = 'six-of-pentacles',
+  SevenOfPentacles = 'seven-of-pentacles',
+  EightOfPentacles = 'eight-of-pentacles',
+  NineOfPentacles = 'nine-of-pentacles',
+  TenOfPentacles = 'ten-of-pentacles',
+  PageOfPentacles = 'page-of-pentacles',
+  KnightOfPentacles = 'knight-of-pentacles',
+  QueenOfPentacles = 'queen-of-pentacles',
+  KingOfPentacles = 'king-of-pentacles',
+  
+  // Swords
+  AceOfSwords = 'ace-of-swords',
+  TwoOfSwords = 'two-of-swords',
+  ThreeOfSwords = 'three-of-swords',
+  FourOfSwords = 'four-of-swords',
+  FiveOfSwords = 'five-of-swords',
+  SixOfSwords = 'six-of-swords',
+  SevenOfSwords = 'seven-of-swords',
+  EightOfSwords = 'eight-of-swords',
+  NineOfSwords = 'nine-of-swords',
+  TenOfSwords = 'ten-of-swords',
+  PageOfSwords = 'page-of-swords',
+  KnightOfSwords = 'knight-of-swords',
+  QueenOfSwords = 'queen-of-swords',
+  KingOfSwords = 'king-of-swords',
+  
+  // Wands
+  AceOfWands = 'ace-of-wands',
+  TwoOfWands = 'two-of-wands',
+  ThreeOfWands = 'three-of-wands',
+  FourOfWands = 'four-of-wands',
+  FiveOfWands = 'five-of-wands',
+  SixOfWands = 'six-of-wands',
+  SevenOfWands = 'seven-of-wands',
+  EightOfWands = 'eight-of-wands',
+  NineOfWands = 'nine-of-wands',
+  TenOfWands = 'ten-of-wands',
+  PageOfWands = 'page-of-wands',
+  KnightOfWands = 'knight-of-wands',
+  QueenOfWands = 'queen-of-wands',
+  KingOfWands = 'king-of-wands'
+}
+
 // Helper functions to get string names
 export function getMinorNumberName(num: MinorNumber): string {
   const names: Record<MinorNumber, string> = {
@@ -227,6 +293,11 @@ export interface SpreadReading {
   userContext?: string; // User-provided context like "what area of life to explore"
   allowReversals: boolean; // Whether this specific reading allows reversals
   timestamp: Date;
+}
+
+export interface CardSelectionOptions {
+  allowReversals?: boolean;
+  strategy?: CardSelectionStrategy;
 }
 
 // Card Selection Strategy Interface

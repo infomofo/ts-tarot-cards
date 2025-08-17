@@ -50,11 +50,14 @@ import { TarotDeck } from 'ts-tarot-cards';
 // Create and shuffle a deck
 const deck = new TarotDeck();
 
-// Deal cards from the top
-const dealtCards = deck.deal(3);
+// Select cards using the default strategy (deal from top)
+const dealtCards = deck.selectCards(3);
 
-// Fan pick (random selection)
-const fanPicked = deck.fanPick(1);
+// Select cards with specific options (fan pick with no reversals)
+const fanPicked = deck.selectCards(1, { 
+  allowReversals: false, 
+  strategy: CARD_SELECTION_STRATEGIES.fanpick 
+});
 
 // Check remaining cards
 console.log(`${deck.getRemainingCount()} cards remaining`);
@@ -80,7 +83,10 @@ const fanPickDeck = new TarotDeck(CARD_SELECTION_STRATEGIES.fanpick);
 const cards1 = defaultDeck.selectCards(3); // Uses deal strategy
 
 // Override with a specific strategy for this selection
-const cards2 = defaultDeck.selectCards(3, true, CARD_SELECTION_STRATEGIES.fanpick);
+const cards2 = defaultDeck.selectCards(3, { 
+  allowReversals: true, 
+  strategy: CARD_SELECTION_STRATEGIES.fanpick 
+});
 
 // Change default card selection strategy
 defaultDeck.setDefaultStrategy(CARD_SELECTION_STRATEGIES.deal);

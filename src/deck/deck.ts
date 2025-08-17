@@ -1,4 +1,4 @@
-import { TarotCard, CardPosition, CardSelectionStrategy, ShuffleStrategy } from '../types';
+import { TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy } from '../types';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
 import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES, DealStrategy } from './strategies';
@@ -46,75 +46,35 @@ export class TarotDeck {
   }
 
   /**
-   * Deal a specified number of cards from the top of the deck
+   * Select cards using a specified strategy or options
    */
-  deal(count: number, allowReversals: boolean = true): CardPosition[] {
-    if (count > this.shuffled.length) {
-      throw new Error(`Cannot deal ${count} cards, only ${this.shuffled.length} available`);
-    }
-
-    const dealtCards: CardPosition[] = [];
+  selectCards(count: number, options?: CardSelectionOptions): CardPosition[] {
+    const allowReversals = options?.allowReversals ?? true;
+    const strategy = options?.strategy || this.defaultStrategy;
     
-    for (let i = 0; i < count; i++) {
-      const card = this.shuffled.shift()!;
-      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
-      
-      dealtCards.push({
-        card,
-        position: i + 1,
-        isReversed
-      });
-    }
-
-    return dealtCards;
-  }
-
-  /**
-   * Fan pick - allow selection of cards from a fanned deck
-   * Returns cards in random positions as if picked from a fan
-   */
-  fanPick(count: number, allowReversals: boolean = true): CardPosition[] {
-    if (count > this.shuffled.length) {
-      throw new Error(`Cannot pick ${count} cards, only ${this.shuffled.length} available`);
-    }
-
-    const pickedCards: CardPosition[] = [];
-    const availableIndices = Array.from({ length: this.shuffled.length }, (_, i) => i);
-
-    for (let i = 0; i < count; i++) {
-      // Pick a random position from the fan
-      const randomIndexPosition = this.getBiometricRandomIndex(availableIndices.length);
-      const cardIndex = availableIndices.splice(randomIndexPosition, 1)[0];
-      
-      const card = this.shuffled[cardIndex];
-      const isReversed = allowReversals ? this.getBiometricRandomIndex(2) === 1 : false; // 50% chance of reversal if allowed
-      
-      pickedCards.push({
-        card,
-        position: i + 1,
-        isReversed
-      });
-    }
-
-    // Remove picked cards from deck
-    const pickedCardIds = new Set(pickedCards.map(cp => cp.card.id));
-    this.shuffled = this.shuffled.filter(card => !pickedCardIds.has(card.id));
-
-    return pickedCards;
-  }
-
-  /**
-   * Select cards using a specified strategy
-   */
-  selectCards(count: number, allowReversals: boolean = true, strategy?: CardSelectionStrategy): CardPosition[] {
-    const selectedStrategy = strategy || this.defaultStrategy;
-    const selectedCards = selectedStrategy.selectCards([...this.shuffled], count, allowReversals);
+    const selectedCards = strategy.selectCards([...this.shuffled], count, allowReversals);
     
     // Remove selected cards from deck
     const selectedCardIds = new Set(selectedCards.map(cp => cp.card.id));
     this.shuffled = this.shuffled.filter(card => !selectedCardIds.has(card.id));
     
     return selectedCards;
+  }
+
+  /**
+   * Deal cards from the top of the deck
+   * @deprecated Use selectCards() with deal strategy instead
+   */
+  deal(count: number, allowReversals: boolean = true): CardPosition[] {
+    return this.selectCards(count, { allowReversals, strategy: CARD_SELECTION_STRATEGIES.deal });
+  }
+
+  /**
+   * Fan pick - random selection from the deck
+   * @deprecated Use selectCards() with fanpick strategy instead
+   */
+  fanPick(count: number, allowReversals: boolean = true): CardPosition[] {
+    return this.selectCards(count, { allowReversals, strategy: CARD_SELECTION_STRATEGIES.fanpick });
   }
 
   /**

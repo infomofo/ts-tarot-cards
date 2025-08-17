@@ -146,7 +146,7 @@ export class SpreadReader {
       strategy = this.deck.getDefaultStrategy();
     }
 
-    const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
+    const cards = this.deck.selectCards(cardCount, { allowReversals: spread.allowReversals, strategy });
 
     return {
 
@@ -235,7 +235,7 @@ export class SpreadReader {
       strategy = this.deck.getDefaultStrategy();
     }
 
-    const cards = this.deck.selectCards(cardCount, spread.allowReversals, strategy);
+    const cards = this.deck.selectCards(cardCount, { allowReversals: spread.allowReversals, strategy });
 
     return {
 

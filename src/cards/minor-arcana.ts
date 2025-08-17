@@ -1,4 +1,4 @@
-import { MinorArcanaCard, Arcana, Suit, MinorNumber, getMinorNumberName, toRomanNumeral } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral } from '../types';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -60,8 +60,8 @@ function createMinorArcanaCard(
 }
 
 // Example minor arcana cards - extensible to full deck
-export const MINOR_ARCANA_CARDS: Partial<Record<string, MinorArcanaCard>> = {
-  'ace-of-cups': createMinorArcanaCard(
+export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> = {
+  [MinorArcana.AceOfCups]: createMinorArcanaCard(
     Suit.Cups,
     MinorNumber.Ace,
     ['love', 'new relationships', 'compassion', 'creativity'],
@@ -86,7 +86,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, MinorArcanaCard>> = {
     'The Ace of Cups represents the beginning of the emotional and spiritual journey in the suit of Cups. As the first card in the suit of Water/Emotions, it embodies pure emotional potential and the opening of the heart. It marks the start of the emotional journey through love, relationships, and spiritual awakening.',
     'The Ace of Cups represents new love, new relationships, new beginnings in love, spiritual awakening, intuitive awareness, compassion, creativity, and overflowing feelings.'
   ),
-  'three-of-swords': createMinorArcanaCard(
+  [MinorArcana.ThreeOfSwords]: createMinorArcanaCard(
     Suit.Swords,
     MinorNumber.Three,
     ['heartbreak', 'emotional pain', 'sorrow', 'grief'],
@@ -111,7 +111,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, MinorArcanaCard>> = {
     'The Three of Swords represents a crucial point in the suit of Swords\' journey through the realm of thoughts and communication. In the Air element\'s progression, this card shows how mental clarity sometimes requires painful truth and the cutting away of illusions. It teaches that heartbreak can lead to wisdom and that pain often precedes growth.',
     'The Three of Swords represents heartbreak, emotional pain, sorrow, grief, hurt, trauma, sadness, rejection, separation, and loss.'
   ),
-  'ten-of-wands': createMinorArcanaCard(
+  [MinorArcana.TenOfWands]: createMinorArcanaCard(
     Suit.Wands,
     MinorNumber.Ten,
     ['burden', 'extra responsibility', 'hard work', 'completion'],
@@ -138,9 +138,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<string, MinorArcanaCard>> = {
   )
 };
 
-export function getMinorArcanaCard(suit: Suit, number: MinorNumber): MinorArcanaCard | undefined {
-  const key = `${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
-  return MINOR_ARCANA_CARDS[key];
+export function getMinorArcanaCard(enumValue: MinorArcana): MinorArcanaCard | undefined {
+  return MINOR_ARCANA_CARDS[enumValue];
 }
 
 export function createMinorArcanaId(suit: Suit, number: MinorNumber): string {

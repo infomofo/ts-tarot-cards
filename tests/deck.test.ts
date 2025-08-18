@@ -16,9 +16,9 @@ describe('TarotDeck', () => {
     expect(deck.getRemainingCount()).toBe(deck.getTotalCount());
   });
 
-  test('should deal cards correctly', () => {
+  test('should select cards correctly', () => {
     const initialCount = deck.getRemainingCount();
-    const dealtCards = deck.deal(3);
+    const dealtCards = deck.selectCards(3);
 
     expect(dealtCards).toHaveLength(3);
     expect(deck.getRemainingCount()).toBe(initialCount - 3);
@@ -35,7 +35,7 @@ describe('TarotDeck', () => {
 
   test('should fan pick cards correctly', () => {
     const initialCount = deck.getRemainingCount();
-    const pickedCards = deck.fanPick(2);
+    const pickedCards = deck.selectCards(2, { strategy: CARD_SELECTION_STRATEGIES.fanpick });
 
     expect(pickedCards).toHaveLength(2);
     expect(deck.getRemainingCount()).toBe(initialCount - 2);
@@ -48,14 +48,14 @@ describe('TarotDeck', () => {
     });
   });
 
-  test('should throw error when dealing more cards than available', () => {
+  test('should throw error when selecting more cards than available', () => {
     const availableCards = deck.getRemainingCount();
-    expect(() => deck.deal(availableCards + 1)).toThrow();
+    expect(() => deck.selectCards(availableCards + 1)).toThrow();
   });
 
   test('should reset deck correctly', () => {
     const originalCount = deck.getTotalCount();
-    deck.deal(2);
+    deck.selectCards(2);
     expect(deck.getRemainingCount()).toBe(originalCount - 2);
     
     deck.reset();
@@ -66,8 +66,8 @@ describe('TarotDeck', () => {
     const deck1 = new TarotDeck();
     const deck2 = new TarotDeck();
     
-    const cards1 = deck1.deal(4);
-    const cards2 = deck2.deal(4);
+    const cards1 = deck1.selectCards(4);
+    const cards2 = deck2.selectCards(4);
     
     // While theoretically possible for shuffles to be identical, 
     // it's extremely unlikely with 4 cards
@@ -306,7 +306,7 @@ describe('SpreadReader', () => {
 describe('Card Types', () => {
   test('should have correct card structure for major arcana', () => {
     const deck = new TarotDeck();
-    const cards = deck.deal(deck.getTotalCount());
+    const cards = deck.selectCards(deck.getTotalCount());
     
     const majorCards = cards.filter(cp => cp.card.arcana === Arcana.Major);
     const minorCards = cards.filter(cp => cp.card.arcana === Arcana.Minor);
@@ -335,7 +335,7 @@ describe('Card Types', () => {
 
   test('should support localization-ready getName() method', () => {
     const deck = new TarotDeck();
-    const cards = deck.deal(5);
+    const cards = deck.selectCards(5);
     
     cards.forEach(cardPosition => {
       const card = cardPosition.card;
@@ -352,7 +352,7 @@ describe('Card Types', () => {
 
   test('should have roman numerals derived from numeric values', () => {
     const deck = new TarotDeck();
-    const cards = deck.deal(deck.getTotalCount());
+    const cards = deck.selectCards(deck.getTotalCount());
     
     cards.forEach(cardPosition => {
       const card = cardPosition.card;
@@ -371,17 +371,17 @@ describe('Card Types', () => {
 describe('Shuffle Strategies', () => {
   test('should support different shuffle strategies', () => {
     const deck = new TarotDeck();
-    const originalOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    const originalOrder = deck.selectCards(deck.getTotalCount()).map(cp => cp.card.id);
     
     // Reset and shuffle with Fisher-Yates
     deck.reset();
     deck.shuffle(SHUFFLE_STRATEGIES.fisherYates);
-    const fisherYatesOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    const fisherYatesOrder = deck.selectCards(deck.getTotalCount()).map(cp => cp.card.id);
     
     // Reset and shuffle with Riffle
     deck.reset();
     deck.shuffle(SHUFFLE_STRATEGIES.riffle);
-    const riffleOrder = deck.deal(deck.getTotalCount()).map(cp => cp.card.id);
+    const riffleOrder = deck.selectCards(deck.getTotalCount()).map(cp => cp.card.id);
     
     // Orders should be different (with very high probability)
     expect(fisherYatesOrder.join(',')).not.toBe(originalOrder.join(','));

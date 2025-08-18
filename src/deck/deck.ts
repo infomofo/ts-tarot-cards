@@ -69,19 +69,7 @@ export class TarotDeck {
     return cardPositions;
   }
 
-  /**
-   * Deal cards from the top of the deck
-   */
-  deal(count: number): CardPosition[] {
-    return this.selectCards(count, { strategy: CARD_SELECTION_STRATEGIES.deal });
-  }
 
-  /**
-   * Fan pick - random selection from the deck
-   */
-  fanPick(count: number): CardPosition[] {
-    return this.selectCards(count, { strategy: CARD_SELECTION_STRATEGIES.fanpick });
-  }
 
   /**
    * Set the default card selection strategy

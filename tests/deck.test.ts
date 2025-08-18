@@ -1,5 +1,6 @@
 import { TarotDeck } from '../src/deck/deck';
-import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES } from '../src/deck/strategies';
+import { CARD_SELECTION_STRATEGIES } from '../src/deck/card-selection-strategies';
+import { SHUFFLE_STRATEGIES } from '../src/deck/shuffle-strategies';
 import { SpreadReader, SPREADS } from '../src/spreads/spreads';
 import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCard } from '../src/types';
 
@@ -145,8 +146,8 @@ describe('SpreadReader', () => {
     expect(reading.spread.positions).toHaveLength(5);
   });
 
-  test('should perform reading with fan pick', () => {
-    const reading = reader.performReading('threeCard', false);
+  test('should perform reading with fan pick strategy', () => {
+    const reading = reader.performReading('threeCard', 'fanpick');
     
     expect(reading.cards).toHaveLength(3);
     expect(reading.spread.name).toBe('Three Card Spread');

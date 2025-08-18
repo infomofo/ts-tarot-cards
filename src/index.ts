@@ -8,7 +8,8 @@ export * from './cards/minor-arcana';
 
 // Deck functionality
 export * from './deck/deck';
-export * from './deck/strategies';
+export * from './deck/card-selection-strategies';
+export * from './deck/shuffle-strategies';
 
 // Spread functionality
 export * from './spreads/spreads';

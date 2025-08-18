@@ -1,7 +1,8 @@
 import { TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy } from '../types';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
-import { CARD_SELECTION_STRATEGIES, SHUFFLE_STRATEGIES, DealStrategy } from './strategies';
+import { CARD_SELECTION_STRATEGIES } from './card-selection-strategies';
+import { SHUFFLE_STRATEGIES } from './shuffle-strategies';
 
 export class TarotDeck {
   private initialDeck: TarotCard[] = [];

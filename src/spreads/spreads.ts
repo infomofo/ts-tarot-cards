@@ -2,6 +2,13 @@ import { Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation
 import { TarotDeck } from '../deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../deck/card-selection-strategies';
 
+// Spread name constants to avoid magic strings
+export const SPREAD_NAMES = {
+  threeCard: 'threeCard',
+  crossSpread: 'crossSpread', 
+  simplePastPresent: 'simplePastPresent'
+} as const;
+
 // Pre-defined spread templates
 export const SPREADS: Record<string, Spread> = {
   threeCard: {
@@ -99,11 +106,10 @@ export class SpreadReader {
 
   /**
    * Perform a reading using a predefined spread
-   * Supports both legacy boolean parameter and new strategy parameter
    */
   performReading(
     spreadName: keyof typeof SPREADS, 
-    strategyOrLegacyBoolean?: string | CardSelectionStrategy | boolean,
+    strategy?: string | CardSelectionStrategy,
     userContext?: string
   ): SpreadReading {
     const spread = SPREADS[spreadName];
@@ -113,53 +119,29 @@ export class SpreadReader {
 
     const cardCount = spread.positions.length;
     
-    // Handle legacy boolean parameter
-    if (typeof strategyOrLegacyBoolean === 'boolean') {
-      const useDealing = strategyOrLegacyBoolean;
-      let cards: CardPosition[];
-
-      if (useDealing) {
-        cards = this.deck.deal(cardCount);
-      } else {
-        cards = this.deck.fanPick(cardCount);
-      }
-
-      // Apply reversal logic at the reader level
-      cards = this.applyReversals(cards, spread.allowReversals);
-
-      return {
-        spread,
-        cards,
-        allowReversals: spread.allowReversals,
-        userContext,
-        timestamp: new Date()
-      };
-    }
-
-    // Handle new strategy parameter
-    let strategy: CardSelectionStrategy;
-
     // Determine strategy to use
-    if (strategyOrLegacyBoolean) {
-      if (typeof strategyOrLegacyBoolean === 'string') {
-        strategy = CARD_SELECTION_STRATEGIES[strategyOrLegacyBoolean];
-        if (!strategy) {
-          throw new Error(`Unknown strategy: ${strategyOrLegacyBoolean}`);
+    let cardSelectionStrategy: CardSelectionStrategy;
+    
+    if (strategy) {
+      if (typeof strategy === 'string') {
+        cardSelectionStrategy = CARD_SELECTION_STRATEGIES[strategy];
+        if (!cardSelectionStrategy) {
+          throw new Error(`Unknown strategy: ${strategy}`);
         }
       } else {
-        strategy = strategyOrLegacyBoolean;
+        cardSelectionStrategy = strategy;
       }
     } else if (spread.preferredStrategy) {
-      strategy = CARD_SELECTION_STRATEGIES[spread.preferredStrategy];
-      if (!strategy) {
+      cardSelectionStrategy = CARD_SELECTION_STRATEGIES[spread.preferredStrategy];
+      if (!cardSelectionStrategy) {
         throw new Error(`Unknown preferred strategy for spread: ${spread.preferredStrategy}`);
       }
     } else {
       // Fallback to deck's default strategy
-      strategy = this.deck.getDefaultCardSelectionStrategy();
+      cardSelectionStrategy = this.deck.getDefaultCardSelectionStrategy();
     }
 
-    let cards = this.deck.selectCards(cardCount, { strategy });
+    let cards = this.deck.selectCards(cardCount, { strategy: cardSelectionStrategy });
     
     // Apply reversal logic at the reader level
     cards = this.applyReversals(cards, spread.allowReversals);

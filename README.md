@@ -127,12 +127,12 @@ console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not.
 
 ```typescript
-import { SpreadReader, SPREADS } from 'ts-tarot-cards';
+import { SpreadReader, SPREADS, SPREAD_NAMES } from 'ts-tarot-cards';
 
 const reader = new SpreadReader();
 
 // Reversals are determined by the spread's allowReversals setting
-const reading = reader.performReading('threeCard'); // Uses spread's reversal setting
+const reading = reader.performReading(SPREAD_NAMES.threeCard); // Uses spread's reversal setting
 console.log(reading.allowReversals); // true (from spread definition)
 
 // Individual card positions show if they're reversed

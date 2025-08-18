@@ -182,8 +182,8 @@ const crossReading = reader.performReading(spreadKeys[1]); // 'crossSpread'
 const dealReading = reader.performReading(spreadKeys[1], strategyKeys[0]); // 'deal'
 const fanpickReading = reader.performReading(spreadKeys[0], strategyKeys[1]); // 'fanpick'
 
-// Legacy support - boolean parameter still works
-const legacyReading = reader.performReading(spreadKeys[0], false); // Uses fanpick
+// Custom strategy selection  
+const customReading = reader.performReading(spreadKeys[0], 'fanpick');
 
 // Custom spread with preferred strategy
 const customSpread = reader.createCustomSpread(

@@ -10,8 +10,8 @@ export class TarotDeck {
   private defaultCardSelectionStrategy: CardSelectionStrategy;
   private defaultShuffleStrategy: ShuffleStrategy;
 
-  constructor(defaultStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
-    this.defaultCardSelectionStrategy = defaultStrategy || CARD_SELECTION_STRATEGIES.deal;
+  constructor(defaultCardSelectionStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
+    this.defaultCardSelectionStrategy = defaultCardSelectionStrategy || CARD_SELECTION_STRATEGIES.deal;
     this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES.fisherYates;
     this.initializeDeck();
     this.shuffle();

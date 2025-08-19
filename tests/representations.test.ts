@@ -44,9 +44,26 @@ describe('Card Representations', () => {
       minorArcanaCards.forEach(card => {
         expect(card.getTextRepresentation().startsWith('[m')).toBe(true);
         expect(card.getTextRepresentation().endsWith(']')).toBe(true);
-        const suitEmoji = SUIT_PROPERTIES[card.suit].emoji;
-        expect(card.getTextRepresentation().includes(suitEmoji)).toBe(true);
+
+        // The Ace of Cups has a special emoji, so we skip the standard suit emoji check for it
+        if (card.id !== 'minor-ace-of-cups') {
+          const suitEmoji = SUIT_PROPERTIES[card.suit].emoji;
+          expect(card.getTextRepresentation().includes(suitEmoji)).toBe(true);
+        }
       });
+    });
+
+    test('ace of cups should have correct text and name', () => {
+      const aceOfCups = getMinorArcanaCard(MinorArcana.AceOfCups) as MinorArcanaCard;
+      expect(aceOfCups.getTextRepresentation()).toBe('[mA☕️]');
+      expect(aceOfCups.getName()).toBe('Ace of Cups');
+    });
+
+    test('ace of swords should have correct text and name', () => {
+      const aceOfSwords = getMinorArcanaCard(MinorArcana.AceOfSwords) as MinorArcanaCard;
+      const suitEmoji = SUIT_PROPERTIES[Suit.Swords].emoji;
+      expect(aceOfSwords.getTextRepresentation()).toBe(`[mA${suitEmoji}]`);
+      expect(aceOfSwords.getName()).toBe('Ace of Swords');
     });
   });
 
@@ -86,6 +103,12 @@ describe('Card Representations', () => {
       if (card.faceCardEmoji) {
         expect(svg).not.toContain(card.faceCardEmoji);
       }
+    });
+
+    test('ace of wands should contain "Ace" text in SVG', () => {
+      const aceOfWands = getMinorArcanaCard(MinorArcana.AceOfWands) as MinorArcanaCard;
+      const svg = aceOfWands.getSvg();
+      expect(svg).toContain('>Ace<');
     });
   });
 });

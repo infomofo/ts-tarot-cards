@@ -81,16 +81,18 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
   } = options || {};
 
   const backgroundColor = getSuitColor(card.suit);
-  const romanNumeral = card.romanNumeral;
   const suitEmoji = SUIT_PROPERTIES[card.suit].emoji;
 
   let artContent = '';
+  let numberContent = '';
 
+  // Determine Art Content
   if (art_override_url) {
     artContent = `<image href="${art_override_url}" x="0" y="0" height="100%" width="100%"/>`;
   } else if (!hide_emoji) {
-    if (card.number >= MinorNumber.Page) {
-      // Face card
+    if (card.number === MinorNumber.Ace) {
+      artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="120">${suitEmoji}</text>`;
+    } else if (card.number >= MinorNumber.Page) {
       const faceCardName = getMinorNumberName(card.number);
       artContent = `
         <rect x="10%" y="5%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
@@ -99,29 +101,27 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
         <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-size="60">${suitEmoji}</text>
       `;
     } else {
-      // Number card
       const positions = getEmojiPositions(card.number);
       artContent = positions
-        .map(
-          (pos) =>
-            `<text x="${pos.x}%" y="${pos.y}%" dominant-baseline="middle" text-anchor="middle" font-size="40">${suitEmoji}</text>`
-        )
+        .map(pos => `<text x="${pos.x}%" y="${pos.y}%" dominant-baseline="middle" text-anchor="middle" font-size="40">${suitEmoji}</text>`)
         .join('');
     }
   }
 
-  const numberContent = hide_number || card.number >= MinorNumber.Page
-    ? ''
-    : `<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="24" font-weight="bold">${romanNumeral}</text>`;
-
-  const suitContent = '';
+  // Determine Number Content
+  if (!hide_number && card.number < MinorNumber.Page) {
+    const text = card.number === MinorNumber.Ace ? 'Ace' : card.romanNumeral;
+    numberContent = `
+      <text x="8%" y="8%" dominant-baseline="hanging" text-anchor="start" font-size="24" font-weight="bold">${text}</text>
+      <text x="92%" y="92%" dominant-baseline="text-after-edge" text-anchor="end" font-size="24" font-weight="bold">${text}</text>
+    `;
+  }
 
   return `
     <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="${backgroundColor}" />
       ${artContent}
       ${numberContent}
-      ${suitContent}
     </svg>
   `;
 }

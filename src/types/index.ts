@@ -237,6 +237,7 @@ export interface BaseTarotCard {
   arcana: Arcana; // Overridden by extensions
   numericValue: number; // Overridden by extensions - unified numeric system
   romanNumeral: string; // Derived from numericValue during initialization
+  readonly emoji: string; // A text-based emoji representation of the card
   
   // Dynamic name generation for localization support
   getName(locale?: string): string;
@@ -247,6 +248,7 @@ export interface MajorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Major;
   number: MajorArcana;
   numericValue: MajorArcana; // 0-21, overrides base
+  emojiOverride?: string;
 }
 
 // Minor Arcana card

@@ -44,6 +44,44 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.description = description;
   }
 
+  get emoji(): string {
+    const suitEmoji = {
+      [Suit.Cups]: '🍵',
+      [Suit.Pentacles]: '🪙',
+      [Suit.Swords]: '🗡️',
+      [Suit.Wands]: '🪄',
+    }[this.suit];
+
+    const numberEmoji = {
+      [MinorNumber.Ace]: 'A',
+      [MinorNumber.Two]: '2',
+      [MinorNumber.Three]: '3',
+      [MinorNumber.Four]: '4',
+      [MinorNumber.Five]: '5',
+      [MinorNumber.Six]: '6',
+      [MinorNumber.Seven]: '7',
+      [MinorNumber.Eight]: '8',
+      [MinorNumber.Nine]: '9',
+      [MinorNumber.Ten]: '10',
+      [MinorNumber.Page]: '📜',
+      [MinorNumber.Knight]: '♞',
+      [MinorNumber.Queen]: {
+        [Suit.Cups]: '👸🏼',
+        [Suit.Wands]: '👸🏽',
+        [Suit.Swords]: '👸🏻',
+        [Suit.Pentacles]: '👸🏾',
+      }[this.suit],
+      [MinorNumber.King]: {
+        [Suit.Cups]: '🤴🏼',
+        [Suit.Wands]: '🤴🏽',
+        [Suit.Swords]: '🤴🏻',
+        [Suit.Pentacles]: '🤴🏾',
+      }[this.suit],
+    }[this.number];
+
+    return `[m${numberEmoji}${suitEmoji}]`;
+  }
+
   getName(locale?: string): string {
     // Future localization can be added here based on locale parameter
     // For now, default to English

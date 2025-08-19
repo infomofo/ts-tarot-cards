@@ -15,6 +15,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
+  public readonly emojiOverride?: string;
 
   constructor(
     number: MajorArcana,
@@ -25,7 +26,8 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     visualDescriptionAnalysis: string,
     symbols: CardSymbol[],
     significance: string,
-    description: string
+    description: string,
+    emojiOverride?: string,
   ) {
     // Auto-generate ID like minor arcana
     this.id = `major-${number.toString().padStart(2, '0')}-${getMajorArcanaName(number).toLowerCase().replace(/\s+/g, '-')}`;
@@ -40,6 +42,14 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     this.symbols = symbols;
     this.significance = significance;
     this.description = description;
+    this.emojiOverride = emojiOverride;
+  }
+
+  get emoji(): string {
+    if (this.emojiOverride) {
+      return `[M${this.number}${this.emojiOverride}]`;
+    }
+    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}]`;
   }
 
   getName(locale?: string): string {
@@ -59,9 +69,10 @@ function createMajorArcanaCard(
   visualDescriptionAnalysis: string,
   symbols: CardSymbol[],
   significance: string,
-  description: string
+  description: string,
+  emojiOverride?: string,
 ): MajorArcanaCard {
-  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description);
+  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, emojiOverride);
 }
 
 // Example major arcana cards - extensible to full deck
@@ -75,7 +86,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The young man represents innocence and the beginning of a journey. His lack of concern for the cliff edge signifies a leap of faith. The white dog is a symbol of loyalty and protection.',
     ['cliff', 'sun', 'dog', 'mountain', 'rose', 'bag'],
     'The beginning of the Major Arcana journey. As card 0, it embodies pure potential and naive courage.',
-    'Represents new beginnings, blind faith, inexperience, and improvisation.'
+    'Represents new beginnings, blind faith, inexperience, and improvisation.',
+    '🤡'
   ),
   [MajorArcana.TheMagician]: createMajorArcanaCard(
     MajorArcana.TheMagician,
@@ -86,7 +98,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The four items on the table represent the four suits of the Minor Arcana and the four elements, indicating the man has all the tools needed to manifest his will. The hand gestures signify the connection between the spiritual and material worlds ("as above, so below"). The infinity symbol, or lemniscate, represents eternal potential and mastery.',
     ['cup', 'pentacle', 'sword', 'wand', 'lemniscate', 'altar'],
     'The soul\'s first conscious act of will. As card 1, it transforms potential into directed energy.',
-    'Represents manifestation, resourcefulness, and having the tools to accomplish your goals.'
+    'Represents manifestation, resourcefulness, and having the tools to accomplish your goals.',
+    '🧙‍♂️'
   ),
   [MajorArcana.TheHighPriestess]: createMajorArcanaCard(
     MajorArcana.TheHighPriestess,
@@ -97,7 +110,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The pillars, labeled "B" (Boaz) and "J" (Jachin), represent duality and the entrance to a sacred temple. The scroll, marked "TORA" (a version of "Torah"), contains hidden wisdom. The pomegranates on the veil symbolize fertility and the subconscious.',
     ['pillar', 'scroll', 'moon', 'pomegranate', 'veil', 'crown'],
     'The guardian of the subconscious. She teaches the value of looking inward for answers.',
-    'Represents intuition, sacred knowledge, and the subconscious mind. It is time to listen to your inner voice.'
+    'Represents intuition, sacred knowledge, and the subconscious mind. It is time to listen to your inner voice.',
+    '🔮'
   ),
   [MajorArcana.TheEmpress]: createMajorArcanaCard(
     MajorArcana.TheEmpress,
@@ -108,7 +122,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The crown of twelve stars represents the zodiac. The wheat field symbolizes abundance from nature. The Venus symbol on the shield connects her to the planet of love, beauty, and creation. She is often seen as the archetypal mother figure.',
     ['throne', 'wheat', 'crown', 'scepter', 'venus symbol', 'shield'],
     'Symbolizing creation and the material world, she is the embodiment of motherhood.',
-    'Represents femininity, nurturing, abundance, and creativity.'
+    'Represents femininity, nurturing, abundance, and creativity.',
+    '👸'
   ),
   [MajorArcana.TheEmperor]: createMajorArcanaCard(
     MajorArcana.TheEmperor,
@@ -119,7 +134,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The ram heads are symbols of Aries, the astrological sign of leadership and action. The scepter is an Ankh, an Egyptian symbol for life, and the globe symbolizes his dominion. The armor signifies protection and fortitude.',
     ['throne', 'ram head', 'ankh', 'globe', 'armor'],
     'The masculine counterpart to the Empress, he represents order and structure.',
-    'Represents authority, structure, and control. It is time to create order from chaos.'
+    'Represents authority, structure, and control. It is time to create order from chaos.',
+    '🤴'
   ),
   [MajorArcana.TheHierophant]: createMajorArcanaCard(
     MajorArcana.TheHierophant,
@@ -130,7 +146,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'This man is often interpreted as a Pope, representing established religious institutions. The crossed keys are the keys to heaven, symbolizing access to sacred knowledge. The two kneeling men show the transfer of wisdom.',
     ['throne', 'pillar', 'papal cross', 'acolyte', 'key'],
     'The bridge between the divine and humanity, he represents tradition and established belief systems.',
-    'Represents tradition, spiritual wisdom, and conformity. Seek guidance from trusted sources.'
+    'Represents tradition, spiritual wisdom, and conformity. Seek guidance from trusted sources.',
+    '👏'
   ),
   [MajorArcana.TheLovers]: createMajorArcanaCard(
     MajorArcana.TheLovers,
@@ -141,7 +158,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The man and woman are commonly interpreted as Adam and Eve. The angel is Raphael. The Tree of Knowledge (behind the woman) and the Tree of Life (behind the man) represent a choice between earthly desire and spiritual union.',
     ['angel', 'serpent', 'tree of knowledge', 'tree of life'],
     'Representing the soul\'s first major choice, this card is about relationships and values.',
-    'Represents love, relationships, and choices. A decision needs to be made based on your personal values.'
+    'Represents love, relationships, and choices. A decision needs to be made based on your personal values.',
+    '👩‍❤️‍👨'
   ),
   [MajorArcana.TheChariot]: createMajorArcanaCard(
     MajorArcana.TheChariot,
@@ -152,7 +170,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The warrior controls the sphinxes through sheer willpower, symbolizing mastery over opposing forces. The black and white sphinxes represent duality (conscious/unconscious, positive/negative) that must be balanced to move forward.',
     ['chariot', 'sphinx', 'warrior', 'canopy'],
     'The Chariot represents the victory of will over conflict.',
-    'Represents willpower, determination, and victory. Take control and move forward with confidence.'
+    'Represents willpower, determination, and victory. Take control and move forward with confidence.',
+    '🏎️'
   ),
   [MajorArcana.Strength]: createMajorArcanaCard(
     MajorArcana.Strength,
@@ -163,7 +182,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'This card depicts inner strength, not brute force. The woman\'s calm demeanor shows that true power comes from compassion. The infinity symbol, or lemniscate, connects her to the Magician\'s infinite potential.',
     ['lion', 'lemniscate', 'floral crown'],
     'This card teaches that true power comes from within. The soul learns to master its primal instincts with compassion.',
-    'Represents inner strength, courage, and compassion. Your power comes from a place of love and patience.'
+    'Represents inner strength, courage, and compassion. Your power comes from a place of love and patience.',
+    '🦁'
   ),
   [MajorArcana.TheHermit]: createMajorArcanaCard(
     MajorArcana.TheHermit,
@@ -174,7 +194,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The lantern contains a six-pointed star (Seal of Solomon), symbolizing wisdom. The Hermit has withdrawn from the world to find this inner light, which he can now share with others. The mountain peak signifies his achievement and isolation.',
     ['lantern', 'star', 'staff', 'mountain'],
     'The Hermit represents the soul\'s need to turn inward for answers.',
-    'Represents soul-searching, introspection, and inner guidance. It is time to withdraw and look for answers within.'
+    'Represents soul-searching, introspection, and inner guidance. It is time to withdraw and look for answers within.',
+    '🐚'
   ),
   [MajorArcana.WheelOfFortune]: createMajorArcanaCard(
     MajorArcana.WheelOfFortune,
@@ -185,7 +206,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The four animals represent the four fixed signs of the zodiac (Aquarius, Scorpio, Leo, Taurus). The letters on the wheel can spell ROTA (wheel) or TAROT. The wheel is constantly turning, symbolizing the ever-changing cycles of life and fate.',
     ['wheel', 'sphinx', 'serpent', 'winged creature', 'letter'],
     'This card signifies the unpredictable nature of fate and the cycles of life.',
-    'Represents good luck, karma, and life cycles. A turning point is at hand; embrace the change.'
+    'Represents good luck, karma, and life cycles. A turning point is at hand; embrace the change.',
+    '🎡'
   ),
   [MajorArcana.Justice]: createMajorArcanaCard(
     MajorArcana.Justice,
@@ -196,7 +218,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The double-edged sword represents the power of intellect to make clear, impartial decisions. The scales symbolize the weighing of evidence to find balance and fairness. This card is about objective truth and taking responsibility for one\'s actions.',
     ['sword', 'scale', 'throne', 'crown'],
     'Justice represents the soul\'s encounter with truth and karmic consequences.',
-    'Represents justice, fairness, and truth. Actions have consequences, and a balanced decision must be made.'
+    'Represents justice, fairness, and truth. Actions have consequences, and a balanced decision must be made.',
+    '⚖️'
   ),
   [MajorArcana.TheHangedMan]: createMajorArcanaCard(
     MajorArcana.TheHangedMan,
@@ -207,7 +230,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'He has willingly suspended himself to gain a new perspective, indicated by his serene expression and the halo of enlightenment. The T-shaped cross is a symbol of the living world. This is a pause for spiritual insight, not a punishment.',
     ['cross', 'halo'],
     'This card represents a pause in the soul\'s journey for profound insight.',
-    'Represents suspension, new perspectives, and letting go. It is time to pause and see things differently.'
+    'Represents suspension, new perspectives, and letting go. It is time to pause and see things differently.',
+    '🙃'
   ),
   [MajorArcana.Death]: createMajorArcanaCard(
     MajorArcana.Death,
@@ -218,7 +242,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The skeleton represents the inevitability of change, which comes for all, regardless of status. The white horse symbolizes purity and the unstoppable force of this transformation. The rose on the flag represents beauty and life that can emerge from endings.',
     ['skeleton', 'white horse', 'flag', 'rose'],
     'Death is not about literal death but about transformation. The soul learns to let go of what no longer serves it.',
-    'Represents endings, change, and transformation. A chapter is closing, making way for a new one.'
+    'Represents endings, change, and transformation. A chapter is closing, making way for a new one.',
+    '💀'
   ),
   [MajorArcana.Temperance]: createMajorArcanaCard(
     MajorArcana.Temperance,
@@ -229,7 +254,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The act of pouring water between two cups symbolizes the blending of opposites to create harmony. The angel\'s stance (one foot in water, one on land) represents the connection between the subconscious and the material world. The path to the rising sun shows the way forward through balance.',
     ['angel', 'cup', 'water', 'sun', 'path'],
     'Temperance teaches the soul the art of balance and integration.',
-    'Represents balance, moderation, and patience. It is time to find harmony and a middle ground.'
+    'Represents balance, moderation, and patience. It is time to find harmony and a middle ground.',
+    '🥂'
   ),
   [MajorArcana.TheDevil]: createMajorArcanaCard(
     MajorArcana.TheDevil,
@@ -240,7 +266,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'This card is a parody of The Lovers, showing a relationship based on bondage and materialism. The chains are loose, indicating that the figures are trapped by their own choices and can escape. The goat-headed being is often identified with Baphomet, representing the primal, shadow self.',
     ['devil', 'chain', 'pedestal'],
     'The Devil represents the soul\'s confrontation with its shadow side: addiction, materialism, and self-imposed limitations.',
-    'Represents addiction, bondage, and materialism. You are chained by your own choices and can break free.'
+    'Represents addiction, bondage, and materialism. You are chained by your own choices and can break free.',
+    '😈'
   ),
   [MajorArcana.TheTower]: createMajorArcanaCard(
     MajorArcana.TheTower,
@@ -251,7 +278,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The Tower represents a sudden, dramatic upheaval that destroys false structures and beliefs. The lightning is a flash of insight from the divine that shatters the ego (the crown). The falling people represent the loss of security when illusions are broken.',
     ['tower', 'lightning', 'fire', 'crown'],
     'The Tower signifies a sudden, ego-shattering event that destroys false structures.',
-    'Represents sudden upheaval, chaos, and revelation. A dramatic change is about to tear down your reality.'
+    'Represents sudden upheaval, chaos, and revelation. A dramatic change is about to tear down your reality.',
+    '🗼'
   ),
   [MajorArcana.TheStar]: createMajorArcanaCard(
     MajorArcana.TheStar,
@@ -262,7 +290,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'After the chaos of the Tower, the Star brings hope and renewal. The woman is naked, symbolizing vulnerability and authenticity. The large star is a guiding light, and the seven smaller stars represent the chakras. The bird is an ibis, a symbol of wisdom.',
     ['nude woman', 'star', 'pool', 'pitcher', 'ibis'],
     'After the storm of the Tower, the Star brings hope and healing.',
-    'Represents hope, faith, and renewal. After a dark time, healing and inspiration are here.'
+    'Represents hope, faith, and renewal. After a dark time, healing and inspiration are here.',
+    '🌟'
   ),
   [MajorArcana.TheMoon]: createMajorArcanaCard(
     MajorArcana.TheMoon,
@@ -273,7 +302,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The Moon represents the journey into the subconscious. The dog (tamed nature) and wolf (wild nature) represent our primal fears. The crayfish emerging from the water symbolizes the surfacing of deep-seated emotions and instincts. The path is one of uncertainty.',
     ['moon', 'tower', 'wolf', 'dog', 'crayfish', 'path'],
     'The Moon represents the soul\'s journey through the dark night of the subconscious.',
-    'Represents illusion, fear, and the subconscious. Things are not as they seem; trust your intuition.'
+    'Represents illusion, fear, and the subconscious. Things are not as they seem; trust your intuition.',
+    '🌙'
   ),
   [MajorArcana.TheSun]: createMajorArcanaCard(
     MajorArcana.TheSun,
@@ -284,7 +314,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The naked child represents innocence and joy in its purest form. The smiling sun radiates warmth and positivity. The sunflowers symbolize growth and abundance. The white horse represents purity and strength.',
     ['sun', 'child', 'white horse', 'sunflower', 'banner'],
     'Following the uncertainty of the Moon, the Sun brings clarity and joy.',
-    'Represents joy, success, and positivity. It is a time of celebration and enlightenment.'
+    'Represents joy, success, and positivity. It is a time of celebration and enlightenment.',
+    '☀️'
   ),
   [MajorArcana.Judgement]: createMajorArcanaCard(
     MajorArcana.Judgement,
@@ -295,7 +326,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'This card depicts a personal Last Judgment. The angel is often identified as Gabriel, calling the souls to awaken to a new level of consciousness. The rising people represent a rebirth and a reckoning with one\'s past actions, leading to absolution.',
     ['angel', 'trumpet', 'grave'],
     'Judgement represents the soul\'s final reckoning and rebirth.',
-    'Represents judgment, rebirth, and a higher calling. It is time to face the past and embrace a new beginning.'
+    'Represents judgment, rebirth, and a higher calling. It is time to face the past and embrace a new beginning.',
+    '🎺'
   ),
   [MajorArcana.TheWorld]: createMajorArcanaCard(
     MajorArcana.TheWorld,
@@ -306,7 +338,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     'The dancing woman represents the integrated self, in harmony with the universe. The laurel wreath symbolizes success and completion. The four heads represent the four fixed signs of the zodiac and the four evangelists, now in balance. The cycle is complete.',
     ['dancing woman', 'wreath', 'wand', 'winged creature'],
     'The final card of the Major Arcana, the World represents the completion of the soul\'s journey.',
-    'Represents completion, integration, and accomplishment. The journey is complete, and it is time to celebrate your success.'
+    'Represents completion, integration, and accomplishment. The journey is complete, and it is time to celebrate your success.',
+    '🌎'
   )
 };
 

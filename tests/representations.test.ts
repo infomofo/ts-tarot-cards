@@ -68,5 +68,12 @@ describe('Card Representations', () => {
         const svg = card.getSvg({ hide_emoji: true });
         expect(svg).not.toContain(SUIT_PROPERTIES[Suit.Wands].emoji);
     });
+
+    test('should embed image with data URI', () => {
+        const card = getMajorArcanaCard(MajorArcana.TheFool) as MajorArcanaCard;
+        const dummyDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+        const svg = card.getSvg({ art_override_url: dummyDataUri });
+        expect(svg).toContain('<image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="');
+    });
   });
 });

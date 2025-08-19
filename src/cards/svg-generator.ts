@@ -131,12 +131,12 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
   const full_height = 100
   const center_x = full_width / 2
   const center_y = full_height / 2
-  const padding_x = 30
+  const padding_x = 25
   const padding_y = 20
   const positions: { [key: number]: { x: number; y: number }[] } = {
     [MinorNumber.Ace]: [{ x: center_x, y: center_y }],
     [MinorNumber.Two]: [{ x: center_x, y: padding_y + 10 }, { x: center_x, y: full_height - padding_y - 10 }],
-    [MinorNumber.Three]: [{ x: center_x, y: padding_y }, { x: center_x, y: center_y }, { x: center_x, y: full_height - padding_y }],
+    [MinorNumber.Three]: [{ x: padding_x, y: padding_y }, { x: center_x, y: center_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Four]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Five]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: center_x, y: center_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Six]: [
@@ -145,31 +145,27 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Seven]: [
-        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
-        { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
-        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
+      { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+      { x: center_x, y: padding_y + (center_y - padding_y) / 2 },
+      { x: padding_x, y: center_y + 10 }, { x: full_width - padding_x, y: center_y + 10 },
+      { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Eight]: [
         { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
-        { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
-        { x: center_x, y: center_y + (center_y - padding_y) / 3 },
+        { x: padding_x, y: padding_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 2 },
+        { x: padding_x, y: center_y + (center_y - padding_y) / 2 + 5 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 2 + 5 },
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Nine]: [
-        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: padding_x, y: padding_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 3 },
-        { x: center_x, y: center_y },
-        { x: padding_x, y: center_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 3 },
-        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
+        { x: padding_x, y: padding_y }, { x: center_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: padding_x, y: center_y }, { x: center_x, y: center_y }, { x: full_width - padding_x, y: center_y },
+        { x: padding_x, y: full_height - padding_y }, { x: center_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Ten]: [
-        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
-        { x: padding_x, y: center_y - (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y - (center_y - padding_y) / 3 },
-        { x: padding_x, y: center_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 3 },
-        { x: center_x, y: full_height - padding_y - (center_y - padding_y) / 3 },
+        { x: padding_x, y: padding_y }, { x: center_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: padding_x, y: padding_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 2 },
+        { x: center_x, y: center_y },
+        { x: padding_x, y: center_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 2 },
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
   };

@@ -8,7 +8,8 @@
     "build": "tsc",
     "test": "jest",
     "dev": "tsc --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "generate-samples": "ts-node src/generate-samples.ts"
   },
   "keywords": [
     "tarot",
@@ -26,6 +27,7 @@
     "@types/node": "^24.3.0",
     "jest": "^30.0.5",
     "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
 }

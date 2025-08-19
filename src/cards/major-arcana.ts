@@ -68,7 +68,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
 }
 
 // Helper function to create a complete MajorArcanaCard with auto-generated properties
-function createMajorArcanaCard(
+export function createMajorArcanaCard(
   number: MajorArcana,
   keywords: string[],
   uprightMeanings: string[],

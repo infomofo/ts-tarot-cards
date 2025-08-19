@@ -31,6 +31,23 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Unified Logic**: Avoid duplicating functionality in multiple places. Unify logic into a single, reusable function or property.
 - **Clean Code**: Remove any unused or "crufted" code to keep the codebase clean and maintainable.
 - **Comprehensive Testing**: Ensure all logic branches and options are covered by tests to prevent regressions.
+- **Sample Generation**: When adding or updating visual features like SVG generation, ensure that sample files are generated to cover all permutations of the feature's options. This includes creating samples for different card types (Major Arcana, Minor Arcana number, Minor Arcana face card) and for different option combinations (e.g., hiding elements, using background images).
+
+### SVG Sample Generation
+
+To maintain a consistent set of sample SVGs for review, a temporary script `src/generate-samples.ts` should be used. When the SVG generation logic is changed, this script should be run to regenerate the samples.
+
+**Specific Samples to Maintain:**
+- **The Magician with Background Image**:
+  - `art_override_url`: `https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L3drOTE5ODI2NTktaW1hZ2UuanBn.jpg`
+  - `hide_number`: `true`
+  - `hide_emoji`: `true`
+  - `hide_title`: `true`
+- **Numbered Card with Background Image**:
+  - `art_override_url`: `https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2xyL21pYTgzODI0LWltYWdlLmpwZw.jpg`
+  - `hide_number`: `false`
+  - `hide_emoji`: `false`
+  - `hide_title`: `false`
 
 ## Content Tone Guidelines
 

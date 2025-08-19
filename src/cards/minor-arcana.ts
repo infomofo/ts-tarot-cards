@@ -67,7 +67,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
 }
 
 // Helper function to create a complete MinorArcanaCard with auto-generated properties
-function createMinorArcanaCard(
+export function createMinorArcanaCard(
   suit: Suit,
   number: MinorNumber,
   keywords: string[],

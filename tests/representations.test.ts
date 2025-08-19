@@ -1,5 +1,8 @@
 import { TarotDeck } from '../src/deck/deck';
-import { Arcana, MajorArcanaCard, MinorArcanaCard, Suit } from '../src/types';
+import { Arcana, MajorArcana, MajorArcanaCard, MinorArcana, MinorArcanaCard, Suit } from '../src/types';
+import { SUIT_PROPERTIES } from '../src/cards/suit';
+import { getMajorArcanaCard } from '../src/cards/major-arcana';
+import { getMinorArcanaCard } from '../src/cards/minor-arcana';
 
 describe('Card Representations', () => {
   let deck: TarotDeck;
@@ -41,12 +44,7 @@ describe('Card Representations', () => {
       minorArcanaCards.forEach(card => {
         expect(card.getTextRepresentation().startsWith('[m')).toBe(true);
         expect(card.getTextRepresentation().endsWith(']')).toBe(true);
-        const suitEmoji = {
-          [Suit.Cups]: '🍵',
-          [Suit.Pentacles]: '🪙',
-          [Suit.Swords]: '🗡️',
-          [Suit.Wands]: '🪄',
-        }[card.suit];
+        const suitEmoji = SUIT_PROPERTIES[card.suit].emoji;
         expect(card.getTextRepresentation().includes(suitEmoji)).toBe(true);
       });
     });
@@ -63,6 +61,31 @@ describe('Card Representations', () => {
         expect(svg.trim().startsWith('<svg')).toBe(true);
         expect(svg.trim().endsWith('</svg>')).toBe(true);
       });
+    });
+
+    test('major arcana should hide elements correctly', () => {
+      const card = getMajorArcanaCard(MajorArcana.TheMagician) as MajorArcanaCard;
+      const svg = card.getSvg({ hide_number: true, hide_title: true, hide_emoji: true });
+      expect(svg).not.toContain('font-weight="bold"');
+      if (card.emoji) {
+        expect(svg).not.toContain(card.emoji);
+      }
+    });
+
+    test('minor arcana number card should hide elements correctly', () => {
+      const card = getMinorArcanaCard(MinorArcana.EightOfCups) as MinorArcanaCard;
+      const svg = card.getSvg({ hide_number: true, hide_emoji: true });
+      expect(svg).not.toContain('font-weight="bold"');
+      expect(svg).not.toContain(SUIT_PROPERTIES[card.suit].emoji);
+    });
+
+    test('minor arcana face card should hide elements correctly', () => {
+      const card = getMinorArcanaCard(MinorArcana.KingOfWands) as MinorArcanaCard;
+      const svg = card.getSvg({ hide_number: true, hide_emoji: true, hide_title: true });
+      expect(svg).not.toContain('font-weight="bold"');
+      if (card.faceCardEmoji) {
+        expect(svg).not.toContain(card.faceCardEmoji);
+      }
     });
   });
 });

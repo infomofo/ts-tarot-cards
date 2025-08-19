@@ -308,6 +308,14 @@ if (magician) {
     <td><img src="samples/minor_arcana_cups_08_eight.svg" width="150"></td>
     <td><img src="samples/minor_arcana_wands_14_king.svg" width="150"></td>
   </tr>
+  <tr>
+    <td>The Magician with Background</td>
+    <td>Seven of Pentacles with Background</td>
+  </tr>
+  <tr>
+    <td><img src="samples/magician_with_bg_image.svg" width="150"></td>
+    <td><img src="samples/seven_of_pentacles_with_bg_image.svg" width="150"></td>
+  </tr>
 </table>
 
 ### Text-Based Representations

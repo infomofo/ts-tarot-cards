@@ -10,7 +10,12 @@
     "dev": "tsc --watch",
     "prepare": "npm run build"
   },
-  "keywords": ["tarot", "cards", "divination", "rider-waite-smith"],
+  "keywords": [
+    "tarot",
+    "cards",
+    "divination",
+    "rider-waite-smith"
+  ],
   "author": "",
   "license": "ISC",
   "files": [

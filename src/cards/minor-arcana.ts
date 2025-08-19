@@ -1,4 +1,5 @@
-import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol, SVGOptions } from '../types';
+import { generateSvg } from './svg-generator';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -16,6 +17,8 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
+  public readonly emoji?: string;
+  public readonly backgroundColor?: string;
 
   constructor(
     suit: Suit,
@@ -27,7 +30,9 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     visualDescriptionAnalysis: string,
     symbols: CardSymbol[],
     significance: string,
-    description: string
+    description: string,
+    emoji?: string,
+    backgroundColor?: string,
   ) {
     this.id = `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
     this.suit = suit;
@@ -42,44 +47,12 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.symbols = symbols;
     this.significance = significance;
     this.description = description;
+    this.emoji = emoji;
+    this.backgroundColor = backgroundColor;
   }
 
-  get emoji(): string {
-    const suitEmoji = {
-      [Suit.Cups]: '🍵',
-      [Suit.Pentacles]: '🪙',
-      [Suit.Swords]: '🗡️',
-      [Suit.Wands]: '🪄',
-    }[this.suit];
-
-    const numberEmoji = {
-      [MinorNumber.Ace]: 'A',
-      [MinorNumber.Two]: '2',
-      [MinorNumber.Three]: '3',
-      [MinorNumber.Four]: '4',
-      [MinorNumber.Five]: '5',
-      [MinorNumber.Six]: '6',
-      [MinorNumber.Seven]: '7',
-      [MinorNumber.Eight]: '8',
-      [MinorNumber.Nine]: '9',
-      [MinorNumber.Ten]: '10',
-      [MinorNumber.Page]: '📜',
-      [MinorNumber.Knight]: '♞',
-      [MinorNumber.Queen]: {
-        [Suit.Cups]: '👸🏼',
-        [Suit.Wands]: '👸🏽',
-        [Suit.Swords]: '👸🏻',
-        [Suit.Pentacles]: '👸🏾',
-      }[this.suit],
-      [MinorNumber.King]: {
-        [Suit.Cups]: '🤴🏼',
-        [Suit.Wands]: '🤴🏽',
-        [Suit.Swords]: '🤴🏻',
-        [Suit.Pentacles]: '🤴🏾',
-      }[this.suit],
-    }[this.number];
-
-    return `[m${numberEmoji}${suitEmoji}]`;
+  getSvg(options?: SVGOptions): string {
+    return generateSvg(this, options);
   }
 
   getName(locale?: string): string {
@@ -100,9 +73,11 @@ function createMinorArcanaCard(
   visualDescriptionAnalysis: string,
   symbols: CardSymbol[],
   significance: string,
-  description: string
+  description: string,
+  emoji?: string,
+  backgroundColor?: string,
 ): MinorArcanaCard {
-  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description);
+  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, emoji, backgroundColor);
 }
 
 // Example minor arcana cards - extensible to full deck

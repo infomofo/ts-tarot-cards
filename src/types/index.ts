@@ -223,6 +223,19 @@ export interface SuitProperties {
   keywords: string[];
 }
 
+// SVG generation options
+export interface SVGOptions {
+  art_override_url?: string;
+  hide_number?: boolean;
+  hide_suit?: boolean;
+  hide_title?: boolean;
+}
+
+export interface CardArtOptions {
+  backgroundColor?: string;
+  emoji?: string;
+}
+
 // Base interface for all tarot cards
 export interface BaseTarotCard {
   id: string;
@@ -237,22 +250,23 @@ export interface BaseTarotCard {
   arcana: Arcana; // Overridden by extensions
   numericValue: number; // Overridden by extensions - unified numeric system
   romanNumeral: string; // Derived from numericValue during initialization
-  readonly emoji: string; // A text-based emoji representation of the card
   
   // Dynamic name generation for localization support
   getName(locale?: string): string;
+
+  // SVG representation generation
+  getSvg(options?: SVGOptions): string;
 }
 
 // Major Arcana card
-export interface MajorArcanaCard extends BaseTarotCard {
+export interface MajorArcanaCard extends BaseTarotCard, CardArtOptions {
   arcana: Arcana.Major;
   number: MajorArcana;
   numericValue: MajorArcana; // 0-21, overrides base
-  emojiOverride?: string;
 }
 
 // Minor Arcana card
-export interface MinorArcanaCard extends BaseTarotCard {
+export interface MinorArcanaCard extends BaseTarotCard, CardArtOptions {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;

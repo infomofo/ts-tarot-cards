@@ -280,6 +280,36 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
+### SVG Representations
+
+Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
+
+**Example:**
+```typescript
+import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';
+
+const magician = getMajorArcanaCard(MajorArcana.TheMagician);
+if (magician) {
+  const svg = magician.getSvg();
+  // svg contains the SVG XML string
+}
+```
+
+**Sample SVGs:**
+
+<table>
+  <tr>
+    <td>The Magician</td>
+    <td>Eight of Cups</td>
+    <td>King of Wands</td>
+  </tr>
+  <tr>
+    <td><img src="samples/magician_default.svg" width="150"></td>
+    <td><img src="samples/eight_of_cups.svg" width="150"></td>
+    <td><img src="samples/king_of_wands.svg" width="150"></td>
+  </tr>
+</table>
+
 ### Emoji Representations
 
 This library includes emoji representations for each card, making it suitable for text-based interfaces.

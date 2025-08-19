@@ -1,4 +1,5 @@
-import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral, CardSymbol } from '../types';
+import { MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral, CardSymbol, SVGOptions } from '../types';
+import { generateSvg } from './svg-generator';
 
 // Concrete implementation of MajorArcanaCard with localization support
 class MajorArcanaCardImpl implements MajorArcanaCard {
@@ -15,7 +16,8 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
-  public readonly emojiOverride?: string;
+  public readonly emoji?: string;
+  public readonly backgroundColor?: string;
 
   constructor(
     number: MajorArcana,
@@ -27,7 +29,8 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     symbols: CardSymbol[],
     significance: string,
     description: string,
-    emojiOverride?: string,
+    emoji?: string,
+    backgroundColor?: string,
   ) {
     // Auto-generate ID like minor arcana
     this.id = `major-${number.toString().padStart(2, '0')}-${getMajorArcanaName(number).toLowerCase().replace(/\s+/g, '-')}`;
@@ -42,14 +45,12 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     this.symbols = symbols;
     this.significance = significance;
     this.description = description;
-    this.emojiOverride = emojiOverride;
+    this.emoji = emoji;
+    this.backgroundColor = backgroundColor;
   }
 
-  get emoji(): string {
-    if (this.emojiOverride) {
-      return `[M${this.number}${this.emojiOverride}]`;
-    }
-    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}]`;
+  getSvg(options?: SVGOptions): string {
+    return generateSvg(this, options);
   }
 
   getName(locale?: string): string {
@@ -60,7 +61,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
 }
 
 // Helper function to create a complete MajorArcanaCard with auto-generated properties
-function createMajorArcanaCard(
+export function createMajorArcanaCard(
   number: MajorArcana,
   keywords: string[],
   uprightMeanings: string[],
@@ -70,9 +71,10 @@ function createMajorArcanaCard(
   symbols: CardSymbol[],
   significance: string,
   description: string,
-  emojiOverride?: string,
+  emoji?: string,
+  backgroundColor?: string,
 ): MajorArcanaCard {
-  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, emojiOverride);
+  return new MajorArcanaCardImpl(number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, emoji, backgroundColor);
 }
 
 // Example major arcana cards - extensible to full deck
@@ -87,7 +89,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['cliff', 'sun', 'dog', 'mountain', 'rose', 'bag'],
     'The beginning of the Major Arcana journey. As card 0, it embodies pure potential and naive courage.',
     'Represents new beginnings, blind faith, inexperience, and improvisation.',
-    '🤡'
+    '🤡',
+    '#FFD700'
   ),
   [MajorArcana.TheMagician]: createMajorArcanaCard(
     MajorArcana.TheMagician,
@@ -99,7 +102,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['cup', 'pentacle', 'sword', 'wand', 'lemniscate', 'altar'],
     'The soul\'s first conscious act of will. As card 1, it transforms potential into directed energy.',
     'Represents manifestation, resourcefulness, and having the tools to accomplish your goals.',
-    '🧙‍♂️'
+    '🧙‍♂️',
+    '#ADD8E6'
   ),
   [MajorArcana.TheHighPriestess]: createMajorArcanaCard(
     MajorArcana.TheHighPriestess,
@@ -111,7 +115,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['pillar', 'scroll', 'moon', 'pomegranate', 'veil', 'crown'],
     'The guardian of the subconscious. She teaches the value of looking inward for answers.',
     'Represents intuition, sacred knowledge, and the subconscious mind. It is time to listen to your inner voice.',
-    '🔮'
+    '🔮',
+    '#E6E6FA'
   ),
   [MajorArcana.TheEmpress]: createMajorArcanaCard(
     MajorArcana.TheEmpress,
@@ -123,7 +128,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['throne', 'wheat', 'crown', 'scepter', 'venus symbol', 'shield'],
     'Symbolizing creation and the material world, she is the embodiment of motherhood.',
     'Represents femininity, nurturing, abundance, and creativity.',
-    '👸'
+    '👸',
+    '#90EE90'
   ),
   [MajorArcana.TheEmperor]: createMajorArcanaCard(
     MajorArcana.TheEmperor,
@@ -135,7 +141,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['throne', 'ram head', 'ankh', 'globe', 'armor'],
     'The masculine counterpart to the Empress, he represents order and structure.',
     'Represents authority, structure, and control. It is time to create order from chaos.',
-    '🤴'
+    '🤴',
+    '#F08080'
   ),
   [MajorArcana.TheHierophant]: createMajorArcanaCard(
     MajorArcana.TheHierophant,
@@ -147,7 +154,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['throne', 'pillar', 'papal cross', 'acolyte', 'key'],
     'The bridge between the divine and humanity, he represents tradition and established belief systems.',
     'Represents tradition, spiritual wisdom, and conformity. Seek guidance from trusted sources.',
-    '👏'
+    '👏',
+    '#DDA0DD'
   ),
   [MajorArcana.TheLovers]: createMajorArcanaCard(
     MajorArcana.TheLovers,
@@ -159,7 +167,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['angel', 'serpent', 'tree of knowledge', 'tree of life'],
     'Representing the soul\'s first major choice, this card is about relationships and values.',
     'Represents love, relationships, and choices. A decision needs to be made based on your personal values.',
-    '👩‍❤️‍👨'
+    '👩‍❤️‍👨',
+    '#FFB6C1'
   ),
   [MajorArcana.TheChariot]: createMajorArcanaCard(
     MajorArcana.TheChariot,
@@ -171,7 +180,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['chariot', 'sphinx', 'warrior', 'canopy'],
     'The Chariot represents the victory of will over conflict.',
     'Represents willpower, determination, and victory. Take control and move forward with confidence.',
-    '🏎️'
+    '🏎️',
+    '#A9A9A9'
   ),
   [MajorArcana.Strength]: createMajorArcanaCard(
     MajorArcana.Strength,
@@ -183,7 +193,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['lion', 'lemniscate', 'floral crown'],
     'This card teaches that true power comes from within. The soul learns to master its primal instincts with compassion.',
     'Represents inner strength, courage, and compassion. Your power comes from a place of love and patience.',
-    '🦁'
+    '🦁',
+    '#F4A460'
   ),
   [MajorArcana.TheHermit]: createMajorArcanaCard(
     MajorArcana.TheHermit,
@@ -195,7 +206,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['lantern', 'star', 'staff', 'mountain'],
     'The Hermit represents the soul\'s need to turn inward for answers.',
     'Represents soul-searching, introspection, and inner guidance. It is time to withdraw and look for answers within.',
-    '🐚'
+    '🐚',
+    '#BDB76B'
   ),
   [MajorArcana.WheelOfFortune]: createMajorArcanaCard(
     MajorArcana.WheelOfFortune,
@@ -207,7 +219,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['wheel', 'sphinx', 'serpent', 'winged creature', 'letter'],
     'This card signifies the unpredictable nature of fate and the cycles of life.',
     'Represents good luck, karma, and life cycles. A turning point is at hand; embrace the change.',
-    '🎡'
+    '🎡',
+    '#DAA520'
   ),
   [MajorArcana.Justice]: createMajorArcanaCard(
     MajorArcana.Justice,
@@ -219,7 +232,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['sword', 'scale', 'throne', 'crown'],
     'Justice represents the soul\'s encounter with truth and karmic consequences.',
     'Represents justice, fairness, and truth. Actions have consequences, and a balanced decision must be made.',
-    '⚖️'
+    '⚖️',
+    '#B0C4DE'
   ),
   [MajorArcana.TheHangedMan]: createMajorArcanaCard(
     MajorArcana.TheHangedMan,
@@ -231,7 +245,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['cross', 'halo'],
     'This card represents a pause in the soul\'s journey for profound insight.',
     'Represents suspension, new perspectives, and letting go. It is time to pause and see things differently.',
-    '🙃'
+    '🙃',
+    '#87CEEB'
   ),
   [MajorArcana.Death]: createMajorArcanaCard(
     MajorArcana.Death,
@@ -243,7 +258,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['skeleton', 'white horse', 'flag', 'rose'],
     'Death is not about literal death but about transformation. The soul learns to let go of what no longer serves it.',
     'Represents endings, change, and transformation. A chapter is closing, making way for a new one.',
-    '💀'
+    '💀',
+    '#2F4F4F'
   ),
   [MajorArcana.Temperance]: createMajorArcanaCard(
     MajorArcana.Temperance,
@@ -255,7 +271,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['angel', 'cup', 'water', 'sun', 'path'],
     'Temperance teaches the soul the art of balance and integration.',
     'Represents balance, moderation, and patience. It is time to find harmony and a middle ground.',
-    '🥂'
+    '🥂',
+    '#AFEEEE'
   ),
   [MajorArcana.TheDevil]: createMajorArcanaCard(
     MajorArcana.TheDevil,
@@ -267,7 +284,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['devil', 'chain', 'pedestal'],
     'The Devil represents the soul\'s confrontation with its shadow side: addiction, materialism, and self-imposed limitations.',
     'Represents addiction, bondage, and materialism. You are chained by your own choices and can break free.',
-    '😈'
+    '😈',
+    '#DC143C'
   ),
   [MajorArcana.TheTower]: createMajorArcanaCard(
     MajorArcana.TheTower,
@@ -279,7 +297,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['tower', 'lightning', 'fire', 'crown'],
     'The Tower signifies a sudden, ego-shattering event that destroys false structures.',
     'Represents sudden upheaval, chaos, and revelation. A dramatic change is about to tear down your reality.',
-    '🗼'
+    '🗼',
+    '#FF4500'
   ),
   [MajorArcana.TheStar]: createMajorArcanaCard(
     MajorArcana.TheStar,
@@ -291,7 +310,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['nude woman', 'star', 'pool', 'pitcher', 'ibis'],
     'After the storm of the Tower, the Star brings hope and healing.',
     'Represents hope, faith, and renewal. After a dark time, healing and inspiration are here.',
-    '🌟'
+    '🌟',
+    '#4682B4'
   ),
   [MajorArcana.TheMoon]: createMajorArcanaCard(
     MajorArcana.TheMoon,
@@ -303,7 +323,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['moon', 'tower', 'wolf', 'dog', 'crayfish', 'path'],
     'The Moon represents the soul\'s journey through the dark night of the subconscious.',
     'Represents illusion, fear, and the subconscious. Things are not as they seem; trust your intuition.',
-    '🌙'
+    '🌙',
+    '#483D8B'
   ),
   [MajorArcana.TheSun]: createMajorArcanaCard(
     MajorArcana.TheSun,
@@ -315,7 +336,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['sun', 'child', 'white horse', 'sunflower', 'banner'],
     'Following the uncertainty of the Moon, the Sun brings clarity and joy.',
     'Represents joy, success, and positivity. It is a time of celebration and enlightenment.',
-    '☀️'
+    '☀️',
+    '#FFD700'
   ),
   [MajorArcana.Judgement]: createMajorArcanaCard(
     MajorArcana.Judgement,
@@ -327,7 +349,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['angel', 'trumpet', 'grave'],
     'Judgement represents the soul\'s final reckoning and rebirth.',
     'Represents judgment, rebirth, and a higher calling. It is time to face the past and embrace a new beginning.',
-    '🎺'
+    '🎺',
+    '#C0C0C0'
   ),
   [MajorArcana.TheWorld]: createMajorArcanaCard(
     MajorArcana.TheWorld,
@@ -339,7 +362,8 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['dancing woman', 'wreath', 'wand', 'winged creature'],
     'The final card of the Major Arcana, the World represents the completion of the soul\'s journey.',
     'Represents completion, integration, and accomplishment. The journey is complete, and it is time to celebrate your success.',
-    '🌎'
+    '🌎',
+    '#87CEFA'
   )
 };
 

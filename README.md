@@ -280,6 +280,46 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
+### Emoji Representations
+
+This library includes emoji representations for each card, making it suitable for text-based interfaces.
+
+**Major Arcana Emojis:**
+
+| Card Name          | Emoji      |
+| ------------------ | ---------- |
+| The Fool           | [M0🤡]     |
+| The Magician       | [M1🧙‍♂️]    |
+| The High Priestess | [M2🔮]     |
+| The Empress        | [M3👸]     |
+| The Emperor        | [M4🤴]     |
+| The Hierophant     | [M5👏]     |
+| The Lovers         | [M6👩‍❤️‍👨] |
+| The Chariot        | [M7🏎️]    |
+| Strength           | [M8🦁]     |
+| The Hermit         | [M9🐚]     |
+| Wheel of Fortune   | [M10🎡]    |
+| Justice            | [M11⚖️]    |
+| The Hanged Man     | [M12🙃]    |
+| Death              | [M13💀]    |
+| Temperance         | [M14🥂]    |
+| The Devil          | [M15😈]    |
+| The Tower          | [M16🗼]    |
+| The Star           | [M17🌟]    |
+| The Moon           | [M18🌙]    |
+| The Sun            | [M19☀️]    |
+| Judgement          | [M20🎺]    |
+| The World          | [M21🌎]    |
+
+**Minor Arcana Emojis:**
+
+| Suit      | Ace    | ... | Page   | Knight | Queen  | King   |
+| --------- | ------ | --- | ------ | ------ | ------ | ------ |
+| Cups      | [mA🍵]  | ... | [m📜🍵]  | [m♞🍵]  | [m👸🏼🍵]  | [m🤴🏼🍵]  |
+| Pentacles | [mA🪙]  | ... | [m📜🪙]  | [m♞🪙]  | [m👸🏾🪙]  | [m🤴🏾🪙]  |
+| Swords    | [mA🗡️] | ... | [m📜🗡️] | [m♞🗡️] | [m👸🏻🗡️] | [m🤴🏻🗡️] |
+| Wands     | [mA🪄]  | ... | [m📜🪄]  | [m♞🪄]  | [m👸🏽🪄]  | [m🤴🏽🪄]  |
+
 ## Current Card Set
 
 This library now includes the full 78-card Rider-Waite-Smith deck.

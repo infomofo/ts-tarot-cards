@@ -2,17 +2,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { MAJOR_ARCANA_CARDS } from './cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from './cards/minor-arcana';
-import { MajorArcana, MinorArcana, getMajorArcanaName, getMinorNumberName } from './types';
+import { MajorArcana, MinorArcana, SVGOptions, TarotCard, getMajorArcanaName, getMinorNumberName } from './types';
 
 function generateSamples() {
   const samplesDir = './samples';
 
-  // Ensure the samples directory exists
-  if (!fs.existsSync(samplesDir)) {
-    fs.mkdirSync(samplesDir);
+  // Clean and recreate the samples directory
+  if (fs.existsSync(samplesDir)) {
+    fs.rmSync(samplesDir, { recursive: true, force: true });
   }
+  fs.mkdirSync(samplesDir);
 
-  // Generate standard samples
+  // --- Generate Full Deck ---
   const allCards = [...Object.values(MAJOR_ARCANA_CARDS), ...Object.values(MINOR_ARCANA_CARDS)];
   for (const card of allCards) {
     if (card) {
@@ -30,45 +31,42 @@ function generateSamples() {
     }
   }
 
-  // Generate samples with SVGOptions
-  const magician = MAJOR_ARCANA_CARDS[MajorArcana.TheMagician];
-  if (magician) {
-    let fileName = 'magician-no-number-no-emoji-no-title.svg';
-    fs.writeFileSync(path.join(samplesDir, fileName), magician.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
+  // --- Generate Cartesian Product of Options for Key Cards ---
+  const baseCards: { name: string; card: TarotCard }[] = [
+    { name: 'fool', card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]! },
+    { name: 'four-of-cups', card: MINOR_ARCANA_CARDS[MinorArcana.FourOfCups]! },
+    { name: 'page-of-wands', card: MINOR_ARCANA_CARDS[MinorArcana.PageOfWands]! },
+  ];
 
-    fileName = 'magician-with-bg-image.svg';
-    fs.writeFileSync(
-      path.join(samplesDir, fileName),
-      magician.getSvg({
-        art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg',
-        hide_number: true,
-        hide_emoji: true,
-        hide_title: true,
-      })
-    );
+  const options: ('hide_number' | 'hide_title' | 'hide_emoji')[] = ['hide_number', 'hide_title', 'hide_emoji'];
+  const optionCombinations: SVGOptions[] = [];
+
+  // Generate all 2^n combinations of boolean options
+  for (let i = 0; i < (1 << options.length); i++) {
+    const combination: SVGOptions = {};
+    for (let j = 0; j < options.length; j++) {
+      if ((i >> j) & 1) {
+        combination[options[j]] = true;
+      }
+    }
+    optionCombinations.push(combination);
   }
 
-  const eightOfCups = MINOR_ARCANA_CARDS[MinorArcana.EightOfCups];
-  if (eightOfCups) {
-    const fileName = 'cups-08-eight-no-number-no-emoji.svg';
-    fs.writeFileSync(path.join(samplesDir, fileName), eightOfCups.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
-  }
+  for (const { name, card } of baseCards) {
+    // Generate sample for each option combination
+    for (const combo of optionCombinations) {
+      const flags = Object.keys(combo).join('-');
+      const fileName = flags ? `${name}-${flags}.svg` : `${name}-default.svg`;
+      fs.writeFileSync(path.join(samplesDir, fileName), card.getSvg(combo));
+    }
 
-  const kingOfWands = MINOR_ARCANA_CARDS[MinorArcana.KingOfWands];
-  if (kingOfWands) {
-    const fileName = 'wands-14-king-no-number-no-emoji-no-title.svg';
-    fs.writeFileSync(path.join(samplesDir, fileName), kingOfWands.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
-  }
+    // Generate sample with background image
+    const bgImageUrl = name === 'fool'
+      ? 'https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg'
+      : 'https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg'; // Using magician as a stand-in for minor arcana
 
-  const sevenOfPentacles = MINOR_ARCANA_CARDS[MinorArcana.SevenOfPentacles];
-  if (sevenOfPentacles) {
-    const fileName = 'pentacles-07-seven-with-bg-image.svg';
-    fs.writeFileSync(
-      path.join(samplesDir, fileName),
-      sevenOfPentacles.getSvg({
-        art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg',
-      })
-    );
+    const bgFileName = `${name}-with-bg-image.svg`;
+    fs.writeFileSync(path.join(samplesDir, bgFileName), card.getSvg({ art_override_url: bgImageUrl }));
   }
 
   console.log('All sample SVGs generated in ./samples directory.');

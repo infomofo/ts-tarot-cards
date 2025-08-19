@@ -37,19 +37,9 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 
 ### SVG Sample Generation
 
-To maintain a consistent set of sample SVGs for review, a temporary script `src/generate-samples.ts` should be used. When the SVG generation logic is changed, this script should be run to regenerate the samples.
+The `npm run generate-samples` command will generate a comprehensive set of sample SVG files in the `/samples` directory. This script should be run whenever the SVG generation logic is changed.
 
-**Specific Samples to Maintain:**
-- **The Magician with Background Image**:
-  - `art_override_url`: `https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L3drOTE5ODI2NTktaW1hZ2UuanBn.jpg`
-  - `hide_number`: `true`
-  - `hide_emoji`: `true`
-  - `hide_title`: `true`
-- **Numbered Card with Background Image**:
-  - `art_override_url`: `https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2xyL21pYTgzODI0LWltYWdlLmpwZw.jpg`
-  - `hide_number`: `false`
-  - `hide_emoji`: `false`
-  - `hide_title`: `false`
+**Note on Viewing Image Samples**: The samples that use an `art_override_url` link to an external image (e.g., `fool-with-bg-image.svg`). These images may not render in all environments (like the GitHub PR preview) due to Content Security Policy (CSP) restrictions. To view these samples correctly, it is recommended to download the SVG file and open it directly in a web browser.
 
 ## Content Tone Guidelines
 

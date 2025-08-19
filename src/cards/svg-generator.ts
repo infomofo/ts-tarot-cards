@@ -77,6 +77,8 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
                 <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">${getFaceCardEmoji(minorCard.number, minorCard.suit)}</text>
                 <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">${suitEmoji}</text>
             `;
+        } else if (minorCard.number === MinorNumber.Ace) {
+            artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${suitEmoji}</text>`;
         } else {
             const positions = getEmojiPositions(minorCard.number);
             artContent = positions

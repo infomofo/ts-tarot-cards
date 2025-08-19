@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { MAJOR_ARCANA_CARDS } from './cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from './cards/minor-arcana';
-import { MajorArcana, MinorArcana, SVGOptions, TarotCard, getMajorArcanaName, getMinorNumberName } from './types';
+import { Arcana, MajorArcana, MinorArcana, SVGOptions, TarotCard, getMajorArcanaName, getMinorNumberName } from './types';
 
 function generateSamples() {
   const samplesDir = './samples';
@@ -18,7 +18,7 @@ function generateSamples() {
   for (const card of allCards) {
     if (card) {
       let fileName: string;
-      if (card.arcana === 'Major') {
+      if (card.arcana === Arcana.Major) {
         const cardName = getMajorArcanaName(card.number).replace(/\s+/g, '-').toLowerCase();
         fileName = `major-${String(card.number).padStart(2, '0')}-${cardName}.svg`;
       } else {

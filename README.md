@@ -304,9 +304,9 @@ if (magician) {
     <td>King of Wands</td>
   </tr>
   <tr>
-    <td><img src="samples/magician_default.svg" width="150"></td>
-    <td><img src="samples/eight_of_cups.svg" width="150"></td>
-    <td><img src="samples/king_of_wands.svg" width="150"></td>
+    <td><img src="samples/major_arcana_01_the_magician.svg" width="150"></td>
+    <td><img src="samples/minor_arcana_cups_08_eight.svg" width="150"></td>
+    <td><img src="samples/minor_arcana_wands_14_king.svg" width="150"></td>
   </tr>
 </table>
 

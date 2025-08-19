@@ -128,9 +128,7 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
     ? ''
     : `<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="24" font-weight="bold">${romanNumeral}</text>`;
 
-  const suitContent = (!hide_suit && card.number >= MinorNumber.Page)
-    ? `<text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-size="24">${suitEmoji}</text>`
-    : '';
+  const suitContent = '';
 
   return `
     <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
@@ -147,44 +145,45 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
   const full_height = 100
   const center_x = full_width / 2
   const center_y = full_height / 2
-  const padding = 15
+  const padding_x = 25
+  const padding_y = 20
   const positions: { [key: number]: { x: number; y: number }[] } = {
     [MinorNumber.Ace]: [{ x: center_x, y: center_y }],
-    [MinorNumber.Two]: [{ x: center_x, y: padding }, { x: center_x, y: full_height - padding }],
-    [MinorNumber.Three]: [{ x: center_x, y: padding }, { x: center_x, y: center_y }, { x: center_x, y: full_height - padding }],
-    [MinorNumber.Four]: [{ x: padding, y: padding }, { x: full_width - padding, y: padding }, { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding }],
-    [MinorNumber.Five]: [{ x: padding, y: padding }, { x: full_width - padding, y: padding }, { x: center_x, y: center_y }, { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding }],
+    [MinorNumber.Two]: [{ x: center_x, y: padding_y + 10 }, { x: center_x, y: full_height - padding_y - 10 }],
+    [MinorNumber.Three]: [{ x: center_x, y: padding_y }, { x: center_x, y: center_y }, { x: center_x, y: full_height - padding_y }],
+    [MinorNumber.Four]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
+    [MinorNumber.Five]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: center_x, y: center_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Six]: [
-        { x: padding, y: padding }, { x: full_width - padding, y: padding },
-        { x: padding, y: center_y }, { x: full_width - padding, y: center_y },
-        { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding },
+        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
+        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Seven]: [
-        { x: padding, y: padding }, { x: full_width - padding, y: padding },
-        { x: center_x, y: padding + (center_y - padding) / 2 },
-        { x: padding, y: center_y }, { x: full_width - padding, y: center_y },
-        { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding },
+        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: center_x, y: padding_y + (center_y - padding_y) / 2 },
+        { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
+        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Eight]: [
-        { x: padding, y: padding }, { x: full_width - padding, y: padding },
-        { x: padding, y: padding + (center_y - padding) / 2 }, { x: full_width - padding, y: padding + (center_y - padding) / 2 },
-        { x: padding, y: center_y + (center_y - padding) / 2 }, { x: full_width - padding, y: center_y + (center_y - padding) / 2 },
-        { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding },
+        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: padding_x, y: padding_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 2 },
+        { x: padding_x, y: center_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 2 },
+        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Nine]: [
-        { x: padding, y: padding }, { x: full_width - padding, y: padding },
-        { x: padding, y: padding + (center_y - padding) / 3 }, { x: full_width - padding, y: padding + (center_y - padding) / 3 },
+        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: padding_x, y: padding_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 3 },
         { x: center_x, y: center_y },
-        { x: padding, y: center_y + (center_y - padding) / 3 }, { x: full_width - padding, y: center_y + (center_y - padding) / 3 },
-        { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding },
+        { x: padding_x, y: center_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 3 },
+        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Ten]: [
-        { x: padding, y: padding }, { x: full_width - padding, y: padding },
-        { x: center_x, y: padding + (center_y - padding) / 3 },
-        { x: padding, y: center_y - (center_y - padding) / 3 }, { x: full_width - padding, y: center_y - (center_y - padding) / 3 },
-        { x: padding, y: center_y + (center_y - padding) / 3 }, { x: full_width - padding, y: center_y + (center_y - padding) / 3 },
-        { x: center_x, y: full_height - padding - (center_y - padding) / 3 },
-        { x: padding, y: full_height - padding }, { x: full_width - padding, y: full_height - padding },
+        { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
+        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
+        { x: padding_x, y: center_y - (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y - (center_y - padding_y) / 3 },
+        { x: padding_x, y: center_y + (center_y - padding_y) / 3 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 3 },
+        { x: center_x, y: full_height - padding_y - (center_y - padding_y) / 3 },
+        { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
   };
   return positions[number] || [];

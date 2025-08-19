@@ -1,7 +1,11 @@
 
     <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="#d6a885" />
-      <text x="30%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="70%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="30%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="70%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="30%" y="80%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="70%" y="80%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
-      <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="24" font-weight="bold">VIII</text>
+      <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="35%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="35%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="80%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="80%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
 
+      <text x="8%" y="8%" dominant-baseline="hanging" text-anchor="start" font-size="24" font-weight="bold">VIII</text>
+      <text x="92%" y="92%" dominant-baseline="text-after-edge" text-anchor="end" font-size="24" font-weight="bold">VIII</text>
+
+      <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+       <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Eight of Pentacles</text>
     </svg>

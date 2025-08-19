@@ -38,7 +38,7 @@ function generateSamples() {
     fs.writeFileSync(
       `${samplesDir}/magician_with_bg_image.svg`,
       magician.getSvg({
-        art_override_url: 'https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L3drOTE5ODI2NTktaW1hZ2UuanBn.jpg',
+        art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg',
         hide_number: true,
         hide_emoji: true,
         hide_title: true,
@@ -61,7 +61,7 @@ function generateSamples() {
     fs.writeFileSync(
       `${samplesDir}/seven_of_pentacles_with_bg_image.svg`,
       sevenOfPentacles.getSvg({
-        art_override_url: 'https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2xyL21pYTgzODI0LWltYWdlLmpwZw.jpg',
+        art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg',
       })
     );
   }

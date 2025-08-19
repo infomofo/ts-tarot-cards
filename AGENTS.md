@@ -11,7 +11,9 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Type Safety**: Maintain full TypeScript coverage with proper type annotations
 
 ### Code Structure
-- **Enum Usage**: Prefer enum values over string literals for consistency and type safety
+- **Type-Safe Comparisons**: Always prefer type-safe enum comparisons over matching against string literals. This improves type safety and reduces the chance of typos causing bugs.
+  - *Good*: `if (card.arcana === Arcana.Major) { ... }`
+  - *Avoid*: `if (card.arcana === 'Major') { ... }`
 - **Factory Functions**: Use helper factory functions for object creation to ensure consistency
 - **Auto-Generation**: Prefer auto-generated values (IDs, numeric values) over manual specification to reduce errors
 - **Consistent Patterns**: Maintain identical patterns across similar components (e.g., major/minor arcana)

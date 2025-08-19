@@ -1,42 +1,7 @@
 import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol, SVGOptions } from '../types';
 import { generateSvg } from './svg-generator';
 import { SUIT_PROPERTIES } from './suit';
-
-const FACE_CARD_EMOJI_MAP: Partial<Record<MinorNumber, string>> = {
-  [MinorNumber.Page]: '📜',
-  [MinorNumber.Knight]: '♞',
-};
-
-function getFaceCardEmoji(number: MinorNumber, suit: Suit): string | undefined {
-  if (number === MinorNumber.Page || number === MinorNumber.Knight) {
-    return FACE_CARD_EMOJI_MAP[number];
-  }
-  if (number === MinorNumber.Queen) {
-    switch (suit) {
-      case Suit.Cups:
-        return '👸🏼';
-      case Suit.Swords:
-        return '👸🏻';
-      case Suit.Wands:
-        return '👸🏽';
-      case Suit.Pentacles:
-        return '👸🏾';
-    }
-  }
-  if (number === MinorNumber.King) {
-    switch (suit) {
-      case Suit.Cups:
-        return '🤴🏼';
-      case Suit.Swords:
-        return '🤴🏻';
-      case Suit.Wands:
-        return '🤴🏽';
-      case Suit.Pentacles:
-        return '🤴🏾';
-    }
-  }
-  return undefined;
-}
+import { getFaceCardEmoji } from './utils';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -54,7 +19,6 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
-  public readonly faceCardEmoji?: string;
 
   constructor(
     suit: Suit,
@@ -81,7 +45,6 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.symbols = symbols;
     this.significance = significance;
     this.description = description;
-    this.faceCardEmoji = getFaceCardEmoji(number, suit);
   }
 
   getSvg(options?: SVGOptions): string {
@@ -93,7 +56,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
       return '[mA☕️]';
     }
     const suitEmoji = SUIT_PROPERTIES[this.suit].emoji;
-    const numberEmoji = this.number === MinorNumber.Ace ? 'A' : (this.faceCardEmoji || String(this.number));
+    const numberEmoji = this.number === MinorNumber.Ace ? 'A' : (getFaceCardEmoji(this.number, this.suit) || String(this.number));
     return `[m${numberEmoji}${suitEmoji}]`;
   }
 

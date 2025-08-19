@@ -91,7 +91,7 @@ describe('Card Representations', () => {
 
     test('minor arcana number card should hide elements correctly', () => {
       const card = getMinorArcanaCard(MinorArcana.EightOfCups) as MinorArcanaCard;
-      const svg = card.getSvg({ hide_number: true, hide_emoji: true });
+      const svg = card.getSvg({ hide_number: true, hide_emoji: true, hide_title: true });
       expect(svg).not.toContain('font-weight="bold"');
       expect(svg).not.toContain(SUIT_PROPERTIES[card.suit].emoji);
     });

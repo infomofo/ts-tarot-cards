@@ -1,4 +1,5 @@
 import {
+  Arcana,
   MajorArcanaCard,
   MinorArcanaCard,
   SVGOptions,
@@ -8,6 +9,7 @@ import {
   getMinorNumberName,
   Element,
 } from '../types';
+import { getFaceCardEmoji } from './utils';
 import { SUIT_PROPERTIES } from './suit';
 
 function getSuitColor(suit: Suit): string {
@@ -27,7 +29,7 @@ function getSuitColor(suit: Suit): string {
 }
 
 export function generateSvg(card: TarotCard, options?: SVGOptions): string {
-  if (card.arcana === 'Major') {
+  if (card.arcana === Arcana.Major) {
     return generateMajorArcanaSvg(card as MajorArcanaCard, options);
   } else {
     return generateMinorArcanaSvg(card as MinorArcanaCard, options);
@@ -78,6 +80,7 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
     art_override_url,
     hide_number = false,
     hide_emoji = false,
+    hide_title = false,
   } = options || {};
 
   const backgroundColor = getSuitColor(card.suit);
@@ -97,7 +100,7 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
       artContent = `
         <rect x="10%" y="5%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
         <text x="50%" y="13%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">${faceCardName}</text>
-        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="60">${card.faceCardEmoji}</text>
+        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="60">${getFaceCardEmoji(card.number, card.suit)}</text>
         <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-size="60">${suitEmoji}</text>
       `;
     } else {
@@ -117,11 +120,18 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
     `;
   }
 
+  // Determine Title Content (only for numbered cards, face cards have their own title logic)
+  const titleContent = !hide_title && card.number < MinorNumber.Page
+    ? `<rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+       <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">${card.getName()}</text>`
+    : '';
+
   return `
     <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="${backgroundColor}" />
       ${artContent}
       ${numberContent}
+      ${titleContent}
     </svg>
   `;
 }
@@ -136,7 +146,7 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
   const positions: { [key: number]: { x: number; y: number }[] } = {
     [MinorNumber.Ace]: [{ x: center_x, y: center_y }],
     [MinorNumber.Two]: [{ x: center_x, y: padding_y + 10 }, { x: center_x, y: full_height - padding_y - 10 }],
-    [MinorNumber.Three]: [{ x: padding_x, y: padding_y }, { x: center_x, y: center_y }, { x: full_width - padding_x, y: full_height - padding_y }],
+    [MinorNumber.Three]: [{ x: padding_x, y: padding_y + 5 }, { x: center_x, y: center_y }, { x: full_width - padding_x, y: full_height - padding_y - 5 }],
     [MinorNumber.Four]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Five]: [{ x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y }, { x: center_x, y: center_y }, { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y }],
     [MinorNumber.Six]: [
@@ -145,9 +155,8 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Seven]: [
-      { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-      { x: center_x, y: padding_y + (center_y - padding_y) / 2 },
-      { x: padding_x, y: center_y + 10 }, { x: full_width - padding_x, y: center_y + 10 },
+      { x: padding_x, y: padding_y }, { x: center_x, y: padding_y + 15 }, { x: full_width - padding_x, y: padding_y },
+      { x: padding_x, y: center_y + 15 }, { x: full_width - padding_x, y: center_y + 15 },
       { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Eight]: [

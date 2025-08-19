@@ -282,17 +282,13 @@ const waterSymbols = allCards.filter(card =>
 
 ## Current Card Set
 
-This library currently includes example implementations of:
+This library now includes the full 78-card Rider-Waite-Smith deck.
 
-**Major Arcana (2 cards)**:
-- The Fool (0)
-- The Magician (I)
+**Major Arcana (22 cards)**:
+- All 22 cards from The Fool to The World.
 
-**Minor Arcana (2 cards)**:
-- Ace of Cups
-- Three of Swords
-
-The architecture is designed to be easily extended to include the full 78-card Rider-Waite-Smith deck.
+**Minor Arcana (56 cards)**:
+- All 14 cards for each of the four suits: Cups, Pentacles, Swords, and Wands.
 
 ## Types
 
@@ -357,7 +353,6 @@ This library is designed to be extensible and support multiple tarot traditions.
 - **[Visconti-Sforza Tarot](https://en.wikipedia.org/wiki/Visconti-Sforza_tarot_deck)**: Renaissance-era deck with artistic and historical importance
 
 ### Extended Functionality
-- **Complete 78-Card Deck**: Full implementation of all Rider-Waite-Smith cards
 - **Multi-Language Support**: Localization for card names and interpretations
 - **Enhanced Biometric Randomness**: Integration with various entropy sources
 - **Advanced Spread Builder**: Visual spread editor and custom position creation

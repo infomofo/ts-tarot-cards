@@ -230,6 +230,7 @@ export interface BaseTarotCard {
   uprightMeanings: string[]; // Changed from string to array for better structure
   reversedMeanings: string[]; // Changed from string to array for better structure
   visualDescription: string; // Description of the traditional Smith artwork
+  visualDescriptionAnalysis: string; // Analysis of the visual description
   symbols: CardSymbol[]; // Hierarchical symbol tags for visual elements
   significance: string; // Card's significance and place in the journey
   description: string; // General description

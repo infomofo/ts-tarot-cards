@@ -320,7 +320,7 @@ if (magician) {
 
 ### Text-Based Representations
 
-Each card has a `getTextRepresentation()` method that returns a simple text-based representation of the card, suitable for console output, alt text for accessibility, or other text-only interfaces.
+Each card has a `getTextRepresentation()` method that returns a simple text-based representation of the card, suitable for console output or other text-only interfaces.
 
 **Example:**
 ```typescript

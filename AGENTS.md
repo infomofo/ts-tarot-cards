@@ -41,6 +41,11 @@ The `npm run generate-samples` command will generate a comprehensive set of samp
 
 **Note on Viewing Image Samples**: The samples that use an `art_override_url` link to an external image (e.g., `fool-with-bg-image.svg`). These images may not render in all environments (like the GitHub PR preview) due to Content Security Policy (CSP) restrictions. To view these samples correctly, it is recommended to download the SVG file and open it directly in a web browser.
 
+### Collaboration Patterns
+
+- **Acknowledge Tool Limitations**: If unable to complete a task due to a limitation of the available tools (e.g., inability to download binary files), clearly state the limitation to the user.
+- **Propose Collaborative Solutions**: When blocked by a tool limitation, propose a workaround that involves the user's help. For example, if unable to download images, ask the user to add them to the repository. This allows the project to move forward and leverages the strengths of both the AI and the human user.
+
 ## Content Tone Guidelines
 
 ### Card Descriptions and Meanings

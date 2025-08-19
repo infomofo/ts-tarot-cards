@@ -10,20 +10,6 @@ import {
 } from '../types';
 import { SUIT_PROPERTIES } from './suit';
 
-const SUIT_EMOJI: Record<Suit, string> = {
-  [Suit.Cups]: '🍵',
-  [Suit.Pentacles]: '🪙',
-  [Suit.Swords]: '🗡️',
-  [Suit.Wands]: '🪄',
-};
-
-const FACE_CARD_EMOJI: Record<MinorNumber.Page | MinorNumber.Knight | MinorNumber.Queen | MinorNumber.King, string> = {
-  [MinorNumber.Page]: '📜',
-  [MinorNumber.Knight]: '♞',
-  [MinorNumber.Queen]: '🫅',
-  [MinorNumber.King]: '👑',
-};
-
 function getSuitColor(suit: Suit): string {
   const element = SUIT_PROPERTIES[suit].element;
   switch (element) {
@@ -53,6 +39,7 @@ function generateMajorArcanaSvg(card: MajorArcanaCard, options?: SVGOptions): st
     art_override_url,
     hide_number = false,
     hide_title = false,
+    hide_emoji = false,
   } = options || {};
 
   const backgroundColor = card.backgroundColor || '#ffffff';
@@ -63,7 +50,7 @@ function generateMajorArcanaSvg(card: MajorArcanaCard, options?: SVGOptions): st
   let artContent = '';
   if (art_override_url) {
     artContent = `<image href="${art_override_url}" x="0" y="0" height="100%" width="100%"/>`;
-  } else if (emoji) {
+  } else if (emoji && !hide_emoji) {
     artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${emoji}</text>`;
   }
 
@@ -90,26 +77,25 @@ function generateMinorArcanaSvg(card: MinorArcanaCard, options?: SVGOptions): st
   const {
     art_override_url,
     hide_number = false,
-    hide_suit = false,
+    hide_emoji = false,
   } = options || {};
 
   const backgroundColor = getSuitColor(card.suit);
   const romanNumeral = card.romanNumeral;
-  const suitEmoji = SUIT_EMOJI[card.suit];
+  const suitEmoji = SUIT_PROPERTIES[card.suit].emoji;
 
   let artContent = '';
 
   if (art_override_url) {
     artContent = `<image href="${art_override_url}" x="0" y="0" height="100%" width="100%"/>`;
-  } else {
+  } else if (!hide_emoji) {
     if (card.number >= MinorNumber.Page) {
       // Face card
       const faceCardName = getMinorNumberName(card.number);
-      const faceCardEmoji = FACE_CARD_EMOJI[card.number as keyof typeof FACE_CARD_EMOJI];
       artContent = `
         <rect x="10%" y="5%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
         <text x="50%" y="13%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">${faceCardName}</text>
-        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="60">${faceCardEmoji}</text>
+        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="60">${card.faceCardEmoji}</text>
         <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-size="60">${suitEmoji}</text>
       `;
     } else {
@@ -145,7 +131,7 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
   const full_height = 100
   const center_x = full_width / 2
   const center_y = full_height / 2
-  const padding_x = 25
+  const padding_x = 30
   const padding_y = 20
   const positions: { [key: number]: { x: number; y: number }[] } = {
     [MinorNumber.Ace]: [{ x: center_x, y: center_y }],
@@ -160,14 +146,15 @@ function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
     ],
     [MinorNumber.Seven]: [
         { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: center_x, y: padding_y + (center_y - padding_y) / 2 },
+        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
         { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Eight]: [
         { x: padding_x, y: padding_y }, { x: full_width - padding_x, y: padding_y },
-        { x: padding_x, y: padding_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: padding_y + (center_y - padding_y) / 2 },
-        { x: padding_x, y: center_y + (center_y - padding_y) / 2 }, { x: full_width - padding_x, y: center_y + (center_y - padding_y) / 2 },
+        { x: center_x, y: padding_y + (center_y - padding_y) / 3 },
+        { x: padding_x, y: center_y }, { x: full_width - padding_x, y: center_y },
+        { x: center_x, y: center_y + (center_y - padding_y) / 3 },
         { x: padding_x, y: full_height - padding_y }, { x: full_width - padding_x, y: full_height - padding_y },
     ],
     [MinorNumber.Nine]: [

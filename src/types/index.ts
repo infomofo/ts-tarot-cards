@@ -221,19 +221,15 @@ export interface SuitProperties {
   element: Element;
   generalMeaning: string;
   keywords: string[];
+  emoji: string;
 }
 
 // SVG generation options
 export interface SVGOptions {
   art_override_url?: string;
   hide_number?: boolean;
-  hide_suit?: boolean;
+  hide_emoji?: boolean;
   hide_title?: boolean;
-}
-
-export interface CardArtOptions {
-  backgroundColor?: string;
-  emoji?: string;
 }
 
 // Base interface for all tarot cards
@@ -256,21 +252,25 @@ export interface BaseTarotCard {
 
   // SVG representation generation
   getSvg(options?: SVGOptions): string;
+  getTextRepresentation(): string;
 }
 
 // Major Arcana card
-export interface MajorArcanaCard extends BaseTarotCard, CardArtOptions {
+export interface MajorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Major;
   number: MajorArcana;
   numericValue: MajorArcana; // 0-21, overrides base
+  emoji?: string;
+  backgroundColor?: string;
 }
 
 // Minor Arcana card
-export interface MinorArcanaCard extends BaseTarotCard, CardArtOptions {
+export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;
   numericValue: MinorNumber; // 1-14, overrides base
+  faceCardEmoji?: string;
 }
 
 // Union type for any tarot card

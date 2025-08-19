@@ -1,5 +1,6 @@
 import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol, SVGOptions } from '../types';
 import { generateSvg } from './svg-generator';
+import { SUIT_PROPERTIES } from './suit';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -17,8 +18,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly symbols: CardSymbol[];
   public readonly significance: string;
   public readonly description: string;
-  public readonly emoji?: string;
-  public readonly backgroundColor?: string;
+  public readonly faceCardEmoji?: string;
 
   constructor(
     suit: Suit,
@@ -31,8 +31,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     symbols: CardSymbol[],
     significance: string,
     description: string,
-    emoji?: string,
-    backgroundColor?: string,
+    faceCardEmoji?: string,
   ) {
     this.id = `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
     this.suit = suit;
@@ -47,12 +46,17 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.symbols = symbols;
     this.significance = significance;
     this.description = description;
-    this.emoji = emoji;
-    this.backgroundColor = backgroundColor;
+    this.faceCardEmoji = faceCardEmoji;
   }
 
   getSvg(options?: SVGOptions): string {
     return generateSvg(this, options);
+  }
+
+  getTextRepresentation(): string {
+    const suitEmoji = SUIT_PROPERTIES[this.suit].emoji;
+    const numberEmoji = this.faceCardEmoji || String(this.number);
+    return `[m${numberEmoji}${suitEmoji}]`;
   }
 
   getName(locale?: string): string {
@@ -74,10 +78,9 @@ function createMinorArcanaCard(
   symbols: CardSymbol[],
   significance: string,
   description: string,
-  emoji?: string,
-  backgroundColor?: string,
+  faceCardEmoji?: string,
 ): MinorArcanaCard {
-  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, emoji, backgroundColor);
+  return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description, faceCardEmoji);
 }
 
 // Example minor arcana cards - extensible to full deck
@@ -91,7 +94,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The hand from the cloud is a divine gift. The overflowing chalice represents emotional abundance. The dove symbolizes peace and the Holy Spirit, carrying a communion wafer.',
     ['hand', 'cloud', 'chalice', 'water', 'dove', 'wafer', 'lotus'],
     'The beginning of the emotional journey, embodying pure emotional potential.',
-    'Represents new love, new relationships, and new beginnings in love.'
+    'Represents new love, new relationships, and new beginnings in love.',
   ),
   [MinorArcana.TwoOfCups]: createMinorArcanaCard(
     Suit.Cups, MinorNumber.Two, ['partnership', 'mutual attraction', 'connection'],
@@ -191,7 +194,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The fish popping out of the cup represents a surprising creative or intuitive message emerging from the subconscious (the sea).',
     ['cup', 'fish', 'sea'],
     'The messenger of the emotional world, bringing new creative ideas.',
-    'Represents creative opportunities and intuitive messages. Be open to new ideas.'
+    'Represents creative opportunities and intuitive messages. Be open to new ideas.',
+    '📜'
   ),
   [MinorArcana.KnightOfCups]: createMinorArcanaCard(
     Suit.Cups, MinorNumber.Knight, ['romance', 'charm', 'imagination', 'beauty'],
@@ -201,7 +205,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The knight is a romantic hero, offering his heart (the cup). The wings on his helmet and boots symbolize his active imagination and connection to the divine.',
     ['knight', 'white horse', 'cup', 'wing'],
     'A quest guided by the heart and imagination.',
-    'Represents romance, charm, and following your heart. An offer is on its way.'
+    'Represents romance, charm, and following your heart. An offer is on its way.',
+    '♞'
   ),
   [MinorArcana.QueenOfCups]: createMinorArcanaCard(
     Suit.Cups, MinorNumber.Queen, ['compassion', 'calm', 'intuition', 'nurturing'],
@@ -211,7 +216,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The queen is in tune with her emotions and the subconscious (the sea). The ornate, lidded cup suggests that her feelings are deep and contained, not openly displayed.',
     ['queen', 'throne', 'cup', 'sea'],
     'The master of her emotions, compassionate and intuitive.',
-    'Represents compassion, calm, and intuition. Trust your heart and lead with love.'
+    'Represents compassion, calm, and intuition. Trust your heart and lead with love.',
+    '👸🏼'
   ),
   [MinorArcana.KingOfCups]: createMinorArcanaCard(
     Suit.Cups, MinorNumber.King, ['emotional balance', 'compassion', 'diplomacy'],
@@ -221,7 +227,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The king\'s calm demeanor in a turbulent sea shows his mastery over his emotions. The cup represents his emotions, while the scepter represents his authority and control.',
     ['king', 'throne', 'sea', 'cup', 'scepter', 'fish', 'ship'],
     'The perfect balance of emotion and intellect.',
-    'Represents emotional balance, compassion, and diplomacy. You are in control of your emotions.'
+    'Represents emotional balance, compassion, and diplomacy. You are in control of your emotions.',
+    '🤴🏼'
   ),
 
   // Suit of Pentacles
@@ -333,7 +340,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The young man is a student of the material world. He is focused and ready to learn, representing the beginning of a new venture or skill.',
     ['pentacle', 'field'],
     'A student of the material world, bringing news of new opportunities.',
-    'Represents new opportunities for manifestation and learning. Be diligent.'
+    'Represents new opportunities for manifestation and learning. Be diligent.',
+    '📜'
   ),
   [MinorArcana.KnightOfPentacles]: createMinorArcanaCard(
     Suit.Pentacles, MinorNumber.Knight, ['hard work', 'responsibility', 'routine'],
@@ -343,7 +351,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'This knight is the most hardworking and patient. He is not charging forward but is methodical and reliable, focused on his long-term goals.',
     ['knight', 'black horse', 'pentacle'],
     'The embodiment of hard work and responsibility.',
-    'Represents hard work, responsibility, and routine. Stay dedicated to your goals.'
+    'Represents hard work, responsibility, and routine. Stay dedicated to your goals.',
+    '♞'
   ),
   [MinorArcana.QueenOfPentacles]: createMinorArcanaCard(
     Suit.Pentacles, MinorNumber.Queen, ['nurturing', 'practicality', 'security'],
@@ -353,7 +362,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The queen is a nurturing mother figure of the material world. The rabbit represents fertility and abundance. She creates a warm and secure environment.',
     ['queen', 'throne', 'pentacle', 'garden', 'rabbit'],
     'The nurturing mother of the material world, practical and generous.',
-    'Represents nurturing, practicality, and security. Create a warm and stable home life.'
+    'Represents nurturing, practicality, and security. Create a warm and stable home life.',
+    '👸🏾'
   ),
   [MinorArcana.KingOfPentacles]: createMinorArcanaCard(
     Suit.Pentacles, MinorNumber.King, ['wealth', 'success', 'leadership', 'security'],
@@ -363,7 +373,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The king is the master of the material world. The bull carvings symbolize his connection to the earth and stubborn determination. He has achieved great success and provides security.',
     ['king', 'throne', 'pentacle', 'scepter', 'castle', 'vine'],
     'The master of the material world, representing financial success and leadership.',
-    'Represents wealth, success, and leadership. You have reached the pinnacle of your financial goals.'
+    'Represents wealth, success, and leadership. You have reached the pinnacle of your financial goals.',
+    '🤴🏾'
   ),
 
   // Suit of Swords
@@ -475,7 +486,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The young man is full of restless energy and a thirst for knowledge. The wind and turbulent clouds represent his active and sometimes chaotic mind.',
     ['sword', 'windy hill'],
     'A messenger of truth and ideas, encouraging a quest for knowledge.',
-    'Represents curiosity, truth, and communication. A new idea is coming your way.'
+    'Represents curiosity, truth, and communication. A new idea is coming your way.',
+    '📜'
   ),
   [MinorArcana.KnightOfSwords]: createMinorArcanaCard(
     Suit.Swords, MinorNumber.Knight, ['ambition', 'action', 'haste', 'assertiveness'],
@@ -485,7 +497,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'This knight is a force of action, charging ahead with intellectual clarity and determination. He is the fastest-moving knight in the tarot.',
     ['knight', 'horse', 'sword'],
     'A force of ambition and action, but with a warning against recklessness.',
-    'Represents ambition, action, and haste. It is time to charge forward with your ideas.'
+    'Represents ambition, action, and haste. It is time to charge forward with your ideas.',
+    '♞'
   ),
   [MinorArcana.QueenOfSwords]: createMinorArcanaCard(
     Suit.Swords, MinorNumber.Queen, ['independence', 'clarity', 'intelligence'],
@@ -495,7 +508,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The queen is a master of the intellect, free from emotion. Her extended hand can be seen as a gesture of welcome or a warning to keep a distance. She values truth above all.',
     ['queen', 'throne', 'sword'],
     'A master of the intellect who values truth and clear boundaries.',
-    'Represents independence, clarity, and intelligence. Think with your head, not your heart.'
+    'Represents independence, clarity, and intelligence. Think with your head, not your heart.',
+    '👸🏻'
   ),
   [MinorArcana.KingOfSwords]: createMinorArcanaCard(
     Suit.Swords, MinorNumber.King, ['authority', 'truth', 'justice', 'intellect'],
@@ -505,7 +519,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The king is the ultimate master of the mind, ruling with logic and justice. The butterflies and angel on his throne symbolize the transformative power of his thoughts.',
     ['king', 'throne', 'sword', 'butterfly'],
     'The ultimate master of the mind, ruling with logic, truth, and justice.',
-    'Represents authority, truth, and justice. You are a master of your thoughts.'
+    'Represents authority, truth, and justice. You are a master of your thoughts.',
+    '🤴🏻'
   ),
 
   // Suit of Wands
@@ -617,7 +632,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The young man is announcing new ideas. The salamanders on his clothes are symbols of fire and transformation, representing his creative passion.',
     ['wand', 'salamander'],
     'The messenger of the creative world, bringing a spark of inspiration.',
-    'Represents inspiration, new ideas, and discovery. A new creative opportunity is presenting itself.'
+    'Represents inspiration, new ideas, and discovery. A new creative opportunity is presenting itself.',
+    '📜'
   ),
   [MinorArcana.KnightOfWands]: createMinorArcanaCard(
     Suit.Wands, MinorNumber.Knight, ['energy', 'passion', 'adventure', 'impulsiveness'],
@@ -627,7 +643,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'This knight is a figure of pure energy and action, moving with passion and determination. He is impulsive and always ready for an adventure.',
     ['knight', 'horse', 'wand'],
     'The embodiment of action and adventure, pursuing goals with energy.',
-    'Represents energy, passion, and adventure. It is time to take action.'
+    'Represents energy, passion, and adventure. It is time to take action.',
+    '♞'
   ),
   [MinorArcana.QueenOfWands]: createMinorArcanaCard(
     Suit.Wands, MinorNumber.Queen, ['courage', 'confidence', 'independence', 'social'],
@@ -637,7 +654,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The lions and sunflowers represent her strength and sunny disposition. The black cat symbolizes her connection to her shadow side and her independence.',
     ['queen', 'throne', 'wand', 'sunflower', 'lion', 'black cat'],
     'A confident and independent leader with a magnetic personality.',
-    'Represents courage, confidence, and independence. Embrace your passionate nature.'
+    'Represents courage, confidence, and independence. Embrace your passionate nature.',
+    '👸🏽'
   ),
   [MinorArcana.KingOfWands]: createMinorArcanaCard(
     Suit.Wands, MinorNumber.King, ['leadership', 'vision', 'creativity', 'entrepreneur'],
@@ -647,7 +665,8 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The king is a natural leader, full of creative energy. The salamanders and lions are symbols of his mastery over the element of fire and his passion.',
     ['king', 'throne', 'wand', 'salamander', 'lion'],
     'The master of creativity and vision, an inspiring leader.',
-    'Represents leadership, vision, and creativity. It is time to take charge.'
+    'Represents leadership, vision, and creativity. It is time to take charge.',
+    '🤴🏽'
   )
 };
 

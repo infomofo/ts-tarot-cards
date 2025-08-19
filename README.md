@@ -310,9 +310,20 @@ if (magician) {
   </tr>
 </table>
 
-### Emoji Representations
+### Text-Based Representations
 
-This library includes emoji representations for each card, making it suitable for text-based interfaces.
+Each card has a `getTextRepresentation()` method that returns a simple text-based representation of the card, suitable for console output or other text-only interfaces.
+
+**Example:**
+```typescript
+import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';
+
+const magician = getMajorArcanaCard(MajorArcana.TheMagician);
+if (magician) {
+  const text = magician.getTextRepresentation();
+  // text will be something like "[M1🧙‍♂️]"
+}
+```
 
 **Major Arcana Emojis:**
 
@@ -323,7 +334,7 @@ This library includes emoji representations for each card, making it suitable fo
 | The High Priestess | [M2🔮]     |
 | The Empress        | [M3👸]     |
 | The Emperor        | [M4🤴]     |
-| The Hierophant     | [M5👏]     |
+| The Hierophant     | [M5🙏]     |
 | The Lovers         | [M6👩‍❤️‍👨] |
 | The Chariot        | [M7🏎️]    |
 | Strength           | [M8🦁]     |

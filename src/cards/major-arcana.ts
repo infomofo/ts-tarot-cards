@@ -53,6 +53,13 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     return generateSvg(this, options);
   }
 
+  getTextRepresentation(): string {
+    if (this.emoji) {
+      return `[M${this.number}${this.emoji}]`;
+    }
+    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}]`;
+  }
+
   getName(locale?: string): string {
     // Future localization can be added here based on locale parameter
     // For now, default to English
@@ -61,7 +68,7 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
 }
 
 // Helper function to create a complete MajorArcanaCard with auto-generated properties
-export function createMajorArcanaCard(
+function createMajorArcanaCard(
   number: MajorArcana,
   keywords: string[],
   uprightMeanings: string[],
@@ -154,7 +161,7 @@ export const MAJOR_ARCANA_CARDS: Partial<Record<MajorArcana, MajorArcanaCard>> =
     ['throne', 'pillar', 'papal cross', 'acolyte', 'key'],
     'The bridge between the divine and humanity, he represents tradition and established belief systems.',
     'Represents tradition, spiritual wisdom, and conformity. Seek guidance from trusted sources.',
-    '👏',
+    '🙏',
     '#DDA0DD'
   ),
   [MajorArcana.TheLovers]: createMajorArcanaCard(

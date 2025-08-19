@@ -28,6 +28,9 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Strategy Pattern**: Use strategy patterns for variable behaviors (e.g., card selection)
 - **Type Safety**: Leverage TypeScript's type system to prevent runtime errors
 - **Single Responsibility**: Each class/function should have one clear purpose
+- **Unified Logic**: Avoid duplicating functionality in multiple places. Unify logic into a single, reusable function or property.
+- **Clean Code**: Remove any unused or "crufted" code to keep the codebase clean and maintainable.
+- **Comprehensive Testing**: Ensure all logic branches and options are covered by tests to prevent regressions.
 
 ## Content Tone Guidelines
 

@@ -1,4 +1,7 @@
-import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol } from '../types';
+import { MinorArcanaCard, Arcana, Suit, MinorNumber, MinorArcana, getMinorNumberName, toRomanNumeral, CardSymbol, SVGOptions } from '../types';
+import { generateSvg } from './svg-generator';
+import { SUIT_PROPERTIES } from './suit';
+import { getFaceCardEmoji } from './utils';
 
 // Concrete implementation of MinorArcanaCard with localization support
 class MinorArcanaCardImpl implements MinorArcanaCard {
@@ -27,7 +30,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     visualDescriptionAnalysis: string,
     symbols: CardSymbol[],
     significance: string,
-    description: string
+    description: string,
   ) {
     this.id = `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
     this.suit = suit;
@@ -44,42 +47,37 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.description = description;
   }
 
-  get emoji(): string {
-    const suitEmoji = {
-      [Suit.Cups]: '🍵',
-      [Suit.Pentacles]: '🪙',
-      [Suit.Swords]: '🗡️',
-      [Suit.Wands]: '🪄',
-    }[this.suit];
+  getSvg(options?: SVGOptions): string {
+    return generateSvg(this, options);
+  }
 
-    const numberEmoji = {
-      [MinorNumber.Ace]: 'A',
-      [MinorNumber.Two]: '2',
-      [MinorNumber.Three]: '3',
-      [MinorNumber.Four]: '4',
-      [MinorNumber.Five]: '5',
-      [MinorNumber.Six]: '6',
-      [MinorNumber.Seven]: '7',
-      [MinorNumber.Eight]: '8',
-      [MinorNumber.Nine]: '9',
-      [MinorNumber.Ten]: '10',
-      [MinorNumber.Page]: '📜',
-      [MinorNumber.Knight]: '♞',
-      [MinorNumber.Queen]: {
-        [Suit.Cups]: '👸🏼',
-        [Suit.Wands]: '👸🏽',
-        [Suit.Swords]: '👸🏻',
-        [Suit.Pentacles]: '👸🏾',
-      }[this.suit],
-      [MinorNumber.King]: {
-        [Suit.Cups]: '🤴🏼',
-        [Suit.Wands]: '🤴🏽',
-        [Suit.Swords]: '🤴🏻',
-        [Suit.Pentacles]: '🤴🏾',
-      }[this.suit],
-    }[this.number];
-
-    return `[m${numberEmoji}${suitEmoji}]`;
+  getTextRepresentation(): string {
+    if (this.id === 'minor-ace-of-cups') {
+      return '[mA☕️]';
+    }
+    const suitEmoji = SUIT_PROPERTIES[this.suit].emoji;
+    let numberChar;
+    switch (this.number) {
+      case MinorNumber.Ace:
+        numberChar = 'A';
+        break;
+      case MinorNumber.Page:
+        numberChar = 'P';
+        break;
+      case MinorNumber.Knight:
+        numberChar = 'N';
+        break;
+      case MinorNumber.Queen:
+        numberChar = 'Q';
+        break;
+      case MinorNumber.King:
+        numberChar = 'K';
+        break;
+      default:
+        numberChar = String(this.number);
+        break;
+    }
+    return `[m${numberChar}${suitEmoji}]`;
   }
 
   getName(locale?: string): string {
@@ -90,7 +88,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
 }
 
 // Helper function to create a complete MinorArcanaCard with auto-generated properties
-function createMinorArcanaCard(
+export function createMinorArcanaCard(
   suit: Suit,
   number: MinorNumber,
   keywords: string[],
@@ -100,7 +98,7 @@ function createMinorArcanaCard(
   visualDescriptionAnalysis: string,
   symbols: CardSymbol[],
   significance: string,
-  description: string
+  description: string,
 ): MinorArcanaCard {
   return new MinorArcanaCardImpl(suit, number, keywords, uprightMeanings, reversedMeanings, visualDescription, visualDescriptionAnalysis, symbols, significance, description);
 }
@@ -116,7 +114,7 @@ export const MINOR_ARCANA_CARDS: Partial<Record<MinorArcana, MinorArcanaCard>> =
     'The hand from the cloud is a divine gift. The overflowing chalice represents emotional abundance. The dove symbolizes peace and the Holy Spirit, carrying a communion wafer.',
     ['hand', 'cloud', 'chalice', 'water', 'dove', 'wafer', 'lotus'],
     'The beginning of the emotional journey, embodying pure emotional potential.',
-    'Represents new love, new relationships, and new beginnings in love.'
+    'Represents new love, new relationships, and new beginnings in love.',
   ),
   [MinorArcana.TwoOfCups]: createMinorArcanaCard(
     Suit.Cups, MinorNumber.Two, ['partnership', 'mutual attraction', 'connection'],

@@ -280,9 +280,58 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
-### Emoji Representations
+### SVG Representations
 
-This library includes emoji representations for each card, making it suitable for text-based interfaces.
+Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
+
+**Example:**
+```typescript
+import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';
+
+const magician = getMajorArcanaCard(MajorArcana.TheMagician);
+if (magician) {
+  const svg = magician.getSvg();
+  // svg contains the SVG XML string
+}
+```
+
+**Sample SVGs:**
+
+<table>
+  <tr>
+    <td>The Magician</td>
+    <td>Eight of Cups</td>
+    <td>King of Wands</td>
+  </tr>
+  <tr>
+    <td><img src="samples/major_arcana_01_the_magician.svg" width="150"></td>
+    <td><img src="samples/minor_arcana_cups_08_eight.svg" width="150"></td>
+    <td><img src="samples/minor_arcana_wands_14_king.svg" width="150"></td>
+  </tr>
+  <tr>
+    <td>The Magician with Background</td>
+    <td>Seven of Pentacles with Background</td>
+  </tr>
+  <tr>
+    <td><img src="samples/magician_with_bg_image.svg" width="150"></td>
+    <td><img src="samples/seven_of_pentacles_with_bg_image.svg" width="150"></td>
+  </tr>
+</table>
+
+### Text-Based Representations
+
+Each card has a `getTextRepresentation()` method that returns a simple text-based representation of the card, suitable for console output or other text-only interfaces.
+
+**Example:**
+```typescript
+import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';
+
+const magician = getMajorArcanaCard(MajorArcana.TheMagician);
+if (magician) {
+  const text = magician.getTextRepresentation();
+  // text will be something like "[M1🧙‍♂️]"
+}
+```
 
 **Major Arcana Emojis:**
 
@@ -293,7 +342,7 @@ This library includes emoji representations for each card, making it suitable fo
 | The High Priestess | [M2🔮]     |
 | The Empress        | [M3👸]     |
 | The Emperor        | [M4🤴]     |
-| The Hierophant     | [M5👏]     |
+| The Hierophant     | [M5🙏]     |
 | The Lovers         | [M6👩‍❤️‍👨] |
 | The Chariot        | [M7🏎️]    |
 | Strength           | [M8🦁]     |

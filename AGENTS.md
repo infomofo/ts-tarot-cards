@@ -11,7 +11,9 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Type Safety**: Maintain full TypeScript coverage with proper type annotations
 
 ### Code Structure
-- **Enum Usage**: Prefer enum values over string literals for consistency and type safety
+- **Type-Safe Comparisons**: Always prefer type-safe enum comparisons over matching against string literals. This improves type safety and reduces the chance of typos causing bugs.
+  - *Good*: `if (card.arcana === Arcana.Major) { ... }`
+  - *Avoid*: `if (card.arcana === 'Major') { ... }`
 - **Factory Functions**: Use helper factory functions for object creation to ensure consistency
 - **Auto-Generation**: Prefer auto-generated values (IDs, numeric values) over manual specification to reduce errors
 - **Consistent Patterns**: Maintain identical patterns across similar components (e.g., major/minor arcana)
@@ -28,6 +30,21 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Strategy Pattern**: Use strategy patterns for variable behaviors (e.g., card selection)
 - **Type Safety**: Leverage TypeScript's type system to prevent runtime errors
 - **Single Responsibility**: Each class/function should have one clear purpose
+- **Unified Logic**: Avoid duplicating functionality in multiple places. Unify logic into a single, reusable function or property.
+- **Clean Code**: Remove any unused or "crufted" code to keep the codebase clean and maintainable.
+- **Comprehensive Testing**: Ensure all logic branches and options are covered by tests to prevent regressions.
+- **Sample Generation**: When adding or updating visual features like SVG generation, ensure that sample files are generated to cover all permutations of the feature's options. This includes creating samples for different card types (Major Arcana, Minor Arcana number, Minor Arcana face card) and for different option combinations (e.g., hiding elements, using background images).
+
+### SVG Sample Generation
+
+The `npm run generate-samples` command will generate a comprehensive set of sample SVG files in the `/samples` directory. This script should be run whenever the SVG generation logic is changed.
+
+**Note on Viewing Image Samples**: The samples that use an `art_override_url` link to an external image (e.g., `fool-with-bg-image.svg`). These images may not render in all environments (like the GitHub PR preview) due to Content Security Policy (CSP) restrictions. To view these samples correctly, it is recommended to download the SVG file and open it directly in a web browser.
+
+### Collaboration Patterns
+
+- **Acknowledge Tool Limitations**: If unable to complete a task due to a limitation of the available tools (e.g., inability to download binary files), clearly state the limitation to the user.
+- **Propose Collaborative Solutions**: When blocked by a tool limitation, propose a workaround that involves the user's help. For example, if unable to download images, ask the user to add them to the repository. This allows the project to move forward and leverages the strengths of both the AI and the human user.
 
 ## Content Tone Guidelines
 

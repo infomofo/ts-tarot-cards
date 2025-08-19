@@ -1,42 +1,44 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import { MAJOR_ARCANA_CARDS } from './cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from './cards/minor-arcana';
-import { MajorArcana, MinorArcana, getMajorArcanaName, getMinorNumberName, Suit, MinorNumber } from './types';
-import { createMinorArcanaCard } from './cards/minor-arcana';
-import { createMajorArcanaCard } from './cards/major-arcana';
+import { MajorArcana, MinorArcana, getMajorArcanaName, getMinorNumberName } from './types';
 
 function generateSamples() {
   const samplesDir = './samples';
+
+  // Ensure the samples directory exists
   if (!fs.existsSync(samplesDir)) {
     fs.mkdirSync(samplesDir);
   }
 
-  // Generate Major Arcana samples
-  for (const card of Object.values(MAJOR_ARCANA_CARDS)) {
+  // Generate standard samples
+  const allCards = [...Object.values(MAJOR_ARCANA_CARDS), ...Object.values(MINOR_ARCANA_CARDS)];
+  for (const card of allCards) {
     if (card) {
-      const cardName = getMajorArcanaName(card.number).replace(/\s+/g, '_').toLowerCase();
-      const fileName = `major_arcana_${String(card.number).padStart(2, '0')}_${cardName}.svg`;
-      fs.writeFileSync(`${samplesDir}/${fileName}`, card.getSvg());
-    }
-  }
-
-  // Generate Minor Arcana samples
-  for (const card of Object.values(MINOR_ARCANA_CARDS)) {
-    if (card) {
-      const suitName = card.suit.toLowerCase();
-      const cardNumber = String(card.number).padStart(2, '0');
-      const cardName = getMinorNumberName(card.number).toLowerCase();
-      const fileName = `minor_arcana_${suitName}_${cardNumber}_${cardName}.svg`;
-      fs.writeFileSync(`${samplesDir}/${fileName}`, card.getSvg());
+      let fileName: string;
+      if (card.arcana === 'Major') {
+        const cardName = getMajorArcanaName(card.number).replace(/\s+/g, '-').toLowerCase();
+        fileName = `major-${String(card.number).padStart(2, '0')}-${cardName}.svg`;
+      } else {
+        const suitName = card.suit.toLowerCase();
+        const cardNumber = String(card.number).padStart(2, '0');
+        const cardName = getMinorNumberName(card.number).toLowerCase();
+        fileName = `${suitName}-${cardNumber}-${cardName}.svg`;
+      }
+      fs.writeFileSync(path.join(samplesDir, fileName), card.getSvg());
     }
   }
 
   // Generate samples with SVGOptions
   const magician = MAJOR_ARCANA_CARDS[MajorArcana.TheMagician];
   if (magician) {
-    fs.writeFileSync(`${samplesDir}/magician_no_number_no_emoji_no_title.svg`, magician.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
+    let fileName = 'magician-no-number-no-emoji-no-title.svg';
+    fs.writeFileSync(path.join(samplesDir, fileName), magician.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
+
+    fileName = 'magician-with-bg-image.svg';
     fs.writeFileSync(
-      `${samplesDir}/magician_with_bg_image.svg`,
+      path.join(samplesDir, fileName),
       magician.getSvg({
         art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg',
         hide_number: true,
@@ -48,18 +50,21 @@ function generateSamples() {
 
   const eightOfCups = MINOR_ARCANA_CARDS[MinorArcana.EightOfCups];
   if (eightOfCups) {
-    fs.writeFileSync(`${samplesDir}/eight_of_cups_no_number_no_emoji.svg`, eightOfCups.getSvg({ hide_number: true, hide_emoji: true }));
+    const fileName = 'cups-08-eight-no-number-no-emoji.svg';
+    fs.writeFileSync(path.join(samplesDir, fileName), eightOfCups.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
   }
 
   const kingOfWands = MINOR_ARCANA_CARDS[MinorArcana.KingOfWands];
   if (kingOfWands) {
-    fs.writeFileSync(`${samplesDir}/king_of_wands_no_number_no_emoji_no_title.svg`, kingOfWands.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
+    const fileName = 'wands-14-king-no-number-no-emoji-no-title.svg';
+    fs.writeFileSync(path.join(samplesDir, fileName), kingOfWands.getSvg({ hide_number: true, hide_emoji: true, hide_title: true }));
   }
 
   const sevenOfPentacles = MINOR_ARCANA_CARDS[MinorArcana.SevenOfPentacles];
   if (sevenOfPentacles) {
+    const fileName = 'pentacles-07-seven-with-bg-image.svg';
     fs.writeFileSync(
-      `${samplesDir}/seven_of_pentacles_with_bg_image.svg`,
+      path.join(samplesDir, fileName),
       sevenOfPentacles.getSvg({
         art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg',
       })

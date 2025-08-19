@@ -56,8 +56,28 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
       return '[mA☕️]';
     }
     const suitEmoji = SUIT_PROPERTIES[this.suit].emoji;
-    const numberEmoji = this.number === MinorNumber.Ace ? 'A' : (getFaceCardEmoji(this.number, this.suit) || String(this.number));
-    return `[m${numberEmoji}${suitEmoji}]`;
+    let numberChar;
+    switch (this.number) {
+      case MinorNumber.Ace:
+        numberChar = 'A';
+        break;
+      case MinorNumber.Page:
+        numberChar = 'P';
+        break;
+      case MinorNumber.Knight:
+        numberChar = 'N';
+        break;
+      case MinorNumber.Queen:
+        numberChar = 'Q';
+        break;
+      case MinorNumber.King:
+        numberChar = 'K';
+        break;
+      default:
+        numberChar = String(this.number);
+        break;
+    }
+    return `[m${numberChar}${suitEmoji}]`;
   }
 
   getName(locale?: string): string {

@@ -417,3 +417,55 @@ describe('Shuffle Strategies', () => {
     expect(deck.getDefaultShuffleStrategy().name).toBe('riffle');
   });
 });
+
+describe('Card Data Conventions', () => {
+  let deck: TarotDeck;
+
+  beforeEach(() => {
+    deck = new TarotDeck();
+  });
+
+  test('should contain exactly 78 cards', () => {
+    expect(deck.getTotalCount()).toBe(78);
+  });
+
+  test('every card should have a visual description and analysis', () => {
+    const cards = deck.selectCards(deck.getTotalCount());
+    cards.forEach(cardPosition => {
+      const card = cardPosition.card;
+      expect(card.visualDescription).toBeDefined();
+      expect(card.visualDescription.length).toBeGreaterThan(0);
+      expect(card.visualDescriptionAnalysis).toBeDefined();
+      expect(card.visualDescriptionAnalysis.length).toBeGreaterThan(0);
+    });
+  });
+
+  test('all symbols should be singular nouns', () => {
+    const cards = deck.selectCards(deck.getTotalCount());
+    cards.forEach(cardPosition => {
+      const card = cardPosition.card;
+      card.symbols.forEach(symbol => {
+        // A simple check: the symbol should not end with 's' unless it's a word that ends in 's'
+        // This is not foolproof, but it's a good heuristic.
+        if (symbol.endsWith('s') && !symbol.endsWith('ss')) {
+          // List of exceptions
+          const exceptions = ['chaos', 'cross', 'cosmos', 'iris', 'ibis', 'lotus', 'ouroboros', 'staffs', 'wands', 'caduceus'];
+          if (!exceptions.includes(symbol.toLowerCase())) {
+            throw new Error(`Symbol "${symbol}" in card "${card.getName()}" might be plural.`);
+          }
+        }
+      });
+    });
+  });
+
+  test('symbols should not include generic terms like "man" or "woman"', () => {
+    const cards = deck.selectCards(deck.getTotalCount());
+    const forbiddenSymbols = ['man', 'woman', 'figure', 'person'];
+    cards.forEach(cardPosition => {
+      const card = cardPosition.card;
+      card.symbols.forEach(symbol => {
+        expect(forbiddenSymbols).not.toContain(symbol.toLowerCase());
+      });
+    });
+  });
+});

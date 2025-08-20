@@ -294,6 +294,7 @@ export interface Spread {
   positions: SpreadPosition[];
   description: string;
   visualRepresentation?: string; // Graphviz DOT notation or ASCII art
+  visualRepresentationContext?: string; // Explanatory text for the visual representation
   allowReversals: boolean; // Whether this spread uses reversals
   preferredStrategy?: string; // Preferred card selection strategy name
 }

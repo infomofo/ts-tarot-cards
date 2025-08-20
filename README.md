@@ -198,6 +198,7 @@ const customSpread = reader.createCustomSpread(
   ],
   true, // allow reversals
   undefined, // no visual representation
+  undefined, // no visual representation context
   strategyKeys[1] // 'fanpick' preferred strategy
 );
 
@@ -285,6 +286,8 @@ const waterSymbols = allCards.filter(card =>
 ### Available Spreads and Reading Digraphs
 
 This library includes several pre-defined spreads. After performing a reading, you can generate a Graphviz DOT digraph that visually represents the spread with the cards that were dealt.
+
+The `visualRepresentation` for a spread should only contain the card nodes and the arrows connecting them. Any additional context or explanation for the layout can be provided in the optional `visualRepresentationContext` field of the `Spread` object.
 
 | Spread Name           | Description                                       | Sample Reading Digraph                                           |
 | --------------------- | ------------------------------------------------- | ---------------------------------------------------------------- |

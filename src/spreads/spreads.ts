@@ -52,17 +52,9 @@ digraph ThreeCardSpread {
     visualRepresentation: `
 digraph CrossSpread {
   node [shape=rectangle, style=filled, fillcolor=lightgreen];
-  subgraph {
-    rank=same; "2. Challenge/Cross";
-  }
-  subgraph {
-    rank=same; "3. Distant Past/Foundation" -> "1. Present Situation" -> "4. Recent Past";
-  }
-  subgraph {
-    rank=same; "5. Possible Outcome";
-  }
-  "1. Present Situation" -> "2. Challenge/Cross" [style=dotted];
-  "1. Present Situation" -> "5. Possible Outcome" [style=dotted];
+  "3. Distant Past/Foundation" -> "1. Present Situation" -> "4. Recent Past";
+  "1. Present Situation" -> "2. Challenge/Cross";
+  "1. Present Situation" -> "5. Possible Outcome";
 }`,
     positions: [
       { position: 1, name: 'Present Situation', positionSignificance: 'The heart of the matter, current situation', dealOrder: 1 },
@@ -97,31 +89,14 @@ digraph SimplePastPresent {
     visualRepresentation: `
 digraph CelticCross {
   node [shape=record, style=filled, fillcolor=lightcoral];
-
-  subgraph cluster_cross {
-    label = "The Cross";
-    "1. The Present" [style=filled, fillcolor=lightblue];
-    "2. The Challenge" [style=filled, fillcolor=lightblue, width=2, height=0.5, orientation=90];
-    "1. The Present" -> "2. The Challenge" [style=invis];
-  }
-
-  subgraph cluster_staff {
-    label = "The Staff";
-    rank=same;
-    "10. The Outcome" -> "9. Hopes and Fears" -> "8. External Influences" -> "7. Advice";
-  }
-
+  "10. The Outcome" -> "9. Hopes and Fears" -> "8. External Influences" -> "7. Advice";
   "3. The Foundation" -> "1. The Present";
   "4. The Past" -> "1. The Present";
   "1. The Present" -> "5. Above";
   "1. The Present" -> "6. The Future";
-
-  "5. Above" -> "2. The Challenge" [style=invis];
-  "6. The Future" -> "1. The Present" [style=invis];
-
-  "1. The Present" -> "7. Advice" [style=dotted, constraint=false];
-}
-`,
+  "1. The Present" -> "2. The Challenge";
+}`,
+    visualRepresentationContext: 'The Celtic Cross consists of two main parts: "The Cross" (positions 1-6) which represents the core of the situation, and "The Staff" (positions 7-10) which provides further insight and advice.',
     positions: [
       { position: 1, name: 'The Present', positionSignificance: 'The current situation or the heart of the matter.', dealOrder: 1 },
       { position: 2, name: 'The Challenge', positionSignificance: 'The immediate challenge or obstacle crossing you.', dealOrder: 2 },
@@ -308,6 +283,7 @@ export class SpreadReader {
     positions: SpreadPosition[], 
     allowReversals: boolean = true, 
     visualRepresentation?: string,
+    visualRepresentationContext?: string,
     preferredStrategy?: string
   ): Spread {
     return {
@@ -316,6 +292,7 @@ export class SpreadReader {
       positions,
       allowReversals,
       visualRepresentation,
+      visualRepresentationContext,
       preferredStrategy
     };
   }

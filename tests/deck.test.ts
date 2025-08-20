@@ -275,6 +275,7 @@ describe('SpreadReader', () => {
       ],
       true,
       undefined,
+      undefined,
       'fanpick'
     );
 

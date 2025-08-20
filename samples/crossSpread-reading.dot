@@ -1,15 +1,7 @@
 
 digraph CrossSpread {
   node [shape=rectangle, style=filled, fillcolor=lightgreen];
-  subgraph {
-    rank=same; "[m9🪄]";
-  }
-  subgraph {
-    rank=same; "[m6🍵]" -> "[m2🗡️]" -> "[M18🌙]";
-  }
-  subgraph {
-    rank=same; "[mP🪙]";
-  }
-  "1. Present Situation" -> "2. Challenge/Cross" [style=dotted];
-  "1. Present Situation" -> "5. Possible Outcome" [style=dotted];
+  "[M21🌎]" -> "[m5🗡️]" -> "[m9🪄]";
+  "[m5🗡️]" -> "[m7🗡️]";
+  "[m5🗡️]" -> "[m8🪄]";
 }

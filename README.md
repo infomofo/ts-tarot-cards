@@ -283,13 +283,28 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
-### Available Spreads and Reading Digraphs
+### Spread Layout and Rendering
 
-This library includes several pre-defined spreads. After performing a reading, you can generate a Graphviz DOT digraph that visually represents the spread with the cards that were dealt.
+Spreads are defined with a format-agnostic JSON-based coordinate system. Each spread has a `layout` property, which is an array of objects that define the `x`, `y`, and optional `rotation` for each card position.
 
-The `visualRepresentation` for a spread should only contain the card nodes and the arrows connecting them. Any additional context or explanation for the layout can be provided in the optional `visualRepresentationContext` field of the `Spread` object.
+This single layout definition can be used to generate multiple types of output. The library provides a `SpreadRenderer` class to convert a completed reading into different formats.
 
-| Spread Name           | Description                                       | Sample Reading Digraph                                           |
+#### Rendering as SVG
+
+You can generate a visual SVG representation of a spread, which is great for web interfaces.
+
+```typescript
+import { SpreadReader, SPREAD_NAMES, SpreadRenderer } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+const renderer = new SpreadRenderer();
+
+const reading = reader.performReading(SPREAD_NAMES.celticCross);
+const svg = renderer.renderAsSvg(reading);
+// svg now contains the SVG XML for the spread
+```
+
+| Spread Name           | Description                                       | Sample Reading SVG                                           |
 | --------------------- | ------------------------------------------------- | ---------------------------------------------------------------- |
 | **Single Card Pull**  | A single card for quick guidance.                 | <img src="samples/singleCard-reading.svg" width="150">           |
 | **Three Card Spread** | A simple spread for past, present, and future.    | <img src="samples/threeCard-reading.svg" width="300">            |
@@ -297,9 +312,21 @@ The `visualRepresentation` for a spread should only contain the card nodes and t
 | **Cross Spread**      | A five-card spread for deeper insight.            | <img src="samples/crossSpread-reading.svg" width="300">          |
 | **Celtic Cross**      | A comprehensive 10-card spread for in-depth analysis. | <img src="samples/celticCross-reading.svg" width="400">        |
 
-### SVG Representations
+#### Rendering as Text
 
-Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
+You can also render a spread as a simple text-based grid, which is useful for console applications.
+
+```typescript
+import { SpreadReader, SPREAD_NAMES, SpreadRenderer } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+const renderer = new SpreadRenderer();
+
+const reading = reader.performReading(SPREAD_NAMES.threeCard);
+const textLayout = renderer.renderAsText(reading);
+console.log(textLayout);
+// [M9🐚] [mK🪙] [m6🗡️]
+```
 
 **Example:**
 ```typescript

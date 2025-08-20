@@ -18,11 +18,9 @@ export const SPREADS: Record<string, Spread> = {
     description: 'A single card for quick guidance or a daily reading.',
     allowReversals: true,
     preferredStrategy: 'deal',
-    visualRepresentation: `
-digraph SingleCard {
-  node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "1. Guidance";
-}`,
+    layout: [
+      { position: 1, x: 0, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Guidance', positionSignificance: 'A single point of focus or advice', dealOrder: 1 }
     ]
@@ -31,13 +29,12 @@ digraph SingleCard {
     name: 'Three Card Spread',
     description: 'A simple three-card spread representing past, present, and future.',
     allowReversals: true,
-    preferredStrategy: 'deal', // Traditional sequential dealing
-    visualRepresentation: `
-digraph ThreeCardSpread {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "1. Past" -> "2. Present" -> "3. Future";
-}`,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 0, y: 0 },
+      { position: 2, x: 1, y: 0 },
+      { position: 3, x: 2, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Past', positionSignificance: 'Past influences and events that led to the current situation', dealOrder: 1 },
       { position: 2, name: 'Present', positionSignificance: 'Current situation and immediate influences', dealOrder: 2 },
@@ -48,15 +45,14 @@ digraph ThreeCardSpread {
     name: 'Cross Spread',
     description: 'A five-card cross spread for deeper insight into a situation.',
     allowReversals: true,
-    preferredStrategy: 'fanpick', // More intuitive selection for complex spreads
-    visualRepresentation: `
-digraph CrossSpread {
-  node [shape=rectangle, style=filled, fillcolor=lightgreen];
-  edge [style=invis];
-  { rank=same; "4. Recent Past"; "1. Present Situation"; "2. Challenge/Cross"; }
-  "4. Recent Past" -> "1. Present Situation" -> "2. Challenge/Cross";
-  "5. Possible Outcome" -> "1. Present Situation" -> "3. Distant Past/Foundation";
-}`,
+    preferredStrategy: 'fanpick',
+    layout: [
+      { position: 1, x: 1, y: 1 },
+      { position: 2, x: 2, y: 1 },
+      { position: 3, x: 1, y: 2 },
+      { position: 4, x: 0, y: 1 },
+      { position: 5, x: 1, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Present Situation', positionSignificance: 'The heart of the matter, current situation', dealOrder: 1 },
       { position: 2, name: 'Challenge/Cross', positionSignificance: 'What crosses you, obstacles or challenges', dealOrder: 2 },
@@ -65,18 +61,15 @@ digraph CrossSpread {
       { position: 5, name: 'Possible Outcome', positionSignificance: 'Potential future outcome', dealOrder: 5 }
     ]
   },
-  // Example spread that doesn't use reversals
   simplePastPresent: {
     name: 'Simple Past-Present',
     description: 'A two-card spread without reversals for straightforward guidance.',
     allowReversals: false,
-    preferredStrategy: 'deal', // Simple dealing for simple spread
-    visualRepresentation: `
-digraph SimplePastPresent {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightyellow];
-  "1. Past" -> "2. Present";
-}`,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 0, y: 0 },
+      { position: 2, x: 1, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Past', positionSignificance: 'What has led to this moment', dealOrder: 1 },
       { position: 2, name: 'Present', positionSignificance: 'What you need to know right now', dealOrder: 2 }
@@ -87,36 +80,18 @@ digraph SimplePastPresent {
     description: 'A comprehensive 10-card spread for in-depth analysis of a situation.',
     allowReversals: true,
     preferredStrategy: 'deal',
-    visualRepresentation: `
-digraph CelticCross {
-    node [shape=rectangle, style=filled, fillcolor=lightblue];
-    edge [style=invis];
-
-    // Define node styles
-    node_cross [fillcolor=lightcoral];
-    node_staff [fillcolor=lightgoldenrodyellow];
-
-    // Apply styles
-    node [style=filled];
-    subgraph {
-        node [shape=rectangle];
-        "1. The Present"; "2. The Challenge"; "3. The Foundation"; "4. The Past"; "5. Above"; "6. The Future" [style=filled, fillcolor=lightcoral];
-        "7. Advice"; "8. External Influences"; "9. Hopes and Fears"; "10. The Outcome" [style=filled, fillcolor=lightgoldenrodyellow];
-    }
-
-    // The Staff
-    "10. The Outcome" -> "9. Hopes and Fears" -> "8. External Influences" -> "7. Advice";
-
-    // The Cross
-    { rank=same; "4. The Past"; "1. The Present"; "6. The Future"; }
-    "4. The Past" -> "1. The Present" -> "6. The Future";
-    "5. Above" -> "1. The Present" -> "3. The Foundation";
-    "2. The Challenge" -> "1. The Present" [style=solid, dir=none, constraint=false];
-
-    // Connect Cross to Staff
-    "6. The Future" -> "7. Advice" [minlen=2];
-}`,
-    visualRepresentationContext: 'The Celtic Cross consists of two main parts: "The Cross" (positions 1-6) which represents the core of the situation, and "The Staff" (positions 7-10) which provides further insight and advice.',
+    layout: [
+      { position: 1, x: 1, y: 1 },
+      { position: 2, x: 1, y: 1, rotation: 90 },
+      { position: 3, x: 1, y: 2 },
+      { position: 4, x: 0, y: 1 },
+      { position: 5, x: 1, y: 0 },
+      { position: 6, x: 2, y: 1 },
+      { position: 7, x: 3, y: 3 },
+      { position: 8, x: 3, y: 2 },
+      { position: 9, x: 3, y: 1 },
+      { position: 10, x: 3, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'The Present', positionSignificance: 'The current situation or the heart of the matter.', dealOrder: 1 },
       { position: 2, name: 'The Challenge', positionSignificance: 'The immediate challenge or obstacle crossing you.', dealOrder: 2 },
@@ -300,19 +275,17 @@ export class SpreadReader {
   createCustomSpread(
     name: string, 
     description: string, 
-    positions: SpreadPosition[], 
+    positions: SpreadPosition[],
+    layout: Spread['layout'],
     allowReversals: boolean = true, 
-    visualRepresentation?: string,
-    visualRepresentationContext?: string,
     preferredStrategy?: string
   ): Spread {
     return {
       name,
       description,
       positions,
+      layout,
       allowReversals,
-      visualRepresentation,
-      visualRepresentationContext,
       preferredStrategy
     };
   }
@@ -356,21 +329,4 @@ export class SpreadReader {
     };
   }
 
-  /**
-   * Generate a digraph for a reading, replacing position names with card text representations
-   */
-  generateReadingDigraph(reading: SpreadReading): string {
-    let digraph = reading.spread.visualRepresentation || '';
-
-    reading.cards.forEach(cardPosition => {
-      const positionInfo = reading.spread.positions.find(p => p.position === cardPosition.position);
-      if (positionInfo) {
-        const cardText = cardPosition.card.getTextRepresentation();
-        const positionName = `"${positionInfo.position}. ${positionInfo.name}"`;
-        digraph = digraph.replaceAll(positionName, `"${cardText}"`);
-      }
-    });
-
-    return digraph;
-  }
 }

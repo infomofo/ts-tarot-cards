@@ -44,33 +44,14 @@ describe('SpreadReader', () => {
           expect(reading.allowReversals).toBe(spread.allowReversals);
         });
 
-        it('should have a visual representation', () => {
+        it('should have a layout', () => {
           const reading = reader.performReading(spreadName as keyof typeof SPREADS);
-          expect(reading.spread.visualRepresentation).toBeDefined();
-          expect(typeof reading.spread.visualRepresentation).toBe('string');
+          expect(reading.spread.layout).toBeDefined();
+          expect(Array.isArray(reading.spread.layout)).toBe(true);
+          expect(reading.spread.layout.length).toBe(reading.spread.positions.length);
         });
       });
     });
   });
 
-  describe('generateReadingDigraph', () => {
-    Object.keys(SPREADS).forEach(spreadName => {
-      describe(`for ${spreadName} spread`, () => {
-        it('should generate a digraph with card text representations', () => {
-          const reading = reader.performReading(spreadName as keyof typeof SPREADS);
-          const digraph = reader.generateReadingDigraph(reading);
-
-          reading.cards.forEach(cardPosition => {
-            const cardText = cardPosition.card.getTextRepresentation();
-            expect(digraph).toContain(`"${cardText}"`);
-          });
-
-          reading.spread.positions.forEach(position => {
-            const positionName = `"${position.position}. ${position.name}"`;
-            expect(digraph).not.toContain(positionName);
-          });
-        });
-      });
-    });
-  });
 });

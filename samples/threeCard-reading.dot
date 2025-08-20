@@ -2,5 +2,5 @@
 digraph ThreeCardSpread {
   rankdir=LR;
   node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "[M2🔮]" -> "[mA🗡️]" -> "[m3🗡️]";
+  "[M11⚖️]" -> "[mP🍵]" -> "[M4🤴]";
 }

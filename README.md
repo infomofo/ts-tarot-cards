@@ -282,44 +282,21 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
-### Available Spreads
+### Available Spreads and Reading Digraphs
 
-This library includes several pre-defined spreads:
+This library includes several pre-defined spreads. After performing a reading, you can generate a Graphviz DOT digraph that visually represents the spread with the cards that were dealt.
 
-- **Single Card Pull**: A single card for quick guidance.
-- **Three Card Spread**: A simple spread for past, present, and future.
-- **Cross Spread**: A five-card spread for deeper insight.
-- **Simple Past-Present**: A two-card spread without reversals.
-- **Celtic Cross**: A comprehensive 10-card spread for in-depth analysis.
+| Spread Name           | Description                                       | Sample Reading Digraph                                           |
+| --------------------- | ------------------------------------------------- | ---------------------------------------------------------------- |
+| **Single Card Pull**  | A single card for quick guidance.                 | <img src="samples/singleCard-reading.svg" width="150">           |
+| **Three Card Spread** | A simple spread for past, present, and future.    | <img src="samples/threeCard-reading.svg" width="300">            |
+| **Simple Past-Present**| A two-card spread without reversals.              | <img src="samples/simplePastPresent-reading.svg" width="200">    |
+| **Cross Spread**      | A five-card spread for deeper insight.            | <img src="samples/crossSpread-reading.svg" width="300">          |
+| **Celtic Cross**      | A comprehensive 10-card spread for in-depth analysis. | <img src="samples/celticCross-reading.svg" width="400">        |
 
 ### SVG Representations
 
 Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
-
-### Generating a Reading Digraph
-
-After performing a reading, you can generate a Graphviz DOT digraph that visually represents the spread with the cards that were dealt.
-
-```typescript
-import { SpreadReader, SPREAD_NAMES } from 'ts-tarot-cards';
-
-const reader = new SpreadReader();
-const reading = reader.performReading(SPREAD_NAMES.threeCard);
-
-// Generate the digraph
-const digraph = reader.generateReadingDigraph(reading);
-console.log(digraph);
-// Output will be a DOT string with card text representations, e.g.:
-// digraph ThreeCardSpread {
-//   rankdir=LR;
-//   node [shape=rectangle, style=filled, fillcolor=lightblue];
-//   "[M9🐚]" -> "[mK🪙]" -> "[m6🗡️]";
-// }
-```
-
-**Example Output:**
-
-<img src="samples/reading-digraph.svg" width="300">
 
 **Example:**
 ```typescript

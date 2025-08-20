@@ -1,0 +1,27 @@
+
+digraph CelticCross {
+  node [shape=record, style=filled, fillcolor=lightcoral];
+
+  subgraph cluster_cross {
+    label = "The Cross";
+    "[mP🗡️]" [style=filled, fillcolor=lightblue];
+    "[m2🪄]" [style=filled, fillcolor=lightblue, width=2, height=0.5, orientation=90];
+    "1. The Present" -> "2. The Challenge" [style=invis];
+  }
+
+  subgraph cluster_staff {
+    label = "The Staff";
+    rank=same;
+    "[m10🪙]" -> "[M16🗼]" -> "[mP🪄]" -> "[m3🪙]";
+  }
+
+  "[m7🪄]" -> "1. The Present";
+  "[M14🥂]" -> "1. The Present";
+  "1. The Present" -> "[m6🪙]";
+  "1. The Present" -> "[mQ🪄]";
+
+  "5. Above" -> "2. The Challenge" [style=invis];
+  "6. The Future" -> "1. The Present" [style=invis];
+
+  "1. The Present" -> "7. Advice" [style=dotted, constraint=false];
+}

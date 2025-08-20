@@ -54,18 +54,23 @@ describe('SpreadReader', () => {
   });
 
   describe('generateReadingDigraph', () => {
-    it('should generate a digraph with card text representations', () => {
-      const reading = reader.performReading(SPREAD_NAMES.threeCard);
-      const digraph = reader.generateReadingDigraph(reading);
+    Object.keys(SPREADS).forEach(spreadName => {
+      describe(`for ${spreadName} spread`, () => {
+        it('should generate a digraph with card text representations', () => {
+          const reading = reader.performReading(spreadName as keyof typeof SPREADS);
+          const digraph = reader.generateReadingDigraph(reading);
 
-      reading.cards.forEach(cardPosition => {
-        const cardText = cardPosition.card.getTextRepresentation();
-        expect(digraph).toContain(`"${cardText}"`);
+          reading.cards.forEach(cardPosition => {
+            const cardText = cardPosition.card.getTextRepresentation();
+            expect(digraph).toContain(`"${cardText}"`);
+          });
+
+          reading.spread.positions.forEach(position => {
+            const positionName = `"${position.position}. ${position.name}"`;
+            expect(digraph).not.toContain(positionName);
+          });
+        });
       });
-
-      expect(digraph).not.toContain('"1. Past"');
-      expect(digraph).not.toContain('"2. Present"');
-      expect(digraph).not.toContain('"3. Future"');
     });
   });
 });

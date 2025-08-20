@@ -53,16 +53,16 @@ digraph ThreeCardSpread {
 digraph CrossSpread {
   node [shape=rectangle, style=filled, fillcolor=lightgreen];
   subgraph {
-    rank=same; "2. Challenge";
+    rank=same; "2. Challenge/Cross";
   }
   subgraph {
-    rank=same; "3. Foundation" -> "1. Present" -> "4. Recent Past";
+    rank=same; "3. Distant Past/Foundation" -> "1. Present Situation" -> "4. Recent Past";
   }
   subgraph {
-    rank=same; "5. Outcome";
+    rank=same; "5. Possible Outcome";
   }
-  "1. Present" -> "2. Challenge" [style=dotted];
-  "1. Present" -> "5. Outcome" [style=dotted];
+  "1. Present Situation" -> "2. Challenge/Cross" [style=dotted];
+  "1. Present Situation" -> "5. Possible Outcome" [style=dotted];
 }`,
     positions: [
       { position: 1, name: 'Present Situation', positionSignificance: 'The heart of the matter, current situation', dealOrder: 1 },
@@ -100,26 +100,26 @@ digraph CelticCross {
 
   subgraph cluster_cross {
     label = "The Cross";
-    "1. Present" [style=filled, fillcolor=lightblue];
-    "2. Challenge" [style=filled, fillcolor=lightblue, width=2, height=0.5, orientation=90];
-    "1. Present" -> "2. Challenge" [style=invis];
+    "1. The Present" [style=filled, fillcolor=lightblue];
+    "2. The Challenge" [style=filled, fillcolor=lightblue, width=2, height=0.5, orientation=90];
+    "1. The Present" -> "2. The Challenge" [style=invis];
   }
 
   subgraph cluster_staff {
     label = "The Staff";
     rank=same;
-    "10. Outcome" -> "9. Hopes/Fears" -> "8. External" -> "7. Advice";
+    "10. The Outcome" -> "9. Hopes and Fears" -> "8. External Influences" -> "7. Advice";
   }
 
-  "3. Foundation" -> "1. Present";
-  "4. Past" -> "1. Present";
-  "1. Present" -> "5. Above";
-  "1. Present" -> "6. Future";
+  "3. The Foundation" -> "1. The Present";
+  "4. The Past" -> "1. The Present";
+  "1. The Present" -> "5. Above";
+  "1. The Present" -> "6. The Future";
 
-  "5. Above" -> "2. Challenge" [style=invis];
-  "6. Future" -> "1. Present" [style=invis];
+  "5. Above" -> "2. The Challenge" [style=invis];
+  "6. The Future" -> "1. The Present" [style=invis];
 
-  "1. Present" -> "7. Advice" [style=dotted, constraint=false];
+  "1. The Present" -> "7. Advice" [style=dotted, constraint=false];
 }
 `,
     positions: [
@@ -370,7 +370,7 @@ export class SpreadReader {
       if (positionInfo) {
         const cardText = cardPosition.card.getTextRepresentation();
         const positionName = `"${positionInfo.position}. ${positionInfo.name}"`;
-        digraph = digraph.replace(positionName, `"${cardText}"`);
+        digraph = digraph.replaceAll(positionName, `"${cardText}"`);
       }
     });
 

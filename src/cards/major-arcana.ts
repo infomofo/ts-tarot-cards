@@ -6,7 +6,6 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly id: string;
   public readonly arcana: Arcana.Major = Arcana.Major;
   public readonly number: MajorArcana;
-  public readonly numericValue: MajorArcana;
   public readonly romanNumeral: string;
   public readonly keywords: string[];
   public readonly uprightMeanings: string[];
@@ -35,7 +34,6 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     // Auto-generate ID like minor arcana
     this.id = `major-${number.toString().padStart(2, '0')}-${getMajorArcanaName(number).toLowerCase().replace(/\s+/g, '-')}`;
     this.number = number;
-    this.numericValue = number;
     this.romanNumeral = toRomanNumeral(number);
     this.keywords = keywords;
     this.uprightMeanings = uprightMeanings;

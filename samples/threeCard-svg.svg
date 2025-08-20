@@ -1,30 +1,33 @@
 <svg width="510" height="320" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
-      <g transform="rotate(180, 150, 250)">
-        <rect width="100%" height="100%" fill="#a0d2eb" />
-        <text x="50%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text>
-
-
-      </g>
-    </svg>
-  </g><g transform="translate(170, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
-      <g transform="rotate(180, 150, 250)">
-        <rect width="100%" height="100%" fill="#90EE90" />
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">👸</text>
-
-
-      </g>
-    </svg>
-  </g><g transform="translate(340, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
       <g >
-        <rect width="100%" height="100%" fill="#f5b08c" />
-        <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+        <rect width="100%" height="100%" fill="#C0C0C0" />
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🎺</text>
+        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XX</text>
 
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Judgement</text>
 
       </g>
-    </svg>
+  </g><g transform="translate(170, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
+      <g >
+        <rect width="100%" height="100%" fill="#FFD700" />
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">☀️</text>
+        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIX</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Sun</text>
+
+      </g>
+  </g><g transform="translate(340, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
+      <g >
+        <rect width="100%" height="100%" fill="#87CEEB" />
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🙃</text>
+        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XII</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Hanged Man</text>
+
+      </g>
   </g>
         <text x="255" y="295" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="black">
           A simple look at the past, present, and future.

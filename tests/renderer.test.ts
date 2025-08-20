@@ -30,7 +30,7 @@ describe('SpreadRenderer', () => {
       expect(typeof svg).toBe('string');
       expect(svg).toContain('<svg');
       expect(svg).toContain('</svg>');
-      expect(svg).toContain('<image');
+      expect(svg).toContain('<g transform');
     });
   });
 });

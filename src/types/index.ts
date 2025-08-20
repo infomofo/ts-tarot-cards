@@ -231,6 +231,7 @@ export interface SVGOptions {
   hide_emoji?: boolean;
   hide_title?: boolean;
   isReversed?: boolean;
+  inner_svg?: boolean;
 }
 
 // Base interface for all tarot cards

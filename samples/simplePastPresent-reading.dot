@@ -1,6 +1,0 @@
-
-digraph SimplePastPresent {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightyellow];
-  "[mQ🍵]" -> "[M8🦁]";
-}

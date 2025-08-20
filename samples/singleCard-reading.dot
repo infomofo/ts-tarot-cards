@@ -1,5 +1,0 @@
-
-digraph SingleCard {
-  node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "[m10🪄]";
-}

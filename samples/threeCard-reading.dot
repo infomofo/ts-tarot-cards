@@ -1,6 +1,0 @@
-
-digraph ThreeCardSpread {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "[m6🪙]" -> "[m7🪙]" -> "[M20🎺]";
-}

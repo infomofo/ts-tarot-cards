@@ -317,6 +317,10 @@ console.log(digraph);
 // }
 ```
 
+**Example Output:**
+
+<img src="samples/reading-digraph.svg" width="300">
+
 **Example:**
 ```typescript
 import { getMajorArcanaCard, MajorArcana } from 'ts-tarot-cards';

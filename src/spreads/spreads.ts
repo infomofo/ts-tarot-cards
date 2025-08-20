@@ -89,16 +89,32 @@ digraph SimplePastPresent {
     preferredStrategy: 'deal',
     visualRepresentation: `
 digraph CelticCross {
-  node [shape=record, style=filled, fillcolor=lightcoral];
-  "1. The Present" -> "2. The Challenge";
-  "1. The Present" -> "3. The Foundation";
-  "1. The Present" -> "4. The Past";
-  "1. The Present" -> "5. Above";
-  "1. The Present" -> "6. The Future";
-  "1. The Present" -> "7. Advice";
-  "1. The Present" -> "8. External Influences";
-  "1. The Present" -> "9. Hopes and Fears";
-  "1. The Present" -> "10. The Outcome";
+    node [shape=rectangle, style=filled, fillcolor=lightblue];
+    edge [style=invis];
+
+    // Define node styles
+    node_cross [fillcolor=lightcoral];
+    node_staff [fillcolor=lightgoldenrodyellow];
+
+    // Apply styles
+    node [style=filled];
+    subgraph {
+        node [shape=rectangle];
+        "1. The Present"; "2. The Challenge"; "3. The Foundation"; "4. The Past"; "5. Above"; "6. The Future" [style=filled, fillcolor=lightcoral];
+        "7. Advice"; "8. External Influences"; "9. Hopes and Fears"; "10. The Outcome" [style=filled, fillcolor=lightgoldenrodyellow];
+    }
+
+    // The Staff
+    "10. The Outcome" -> "9. Hopes and Fears" -> "8. External Influences" -> "7. Advice";
+
+    // The Cross
+    { rank=same; "4. The Past"; "1. The Present"; "6. The Future"; }
+    "4. The Past" -> "1. The Present" -> "6. The Future";
+    "5. Above" -> "1. The Present" -> "3. The Foundation";
+    "2. The Challenge" -> "1. The Present" [style=solid, dir=none, constraint=false];
+
+    // Connect Cross to Staff
+    "6. The Future" -> "7. Advice" [minlen=2];
 }`,
     visualRepresentationContext: 'The Celtic Cross consists of two main parts: "The Cross" (positions 1-6) which represents the core of the situation, and "The Staff" (positions 7-10) which provides further insight and advice.',
     positions: [

@@ -124,6 +124,8 @@ console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 
 ### Reversal Logic
 
+**Note on Reversals:** Due to the complexity of rendering text upside down, this library does not currently support card reversals in the text-based or visual representations. The `isReversed` property is available in the API, but all cards will be treated as upright in the output.
+
 Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not.
 
 ```typescript
@@ -166,7 +168,7 @@ import { SpreadReader, SPREADS, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards
 const reader = new SpreadReader();
 
 // Using available spread keys
-const spreadKeys = Object.keys(SPREADS); // ['threeCard', 'crossSpread', 'simplePastPresent']
+const spreadKeys = Object.keys(SPREADS); // ['singleCard', 'threeCard', 'crossSpread', 'simplePastPresent', 'celticCross']
 const strategyKeys = Object.keys(CARD_SELECTION_STRATEGIES); // ['deal', 'fanpick']
 
 // Three-card spread (uses preferred strategy: 'deal')
@@ -280,9 +282,40 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
+### Available Spreads
+
+This library includes several pre-defined spreads:
+
+- **Single Card Pull**: A single card for quick guidance.
+- **Three Card Spread**: A simple spread for past, present, and future.
+- **Cross Spread**: A five-card spread for deeper insight.
+- **Simple Past-Present**: A two-card spread without reversals.
+- **Celtic Cross**: A comprehensive 10-card spread for in-depth analysis.
+
 ### SVG Representations
 
 Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
+
+### Generating a Reading Digraph
+
+After performing a reading, you can generate a Graphviz DOT digraph that visually represents the spread with the cards that were dealt.
+
+```typescript
+import { SpreadReader, SPREAD_NAMES } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+const reading = reader.performReading(SPREAD_NAMES.threeCard);
+
+// Generate the digraph
+const digraph = reader.generateReadingDigraph(reading);
+console.log(digraph);
+// Output will be a DOT string with card text representations, e.g.:
+// digraph ThreeCardSpread {
+//   rankdir=LR;
+//   node [shape=rectangle, style=filled, fillcolor=lightblue];
+//   "[M9🐚]" -> "[mK🪙]" -> "[m6🗡️]";
+// }
+```
 
 **Example:**
 ```typescript

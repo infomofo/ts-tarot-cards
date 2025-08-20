@@ -49,9 +49,10 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     return generateSvg(this, options);
   }
 
-  getTextRepresentation(): string {
+  getTextRepresentation(isReversed = false): string {
+    const reversedMark = isReversed ? 'r' : '';
     if (this.id === 'minor-ace-of-cups') {
-      return '[mA☕️]';
+      return `[mA☕️${reversedMark}]`;
     }
     const suitEmoji = SUIT_PROPERTIES[this.suit].emoji;
     let numberChar;
@@ -75,7 +76,7 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
         numberChar = String(this.number);
         break;
     }
-    return `[m${numberChar}${suitEmoji}]`;
+    return `[m${numberChar}${suitEmoji}${reversedMark}]`;
   }
 
   getName(locale?: string): string {

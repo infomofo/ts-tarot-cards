@@ -1,8 +1,47 @@
+/**
+ * This script generates a fixed set of sample images and spread representations.
+ *
+ * Individual Cards:
+ * - Ace of Cups
+ * - 2 of Cups
+ * - 3 of Cups (reversed)
+ * - 4 of Pentacles
+ * - 5 of Wands
+ * - 6 of Wands
+ * - 7 of Swords
+ * - 8 of Swords
+ * - 9 of Cups
+ * - 10 of Swords
+ * - Page of Pentacles
+ * - Knight of Swords (reversed)
+ * - Queen of Cups
+ * - King of Wands
+ * - The Fool
+ * - The Fool with fool background image, no title, no number, no emoji
+ * - 9 of swords with generic background image, showing title, number and emoji
+ * - 2 of swords with generic background image, no number, no emoji
+ *
+ * Spreads (Text Representation):
+ * - single spread
+ * - three pick spread (with interpretation)
+ * - celtic cross
+ * - simplePastPresent
+ * - cross spread (with interpretation)
+ *
+ * Spreads (SVG Representation):
+ * - single spread
+ * - three pick spread
+ * - celtic cross (with interpretation)
+ * - simplePastPresent
+ * - cross spread
+ */
 import * as fs from 'fs';
 import * as path from 'path';
-import { MAJOR_ARCANA_CARDS } from './cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from './cards/minor-arcana';
-import { Arcana, MajorArcana, MinorArcana, SVGOptions, TarotCard, getMajorArcanaName, getMinorNumberName, Suit, MinorNumber } from './types';
+import { MAJOR_ARCANA_CARDS, getMajorArcanaCard } from './cards/major-arcana';
+import { MINOR_ARCANA_CARDS, getMinorArcanaCard } from './cards/minor-arcana';
+import { MajorArcana, MinorArcana, SVGOptions, TarotCard } from './types';
+import { SpreadReader, SPREAD_NAMES } from './spreads/spreads';
+import { SpreadRenderer } from './spreads/renderer';
 
 function imageToDataURI(filePath: string): string {
   const fileContent = fs.readFileSync(filePath);
@@ -34,85 +73,84 @@ function generateSamples() {
   }
   fs.mkdirSync(samplesDir);
 
-  // --- Generate Representative Set of Cards ---
-  const cardsToGenerate: TarotCard[] = [
-    ...Object.values(MAJOR_ARCANA_CARDS), // All Major Arcana
-    ...Object.values(MINOR_ARCANA_CARDS).filter(card => card.suit === Suit.Cups), // All Cups
-    ...Object.values(MINOR_ARCANA_CARDS).filter(card =>
-      card.suit !== Suit.Cups &&
-      [MinorNumber.Ace, MinorNumber.Five, MinorNumber.Queen].includes(card.number)
-    ), // Ace, 5, Queen of other suits
-  ];
+  const spreadReader = new SpreadReader();
+  const spreadRenderer = new SpreadRenderer();
 
-  for (const card of cardsToGenerate) {
-    if (card) {
-      let fileName: string;
-      if (card.arcana === Arcana.Major) {
-        const cardName = getMajorArcanaName(card.number).replace(/\s+/g, '-').toLowerCase();
-        fileName = `major-${String(card.number).padStart(2, '0')}-${cardName}.svg`;
-      } else {
-        const suitName = card.suit.toLowerCase();
-        const cardNumber = String(card.number).padStart(2, '0');
-        const cardName = getMinorNumberName(card.number).toLowerCase();
-        fileName = `${suitName}-${cardNumber}-${cardName}.svg`;
+  // --- Generate Individual Cards ---
+  const individualCards: { name: string, card: TarotCard, options?: SVGOptions, isReversed?: boolean }[] = [
+    { name: 'ace-of-cups', card: getMinorArcanaCard(MinorArcana.AceOfCups)! },
+    { name: '2-of-cups', card: getMinorArcanaCard(MinorArcana.TwoOfCups)! },
+    { name: '3-of-cups-reversed', card: getMinorArcanaCard(MinorArcana.ThreeOfCups)!, isReversed: true },
+    { name: '4-of-pentacles', card: getMinorArcanaCard(MinorArcana.FourOfPentacles)! },
+    { name: '5-of-wands', card: getMinorArcanaCard(MinorArcana.FiveOfWands)! },
+    { name: '6-of-wands', card: getMinorArcanaCard(MinorArcana.SixOfWands)! },
+    { name: '7-of-swords', card: getMinorArcanaCard(MinorArcana.SevenOfSwords)! },
+    { name: '8-of-swords', card: getMinorArcanaCard(MinorArcana.EightOfSwords)! },
+    { name: '9-of-cups', card: getMinorArcanaCard(MinorArcana.NineOfCups)! },
+    { name: '10-of-swords', card: getMinorArcanaCard(MinorArcana.TenOfSwords)! },
+    { name: 'page-of-pentacles', card: getMinorArcanaCard(MinorArcana.PageOfPentacles)! },
+    { name: 'knight-of-swords-reversed', card: getMinorArcanaCard(MinorArcana.KnightOfSwords)!, isReversed: true },
+    { name: 'queen-of-cups', card: getMinorArcanaCard(MinorArcana.QueenOfCups)! },
+    { name: 'king-of-wands', card: getMinorArcanaCard(MinorArcana.KingOfWands)! },
+    { name: 'the-fool', card: getMajorArcanaCard(MajorArcana.TheFool)! },
+    {
+      name: 'the-fool-custom-bg',
+      card: getMajorArcanaCard(MajorArcana.TheFool)!,
+      options: {
+        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
+        hide_title: true,
+        hide_number: true,
+        hide_emoji: true
       }
-      fs.writeFileSync(path.join(samplesDir, fileName), card.getSvg());
-    }
-  }
-
-  // --- Generate Specific Option Combinations for The Fool ---
-  const foolCard = MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!;
-  const foolSamples: { name: string, options: SVGOptions }[] = [
-    { name: 'fool-default', options: {} },
-    { name: 'fool-hide_number', options: { hide_number: true } },
-    { name: 'fool-hide_title', options: { hide_title: true } },
-    { name: 'fool-hide_emoji', options: { hide_emoji: true } },
-    { name: 'fool-hide_number-hide_title-hide_emoji', options: { hide_number: true, hide_title: true, hide_emoji: true } },
+    },
+    {
+      name: '9-of-swords-generic-bg',
+      card: getMinorArcanaCard(MinorArcana.NineOfSwords)!,
+      options: {
+        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png'))
+      }
+    },
+    {
+      name: '2-of-swords-generic-bg-no-text',
+      card: getMinorArcanaCard(MinorArcana.TwoOfSwords)!,
+      options: {
+        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
+        hide_number: true,
+        hide_emoji: true
+      }
+    },
   ];
 
-  for (const sample of foolSamples) {
-    fs.writeFileSync(path.join(samplesDir, `${sample.name}.svg`), foolCard.getSvg(sample.options));
+  for (const sample of individualCards) {
+    const svg = sample.card.getSvg({ ...sample.options, isReversed: sample.isReversed });
+    fs.writeFileSync(path.join(samplesDir, `${sample.name}.svg`), svg);
   }
 
-  // --- Generate Samples with Local Images ---
-  const foolImage = imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg'));
-  const magicianImage = imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-01-magician.webp'));
-  const backImage = imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png'));
+  // --- Generate Spreads ---
+  const spreadsToGenerate = [
+    { name: SPREAD_NAMES.singleCard, interpretation: undefined },
+    { name: SPREAD_NAMES.threeCard, interpretation: "A simple look at the past, present, and future." },
+    { name: SPREAD_NAMES.celticCross, interpretation: "A deep dive into a complex situation." },
+    { name: SPREAD_NAMES.simplePastPresent, interpretation: undefined },
+    { name: SPREAD_NAMES.crossSpread, interpretation: "A look at the core of the situation and its challenges." },
+  ];
 
-  // Update existing samples to use local images
-  fs.writeFileSync(path.join(samplesDir, 'fool-with-bg-image.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!.getSvg({ art_override_url: foolImage }));
-  fs.writeFileSync(path.join(samplesDir, 'four-of-cups-with-bg-image.svg'), MINOR_ARCANA_CARDS[MinorArcana.FourOfCups]!.getSvg({ art_override_url: backImage }));
+  for (const spreadInfo of spreadsToGenerate) {
+    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    if (spreadInfo.interpretation) {
+      reading.interpretation = spreadInfo.interpretation;
+    }
 
-  // Add new samples as per request
-  // Fool: suppress title, image, and number
-  fs.writeFileSync(path.join(samplesDir, 'fool-local-suppress-all.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!.getSvg({ art_override_url: foolImage, hide_title: true, hide_number: true, hide_emoji: true }));
+    // Generate Text Representation
+    const textRepresentation = spreadRenderer.renderAsText(reading);
+    fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-text.txt`), textRepresentation);
 
-  // Magician: suppress all
-  fs.writeFileSync(path.join(samplesDir, 'magician-local-suppress-all.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!.getSvg({ art_override_url: magicianImage, hide_title: true, hide_number: true, hide_emoji: true }));
-  // Magician: don't suppress number
-  fs.writeFileSync(path.join(samplesDir, 'magician-local-suppress-title-emoji.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!.getSvg({ art_override_url: magicianImage, hide_title: true, hide_emoji: true }));
+    // Generate SVG Representation
+    const svgRepresentation = spreadRenderer.renderAsSvg(reading);
+    fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-svg.svg`), svgRepresentation);
+  }
 
-  // Generic back for different card types
-  fs.writeFileSync(path.join(samplesDir, 'major-arcana-with-back.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheEmpress]!.getSvg({ art_override_url: backImage }));
-  fs.writeFileSync(path.join(samplesDir, 'minor-arcana-num-with-back.svg'), MINOR_ARCANA_CARDS[MinorArcana.TwoOfCups]!.getSvg({ art_override_url: backImage }));
-  fs.writeFileSync(path.join(samplesDir, 'minor-arcana-face-with-back.svg'), MINOR_ARCANA_CARDS[MinorArcana.KingOfSwords]!.getSvg({ art_override_url: backImage }));
-
-  // --- Keep Two Samples for External URLs ---
-  // Fool: suppress title, number, and emoji
-  fs.writeFileSync(path.join(samplesDir, 'fool-external-suppress-all.svg'), MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!.getSvg({
-    art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg',
-    hide_title: true,
-    hide_number: true,
-    hide_emoji: true,
-  }));
-
-  // Generic background for a minor arcana, don't suppress anything
-  fs.writeFileSync(path.join(samplesDir, 'page-of-wands-external-bg.svg'), MINOR_ARCANA_CARDS[MinorArcana.PageOfWands]!.getSvg({
-    art_override_url: 'https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg',
-  }));
-
-
-  console.log('All sample SVGs generated in ./samples directory.');
+  console.log('All sample SVGs and spreads generated in ./samples directory.');
 }
 
 generateSamples();

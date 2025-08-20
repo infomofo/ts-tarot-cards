@@ -51,6 +51,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     hide_number = false,
     hide_title = false,
     hide_emoji = false,
+    isReversed = false,
   } = options || {};
 
   const backgroundColor = card.arcana === Arcana.Major
@@ -93,12 +94,16 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">${card.getName()}</text>
   `;
 
+  const transform = isReversed ? 'transform="rotate(180, 150, 250)"' : '';
+
   return `
     <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="${backgroundColor}" />
-      ${artContent}
-      ${numberContent}
-      ${titleContent}
+      <g ${transform}>
+        <rect width="100%" height="100%" fill="${backgroundColor}" />
+        ${artContent}
+        ${numberContent}
+        ${titleContent}
+      </g>
     </svg>
   `;
 }

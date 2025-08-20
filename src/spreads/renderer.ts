@@ -20,7 +20,7 @@ export class SpreadRenderer {
     for (const cardPosition of cards) {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
       if (layoutPos) {
-        grid[layoutPos.y][layoutPos.x] = cardPosition.card.getTextRepresentation();
+        grid[layoutPos.y][layoutPos.x] = cardPosition.card.getTextRepresentation(cardPosition.isReversed);
       }
     }
 
@@ -37,9 +37,10 @@ export class SpreadRenderer {
   renderAsSvg(reading: SpreadReading): string {
     const layout = reading.spread.layout;
     const cards = reading.cards;
+    const interpretation = reading.interpretation;
 
-    const cardWidth = 100;
-    const cardHeight = 150;
+    const cardWidth = 150;
+    const cardHeight = 250;
     const padding = 20;
 
     let maxX = 0;
@@ -49,8 +50,19 @@ export class SpreadRenderer {
       if (pos.y > maxY) maxY = pos.y;
     }
 
-    const svgWidth = (maxX + 1) * (cardWidth + padding);
-    const svgHeight = (maxY + 1) * (cardHeight + padding);
+    const spreadWidth = (maxX + 1) * (cardWidth + padding);
+    let svgHeight = (maxY + 1) * (cardHeight + padding);
+    const svgWidth = spreadWidth;
+
+    let interpretationContent = '';
+    if (interpretation) {
+      svgHeight += 50; // Add space for the interpretation text
+      interpretationContent = `
+        <text x="${svgWidth / 2}" y="${svgHeight - 25}" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="black">
+          ${interpretation}
+        </text>
+      `;
+    }
 
     let svgContent = '';
 
@@ -61,15 +73,18 @@ export class SpreadRenderer {
         const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
-        const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2})`;
+        const cardSvg = cardPosition.card.getSvg({
+          isReversed: cardPosition.isReversed
+        });
 
-        svgContent += `<g transform="${transform}">`;
-        svgContent += `<rect x="0" y="0" width="${cardWidth}" height="${cardHeight}" fill="#FFF" stroke="#000" />`;
-        svgContent += `<text x="${cardWidth / 2}" y="${cardHeight / 2}" dominant-baseline="middle" text-anchor="middle" font-size="12">${cardPosition.card.getTextRepresentation()}</text>`;
-        svgContent += `</g>`;
+        const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+
+        const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
+
+        svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
       }
     }
 
-    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
+    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}${interpretationContent}</svg>`;
   }
 }

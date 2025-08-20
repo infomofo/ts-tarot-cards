@@ -124,9 +124,10 @@ console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 
 ### Reversal Logic
 
-**Note on Reversals:** Due to the complexity of rendering text upside down, this library does not currently support card reversals in the text-based or visual representations. The `isReversed` property is available in the API, but all cards will be treated as upright in the output.
+Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not. Both text and SVG representations of cards now support a reversed state.
 
-Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not.
+- **Text Representation**: A reversed card will have an 'r' appended to its text representation (e.g., `[M0🤡r]`).
+- **SVG Representation**: A reversed card's image will be rotated 180 degrees.
 
 ```typescript
 import { SpreadReader, SPREADS, SPREAD_NAMES } from 'ts-tarot-cards';

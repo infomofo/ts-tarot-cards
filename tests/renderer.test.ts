@@ -17,7 +17,7 @@ describe('SpreadRenderer', () => {
       expect(text).toBeDefined();
       expect(typeof text).toBe('string');
       reading.cards.forEach(cardPosition => {
-        expect(text).toContain(cardPosition.card.getTextRepresentation());
+        expect(text).toContain(cardPosition.card.getTextRepresentation(cardPosition.isReversed));
       });
     });
   });
@@ -30,9 +30,7 @@ describe('SpreadRenderer', () => {
       expect(typeof svg).toBe('string');
       expect(svg).toContain('<svg');
       expect(svg).toContain('</svg>');
-      reading.cards.forEach(cardPosition => {
-        expect(svg).toContain(cardPosition.card.getTextRepresentation());
-      });
+      expect(svg).toContain('<image');
     });
   });
 });

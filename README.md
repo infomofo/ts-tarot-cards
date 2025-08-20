@@ -124,6 +124,8 @@ console.log(Object.keys(shuffleStrategies)); // ['fisherYates', 'riffle']
 
 ### Reversal Logic
 
+**Note on Reversals:** Due to the complexity of rendering text upside down, this library does not currently support card reversals in the text-based or visual representations. The `isReversed` property is available in the API, but all cards will be treated as upright in the output.
+
 Reversals are handled at the SpreadReader and Spread level, to reflect the real world modeling of how some tarot card readers choose to use reversals and others do not.
 
 ```typescript
@@ -166,7 +168,7 @@ import { SpreadReader, SPREADS, CARD_SELECTION_STRATEGIES } from 'ts-tarot-cards
 const reader = new SpreadReader();
 
 // Using available spread keys
-const spreadKeys = Object.keys(SPREADS); // ['threeCard', 'crossSpread', 'simplePastPresent']
+const spreadKeys = Object.keys(SPREADS); // ['singleCard', 'threeCard', 'crossSpread', 'simplePastPresent', 'celticCross']
 const strategyKeys = Object.keys(CARD_SELECTION_STRATEGIES); // ['deal', 'fanpick']
 
 // Three-card spread (uses preferred strategy: 'deal')
@@ -196,6 +198,7 @@ const customSpread = reader.createCustomSpread(
   ],
   true, // allow reversals
   undefined, // no visual representation
+  undefined, // no visual representation context
   strategyKeys[1] // 'fanpick' preferred strategy
 );
 
@@ -280,9 +283,50 @@ const waterSymbols = allCards.filter(card =>
 - **Study Aid**: Track symbolic evolution through spreads
 - **Flexible Hierarchy**: Support both specific ('dove') and general ('bird') categorization
 
-### SVG Representations
+### Spread Layout and Rendering
 
-Each card has a `getSvg()` method that returns an SVG XML representation of the card. This can be used to display the cards in a web interface or other graphical application.
+Spreads are defined with a format-agnostic JSON-based coordinate system. Each spread has a `layout` property, which is an array of objects that define the `x`, `y`, and optional `rotation` for each card position.
+
+This single layout definition can be used to generate multiple types of output. The library provides a `SpreadRenderer` class to convert a completed reading into different formats.
+
+#### Rendering as SVG
+
+You can generate a visual SVG representation of a spread, which is great for web interfaces.
+
+```typescript
+import { SpreadReader, SPREAD_NAMES, SpreadRenderer } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+const renderer = new SpreadRenderer();
+
+const reading = reader.performReading(SPREAD_NAMES.celticCross);
+const svg = renderer.renderAsSvg(reading);
+// svg now contains the SVG XML for the spread
+```
+
+| Spread Name           | Description                                       | Sample Reading SVG                                           |
+| --------------------- | ------------------------------------------------- | ---------------------------------------------------------------- |
+| **Single Card Pull**  | A single card for quick guidance.                 | <img src="samples/singleCard-reading.svg" width="150">           |
+| **Three Card Spread** | A simple spread for past, present, and future.    | <img src="samples/threeCard-reading.svg" width="300">            |
+| **Simple Past-Present**| A two-card spread without reversals.              | <img src="samples/simplePastPresent-reading.svg" width="200">    |
+| **Cross Spread**      | A five-card spread for deeper insight.            | <img src="samples/crossSpread-reading.svg" width="300">          |
+| **Celtic Cross**      | A comprehensive 10-card spread for in-depth analysis. | <img src="samples/celticCross-reading.svg" width="400">        |
+
+#### Rendering as Text
+
+You can also render a spread as a simple text-based grid, which is useful for console applications.
+
+```typescript
+import { SpreadReader, SPREAD_NAMES, SpreadRenderer } from 'ts-tarot-cards';
+
+const reader = new SpreadReader();
+const renderer = new SpreadRenderer();
+
+const reading = reader.performReading(SPREAD_NAMES.threeCard);
+const textLayout = renderer.renderAsText(reading);
+console.log(textLayout);
+// [M9🐚] [mK🪙] [m6🗡️]
+```
 
 **Example:**
 ```typescript
@@ -294,29 +338,6 @@ if (magician) {
   // svg contains the SVG XML string
 }
 ```
-
-**Sample SVGs:**
-
-<table>
-  <tr>
-    <td>The Magician</td>
-    <td>Eight of Cups</td>
-    <td>King of Wands</td>
-  </tr>
-  <tr>
-    <td><img src="samples/major_arcana_01_the_magician.svg" width="150"></td>
-    <td><img src="samples/minor_arcana_cups_08_eight.svg" width="150"></td>
-    <td><img src="samples/minor_arcana_wands_14_king.svg" width="150"></td>
-  </tr>
-  <tr>
-    <td>The Magician with Background</td>
-    <td>Seven of Pentacles with Background</td>
-  </tr>
-  <tr>
-    <td><img src="samples/magician_with_bg_image.svg" width="150"></td>
-    <td><img src="samples/seven_of_pentacles_with_bg_image.svg" width="150"></td>
-  </tr>
-</table>
 
 ### Text-Based Representations
 

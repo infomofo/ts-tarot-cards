@@ -34,6 +34,7 @@ This document provides comprehensive guidelines for AI agents working on this Ty
 - **Clean Code**: Remove any unused or "crufted" code to keep the codebase clean and maintainable.
 - **Comprehensive Testing**: Ensure all logic branches and options are covered by tests to prevent regressions.
 - **Sample Generation**: When adding or updating visual features like SVG generation, ensure that sample files are generated to cover all permutations of the feature's options. This includes creating samples for different card types (Major Arcana, Minor Arcana number, Minor Arcana face card) and for different option combinations (e.g., hiding elements, using background images).
+- **Demonstrate Changes**: Any change being made should be demonstrated somehow in the PR in a way that clearly communicates to the reviewer that the feature is working as intended. This can either be demonstrated in the README, a sample, or some kind of explicit test against the output that is easy to verify.
 
 ### SVG Sample Generation
 

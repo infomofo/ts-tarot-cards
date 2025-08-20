@@ -6,22 +6,35 @@ import { CARD_SELECTION_STRATEGIES } from '../deck/card-selection-strategies';
 export const SPREAD_NAMES = {
   threeCard: 'threeCard',
   crossSpread: 'crossSpread', 
-  simplePastPresent: 'simplePastPresent'
+  simplePastPresent: 'simplePastPresent',
+  singleCard: 'singleCard',
+  celticCross: 'celticCross'
 } as const;
 
 // Pre-defined spread templates
 export const SPREADS: Record<string, Spread> = {
+  singleCard: {
+    name: 'Single Card Pull',
+    description: 'A single card for quick guidance or a daily reading.',
+    allowReversals: true,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 0, y: 0 }
+    ],
+    positions: [
+      { position: 1, name: 'Guidance', positionSignificance: 'A single point of focus or advice', dealOrder: 1 }
+    ]
+  },
   threeCard: {
     name: 'Three Card Spread',
     description: 'A simple three-card spread representing past, present, and future.',
     allowReversals: true,
-    preferredStrategy: 'deal', // Traditional sequential dealing
-    visualRepresentation: `
-digraph ThreeCardSpread {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightblue];
-  "1. Past" -> "2. Present" -> "3. Future";
-}`,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 0, y: 0 },
+      { position: 2, x: 1, y: 0 },
+      { position: 3, x: 2, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Past', positionSignificance: 'Past influences and events that led to the current situation', dealOrder: 1 },
       { position: 2, name: 'Present', positionSignificance: 'Current situation and immediate influences', dealOrder: 2 },
@@ -32,22 +45,14 @@ digraph ThreeCardSpread {
     name: 'Cross Spread',
     description: 'A five-card cross spread for deeper insight into a situation.',
     allowReversals: true,
-    preferredStrategy: 'fanpick', // More intuitive selection for complex spreads
-    visualRepresentation: `
-digraph CrossSpread {
-  node [shape=rectangle, style=filled, fillcolor=lightgreen];
-  subgraph {
-    rank=same; "2. Challenge";
-  }
-  subgraph {
-    rank=same; "3. Foundation" -> "1. Present" -> "4. Recent Past";
-  }
-  subgraph {
-    rank=same; "5. Outcome";
-  }
-  "1. Present" -> "2. Challenge" [style=dotted];
-  "1. Present" -> "5. Outcome" [style=dotted];
-}`,
+    preferredStrategy: 'fanpick',
+    layout: [
+      { position: 1, x: 1, y: 1 },
+      { position: 2, x: 2, y: 1 },
+      { position: 3, x: 1, y: 2 },
+      { position: 4, x: 0, y: 1 },
+      { position: 5, x: 1, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Present Situation', positionSignificance: 'The heart of the matter, current situation', dealOrder: 1 },
       { position: 2, name: 'Challenge/Cross', positionSignificance: 'What crosses you, obstacles or challenges', dealOrder: 2 },
@@ -56,21 +61,48 @@ digraph CrossSpread {
       { position: 5, name: 'Possible Outcome', positionSignificance: 'Potential future outcome', dealOrder: 5 }
     ]
   },
-  // Example spread that doesn't use reversals
   simplePastPresent: {
     name: 'Simple Past-Present',
     description: 'A two-card spread without reversals for straightforward guidance.',
     allowReversals: false,
-    preferredStrategy: 'deal', // Simple dealing for simple spread
-    visualRepresentation: `
-digraph SimplePastPresent {
-  rankdir=LR;
-  node [shape=rectangle, style=filled, fillcolor=lightyellow];
-  "1. Past" -> "2. Present";
-}`,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 0, y: 0 },
+      { position: 2, x: 1, y: 0 }
+    ],
     positions: [
       { position: 1, name: 'Past', positionSignificance: 'What has led to this moment', dealOrder: 1 },
       { position: 2, name: 'Present', positionSignificance: 'What you need to know right now', dealOrder: 2 }
+    ]
+  },
+  celticCross: {
+    name: 'Celtic Cross',
+    description: 'A comprehensive 10-card spread for in-depth analysis of a situation.',
+    allowReversals: true,
+    preferredStrategy: 'deal',
+    layout: [
+      { position: 1, x: 1, y: 1 },
+      { position: 2, x: 1, y: 1, rotation: 90 },
+      { position: 3, x: 1, y: 2 },
+      { position: 4, x: 0, y: 1 },
+      { position: 5, x: 1, y: 0 },
+      { position: 6, x: 2, y: 1 },
+      { position: 7, x: 3, y: 3 },
+      { position: 8, x: 3, y: 2 },
+      { position: 9, x: 3, y: 1 },
+      { position: 10, x: 3, y: 0 }
+    ],
+    positions: [
+      { position: 1, name: 'The Present', positionSignificance: 'The current situation or the heart of the matter.', dealOrder: 1 },
+      { position: 2, name: 'The Challenge', positionSignificance: 'The immediate challenge or obstacle crossing you.', dealOrder: 2 },
+      { position: 3, name: 'The Foundation', positionSignificance: 'The basis of the situation, events from the distant past.', dealOrder: 3 },
+      { position: 4, name: 'The Past', positionSignificance: 'Recent events that have led to the present situation.', dealOrder: 4 },
+      { position: 5, name: 'Above', positionSignificance: 'Conscious influences, goals, and what you are aiming for.', dealOrder: 5 },
+      { position: 6, name: 'The Future', positionSignificance: 'What is likely to happen in the near future.', dealOrder: 6 },
+      { position: 7, name: 'Advice', positionSignificance: 'Your role in the situation and the advice the cards offer.', dealOrder: 7 },
+      { position: 8, name: 'External Influences', positionSignificance: 'How others see you and the situation; external forces at play.', dealOrder: 8 },
+      { position: 9, name: 'Hopes and Fears', positionSignificance: 'Your hopes and fears regarding the situation.', dealOrder: 9 },
+      { position: 10, name: 'The Outcome', positionSignificance: 'The final resolution or outcome of the situation.', dealOrder: 10 }
     ]
   }
 };
@@ -243,17 +275,17 @@ export class SpreadReader {
   createCustomSpread(
     name: string, 
     description: string, 
-    positions: SpreadPosition[], 
+    positions: SpreadPosition[],
+    layout: Spread['layout'],
     allowReversals: boolean = true, 
-    visualRepresentation?: string,
     preferredStrategy?: string
   ): Spread {
     return {
       name,
       description,
       positions,
+      layout,
       allowReversals,
-      visualRepresentation,
       preferredStrategy
     };
   }
@@ -296,4 +328,5 @@ export class SpreadReader {
       total: this.deck.getTotalCount()
     };
   }
+
 }

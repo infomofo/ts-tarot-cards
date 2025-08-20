@@ -164,6 +164,10 @@ describe('SpreadReader', () => {
       [
         { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
         { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
+      ],
+      [
+        { position: 1, x: 0, y: 0 },
+        { position: 2, x: 1, y: 0 }
       ]
     );
 
@@ -217,14 +221,14 @@ describe('SpreadReader', () => {
     expect(readingWithReversals.spread.allowReversals).toBe(true);
   });
 
-  test('should include visual representation in spreads', () => {
+  test('should include layout in spreads', () => {
     const spread = reader.getSpread('threeCard');
-    expect(spread.visualRepresentation).toBeDefined();
-    expect(spread.visualRepresentation).toContain('digraph');
+    expect(spread.layout).toBeDefined();
+    expect(spread.layout.length).toBe(spread.positions.length);
     
     const spread2 = reader.getSpread('crossSpread');
-    expect(spread2.visualRepresentation).toBeDefined();
-    expect(spread2.visualRepresentation).toContain('digraph');
+    expect(spread2.layout).toBeDefined();
+    expect(spread2.layout.length).toBe(spread2.positions.length);
   });
 
   test('should support new strategy-based card selection', () => {
@@ -273,8 +277,11 @@ describe('SpreadReader', () => {
         { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
         { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
       ],
+      [
+        { position: 1, x: 0, y: 0 },
+        { position: 2, x: 1, y: 0 }
+      ],
       true,
-      undefined,
       'fanpick'
     );
 
@@ -295,7 +302,8 @@ describe('SpreadReader', () => {
     const customSpread = reader.createCustomSpread(
       'Default Strategy Test',
       'A test spread',
-      [{ position: 1, name: 'Only', positionSignificance: 'Only position', dealOrder: 1 }]
+      [{ position: 1, name: 'Only', positionSignificance: 'Only position', dealOrder: 1 }],
+      [{ position: 1, x: 0, y: 0 }]
     );
 
     const reading = reader.performCustomReading(customSpread);

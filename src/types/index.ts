@@ -287,11 +287,18 @@ export interface SpreadPosition {
   dealOrder: number; // Order in which this position is dealt
 }
 
+export interface SpreadLayoutPosition {
+  position: number;
+  x: number;
+  y: number;
+  rotation?: number;
+}
+
 export interface Spread {
   name: string;
   positions: SpreadPosition[];
   description: string;
-  visualRepresentation?: string; // Graphviz DOT notation or ASCII art
+  layout: SpreadLayoutPosition[];
   allowReversals: boolean; // Whether this spread uses reversals
   preferredStrategy?: string; // Preferred card selection strategy name
 }

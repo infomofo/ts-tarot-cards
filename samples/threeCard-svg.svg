@@ -1,35 +1,5 @@
-<svg width="510" height="320" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-      <g >
-        <rect width="100%" height="100%" fill="#C0C0C0" />
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🎺</text>
-        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XX</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Judgement</text>
-
-      </g>
-  </g><g transform="translate(170, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-      <g >
-        <rect width="100%" height="100%" fill="#FFD700" />
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">☀️</text>
-        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIX</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Sun</text>
-
-      </g>
-  </g><g transform="translate(340, 0) rotate(0, 75, 125) scale(0.5, 0.5)">
-      <g >
-        <rect width="100%" height="100%" fill="#87CEEB" />
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🙃</text>
-        <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XII</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Hanged Man</text>
-
-      </g>
-  </g>
-        <text x="255" y="295" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="black">
+<svg width="360" height="236" xmlns="http://www.w3.org/2000/svg"><image transform="rotate(0, 50, 83)" href="data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgMzAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgCiAgICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDE4MCwgMTUwLCAyNTApIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjViMDhjIiAvPgogICAgICAgIDx0ZXh0IHg9IjUwJSIgeT0iMjUlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjQwIj7wn6qEPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNzAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjQwIj7wn6qEPC90ZXh0PgogICAgICAgIDx0ZXh0IHg9IjUwJSIgeT0iMTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCI+SUk8L3RleHQ+CiAgICAgICAgCiAgICA8cmVjdCB4PSIxMCUiIHk9IjgwJSIgd2lkdGg9IjgwJSIgaGVpZ2h0PSIxNSUiIGZpbGw9IndoaXRlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIC8+CiAgICA8dGV4dCB4PSI1MCUiIHk9Ijg4JSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9ImJsYWNrIj5Ud28gb2YgV2FuZHM8L3RleHQ+CiAgCiAgICAgIDwvZz4KICAKICAgIDwvc3ZnPgogIA==" x="0" y="0" width="100" height="166" /><image transform="rotate(0, 170, 83)" href="data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgMzAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgCiAgICAgIDxnID4KICAgICAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZDZhODg1IiAvPgogICAgICAgIAogICAgICAgICAgICAgICAgPHRleHQgeD0iNTAlIiB5PSI0MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iNjAiPvCfk5w8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSI2MCI+8J+qmTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgPHRleHQgeD0iNTAlIiB5PSIxMCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIj5QYWdlPC90ZXh0PgogICAgICAgIAogICAgPHJlY3QgeD0iMTAlIiB5PSI4MCUiIHdpZHRoPSI4MCUiIGhlaWdodD0iMTUlIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIiAvPgogICAgPHRleHQgeD0iNTAlIiB5PSI4OCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJibGFjayI+UGFnZSBvZiBQZW50YWNsZXM8L3RleHQ+CiAgCiAgICAgIDwvZz4KICAKICAgIDwvc3ZnPgogIA==" x="120" y="0" width="100" height="166" /><image transform="rotate(0, 290, 83)" href="data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgMzAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgCiAgICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDE4MCwgMTUwLCAyNTApIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTBkMmViIiAvPgogICAgICAgIAogICAgICAgICAgICAgICAgPHRleHQgeD0iNTAlIiB5PSI0MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iNjAiPvCfpLTwn4+8PC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iNTAlIiB5PSI2MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iNjAiPvCfjbU8L3RleHQ+CiAgICAgICAgICAgIAogICAgICAgIDx0ZXh0IHg9IjUwJSIgeT0iMTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCI+S2luZzwvdGV4dD4KICAgICAgICAKICAgIDxyZWN0IHg9IjEwJSIgeT0iODAlIiB3aWR0aD0iODAlIiBoZWlnaHQ9IjE1JSIgZmlsbD0id2hpdGUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIgLz4KICAgIDx0ZXh0IHg9IjUwJSIgeT0iODglIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iYmxhY2siPktpbmcgb2YgQ3VwczwvdGV4dD4KICAKICAgICAgPC9nPgogIAogICAgPC9zdmc+CiAg" x="240" y="0" width="100" height="166" />
+        <text x="180" y="211" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="black">
           A simple look at the past, present, and future.
         </text>
       </svg>

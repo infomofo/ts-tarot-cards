@@ -39,8 +39,8 @@ export class SpreadRenderer {
     const cards = reading.cards;
     const interpretation = reading.interpretation;
 
-    const cardWidth = 150;
-    const cardHeight = 250;
+    const cardWidth = 100;
+    const cardHeight = 166;
     const padding = 20;
 
     let maxX = 0;
@@ -75,15 +75,13 @@ export class SpreadRenderer {
 
         const cardSvg = cardPosition.card.getSvg({
           isReversed: cardPosition.isReversed,
-          inner_svg: true,
         });
 
-        const scaleX = cardWidth / 300;
-        const scaleY = cardHeight / 500;
+        const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
 
-        const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2}) scale(${scaleX}, ${scaleY})`;
+        const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
 
-        svgContent += `<g transform="${transform}">${cardSvg}</g>`;
+        svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
       }
     }
 

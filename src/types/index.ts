@@ -244,8 +244,8 @@ export interface BaseTarotCard {
   significance: string; // Card's significance and place in the journey
   description: string; // General description
   arcana: Arcana; // Overridden by extensions
-  numericValue: number; // Overridden by extensions - unified numeric system
-  romanNumeral: string; // Derived from numericValue during initialization
+  number: MajorArcana | MinorNumber; // Overridden by extensions - unified numeric system
+  romanNumeral: string; // Derived from number during initialization
   
   // Dynamic name generation for localization support
   getName(locale?: string): string;
@@ -259,7 +259,6 @@ export interface BaseTarotCard {
 export interface MajorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Major;
   number: MajorArcana;
-  numericValue: MajorArcana; // 0-21, overrides base
   emoji?: string;
   backgroundColor?: string;
 }
@@ -269,7 +268,6 @@ export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;
-  numericValue: MinorNumber; // 1-14, overrides base
   faceCardEmoji?: string;
 }
 

@@ -9,7 +9,6 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly arcana: Arcana.Minor = Arcana.Minor;
   public readonly suit: Suit;
   public readonly number: MinorNumber;
-  public readonly numericValue: MinorNumber;
   public readonly romanNumeral: string;
   public readonly keywords: string[];
   public readonly uprightMeanings: string[];
@@ -35,7 +34,6 @@ class MinorArcanaCardImpl implements MinorArcanaCard {
     this.id = `minor-${getMinorNumberName(number).toLowerCase()}-of-${suit.toLowerCase()}`;
     this.suit = suit;
     this.number = number;
-    this.numericValue = number; // Automatically use the enum value
     this.romanNumeral = toRomanNumeral(number);
     this.keywords = keywords;
     this.uprightMeanings = uprightMeanings;

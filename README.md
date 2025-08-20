@@ -7,7 +7,7 @@ A comprehensive TypeScript library for modeling and working with a tarot deck, f
 This library is built on several key architectural principles that make it both powerful and extensible:
 
 ### Unified Type System
-- **Base Card Model**: All tarot cards inherit from `BaseTarotCard` with unified `numericValue` and `arcana` properties
+- **Base Card Model**: All tarot cards inherit from `BaseTarotCard` with unified `number` and `arcana` properties
 - **Proper Numeric Values**: Major Arcana (0-21), Minor Arcana (1-14) with clear numeric progression
 - **Type Safety**: Clean union types eliminate confusion from optional fields
 - **Extensibility**: Easy to extend from archetype examples to full 78-card deck

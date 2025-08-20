@@ -37,11 +37,10 @@ export class SpreadRenderer {
   renderAsSvg(reading: SpreadReading): string {
     const layout = reading.spread.layout;
     const cards = reading.cards;
-    const interpretation = reading.interpretation;
 
     const cardWidth = 100;
     const cardHeight = 166;
-    const padding = 20;
+    const padding = 40;
 
     let maxX = 0;
     let maxY = 0;
@@ -50,19 +49,8 @@ export class SpreadRenderer {
       if (pos.y > maxY) maxY = pos.y;
     }
 
-    const spreadWidth = (maxX + 1) * (cardWidth + padding);
-    let svgHeight = (maxY + 1) * (cardHeight + padding);
-    const svgWidth = spreadWidth;
-
-    let interpretationContent = '';
-    if (interpretation) {
-      svgHeight += 50; // Add space for the interpretation text
-      interpretationContent = `
-        <text x="${svgWidth / 2}" y="${svgHeight - 25}" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="black">
-          ${interpretation}
-        </text>
-      `;
-    }
+    const svgWidth = (maxX + 1) * (cardWidth + padding);
+    const svgHeight = (maxY + 1) * (cardHeight + padding);
 
     let svgContent = '';
 
@@ -85,6 +73,6 @@ export class SpreadRenderer {
       }
     }
 
-    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}${interpretationContent}</svg>`;
+    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
   }
 }

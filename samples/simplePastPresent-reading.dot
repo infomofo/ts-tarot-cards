@@ -2,5 +2,5 @@
 digraph SimplePastPresent {
   rankdir=LR;
   node [shape=rectangle, style=filled, fillcolor=lightyellow];
-  "[m10🪄]" -> "[mN🍵]";
+  "[mQ🍵]" -> "[M8🦁]";
 }

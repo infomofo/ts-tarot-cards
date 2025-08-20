@@ -1,7 +1,8 @@
 
 digraph CrossSpread {
   node [shape=rectangle, style=filled, fillcolor=lightgreen];
-  "[M21🌎]" -> "[m5🗡️]" -> "[m9🪄]";
-  "[m5🗡️]" -> "[m7🗡️]";
-  "[m5🗡️]" -> "[m8🪄]";
+  edge [style=invis];
+  { rank=same; "[M6👩‍❤️‍👨]"; "[mN🗡️]"; "[M12🙃]"; }
+  "[M6👩‍❤️‍👨]" -> "[mN🗡️]" -> "[M12🙃]";
+  "[M1🧙‍♂️]" -> "[mN🗡️]" -> "[m8🍵]";
 }

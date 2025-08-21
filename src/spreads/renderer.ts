@@ -34,12 +34,12 @@ export class SpreadRenderer {
     return output;
   }
 
-  renderAsSvg(reading: SpreadReading): string {
+  renderAsSvg(reading: SpreadReading, animate: boolean = false): string {
     const layout = reading.spread.layout;
     const cards = reading.cards;
 
-    const cardWidth = 100;
-    const cardHeight = 166;
+    const cardWidth = animate ? 300 : 100;
+    const cardHeight = animate ? 500 : 166;
     const padding = 40;
 
     let maxX = 0;
@@ -56,20 +56,29 @@ export class SpreadRenderer {
 
     for (const cardPosition of cards) {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
-      if (layoutPos) {
+      const spreadPos = reading.spread.positions.find(p => p.position === cardPosition.position);
+      if (layoutPos && spreadPos) {
         const x = layoutPos.x * (cardWidth + padding);
         const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
-        const cardSvg = cardPosition.card.getSvg({
-          isReversed: cardPosition.isReversed,
-        });
-
-        const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
-
-        const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
-
-        svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
+        if (animate) {
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            inner_svg: true,
+            animate,
+            dealOrder: spreadPos.dealOrder,
+          });
+          const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2})`;
+          svgContent += `<g transform="${transform}">${cardSvg}</g>`;
+        } else {
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+          });
+          const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+          const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
+          svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
+        }
       }
     }
 

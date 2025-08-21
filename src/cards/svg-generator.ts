@@ -53,6 +53,8 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     hide_emoji = false,
     isReversed = false,
     inner_svg = false,
+    animate = false,
+    dealOrder = 0,
   } = options || {};
 
   const backgroundColor = card.arcana === Arcana.Major
@@ -97,14 +99,41 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
 
   const transform = isReversed ? 'transform="rotate(180, 150, 250)"' : '';
 
-  const innerContent = `
-      <g ${transform}>
-        <rect width="100%" height="100%" fill="${backgroundColor}" />
-        ${artContent}
-        ${numberContent}
-        ${titleContent}
-      </g>
+  const cardFace = `
+    <rect width="100%" height="100%" fill="${backgroundColor}" />
+    ${artContent}
+    ${numberContent}
+    ${titleContent}
   `;
+
+  let innerContent = `<g ${transform}>${cardFace}</g>`;
+
+  if (animate) {
+    const dealDelay = (dealOrder || 0) * 0.5;
+    const dealDuration = 0.5;
+    const flipDelay = dealDelay + dealDuration;
+    const flipDuration = 0.5;
+    const flipMidpoint = flipDelay + (flipDuration / 2);
+
+    innerContent = `
+      <g transform="translate(-350, 0)">
+        <animateTransform attributeName="transform" type="translate" from="-350, 0" to="0, 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" />
+        <g ${transform}>
+          <g>
+            <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="${flipDuration}s" begin="${flipDelay}s" fill="freeze" />
+            <g>
+              <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+              <rect width="300" height="500" fill="#00008b" />
+            </g>
+            <g visibility="hidden" transform="rotate(180, 150, 250)">
+              <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+              ${cardFace}
+            </g>
+          </g>
+        </g>
+      </g>
+    `;
+  }
 
   if (inner_svg) {
     return innerContent;

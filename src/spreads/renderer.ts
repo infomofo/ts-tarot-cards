@@ -75,14 +75,13 @@ export class SpreadRenderer {
         if (animate) {
           const cardSvg = cardPosition.card.getSvg({
             isReversed: cardPosition.isReversed,
-            inner_svg: true,
             animate,
-            dealOrder: spreadPos.dealOrder,
           });
           const dealDelay = (spreadPos.dealOrder || 0) * 0.5;
           const dealDuration = 0.5;
           const positioningTransform = `translate(${x}, ${y})`;
           const rotationTransform = `rotate(${rotation}, ${transformOriginX}, ${transformOriginY})`;
+          // Using a nested <svg> element preserves the card's coordinate system for animations.
           cardGroup = `
             <g transform="${positioningTransform}">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" additive="sum" />

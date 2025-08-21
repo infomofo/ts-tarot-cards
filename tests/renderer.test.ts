@@ -28,7 +28,7 @@ describe('SpreadRenderer', () => {
       const svg = renderer.renderAsSvg(reading, false);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');
-      expect(svg).toContain('<svg');
+      expect(svg).toMatch(/^<svg width="560" height="826.6666666666666"/);
       expect(svg).toContain('</svg>');
       expect(svg).toContain('<image transform');
       expect(svg).not.toContain('<g transform');

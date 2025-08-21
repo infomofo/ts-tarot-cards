@@ -106,33 +106,34 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     ${titleContent}
   `;
 
-  let innerContent = `<g ${transform}>${cardFace}</g>`;
+  const cardBack = `<rect width="100%" height="100%" fill="#00008b" />`;
+  let innerContent: string;
 
   if (animate) {
     const dealDelay = (dealOrder || 0) * 0.5;
     const dealDuration = 0.5;
-    const flipDelay = dealDelay + dealDuration;
+    const flipDelay = dealDelay + dealDuration + 0.5; // Add a pause after dealing
     const flipDuration = 0.5;
     const flipMidpoint = flipDelay + (flipDuration / 2);
 
     innerContent = `
-      <g transform="translate(-350, 0)">
-        <animateTransform attributeName="transform" type="translate" from="-350, 0" to="0, 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" />
-        <g ${transform}>
-          <g>
-            <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="${flipDuration}s" begin="${flipDelay}s" fill="freeze" />
-            <g>
-              <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
-              <rect width="300" height="500" fill="#00008b" />
-            </g>
-            <g visibility="hidden" transform="rotate(180, 150, 250)">
-              <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
-              ${cardFace}
-            </g>
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="${flipDuration / 2}s" begin="${flipDelay}s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="${flipDuration / 2}s" begin="${flipMidpoint}s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+            ${cardBack}
+          </g>
+          <g visibility="hidden" ${transform}>
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+            ${cardFace}
           </g>
         </g>
       </g>
     `;
+  } else {
+    innerContent = `<g ${transform}>${cardFace}</g>`;
   }
 
   if (inner_svg) {

@@ -1,0 +1,58 @@
+<svg width="1020" height="540" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0, 0) rotate(0, 150, 250)">
+      <g transform="rotate(180, 150, 250)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="1s" begin="0.5s" fill="freeze" repeatCount="1" />
+          <rect width="300" height="500" fill="#00008b" />
+        </g>
+        <g style="visibility: hidden;">
+          <animate attributeName="style" from="visibility: hidden" to="visibility: visible" dur="0.01s" begin="1s" fill="freeze" repeatCount="1" />
+
+    <rect width="100%" height="100%" fill="#AFEEEE" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🥂</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIV</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Temperance</text>
+
+
+        </g>
+      </g>
+    </g><g transform="translate(340, 0) rotate(0, 150, 250)">
+      <g transform="rotate(180, 150, 250)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="1s" begin="1s" fill="freeze" repeatCount="1" />
+          <rect width="300" height="500" fill="#00008b" />
+        </g>
+        <g style="visibility: hidden;">
+          <animate attributeName="style" from="visibility: hidden" to="visibility: visible" dur="0.01s" begin="1.5s" fill="freeze" repeatCount="1" />
+
+    <rect width="100%" height="100%" fill="#a0d2eb" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🍵</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Cups</text>
+
+
+        </g>
+      </g>
+    </g><g transform="translate(680, 0) rotate(0, 150, 250)">
+      <g transform="rotate(180, 150, 250)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="1s" begin="1.5s" fill="freeze" repeatCount="1" />
+          <rect width="300" height="500" fill="#00008b" />
+        </g>
+        <g style="visibility: hidden;">
+          <animate attributeName="style" from="visibility: hidden" to="visibility: visible" dur="0.01s" begin="2s" fill="freeze" repeatCount="1" />
+
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VIII</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Eight of Swords</text>
+
+
+        </g>
+      </g>
+    </g></svg>

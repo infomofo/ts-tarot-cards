@@ -38,8 +38,8 @@ export class SpreadRenderer {
     const layout = reading.spread.layout;
     const cards = reading.cards;
 
-    const cardWidth = 300;
-    const cardHeight = 500;
+    const cardWidth = animate ? 300 : 100;
+    const cardHeight = animate ? 500 : 166;
     const padding = 40;
 
     let maxX = 0;
@@ -62,16 +62,23 @@ export class SpreadRenderer {
         const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
-        const cardSvg = cardPosition.card.getSvg({
-          isReversed: cardPosition.isReversed,
-          inner_svg: true,
-          animate,
-          dealOrder: spreadPos.dealOrder,
-        });
-
-        const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2})`;
-
-        svgContent += `<g transform="${transform}">${cardSvg}</g>`;
+        if (animate) {
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            inner_svg: true,
+            animate,
+            dealOrder: spreadPos.dealOrder,
+          });
+          const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2})`;
+          svgContent += `<g transform="${transform}">${cardSvg}</g>`;
+        } else {
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+          });
+          const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+          const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
+          svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
+        }
       }
     }
 

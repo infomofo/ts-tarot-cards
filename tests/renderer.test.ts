@@ -23,14 +23,26 @@ describe('SpreadRenderer', () => {
   });
 
   describe('renderAsSvg', () => {
-    it('should render a spread as SVG', () => {
+    it('should render a non-animated spread as SVG using image tags', () => {
       const reading = reader.performReading(SPREAD_NAMES.celticCross);
-      const svg = renderer.renderAsSvg(reading);
+      const svg = renderer.renderAsSvg(reading, false);
+      expect(svg).toBeDefined();
+      expect(typeof svg).toBe('string');
+      expect(svg).toContain('<svg width="560" height="824"');
+      expect(svg).toContain('</svg>');
+      expect(svg).toContain('<image transform');
+      expect(svg).not.toContain('<g transform');
+    });
+
+    it('should render an animated spread as SVG using g tags', () => {
+      const reading = reader.performReading(SPREAD_NAMES.celticCross);
+      const svg = renderer.renderAsSvg(reading, true);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');
       expect(svg).toContain('<svg');
       expect(svg).toContain('</svg>');
       expect(svg).toContain('<g transform');
+      expect(svg).not.toContain('<image transform');
     });
   });
 });

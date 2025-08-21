@@ -473,6 +473,10 @@ This library is designed to be extensible and support multiple tarot traditions.
 
 ISC
 
+## CLIO - The Command Line Interface Oracle
+
+This project also includes CLIO, a mystical and playful tarot card reader for your command line. For more information on how to use CLIO, see the [CLIO README](src/cli/README.md).
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests to expand the card database, add new spread types, or improve functionality.

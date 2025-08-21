@@ -54,6 +54,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     isReversed = false,
     inner_svg = false,
     animate = false,
+    dealDelay = 0,
   } = options || {};
 
   const backgroundColor = card.arcana === Arcana.Major
@@ -109,7 +110,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
   let innerContent: string;
 
   if (animate) {
-    const flipDelay = 1.0; // Start flip after 1s
+    const flipDelay = dealDelay + 0.5 + 0.5; // dealDelay + dealDuration + pause
     const flipDuration = 0.5;
     const flipMidpoint = flipDelay + (flipDuration / 2);
 

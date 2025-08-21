@@ -234,6 +234,7 @@ export interface SVGOptions {
   inner_svg?: boolean;
   animate?: boolean;
   dealOrder?: number;
+  dealDelay?: number;
 }
 
 // Base interface for all tarot cards

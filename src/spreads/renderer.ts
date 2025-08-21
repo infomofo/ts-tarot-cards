@@ -53,10 +53,8 @@ export class SpreadRenderer {
       if (pos.y > maxY) maxY = pos.y;
     }
 
-    const contentWidth = (maxX * (cardWidth + padding)) + cardWidth;
-    const contentHeight = (maxY * (cardHeight + padding)) + cardHeight;
-    const svgWidth = contentWidth + padding;
-    const svgHeight = contentHeight + padding;
+    const svgWidth = (maxX + 1) * (cardWidth + padding);
+    const svgHeight = (maxY + 1) * (cardHeight + padding);
 
     let svgContent = '';
 
@@ -64,8 +62,8 @@ export class SpreadRenderer {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
       const spreadPos = reading.spread.positions.find(p => p.position === cardPosition.position);
       if (layoutPos && spreadPos) {
-        const x = (layoutPos.x * (cardWidth + padding)) + padding / 2;
-        const y = (layoutPos.y * (cardHeight + padding)) + padding / 2;
+        const x = layoutPos.x * (cardWidth + padding);
+        const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
         const transformOriginX = baseCardWidth / 2;
@@ -73,17 +71,18 @@ export class SpreadRenderer {
 
         let cardGroup: string;
         if (animate) {
+          const dealDelay = (spreadPos.dealOrder || 0) * 0.5;
           const cardSvg = cardPosition.card.getSvg({
             isReversed: cardPosition.isReversed,
             animate,
+            dealDelay,
           });
-          const dealDelay = (spreadPos.dealOrder || 0) * 0.5;
           const dealDuration = 0.5;
           const positioningTransform = `translate(${x}, ${y})`;
           const rotationTransform = `rotate(${rotation}, ${transformOriginX}, ${transformOriginY})`;
           // Using a nested <svg> element preserves the card's coordinate system for animations.
           cardGroup = `
-            <g transform="${positioningTransform}">
+            <g transform="${positioningTransform}" data-deal-order="${spreadPos.dealOrder}">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" additive="sum" />
               <g transform="${rotationTransform}">
                 ${cardSvg}

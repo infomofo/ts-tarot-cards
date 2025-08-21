@@ -109,16 +109,23 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
   let innerContent = `<g ${transform}>${cardFace}</g>`;
 
   if (animate) {
-    const animationDelay = (dealOrder || 0) * 0.5;
+    const dealDelay = (dealOrder || 0) * 0.5;
+    const dealDuration = 0.5;
+    const flipDelay = dealDelay + dealDuration;
+    const flipDuration = 0.5;
+
     innerContent = `
-      <g ${transform}>
-        <g>
-          <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="1s" begin="${animationDelay}s" fill="freeze" repeatCount="1" />
-          <rect width="300" height="500" fill="#00008b" />
-        </g>
-        <g style="visibility: hidden;">
-          <animate attributeName="style" from="visibility: hidden" to="visibility: visible" dur="0.01s" begin="${animationDelay + 0.5}s" fill="freeze" repeatCount="1" />
-          ${cardFace}
+      <g transform="translate(-350, 0)">
+        <animateTransform attributeName="transform" type="translate" from="-350, 0" to="0, 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" repeatCount="1" />
+        <g ${transform}>
+          <g>
+            <animateTransform attributeName="transform" type="rotate" from="0 150 250" to="180 150 250" dur="${flipDuration}s" begin="${flipDelay}s" fill="freeze" repeatCount="1" />
+            <rect width="300" height="500" fill="#00008b" />
+          </g>
+          <g style="visibility: hidden;">
+            <animate attributeName="style" from="visibility: hidden" to="visibility: visible" dur="0.01s" begin="${flipDelay + (flipDuration / 2)}s" fill="freeze" repeatCount="1" />
+            ${cardFace}
+          </g>
         </g>
       </g>
     `;

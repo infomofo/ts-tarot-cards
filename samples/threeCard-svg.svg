@@ -1,28 +1,25 @@
 <svg width="1020" height="540" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0, 0) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
-    <rect width="100%" height="100%" fill="#a0d2eb" />
-    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IX</text>
+    <rect width="100%" height="100%" fill="#90EE90" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">👸</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Nine of Cups</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Empress</text>
 
   </g></g><g transform="translate(340, 0) rotate(0, 150, 250)"><g >
-    <rect width="100%" height="100%" fill="#FF4500" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🗼</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XVI</text>
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VI</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Tower</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Six of Wands</text>
 
   </g></g><g transform="translate(680, 0) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
-    <rect width="100%" height="100%" fill="#f5b08c" />
-
-                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏽</text>
-                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🪄</text>
-
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Wands</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Pentacles</text>
 
   </g></g></svg>

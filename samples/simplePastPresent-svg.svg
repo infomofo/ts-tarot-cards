@@ -1,17 +1,17 @@
 <svg width="680" height="540" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0, 0) rotate(0, 150, 250)"><g >
-    <rect width="100%" height="100%" fill="#d6a885" />
-    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IV</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Three of Pentacles</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Four of Swords</text>
 
   </g></g><g transform="translate(340, 0) rotate(0, 150, 250)"><g >
-    <rect width="100%" height="100%" fill="#f5b08c" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🪄</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VIII</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Wands</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Eight of Swords</text>
 
   </g></g></svg>

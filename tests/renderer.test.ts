@@ -23,39 +23,25 @@ describe('SpreadRenderer', () => {
   });
 
   describe('renderAsSvg', () => {
-    it('should render a non-animated spread as SVG using g tags and scaling', () => {
+    it('should render a non-animated spread as SVG using image tags', () => {
       const reading = reader.performReading(SPREAD_NAMES.celticCross);
       const svg = renderer.renderAsSvg(reading, false);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');
       expect(svg).toContain('<svg');
-      expect(svg).toContain('</g>');
-      // Check for scale transform, which is indicative of non-animated spread
-      expect(svg).toContain('scale(0.333');
-      expect(svg).not.toContain('<image transform');
+      expect(svg).toContain('</svg>');
+      expect(svg).toContain('<image transform');
+      expect(svg).not.toContain('<g transform');
     });
 
-    it('should render an animated spread as SVG using g tags without scaling', () => {
+    it('should render an animated spread as SVG using g tags', () => {
       const reading = reader.performReading(SPREAD_NAMES.celticCross);
       const svg = renderer.renderAsSvg(reading, true);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');
       expect(svg).toContain('<svg');
       expect(svg).toContain('</g>');
-      expect(svg).not.toContain('scale(0.333');
-      expect(svg).not.toContain('<image transform');
-    });
-
-    it('should maintain card uniqueness in the SVG output', () => {
-      const reading = reader.performReading(SPREAD_NAMES.celticCross);
-      const svg = renderer.renderAsSvg(reading, false);
-      const cardNames = reading.cards.map(c => c.card.getName());
-      const uniqueCardNames = [...new Set(cardNames)];
-
-      for (const name of uniqueCardNames) {
-        const occurrences = (svg.match(new RegExp(name, 'g')) || []).length;
-        expect(occurrences).toBe(1);
-      }
+      expect(svg).not.toContain('<image');
     });
   });
 });

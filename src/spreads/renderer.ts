@@ -55,8 +55,8 @@ export class SpreadRenderer {
 
     const contentWidth = (maxX * (cardWidth + padding)) + cardWidth;
     const contentHeight = (maxY * (cardHeight + padding)) + cardHeight;
-    const svgWidth = contentWidth + 2 * padding;
-    const svgHeight = contentHeight + 2 * padding;
+    const svgWidth = contentWidth + padding;
+    const svgHeight = contentHeight + padding;
 
     let svgContent = '';
 
@@ -64,22 +64,21 @@ export class SpreadRenderer {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
       const spreadPos = reading.spread.positions.find(p => p.position === cardPosition.position);
       if (layoutPos && spreadPos) {
-        const x = (layoutPos.x * (cardWidth + padding)) + padding;
-        const y = (layoutPos.y * (cardHeight + padding)) + padding;
+        const x = (layoutPos.x * (cardWidth + padding)) + padding / 2;
+        const y = (layoutPos.y * (cardHeight + padding)) + padding / 2;
         const rotation = layoutPos.rotation || 0;
-
-        const cardSvg = cardPosition.card.getSvg({
-          isReversed: cardPosition.isReversed,
-          inner_svg: true,
-          animate,
-          dealOrder: spreadPos.dealOrder,
-        });
 
         const transformOriginX = baseCardWidth / 2;
         const transformOriginY = baseCardHeight / 2;
 
         let cardGroup: string;
         if (animate) {
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            inner_svg: true,
+            animate,
+            dealOrder: spreadPos.dealOrder,
+          });
           const dealDelay = (spreadPos.dealOrder || 0) * 0.5;
           const dealDuration = 0.5;
           const positioningTransform = `translate(${x}, ${y})`;
@@ -93,13 +92,21 @@ export class SpreadRenderer {
             </g>
           `;
         } else {
-          const transform = `translate(${x}, ${y}) scale(${scale}) rotate(${rotation}, ${transformOriginX}, ${transformOriginY})`;
-          cardGroup = `<g transform="${transform}">${cardSvg}</g>`;
+          // Revert to the original <image> tag logic, which is more robust for preserving card-internal coordinate systems.
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            animate: false,
+          });
+          const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+          const rotationCenterX = x + cardWidth / 2;
+          const rotationCenterY = y + cardHeight / 2;
+          const transform = `rotate(${rotation}, ${rotationCenterX}, ${rotationCenterY})`;
+          cardGroup = `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
         }
         svgContent += cardGroup;
       }
     }
 
-    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svgWidth} ${svgHeight}">${svgContent}</svg>`;
+    return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
   }
 }

@@ -230,6 +230,8 @@ export interface SVGOptions {
   hide_number?: boolean;
   hide_emoji?: boolean;
   hide_title?: boolean;
+  isReversed?: boolean;
+  inner_svg?: boolean;
 }
 
 // Base interface for all tarot cards
@@ -252,7 +254,7 @@ export interface BaseTarotCard {
 
   // SVG representation generation
   getSvg(options?: SVGOptions): string;
-  getTextRepresentation(): string;
+  getTextRepresentation(isReversed?: boolean): string;
 }
 
 // Major Arcana card
@@ -315,7 +317,7 @@ export interface SpreadReading {
   spread: Spread;
   cards: CardPosition[];
   cardInterpretations?: CardInterpretation[];
-  overallInterpretation?: string; // Interpretation of the entire spread reading
+  interpretation?: string; // Interpretation of the entire spread reading
   userContext?: string; // User-provided context like "what area of life to explore"
   allowReversals: boolean; // Whether this specific reading allows reversals
   timestamp: Date;

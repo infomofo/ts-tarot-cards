@@ -51,11 +51,12 @@ class MajorArcanaCardImpl implements MajorArcanaCard {
     return generateSvg(this, options);
   }
 
-  getTextRepresentation(): string {
+  getTextRepresentation(isReversed = false): string {
+    const reversedMark = isReversed ? 'r' : '';
     if (this.emoji) {
-      return `[M${this.number}${this.emoji}]`;
+      return `[M${this.number}${this.emoji}${reversedMark}]`;
     }
-    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}]`;
+    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}${reversedMark}]`;
   }
 
   getName(locale?: string): string {

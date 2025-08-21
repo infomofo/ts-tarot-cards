@@ -20,7 +20,7 @@ export class SpreadRenderer {
     for (const cardPosition of cards) {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
       if (layoutPos) {
-        grid[layoutPos.y][layoutPos.x] = cardPosition.card.getTextRepresentation();
+        grid[layoutPos.y][layoutPos.x] = cardPosition.card.getTextRepresentation(cardPosition.isReversed);
       }
     }
 
@@ -39,8 +39,8 @@ export class SpreadRenderer {
     const cards = reading.cards;
 
     const cardWidth = 100;
-    const cardHeight = 150;
-    const padding = 20;
+    const cardHeight = 166;
+    const padding = 40;
 
     let maxX = 0;
     let maxY = 0;
@@ -61,12 +61,15 @@ export class SpreadRenderer {
         const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
-        const transform = `translate(${x}, ${y}) rotate(${rotation}, ${cardWidth / 2}, ${cardHeight / 2})`;
+        const cardSvg = cardPosition.card.getSvg({
+          isReversed: cardPosition.isReversed,
+        });
 
-        svgContent += `<g transform="${transform}">`;
-        svgContent += `<rect x="0" y="0" width="${cardWidth}" height="${cardHeight}" fill="#FFF" stroke="#000" />`;
-        svgContent += `<text x="${cardWidth / 2}" y="${cardHeight / 2}" dominant-baseline="middle" text-anchor="middle" font-size="12">${cardPosition.card.getTextRepresentation()}</text>`;
-        svgContent += `</g>`;
+        const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+
+        const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
+
+        svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
       }
     }
 

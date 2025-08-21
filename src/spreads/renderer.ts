@@ -34,12 +34,16 @@ export class SpreadRenderer {
     return output;
   }
 
-  renderAsSvg(reading: SpreadReading): string {
+  renderAsSvg(reading: SpreadReading, animate: boolean = false): string {
     const layout = reading.spread.layout;
     const cards = reading.cards;
 
-    const cardWidth = 100;
-    const cardHeight = 166;
+    const baseCardWidth = 300;
+    const baseCardHeight = 500;
+    const desiredWidth = 100;
+    const scale = desiredWidth / baseCardWidth;
+    const cardWidth = animate ? baseCardWidth : desiredWidth;
+    const cardHeight = animate ? baseCardHeight : baseCardHeight * scale;
     const padding = 40;
 
     let maxX = 0;
@@ -56,20 +60,48 @@ export class SpreadRenderer {
 
     for (const cardPosition of cards) {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
-      if (layoutPos) {
+      const spreadPos = reading.spread.positions.find(p => p.position === cardPosition.position);
+      if (layoutPos && spreadPos) {
         const x = layoutPos.x * (cardWidth + padding);
         const y = layoutPos.y * (cardHeight + padding);
         const rotation = layoutPos.rotation || 0;
 
-        const cardSvg = cardPosition.card.getSvg({
-          isReversed: cardPosition.isReversed,
-        });
+        const transformOriginX = baseCardWidth / 2;
+        const transformOriginY = baseCardHeight / 2;
 
-        const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
-
-        const transform = `rotate(${rotation}, ${x + cardWidth / 2}, ${y + cardHeight / 2})`;
-
-        svgContent += `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
+        let cardGroup: string;
+        if (animate) {
+          const dealDelay = (spreadPos.dealOrder || 0) * 0.5;
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            animate,
+            dealDelay,
+          });
+          const dealDuration = 0.5;
+          const positioningTransform = `translate(${x}, ${y})`;
+          const rotationTransform = `rotate(${rotation}, ${transformOriginX}, ${transformOriginY})`;
+          // Using a nested <svg> element preserves the card's coordinate system for animations.
+          cardGroup = `
+            <g transform="${positioningTransform}" data-deal-order="${spreadPos.dealOrder}">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="${dealDuration}s" begin="${dealDelay}s" fill="freeze" additive="sum" />
+              <g transform="${rotationTransform}">
+                ${cardSvg}
+              </g>
+            </g>
+          `;
+        } else {
+          // Revert to the original <image> tag logic, which is more robust for preserving card-internal coordinate systems.
+          const cardSvg = cardPosition.card.getSvg({
+            isReversed: cardPosition.isReversed,
+            animate: false,
+          });
+          const cardSvgDataUri = `data:image/svg+xml;base64,${Buffer.from(cardSvg).toString('base64')}`;
+          const rotationCenterX = x + cardWidth / 2;
+          const rotationCenterY = y + cardHeight / 2;
+          const transform = `rotate(${rotation}, ${rotationCenterX}, ${rotationCenterY})`;
+          cardGroup = `<image transform="${transform}" href="${cardSvgDataUri}" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" />`;
+        }
+        svgContent += cardGroup;
       }
     }
 

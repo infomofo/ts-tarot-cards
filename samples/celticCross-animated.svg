@@ -1,0 +1,347 @@
+<svg width="1360" height="2160" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(340, 540)" data-deal-order="1">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="0.5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="1.5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="1.75s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="1.75s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="1.75s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+
+                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏻</text>
+                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🗡️</text>
+
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Swords</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(340, 540)" data-deal-order="2">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="1s" fill="freeze" additive="sum" />
+              <g transform="rotate(90, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="2s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="2.25s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="2.25s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" >
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="2.25s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#DDA0DD" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🙏</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">V</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Hierophant</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(340, 1080)" data-deal-order="3">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="1.5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="2.5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="2.75s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="2.75s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="2.75s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#AFEEEE" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🥂</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIV</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Temperance</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(0, 540)" data-deal-order="4">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="2s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="3s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="3.25s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="3.25s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="3.25s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">V</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Five of Swords</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(340, 0)" data-deal-order="5">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="2.5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="3.5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="3.75s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="3.75s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="3.75s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VI</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Six of Wands</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(680, 540)" data-deal-order="6">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="3s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="4s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="4.25s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="4.25s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" >
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="4.25s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Three of Pentacles</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(1020, 1620)" data-deal-order="7">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="3.5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="4.5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="4.75s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="4.75s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" >
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="4.75s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#F08080" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🤴</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IV</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Emperor</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(1020, 1080)" data-deal-order="8">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="4s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="5.25s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="5.25s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" >
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="5.25s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Wands</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(1020, 540)" data-deal-order="9">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="4.5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="5.5s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="5.75s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="5.75s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="5.75s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#d6a885" />
+
+                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">♞</text>
+                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🪙</text>
+
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Knight</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Knight of Pentacles</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+
+            <g transform="translate(1020, 0)" data-deal-order="10">
+              <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="5s" fill="freeze" additive="sum" />
+              <g transform="rotate(0, 150, 250)">
+
+    <svg width="300" height="500" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+
+      <g style="transform-origin: center; transform-box: fill-box;">
+        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="0.25s" begin="6s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="0.25s" begin="6.25s" fill="freeze" />
+        <g>
+          <g visibility="visible">
+            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="6.25s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#00008b" />
+          </g>
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
+            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="6.25s" fill="freeze" />
+
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VIII</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Eight of Wands</text>
+
+
+          </g>
+        </g>
+      </g>
+
+    </svg>
+
+              </g>
+            </g>
+          </svg>

@@ -146,8 +146,20 @@ function generateSamples() {
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-text.txt`), textRepresentation);
 
     // Generate SVG Representation
-    const svgRepresentation = spreadRenderer.renderAsSvg(reading);
+    const svgRepresentation = spreadRenderer.renderAsSvg(reading, false);
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-svg.svg`), svgRepresentation);
+  }
+
+  // --- Generate Animated Spreads ---
+  const animatedSpreadsToGenerate = [
+    { name: SPREAD_NAMES.threeCard },
+    { name: SPREAD_NAMES.celticCross },
+  ];
+
+  for (const spreadInfo of animatedSpreadsToGenerate) {
+    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    const svgRepresentation = spreadRenderer.renderAsSvg(reading, true);
+    fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-animated.svg`), svgRepresentation);
   }
 
   console.log('All sample SVGs and spreads generated in ./samples directory.');

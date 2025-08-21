@@ -29,6 +29,7 @@ These are specific directives for working with the ts-tarot-cards repository.
 2.  **Generate sample SVG files.** When changing SVG generation logic, run `npm run generate-samples` to create updated samples.
 3.  **Use the strategy pattern for variable behaviors.** This applies to features like card selection and shuffling.
 4.  **Design for localization.** Interfaces should be designed to support future internationalization.
+5.  **Be proactive in SVG verification.** If the provided tools are insufficient to verify a visual change to an SVG, attempt to install and use additional tools through `npm` to create a more robust verification process.
 
 ---
 
@@ -90,3 +91,8 @@ For the `ts-tarot-cards` project, this means following the specific content guid
 ### ts-tarot-cards Law 2: Generate sample SVG files
 - The `npm run generate-samples` command will generate sample SVG files in the `/samples` directory.
 - **Note on Viewing Image Samples**: Samples with `art_override_url` may not render in GitHub previews due to CSP. Download the SVG to view it correctly in a browser.
+
+### ts-tarot-cards Law 5: Be proactive in SVG verification
+- When dealing with visual outputs like SVGs, reading the file as text is not enough. You should be proactive and find ways to "see" the output.
+- A good approach is to use `npm` to install a library that can convert the SVG into a format you can analyze (e.g., converting an SVG to a PNG).
+- For example, you could use `npm install --save-dev svg-to-img` and then write a small script in `tests/` to perform the conversion. You can then use the `read_image_file` tool to view the result. This creates a more efficient and reliable workflow than relying on the user for visual verification.

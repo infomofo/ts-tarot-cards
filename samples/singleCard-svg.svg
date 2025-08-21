@@ -1,9 +1,9 @@
-<svg width="140" height="206.66666666666666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 206.66666666666666"><g transform="translate(0, 0) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
-    <rect width="100%" height="100%" fill="#DAA520" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🎡</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">X</text>
+<svg width="180" height="246.66666666666666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 246.66666666666666"><g transform="translate(40, 40) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
+    <rect width="100%" height="100%" fill="#C0C0C0" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🎺</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XX</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Wheel of Fortune</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Judgement</text>
 
   </g></g></svg>

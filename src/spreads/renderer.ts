@@ -53,8 +53,10 @@ export class SpreadRenderer {
       if (pos.y > maxY) maxY = pos.y;
     }
 
-    const svgWidth = (maxX + 1) * (cardWidth + padding);
-    const svgHeight = (maxY + 1) * (cardHeight + padding);
+    const contentWidth = (maxX * (cardWidth + padding)) + cardWidth;
+    const contentHeight = (maxY * (cardHeight + padding)) + cardHeight;
+    const svgWidth = contentWidth + 2 * padding;
+    const svgHeight = contentHeight + 2 * padding;
 
     let svgContent = '';
 
@@ -62,8 +64,8 @@ export class SpreadRenderer {
       const layoutPos = layout.find(p => p.position === cardPosition.position);
       const spreadPos = reading.spread.positions.find(p => p.position === cardPosition.position);
       if (layoutPos && spreadPos) {
-        const x = layoutPos.x * (cardWidth + padding);
-        const y = layoutPos.y * (cardHeight + padding);
+        const x = (layoutPos.x * (cardWidth + padding)) + padding;
+        const y = (layoutPos.y * (cardHeight + padding)) + padding;
         const rotation = layoutPos.rotation || 0;
 
         const cardSvg = cardPosition.card.getSvg({

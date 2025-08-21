@@ -1,17 +1,17 @@
-<svg width="280" height="206.66666666666666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 206.66666666666666"><g transform="translate(0, 0) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
+<svg width="320" height="246.66666666666666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 246.66666666666666"><g transform="translate(40, 40) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
+    <rect width="100%" height="100%" fill="#F4A460" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🦁</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VIII</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Strength</text>
+
+  </g></g><g transform="translate(180, 40) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
     <rect width="100%" height="100%" fill="#e6e6fa" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🗡️</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
+    <text x="50%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">II</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Swords</text>
-
-  </g></g><g transform="translate(140, 0) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
-    <rect width="100%" height="100%" fill="#FFD700" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">☀️</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIX</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Sun</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Two of Swords</text>
 
   </g></g></svg>

@@ -1,20 +1,4 @@
-<svg width="420" height="620" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620"><g transform="translate(140, 206.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
-    <rect width="100%" height="100%" fill="#a0d2eb" />
-    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VI</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Six of Cups</text>
-
-  </g></g><g transform="translate(280, 206.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
-    <rect width="100%" height="100%" fill="#f5b08c" />
-    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
-
-    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Three of Wands</text>
-
-  </g></g><g transform="translate(140, 413.3333333333333) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
+<svg width="460" height="660" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 660"><g transform="translate(180, 246.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
     <rect width="100%" height="100%" fill="#e6e6fa" />
     <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
     <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">V</text>
@@ -22,23 +6,36 @@
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
     <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Five of Swords</text>
 
-  </g></g><g transform="translate(0, 206.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
-    <rect width="100%" height="100%" fill="#f5b08c" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🪄</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
+  </g></g><g transform="translate(320, 246.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
+    <rect width="100%" height="100%" fill="#A9A9A9" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🏎️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VII</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Wands</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Chariot</text>
 
-  </g></g><g transform="translate(140, 0) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
+  </g></g><g transform="translate(180, 453.3333333333333) scale(0.3333333333333333) rotate(0, 150, 250)"><g transform="rotate(180, 150, 250)">
+    <rect width="100%" height="100%" fill="#2F4F4F" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">💀</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XIII</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Death</text>
+
+  </g></g><g transform="translate(40, 246.66666666666666) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VI</text>
+
+    <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Six of Pentacles</text>
+
+  </g></g><g transform="translate(180, 40) scale(0.3333333333333333) rotate(0, 150, 250)"><g >
     <rect width="100%" height="100%" fill="#e6e6fa" />
-
-                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏻</text>
-                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🗡️</text>
-
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VI</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Swords</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Six of Swords</text>
 
   </g></g></svg>

@@ -1,5 +1,5 @@
-<svg width="1360" height="2160" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 2160">
-            <g transform="translate(340, 540)">
+<svg width="1400" height="2200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 2200">
+            <g transform="translate(380, 580)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="0.5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -11,15 +11,15 @@
             <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="1.75s" fill="freeze" />
             <rect width="100%" height="100%" fill="#00008b" />
           </g>
-          <g visibility="hidden" >
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="1.75s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#f5b08c" />
-    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IX</text>
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Ace</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Nine of Wands</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ace of Pentacles</text>
 
 
           </g>
@@ -29,7 +29,7 @@
               </g>
             </g>
 
-            <g transform="translate(340, 540)">
+            <g transform="translate(380, 580)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="1s" fill="freeze" additive="sum" />
               <g transform="rotate(90, 150, 250)">
 
@@ -44,12 +44,12 @@
           <g visibility="hidden" transform="rotate(180, 150, 250)">
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="2.25s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#a0d2eb" />
-    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="50%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">II</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Three of Cups</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Two of Wands</text>
 
 
           </g>
@@ -59,7 +59,7 @@
               </g>
             </g>
 
-            <g transform="translate(340, 1080)">
+            <g transform="translate(380, 1120)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="1.5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -71,15 +71,15 @@
             <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="2.75s" fill="freeze" />
             <rect width="100%" height="100%" fill="#00008b" />
           </g>
-          <g visibility="hidden" >
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="2.75s" fill="freeze" />
 
     <rect width="100%" height="100%" fill="#e6e6fa" />
-    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IX</text>
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🗡️</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VII</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Nine of Swords</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Seven of Swords</text>
 
 
           </g>
@@ -89,7 +89,7 @@
               </g>
             </g>
 
-            <g transform="translate(0, 540)">
+            <g transform="translate(40, 580)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="2s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -104,12 +104,12 @@
           <g visibility="hidden" >
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="3.25s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#FFD700" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🤡</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">0</text>
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="57.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VII</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Fool</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Seven of Wands</text>
 
 
           </g>
@@ -119,7 +119,7 @@
               </g>
             </g>
 
-            <g transform="translate(340, 0)">
+            <g transform="translate(380, 40)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="2.5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -131,18 +131,15 @@
             <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="3.75s" fill="freeze" />
             <rect width="100%" height="100%" fill="#00008b" />
           </g>
-          <g visibility="hidden" transform="rotate(180, 150, 250)">
+          <g visibility="hidden" >
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="3.75s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#d6a885" />
-
-                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏾</text>
-                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🪙</text>
-
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
+    <rect width="100%" height="100%" fill="#f5b08c" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪄</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">IV</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Pentacles</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Four of Wands</text>
 
 
           </g>
@@ -152,7 +149,7 @@
               </g>
             </g>
 
-            <g transform="translate(680, 540)">
+            <g transform="translate(720, 580)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="3s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -167,12 +164,12 @@
           <g visibility="hidden" transform="rotate(180, 150, 250)">
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="4.25s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#a0d2eb" />
-    <text x="50%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text><text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🍵</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">II</text>
+    <rect width="100%" height="100%" fill="#4682B4" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🌟</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XVII</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Two of Cups</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Star</text>
 
 
           </g>
@@ -182,7 +179,7 @@
               </g>
             </g>
 
-            <g transform="translate(1020, 1620)">
+            <g transform="translate(1060, 1660)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="3.5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -194,18 +191,15 @@
             <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="4.75s" fill="freeze" />
             <rect width="100%" height="100%" fill="#00008b" />
           </g>
-          <g visibility="hidden" >
+          <g visibility="hidden" transform="rotate(180, 150, 250)">
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="4.75s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#d6a885" />
-
-                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">👸🏾</text>
-                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🪙</text>
-
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">Queen</text>
+    <rect width="100%" height="100%" fill="#87CEFA" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🌎</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">XXI</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Queen of Pentacles</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The World</text>
 
 
           </g>
@@ -215,7 +209,7 @@
               </g>
             </g>
 
-            <g transform="translate(1020, 1080)">
+            <g transform="translate(1060, 1120)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="4s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -230,15 +224,12 @@
           <g visibility="hidden" >
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="5.25s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#f5b08c" />
-
-                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏽</text>
-                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🪄</text>
-
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="25%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="25%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">V</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Wands</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Five of Pentacles</text>
 
 
           </g>
@@ -248,7 +239,7 @@
               </g>
             </g>
 
-            <g transform="translate(1020, 540)">
+            <g transform="translate(1060, 580)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="4.5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -260,15 +251,15 @@
             <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="5.75s" fill="freeze" />
             <rect width="100%" height="100%" fill="#00008b" />
           </g>
-          <g visibility="hidden" transform="rotate(180, 150, 250)">
+          <g visibility="hidden" >
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="5.75s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#F4A460" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">🦁</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">VIII</text>
+    <rect width="100%" height="100%" fill="#d6a885" />
+    <text x="25%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="36.66666666666667%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="50%" y="47.5%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="58.33333333333333%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="25%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text><text x="75%" y="75%" dominant-baseline="middle" text-anchor="middle" font-size="40">🪙</text>
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">X</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Strength</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">Ten of Pentacles</text>
 
 
           </g>
@@ -278,7 +269,7 @@
               </g>
             </g>
 
-            <g transform="translate(1020, 0)">
+            <g transform="translate(1060, 40)">
               <animateTransform attributeName="transform" type="translate" from="-400 0" to="0 0" dur="0.5s" begin="5s" fill="freeze" additive="sum" />
               <g transform="rotate(0, 150, 250)">
 
@@ -293,12 +284,15 @@
           <g visibility="hidden" >
             <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="6.25s" fill="freeze" />
 
-    <rect width="100%" height="100%" fill="#90EE90" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">👸</text>
-    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">III</text>
+    <rect width="100%" height="100%" fill="#e6e6fa" />
+
+                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">🤴🏻</text>
+                <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">🗡️</text>
+
+    <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">King</text>
 
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
-    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">The Empress</text>
+    <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">King of Swords</text>
 
 
           </g>

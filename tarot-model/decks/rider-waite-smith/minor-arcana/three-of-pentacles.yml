@@ -1,0 +1,35 @@
+suit: Pentacles
+number: 3
+name: Three of Pentacles
+keywords:
+  - teamwork
+  - collaboration
+  - skill
+meanings:
+  upright:
+    - Teamwork
+    - Collaboration
+    - Mastery of a skill
+    - Recognition
+  reversed:
+    - Lack of teamwork
+    - Poor quality work
+    - No recognition
+    - Ego
+visual_description:
+  background: >-
+    A craftsman works on a cathedral archway, consulting with a monk and a nun
+    who hold the plans.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    This card highlights the importance of teamwork and collaboration, where
+    different skills come together to create something of value.
+symbols:
+  - craftsman
+  - monk
+  - nun
+  - cathedral
+  - plan
+significance: The initial rewards of hard work and collaboration.
+description: Represents teamwork, collaboration, and skilled craftsmanship.

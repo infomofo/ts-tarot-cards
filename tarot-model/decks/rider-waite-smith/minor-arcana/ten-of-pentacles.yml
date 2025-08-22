@@ -1,0 +1,37 @@
+suit: Pentacles
+number: 10
+name: Ten of Pentacles
+keywords:
+  - wealth
+  - legacy
+  - family
+  - inheritance
+meanings:
+  upright:
+    - Legacy
+    - Family wealth
+    - Inheritance
+    - Financial security
+  reversed:
+    - Family disputes
+    - Financial loss
+    - Breaking from tradition
+    - Inheritance problems
+visual_description:
+  background: >-
+    An old man sits with his two white dogs, watching a happy couple and their
+    child under an archway.
+  foreground: Ten pentacles are arranged in the Tree of Life formation.
+visual_description_analysis:
+  - >-
+    This card represents the culmination of material success and the creation of
+    a lasting legacy. The three generations show the passing of wealth and
+    tradition.
+symbols:
+  - patriarch
+  - dog
+  - couple
+  - pentacle
+  - archway
+significance: The pinnacle of material success and the creation of a lasting family legacy.
+description: Represents wealth, legacy, and family. You are building a secure foundation.

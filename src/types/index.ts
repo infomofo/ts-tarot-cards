@@ -241,10 +241,15 @@ export interface SVGOptions {
 export interface BaseTarotCard {
   id: string;
   keywords: string[];
-  uprightMeanings: string[]; // Changed from string to array for better structure
-  reversedMeanings: string[]; // Changed from string to array for better structure
-  visualDescription: string; // Description of the traditional Smith artwork
-  visualDescriptionAnalysis: string; // Analysis of the visual description
+  meanings: {
+    upright: string[];
+    reversed: string[];
+  };
+  visual_description: {
+    background: string;
+    foreground: string;
+  };
+  visual_description_analysis: string[];
   symbols: CardSymbol[]; // Hierarchical symbol tags for visual elements
   significance: string; // Card's significance and place in the journey
   description: string; // General description
@@ -265,7 +270,7 @@ export interface MajorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Major;
   number: MajorArcana;
   emoji?: string;
-  backgroundColor?: string;
+  bg_color?: string;
 }
 
 // Minor Arcana card
@@ -273,7 +278,6 @@ export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;
-  faceCardEmoji?: string;
 }
 
 // Union type for any tarot card
@@ -304,8 +308,8 @@ export interface Spread {
   positions: SpreadPosition[];
   description: string;
   layout: SpreadLayoutPosition[];
-  allowReversals: boolean; // Whether this spread uses reversals
-  preferredStrategy?: string; // Preferred card selection strategy name
+  allow_reversals: boolean; // Whether this spread uses reversals
+  preferred_strategy?: string; // Preferred card selection strategy name
 }
 
 export interface CardInterpretation {

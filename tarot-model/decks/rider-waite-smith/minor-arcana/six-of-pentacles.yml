@@ -1,0 +1,33 @@
+suit: Pentacles
+number: 6
+name: Six of Pentacles
+keywords:
+  - generosity
+  - charity
+  - giving and receiving
+meanings:
+  upright:
+    - Generosity
+    - Charity
+    - Giving and receiving
+    - Financial balance
+  reversed:
+    - Debt
+    - One-sided charity
+    - Abuse of generosity
+    - Greed
+visual_description:
+  background: A wealthy merchant gives coins to two beggars who kneel at his feet.
+  foreground: He holds a scale.
+visual_description_analysis:
+  - >-
+    The merchant is sharing his wealth, but the scales show that his charity is
+    measured and just, not boundless. It represents a balance of power and
+    resources.
+symbols:
+  - merchant
+  - beggar
+  - coin
+  - scale
+significance: The flow of resources and the balance between giving and receiving.
+description: Represents generosity, charity, and financial balance.

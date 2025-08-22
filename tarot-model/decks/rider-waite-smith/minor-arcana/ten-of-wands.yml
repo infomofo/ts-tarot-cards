@@ -1,0 +1,35 @@
+suit: Wands
+number: 10
+name: Ten of Wands
+keywords:
+  - burden
+  - extra responsibility
+  - hard work
+meanings:
+  upright:
+    - Burden
+    - Extra responsibility
+    - Hard work
+    - Completion
+  reversed:
+    - Doing too much
+    - Burnout
+    - Overwhelmed
+    - Letting go of burdens
+visual_description:
+  background: A person struggles to carry ten heavy wands toward a nearby village.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The person is burdened by the weight of their responsibilities but is close
+    to their destination. This represents the final, difficult stage of a
+    project.
+symbols:
+  - wand
+  - village
+  - burden
+  - destination
+significance: >-
+  The culmination of the suit of Wands, where success brings heavy
+  responsibilities.
+description: Represents burden, extra responsibility, hard work, and stress.

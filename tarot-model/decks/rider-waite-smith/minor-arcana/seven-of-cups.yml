@@ -1,0 +1,35 @@
+suit: Cups
+number: 7
+name: Seven of Cups
+keywords:
+  - choices
+  - illusions
+  - daydreaming
+meanings:
+  upright:
+    - Choices
+    - Daydreaming
+    - Illusion
+    - Wishful thinking
+  reversed:
+    - Clarity
+    - Decisiveness
+    - Avoiding temptation
+    - Focusing on reality
+visual_description:
+  background: >-
+    A person stands before seven cups on clouds, each containing a different
+    vision: a castle, jewels, a laurel wreath, a dragon, a snake, a woman's
+    head, and a shrouded figure.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The cups contain various temptations and desires, representing the many
+    choices available, some of which may be illusions. The shrouded figure
+    represents a hidden truth or a mystery.
+symbols:
+  - cup
+  - cloud
+  - vision
+significance: A crossroads of choice, often clouded by illusion.
+description: Represents choices, illusions, and daydreaming. You must choose wisely.

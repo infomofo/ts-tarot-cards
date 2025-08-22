@@ -1,0 +1,41 @@
+name: Cross Spread
+description: A five-card cross spread for deeper insight into a situation.
+allow_reversals: true
+preferred_strategy: fanpick
+layout:
+  - position: 1
+    x: 1
+    y: 1
+  - position: 2
+    x: 2
+    y: 1
+  - position: 3
+    x: 1
+    y: 2
+  - position: 4
+    x: 0
+    y: 1
+  - position: 5
+    x: 1
+    y: 0
+positions:
+  - position: 1
+    name: Present Situation
+    position_significance: The heart of the matter, current situation
+    deal_order: 1
+  - position: 2
+    name: Challenge/Cross
+    position_significance: What crosses you, obstacles or challenges
+    deal_order: 2
+  - position: 3
+    name: Distant Past/Foundation
+    position_significance: Foundation of the situation, distant past
+    deal_order: 3
+  - position: 4
+    name: Recent Past
+    position_significance: Recent events and influences
+    deal_order: 4
+  - position: 5
+    name: Possible Outcome
+    position_significance: Potential future outcome
+    deal_order: 5

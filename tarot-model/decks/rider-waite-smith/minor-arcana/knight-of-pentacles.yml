@@ -1,0 +1,33 @@
+suit: Pentacles
+number: 12
+name: Knight of Pentacles
+keywords:
+  - hard work
+  - responsibility
+  - routine
+meanings:
+  upright:
+    - Hard work
+    - Responsibility
+    - Routine
+    - Conservatism
+  reversed:
+    - Boredom
+    - Stagnation
+    - Feeling stuck in a rut
+    - Resistance to change
+visual_description:
+  background: A knight on a sturdy black horse holds a pentacle, looking at it with focus.
+  foreground: He is not moving.
+visual_description_analysis:
+  - >-
+    This knight is the most hardworking and patient. He is not charging forward
+    but is methodical and reliable, focused on his long-term goals.
+symbols:
+  - knight
+  - black horse
+  - pentacle
+significance: The embodiment of hard work and responsibility.
+description: >-
+  Represents hard work, responsibility, and routine. Stay dedicated to your
+  goals.

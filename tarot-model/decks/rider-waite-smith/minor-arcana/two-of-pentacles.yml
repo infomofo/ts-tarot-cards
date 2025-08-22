@@ -1,0 +1,35 @@
+suit: Pentacles
+number: 2
+name: Two of Pentacles
+keywords:
+  - balancing
+  - juggling
+  - flexibility
+meanings:
+  upright:
+    - Balancing priorities
+    - Juggling responsibilities
+    - Adaptability
+    - Time management
+  reversed:
+    - Feeling overwhelmed
+    - Disorganization
+    - Lack of balance
+    - Dropping the ball
+visual_description:
+  background: >-
+    A young man dances while juggling two pentacles connected by an infinity
+    loop.
+  foreground: Behind him, two ships ride the waves.
+visual_description_analysis:
+  - >-
+    The juggling act represents the need to balance multiple priorities. The
+    ships on the waves symbolize the ups and downs of life that one must adapt
+    to. The infinity loop (lemniscate) suggests he can handle this indefinitely.
+symbols:
+  - pentacle
+  - lemniscate
+  - ship
+  - wave
+significance: The art of balance in a constantly changing world.
+description: Represents balancing priorities and adapting to change.

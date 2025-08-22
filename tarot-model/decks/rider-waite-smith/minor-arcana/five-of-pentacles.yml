@@ -1,0 +1,33 @@
+suit: Pentacles
+number: 5
+name: Five of Pentacles
+keywords:
+  - poverty
+  - hardship
+  - isolation
+meanings:
+  upright:
+    - Financial hardship
+    - Poverty
+    - Isolation
+    - Insecurity
+  reversed:
+    - Recovery
+    - Finding help
+    - Financial improvement
+    - Hope
+visual_description:
+  background: >-
+    Two people in ragged clothes walk through the snow outside a brightly lit
+    church window.
+  foreground: One is on crutches.
+visual_description_analysis:
+  - >-
+    The people are "left out in the cold," representing hardship and isolation.
+    The lit church window symbolizes a sanctuary or help that is available but
+    being ignored.
+symbols:
+  - snow
+  - church window
+significance: A time of hardship and feeling left out in the cold.
+description: Represents poverty, hardship, and isolation.

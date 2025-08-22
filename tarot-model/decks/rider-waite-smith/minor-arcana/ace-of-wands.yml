@@ -1,0 +1,34 @@
+suit: Wands
+number: 1
+name: Ace of Wands
+keywords:
+  - inspiration
+  - power
+  - creation
+  - beginnings
+meanings:
+  upright:
+    - New inspiration
+    - Creative energy
+    - A spark of passion
+    - Taking action
+  reversed:
+    - Lack of energy
+    - Creative blocks
+    - Delays
+    - False starts
+visual_description:
+  background: A hand emerges from a cloud, holding a sprouting wand.
+  foreground: In the distance is a castle.
+visual_description_analysis:
+  - >-
+    The sprouting wand represents new growth and creative potential. The castle
+    in the distance symbolizes the promise of future success from this initial
+    spark.
+symbols:
+  - hand
+  - cloud
+  - wand
+  - castle
+significance: The seed of creativity and passion.
+description: Represents new inspiration, creative energy, and taking action.

@@ -1,0 +1,33 @@
+suit: Pentacles
+number: 1
+name: Ace of Pentacles
+keywords:
+  - opportunity
+  - prosperity
+  - new venture
+meanings:
+  upright:
+    - New opportunities
+    - Prosperity
+    - Manifestation
+    - Good fortune
+  reversed:
+    - Missed opportunities
+    - Poor financial planning
+    - Greed
+    - Bad investments
+visual_description:
+  background: A hand emerges from a cloud, holding a large golden pentacle.
+  foreground: Below is a lush garden.
+visual_description_analysis:
+  - >-
+    The hand from the cloud offers a tangible gift or opportunity. The lush
+    garden represents the potential for prosperous new beginnings.
+symbols:
+  - hand
+  - cloud
+  - pentacle
+  - garden
+  - path
+significance: The seed of material prosperity and a new, tangible venture.
+description: Represents a new opportunity for prosperity and manifestation.

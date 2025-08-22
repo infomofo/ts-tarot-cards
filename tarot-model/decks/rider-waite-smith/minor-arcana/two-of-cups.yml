@@ -1,0 +1,32 @@
+suit: Cups
+number: 2
+name: Two of Cups
+keywords:
+  - partnership
+  - mutual attraction
+  - connection
+meanings:
+  upright:
+    - Unified love
+    - Partnership
+    - Mutual attraction
+    - Harmony
+  reversed:
+    - Break-ups
+    - Disharmony
+    - Mistrust
+    - Imbalance
+visual_description:
+  background: A man and a woman exchange cups.
+  foreground: Above them is a winged lion's head over two intertwined snakes.
+visual_description_analysis:
+  - >-
+    The exchange of cups symbolizes a partnership or truce. The symbol above
+    them is a Caduceus, a symbol of negotiation and commerce, with a lion's head
+    signifying passion.
+symbols:
+  - cup
+  - caduceus
+  - lion head
+significance: The formation of a connection, bringing emotion into a partnership.
+description: Represents partnership, mutual attraction, and shared understanding.

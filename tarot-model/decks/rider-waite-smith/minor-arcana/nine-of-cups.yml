@@ -1,0 +1,31 @@
+suit: Cups
+number: 9
+name: Nine of Cups
+keywords:
+  - wishes fulfilled
+  - satisfaction
+  - contentment
+meanings:
+  upright:
+    - Wishes fulfilled
+    - Contentment
+    - Satisfaction
+    - Gratitude
+  reversed:
+    - Unfulfilled wishes
+    - Dissatisfaction
+    - Greed
+    - Smugness
+visual_description:
+  background: A cheerful man sits on a bench with his arms crossed.
+  foreground: Behind him, nine golden cups are arranged on a draped table.
+visual_description_analysis:
+  - >-
+    Often called the "wish card," the man's smug satisfaction shows that his
+    desires have been met. The cups represent emotional and material
+    fulfillment.
+symbols:
+  - cup
+  - bench
+significance: The attainment of happiness and emotional satisfaction.
+description: Represents wishes fulfilled, satisfaction, and contentment.

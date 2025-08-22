@@ -1,0 +1,34 @@
+suit: Swords
+number: 14
+name: King of Swords
+keywords:
+  - authority
+  - truth
+  - justice
+  - intellect
+meanings:
+  upright:
+    - Intellectual authority
+    - Truth
+    - Justice
+    - Ethical leadership
+  reversed:
+    - Abuse of power
+    - Authoritarian
+    - Manipulative
+    - Cold
+visual_description:
+  background: A king sits on a throne, holding a double-edged sword.
+  foreground: Butterflies and an angel are on his throne.
+visual_description_analysis:
+  - >-
+    The king is the ultimate master of the mind, ruling with logic and justice.
+    The butterflies and angel on his throne symbolize the transformative power
+    of his thoughts.
+symbols:
+  - king
+  - throne
+  - sword
+  - butterfly
+significance: The ultimate master of the mind, ruling with logic, truth, and justice.
+description: Represents authority, truth, and justice. You are a master of your thoughts.

@@ -1,0 +1,37 @@
+suit: Wands
+number: 13
+name: Queen of Wands
+keywords:
+  - courage
+  - confidence
+  - independence
+  - social
+meanings:
+  upright:
+    - Confidence
+    - Courage
+    - Independence
+    - A social personality
+  reversed:
+    - Jealousy
+    - Insecurity
+    - A short temper
+    - Being demanding
+visual_description:
+  background: A queen sits on a throne decorated with lions and sunflowers.
+  foreground: She holds a wand and a sunflower, and a black cat sits at her feet.
+visual_description_analysis:
+  - >-
+    The lions and sunflowers represent her strength and sunny disposition. The
+    black cat symbolizes her connection to her shadow side and her independence.
+symbols:
+  - queen
+  - throne
+  - wand
+  - sunflower
+  - lion
+  - black cat
+significance: A confident and independent leader with a magnetic personality.
+description: >-
+  Represents courage, confidence, and independence. Embrace your passionate
+  nature.

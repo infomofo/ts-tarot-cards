@@ -1,0 +1,30 @@
+suit: Wands
+number: 5
+name: Five of Wands
+keywords:
+  - conflict
+  - competition
+  - disagreement
+meanings:
+  upright:
+    - Conflict
+    - Competition
+    - Disagreement
+    - Tension
+  reversed:
+    - Avoiding conflict
+    - Finding common ground
+    - A peaceful resolution
+    - Releasing tension
+visual_description:
+  background: Five young men are engaged in a mock battle with their wands.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The scene is chaotic but not truly violent. It represents the struggles and
+    competition that can arise from creative differences or a clash of egos.
+symbols:
+  - wand
+  - mock battle
+significance: A time of conflict and competition, which can be a source of growth.
+description: Represents conflict, competition, and disagreement.

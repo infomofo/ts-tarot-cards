@@ -1,0 +1,43 @@
+number: 17
+name: The Star
+keywords:
+  - hope
+  - faith
+  - purpose
+  - rejuvenation
+meanings:
+  upright:
+    - Hope
+    - Faith
+    - Renewal
+    - Healing
+  reversed:
+    - Despair
+    - Lack of faith
+    - Creative blocks
+    - Feeling disconnected
+visual_description:
+  background: >-
+    A naked woman kneels by a pool of water, pouring water from two pitchers
+    onto the land and into the pool.
+  foreground: >-
+    Above her shines one large star and seven smaller ones. A bird sits on a
+    nearby tree.
+visual_description_analysis:
+  - >-
+    After the chaos of the Tower, the Star brings hope and renewal. The woman is
+    naked, symbolizing vulnerability and authenticity. The large star is a
+    guiding light, and the seven smaller stars represent the chakras. The bird
+    is an ibis, a symbol of wisdom.
+symbols:
+  - nude woman
+  - star
+  - pool
+  - pitcher
+  - ibis
+significance: After the storm of the Tower, the Star brings hope and healing.
+description: >-
+  Represents hope, faith, and renewal. After a dark time, healing and
+  inspiration are here.
+emoji: 🌟
+bg_color: '#4682B4'

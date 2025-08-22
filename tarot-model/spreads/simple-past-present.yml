@@ -1,0 +1,20 @@
+name: Simple Past-Present
+description: A two-card spread without reversals for straightforward guidance.
+allow_reversals: false
+preferred_strategy: deal
+layout:
+  - position: 1
+    x: 0
+    y: 0
+  - position: 2
+    x: 1
+    y: 0
+positions:
+  - position: 1
+    name: Past
+    position_significance: What has led to this moment
+    deal_order: 1
+  - position: 2
+    name: Present
+    position_significance: What you need to know right now
+    deal_order: 2

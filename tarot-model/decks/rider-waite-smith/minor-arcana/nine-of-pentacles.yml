@@ -1,0 +1,34 @@
+suit: Pentacles
+number: 9
+name: Nine of Pentacles
+keywords:
+  - abundance
+  - luxury
+  - self-sufficiency
+meanings:
+  upright:
+    - Financial independence
+    - Abundance
+    - Luxury
+    - Self-sufficiency
+  reversed:
+    - Financial dependency
+    - Materialism
+    - Reckless spending
+    - Loneliness
+visual_description:
+  background: >-
+    An elegant woman stands in a lush garden, a falcon perched on her gloved
+    hand.
+  foreground: Nine pentacles are arranged on a bush behind her.
+visual_description_analysis:
+  - >-
+    The woman is self-sufficient and enjoys the fruits of her labor. The falcon
+    represents her intellect and self-control. She has created a life of luxury
+    and independence.
+symbols:
+  - garden
+  - falcon
+  - pentacle
+significance: The satisfaction of a self-made life.
+description: Represents abundance, luxury, and self-sufficiency.

@@ -1,0 +1,34 @@
+suit: Swords
+number: 8
+name: Eight of Swords
+keywords:
+  - imprisonment
+  - limitation
+  - victim mentality
+meanings:
+  upright:
+    - Feeling trapped
+    - Self-imposed limitations
+    - Victim mentality
+    - Powerlessness
+  reversed:
+    - Breaking free
+    - Taking back your power
+    - New perspective
+    - Freedom
+visual_description:
+  background: >-
+    A woman is bound and blindfolded, surrounded by eight swords that seem to
+    form a cage.
+  foreground: The bindings are loose.
+visual_description_analysis:
+  - >-
+    The woman feels trapped, but the loose bindings and the space between the
+    swords show that her imprisonment is self-imposed. She has the power to free
+    herself.
+symbols:
+  - sword
+  - binding
+  - blindfold
+significance: The feeling of being trapped by your own thoughts and beliefs.
+description: Represents feeling trapped and limited. You have the power to break free.

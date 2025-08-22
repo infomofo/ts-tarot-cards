@@ -215,10 +215,10 @@ describe('SpreadReader', () => {
     
     // simplePastPresent spread doesn't allow reversals
     expect(readingWithoutReversals.cards.every(card => !card.isReversed)).toBe(true);
-    expect(readingWithoutReversals.spread.allowReversals).toBe(false);
+    expect(readingWithoutReversals.spread.allow_reversals).toBe(false);
     
     // threeCard spread allows reversals
-    expect(readingWithReversals.spread.allowReversals).toBe(true);
+    expect(readingWithReversals.spread.allow_reversals).toBe(true);
   });
 
   test('should include layout in spreads', () => {
@@ -243,10 +243,10 @@ describe('SpreadReader', () => {
 
   test('should use preferred strategy from spread', () => {
     const threeCardSpread = reader.getSpread('threeCard');
-    expect(threeCardSpread.preferredStrategy).toBe('deal');
+    expect(threeCardSpread.preferred_strategy).toBe('deal');
     
     const crossSpread = reader.getSpread('crossSpread');
-    expect(crossSpread.preferredStrategy).toBe('fanpick');
+    expect(crossSpread.preferred_strategy).toBe('fanpick');
     
     // Reading should use preferred strategy when no override provided
     const reading = reader.performReading('threeCard');
@@ -285,7 +285,7 @@ describe('SpreadReader', () => {
       'fanpick'
     );
 
-    expect(customSpread.preferredStrategy).toBe('fanpick');
+    expect(customSpread.preferred_strategy).toBe('fanpick');
     
     const reading = reader.performCustomReading(customSpread);
     expect(reading.cards).toHaveLength(2);
@@ -441,10 +441,10 @@ describe('Card Data Conventions', () => {
     const cards = deck.selectCards(deck.getTotalCount());
     cards.forEach(cardPosition => {
       const card = cardPosition.card;
-      expect(card.visualDescription).toBeDefined();
-      expect(card.visualDescription.length).toBeGreaterThan(0);
-      expect(card.visualDescriptionAnalysis).toBeDefined();
-      expect(card.visualDescriptionAnalysis.length).toBeGreaterThan(0);
+      expect(card.visual_description).toBeDefined();
+      expect(card.visual_description.background.length).toBeGreaterThan(0);
+      expect(card.visual_description_analysis).toBeDefined();
+      expect(card.visual_description_analysis.length).toBeGreaterThan(0);
     });
   });
 

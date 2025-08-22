@@ -1,0 +1,31 @@
+suit: Wands
+number: 3
+name: Three of Wands
+keywords:
+  - expansion
+  - foresight
+  - long-term success
+meanings:
+  upright:
+    - Expansion
+    - Foresight
+    - Long-term success
+    - Waiting for results
+  reversed:
+    - Delays
+    - Obstacles
+    - Lack of foresight
+    - Impatience
+visual_description:
+  background: A man stands on a cliff, looking out at three ships on the sea.
+  foreground: Three wands are planted in the ground around him.
+visual_description_analysis:
+  - >-
+    The man is "waiting for his ships to come in," anticipating the results of
+    his initial efforts. The three wands represent the foundation he has built.
+symbols:
+  - cliff
+  - ship
+  - wand
+significance: The initial rewards of your efforts and the anticipation of future success.
+description: Represents expansion, foresight, and waiting for success.

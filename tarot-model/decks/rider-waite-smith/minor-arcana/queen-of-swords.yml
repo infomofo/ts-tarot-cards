@@ -1,0 +1,34 @@
+suit: Swords
+number: 13
+name: Queen of Swords
+keywords:
+  - independence
+  - clarity
+  - intelligence
+meanings:
+  upright:
+    - Independence
+    - Clarity of thought
+    - Unbiased judgment
+    - Honest communication
+  reversed:
+    - Cold
+    - Unemotional
+    - Harsh
+    - Critical
+visual_description:
+  background: A queen sits on a throne, holding a sword upright.
+  foreground: Her expression is stern and her hand is extended.
+visual_description_analysis:
+  - >-
+    The queen is a master of the intellect, free from emotion. Her extended hand
+    can be seen as a gesture of welcome or a warning to keep a distance. She
+    values truth above all.
+symbols:
+  - queen
+  - throne
+  - sword
+significance: A master of the intellect who values truth and clear boundaries.
+description: >-
+  Represents independence, clarity, and intelligence. Think with your head, not
+  your heart.

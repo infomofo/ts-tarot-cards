@@ -1,0 +1,40 @@
+number: 9
+name: The Hermit
+keywords:
+  - soul-searching
+  - introspection
+  - guidance
+  - solitude
+meanings:
+  upright:
+    - Introspection
+    - Seeking inner guidance
+    - Solitude
+    - Wisdom
+  reversed:
+    - Isolation
+    - Loneliness
+    - Withdrawal
+    - Lost path
+visual_description:
+  background: >-
+    An old man with a long white beard stands on a mountain peak, holding a
+    lantern with a shining star and a long staff.
+  foreground: He is alone and looking down.
+visual_description_analysis:
+  - >-
+    The lantern contains a six-pointed star (Seal of Solomon), symbolizing
+    wisdom. The Hermit has withdrawn from the world to find this inner light,
+    which he can now share with others. The mountain peak signifies his
+    achievement and isolation.
+symbols:
+  - lantern
+  - star
+  - staff
+  - mountain
+significance: The Hermit represents the soul's need to turn inward for answers.
+description: >-
+  Represents soul-searching, introspection, and inner guidance. It is time to
+  withdraw and look for answers within.
+emoji: 🐚
+bg_color: '#BDB76B'

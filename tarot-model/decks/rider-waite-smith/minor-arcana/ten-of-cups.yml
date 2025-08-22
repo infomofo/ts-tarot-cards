@@ -1,0 +1,36 @@
+suit: Cups
+number: 10
+name: Ten of Cups
+keywords:
+  - harmony
+  - marriage
+  - happiness
+  - family
+meanings:
+  upright:
+    - Harmony
+    - Marriage
+    - Family happiness
+    - Emotional fulfillment
+  reversed:
+    - Broken relationships
+    - Disharmony
+    - Family strife
+    - A facade of happiness
+visual_description:
+  background: >-
+    A man and woman stand with their arms around each other, looking at a
+    rainbow with ten cups in the sky.
+  foreground: Two children play nearby.
+visual_description_analysis:
+  - >-
+    The rainbow is a symbol of divine blessing and the end of troubles. The
+    happy family and cozy home represent ultimate emotional fulfillment.
+symbols:
+  - rainbow
+  - cup
+  - home
+significance: >-
+  The culmination of the suit of Cups, representing ultimate emotional
+  fulfillment.
+description: Represents harmony, marriage, and family happiness.

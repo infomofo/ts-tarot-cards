@@ -1,0 +1,42 @@
+suit: Pentacles
+number: 14
+name: King of Pentacles
+keywords:
+  - wealth
+  - success
+  - leadership
+  - security
+meanings:
+  upright:
+    - Financial success
+    - Abundance
+    - Leadership
+    - Security
+  reversed:
+    - Greed
+    - Materialism
+    - Authoritarian
+    - Gambling
+visual_description:
+  background: >-
+    A king sits on a throne decorated with bull carvings, holding a pentacle and
+    a scepter.
+  foreground: His castle is behind him.
+visual_description_analysis:
+  - >-
+    The king is the master of the material world. The bull carvings symbolize
+    his connection to the earth and stubborn determination. He has achieved
+    great success and provides security.
+symbols:
+  - king
+  - throne
+  - pentacle
+  - scepter
+  - castle
+  - vine
+significance: >-
+  The master of the material world, representing financial success and
+  leadership.
+description: >-
+  Represents wealth, success, and leadership. You have reached the pinnacle of
+  your financial goals.

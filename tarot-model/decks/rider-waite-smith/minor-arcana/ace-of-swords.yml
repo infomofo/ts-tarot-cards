@@ -1,0 +1,34 @@
+suit: Swords
+number: 1
+name: Ace of Swords
+keywords:
+  - breakthrough
+  - clarity
+  - truth
+  - power
+meanings:
+  upright:
+    - Breakthrough
+    - Mental clarity
+    - Truth
+    - Justice
+  reversed:
+    - Confusion
+    - Misinformation
+    - Lack of clarity
+    - Abuse of power
+visual_description:
+  background: A hand emerges from a cloud, holding an upright sword.
+  foreground: A golden crown with olive and palm branches sits on the sword's tip.
+visual_description_analysis:
+  - >-
+    The sword represents the power of the intellect. The crown symbolizes
+    victory and clarity of thought. This is a moment of breakthrough and
+    profound understanding.
+symbols:
+  - hand
+  - cloud
+  - sword
+  - crown
+significance: The seed of truth and mental clarity.
+description: Represents a breakthrough, mental clarity, and the power of truth.

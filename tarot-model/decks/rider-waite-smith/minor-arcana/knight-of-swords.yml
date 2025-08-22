@@ -1,0 +1,34 @@
+suit: Swords
+number: 12
+name: Knight of Swords
+keywords:
+  - ambition
+  - action
+  - haste
+  - assertiveness
+meanings:
+  upright:
+    - Ambitious action
+    - Assertiveness
+    - Quick thinking
+    - A drive to succeed
+  reversed:
+    - Reckless
+    - Impulsive
+    - Hasty
+    - Aggressive
+visual_description:
+  background: A knight on a powerful horse charges forward, his sword raised.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    This knight is a force of action, charging ahead with intellectual clarity
+    and determination. He is the fastest-moving knight in the tarot.
+symbols:
+  - knight
+  - horse
+  - sword
+significance: A force of ambition and action, but with a warning against recklessness.
+description: >-
+  Represents ambition, action, and haste. It is time to charge forward with your
+  ideas.

@@ -1,0 +1,39 @@
+suit: Cups
+number: 1
+name: Ace of Cups
+keywords:
+  - love
+  - new relationships
+  - compassion
+  - creativity
+meanings:
+  upright:
+    - New love
+    - Emotional beginnings
+    - Compassion
+    - Creativity
+  reversed:
+    - Emotional loss
+    - Blocked creativity
+    - Emptiness
+    - Instability
+visual_description:
+  background: >-
+    A hand emerges from a cloud, holding a chalice overflowing with five streams
+    of water.
+  foreground: A dove descends toward it, holding a wafer in its beak.
+visual_description_analysis:
+  - >-
+    The hand from the cloud is a divine gift. The overflowing chalice represents
+    emotional abundance. The dove symbolizes peace and the Holy Spirit, carrying
+    a communion wafer.
+symbols:
+  - hand
+  - cloud
+  - chalice
+  - water
+  - dove
+  - wafer
+  - lotus
+significance: The beginning of the emotional journey, embodying pure emotional potential.
+description: Represents new love, new relationships, and new beginnings in love.

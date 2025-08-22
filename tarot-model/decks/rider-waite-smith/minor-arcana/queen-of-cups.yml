@@ -1,0 +1,38 @@
+suit: Cups
+number: 13
+name: Queen of Cups
+keywords:
+  - compassion
+  - calm
+  - intuition
+  - nurturing
+meanings:
+  upright:
+    - Compassion
+    - Emotional security
+    - Intuition
+    - Nurturing
+  reversed:
+    - Emotional insecurity
+    - Neediness
+    - Being overly sensitive
+    - Martyrdom
+visual_description:
+  background: >-
+    A queen sits on a throne at the edge of the sea, holding an ornate, lidded
+    cup.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The queen is in tune with her emotions and the subconscious (the sea). The
+    ornate, lidded cup suggests that her feelings are deep and contained, not
+    openly displayed.
+symbols:
+  - queen
+  - throne
+  - cup
+  - sea
+significance: The master of her emotions, compassionate and intuitive.
+description: >-
+  Represents compassion, calm, and intuition. Trust your heart and lead with
+  love.

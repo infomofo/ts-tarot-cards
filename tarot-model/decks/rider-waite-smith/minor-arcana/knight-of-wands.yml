@@ -1,0 +1,32 @@
+suit: Wands
+number: 12
+name: Knight of Wands
+keywords:
+  - energy
+  - passion
+  - adventure
+  - impulsiveness
+meanings:
+  upright:
+    - Energy
+    - Passion
+    - Adventure
+    - Impulsiveness
+  reversed:
+    - Recklessness
+    - Impatience
+    - Hasty decisions
+    - Arrogance
+visual_description:
+  background: A knight on a rearing horse charges forward, his wand held out like a lance.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    This knight is a figure of pure energy and action, moving with passion and
+    determination. He is impulsive and always ready for an adventure.
+symbols:
+  - knight
+  - horse
+  - wand
+significance: The embodiment of action and adventure, pursuing goals with energy.
+description: Represents energy, passion, and adventure. It is time to take action.

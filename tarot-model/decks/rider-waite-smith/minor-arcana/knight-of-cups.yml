@@ -1,0 +1,34 @@
+suit: Cups
+number: 12
+name: Knight of Cups
+keywords:
+  - romance
+  - charm
+  - imagination
+  - beauty
+meanings:
+  upright:
+    - Romance
+    - Charm
+    - Imagination
+    - An invitation
+  reversed:
+    - Unrealistic ideals
+    - Jealousy
+    - Emotional manipulation
+    - A player
+visual_description:
+  background: A knight on a white horse moves slowly, holding out a golden cup.
+  foreground: His helmet and boots have wings.
+visual_description_analysis:
+  - >-
+    The knight is a romantic hero, offering his heart (the cup). The wings on
+    his helmet and boots symbolize his active imagination and connection to the
+    divine.
+symbols:
+  - knight
+  - white horse
+  - cup
+  - wing
+significance: A quest guided by the heart and imagination.
+description: Represents romance, charm, and following your heart. An offer is on its way.

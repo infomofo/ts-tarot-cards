@@ -1,0 +1,44 @@
+number: 18
+name: The Moon
+keywords:
+  - illusion
+  - fear
+  - anxiety
+  - subconscious
+meanings:
+  upright:
+    - Illusion
+    - Fear
+    - Exploring the subconscious
+    - Dreams and intuition
+  reversed:
+    - Releasing fear
+    - Clarity
+    - Confronting illusions
+    - Repressed emotions
+visual_description:
+  background: A full moon with a crescent inside shines between two towers.
+  foreground: >-
+    A wolf and a dog howl at the moon, and a crayfish emerges from a pool of
+    water onto a winding path.
+visual_description_analysis:
+  - >-
+    The Moon represents the journey into the subconscious. The dog (tamed
+    nature) and wolf (wild nature) represent our primal fears. The crayfish
+    emerging from the water symbolizes the surfacing of deep-seated emotions and
+    instincts. The path is one of uncertainty.
+symbols:
+  - moon
+  - tower
+  - wolf
+  - dog
+  - crayfish
+  - path
+significance: >-
+  The Moon represents the soul's journey through the dark night of the
+  subconscious.
+description: >-
+  Represents illusion, fear, and the subconscious. Things are not as they seem;
+  trust your intuition.
+emoji: 🌙
+bg_color: '#483D8B'

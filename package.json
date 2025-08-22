@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@types/inquirer": "^8.2.4",
-    "inquirer": "^8.2.4",
-    "openai": "^5.15.0"
+    "inquirer": "^8.2.4"
   }
 }

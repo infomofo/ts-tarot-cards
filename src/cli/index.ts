@@ -1,26 +1,24 @@
 import inquirer from 'inquirer';
 import { MAJOR_ARCANA_CARDS } from '../../src/cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../../src/cards/minor-arcana';
-import { TarotCard, SpreadReader, SPREADS, SPREAD_NAMES, SpreadReading } from '../index';
+import { TarotCard, SpreadReader, SPREADS, SPREAD_NAMES } from '../index';
 import { SpreadRenderer } from '../spreads/renderer';
-import OpenAI from 'openai';
-import * as fs from 'fs';
 
 const allCards: TarotCard[] = [...Object.values(MAJOR_ARCANA_CARDS), ...Object.values(MINOR_ARCANA_CARDS)];
 
-function clearConsole() {
+export function clearConsole() {
   console.log('\x1B[2J\x1B[0f');
 }
 
-function displayWelcomeMessage() {
+export function displayWelcomeMessage() {
   clearConsole();
   console.log("Welcome, seeker of truths, to the realm of CLIO, the Command Line Interface Oracle.");
   console.log("The digital ether hums with ancient secrets, and I am here to channel them for you.");
   console.log("Speak your desires, and let the command line unveil your destiny!\n");
 }
 
-function learnAboutCards() {
-  inquirer
+export function learnAboutCards(): Promise<any> {
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -42,58 +40,22 @@ function learnAboutCards() {
         console.log('  Reversed:');
         selectedCard.reversedMeanings.forEach(meaning => console.log(`    - ${meaning}`));
       }
-      inquirer.prompt({
+      return inquirer.prompt({
         type: 'confirm',
         name: 'continue',
         message: '\nWould you like to learn about another card?'
       }).then(answer => {
         if(answer.continue) {
-          learnAboutCards();
+          return learnAboutCards();
         } else {
-          mainMenu();
+          return mainMenu();
         }
       })
     });
 }
 
-async function getLlmInterpretation(reading: SpreadReading) {
-  if (!process.env.OPENAI_API_KEY) {
-    console.log("\nCLIO's deepest visions are unavailable at this time. (OPENAI_API_KEY not set)");
-    return;
-  }
-
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-
-  try {
-    const config = fs.readFileSync('clio-llm-config.md', 'utf-8');
-
-    let prompt = `${config}\n\n`;
-    prompt += `Spread: ${reading.spread.name}\n`;
-    reading.cards.forEach(cardPosition => {
-      const spreadPosition = reading.spread.positions.find(p => p.position === cardPosition.position);
-      if (spreadPosition) {
-        prompt += `Card: ${cardPosition.card.getName()} (${spreadPosition.name})\n`;
-        prompt += `Meaning: ${cardPosition.isReversed ? cardPosition.card.reversedMeanings[0] : cardPosition.card.uprightMeanings[0]}\n`;
-      }
-    });
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-    });
-
-    console.log("\nCLIO's vision crystallizes:\n");
-    console.log(response.choices[0].message.content);
-
-  } catch (error) {
-    console.error("\nCLIO's connection to the ether has been disrupted:", error);
-  }
-}
-
-function getAReading() {
-  inquirer
+export function getAReading(): Promise<any> {
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -126,25 +88,22 @@ function getAReading() {
         }
       });
 
-      await getLlmInterpretation(reading);
-
-      inquirer.prompt({
+      return inquirer.prompt({
         type: 'confirm',
         name: 'continue',
         message: '\nWould you like another reading?'
       }).then(answer => {
         if(answer.continue) {
-          getAReading();
+          return getAReading();
         } else {
-          mainMenu();
+          return mainMenu();
         }
       })
     });
 }
 
-
-function mainMenu() {
-  inquirer
+export function mainMenu(): Promise<any> {
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -161,11 +120,9 @@ function mainMenu() {
     .then((answers) => {
       switch (answers.choice) {
         case 'Learn about the tarot cards':
-          learnAboutCards();
-          break;
+          return learnAboutCards();
         case 'Get a sample tarot reading':
-          getAReading();
-          break;
+          return getAReading();
         case 'Exit':
           console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
           process.exit(0);
@@ -173,5 +130,7 @@ function mainMenu() {
     });
 }
 
-displayWelcomeMessage();
-mainMenu();
+if (require.main === module) {
+  displayWelcomeMessage();
+  mainMenu();
+}

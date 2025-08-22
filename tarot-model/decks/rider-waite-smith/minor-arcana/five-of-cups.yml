@@ -1,0 +1,36 @@
+suit: Cups
+number: 5
+name: Five of Cups
+keywords:
+  - loss
+  - grief
+  - regret
+  - disappointment
+meanings:
+  upright:
+    - Loss
+    - Grief
+    - Regret
+    - Disappointment
+  reversed:
+    - Moving on
+    - Acceptance
+    - Forgiveness
+    - Finding hope
+visual_description:
+  background: A person in a black cloak looks down at three spilled cups.
+  foreground: >-
+    Two full cups stand behind them. A bridge leads to a building in the
+    distance.
+visual_description_analysis:
+  - >-
+    The spilled cups symbolize loss and regret. The two full cups represent what
+    remains, though they are currently unseen. The bridge shows a path forward.
+symbols:
+  - cloak
+  - spilled cup
+  - full cup
+  - bridge
+  - building
+significance: The pain of loss and the tendency to focus on what is gone.
+description: Represents loss, grief, and regret. Do not forget what still remains.

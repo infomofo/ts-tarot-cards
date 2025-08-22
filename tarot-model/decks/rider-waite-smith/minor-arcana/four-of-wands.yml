@@ -1,0 +1,34 @@
+suit: Wands
+number: 4
+name: Four of Wands
+keywords:
+  - celebration
+  - harmony
+  - marriage
+  - homecoming
+meanings:
+  upright:
+    - Celebration
+    - Harmony
+    - Marriage
+    - Homecoming
+  reversed:
+    - Lack of harmony
+    - Family disputes
+    - Cancelled celebrations
+    - Feeling unwelcome
+visual_description:
+  background: A couple stands under a floral canopy supported by four wands.
+  foreground: In the background, a crowd gathers before a castle.
+visual_description_analysis:
+  - >-
+    The floral canopy represents a celebration, often a wedding or homecoming.
+    The four wands create a stable foundation. The crowd shows this is a
+    community event.
+symbols:
+  - canopy
+  - wand
+  - castle
+  - crowd
+significance: A card of celebration and stable foundations.
+description: Represents celebration, harmony, and homecoming. A time for joyful gatherings.

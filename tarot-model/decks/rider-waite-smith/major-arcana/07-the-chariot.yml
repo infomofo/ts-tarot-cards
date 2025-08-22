@@ -1,0 +1,40 @@
+number: 7
+name: The Chariot
+keywords:
+  - control
+  - willpower
+  - victory
+  - assertion
+meanings:
+  upright:
+    - Willpower
+    - Victory
+    - Assertiveness
+    - Forward momentum
+  reversed:
+    - Lack of direction
+    - Loss of control
+    - Aggression
+    - Scattered energy
+visual_description:
+  background: A warrior in armor stands in a chariot under a starry canopy.
+  foreground: >-
+    He holds no reins, and the chariot is pulled by two sphinxes (one black, one
+    white).
+visual_description_analysis:
+  - >-
+    The warrior controls the sphinxes through sheer willpower, symbolizing
+    mastery over opposing forces. The black and white sphinxes represent duality
+    (conscious/unconscious, positive/negative) that must be balanced to move
+    forward.
+symbols:
+  - chariot
+  - sphinx
+  - warrior
+  - canopy
+significance: The Chariot represents the victory of will over conflict.
+description: >-
+  Represents willpower, determination, and victory. Take control and move
+  forward with confidence.
+emoji: 🏎️
+bg_color: '#A9A9A9'

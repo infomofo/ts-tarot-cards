@@ -1,0 +1,35 @@
+suit: Swords
+number: 2
+name: Two of Swords
+keywords:
+  - stalemate
+  - indecision
+  - truce
+  - avoidance
+meanings:
+  upright:
+    - Stalemate
+    - Indecision
+    - Truce
+    - Avoiding conflict
+  reversed:
+    - Confusion
+    - Emotional turmoil
+    - Making the wrong choice
+    - Forced decisions
+visual_description:
+  background: >-
+    A blindfolded woman sits with her back to the sea, holding two crossed
+    swords.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The blindfold represents a refusal to see the truth. The crossed swords
+    signify a stalemate or truce. She is blocking her emotions (the sea) to
+    maintain balance.
+symbols:
+  - blindfolded woman
+  - sword
+  - sea
+significance: A state of intellectual stalemate and the need to make a difficult decision.
+description: Represents indecision, stalemate, and avoiding a difficult truth.

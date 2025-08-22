@@ -1,0 +1,31 @@
+suit: Cups
+number: 3
+name: Three of Cups
+keywords:
+  - celebration
+  - friendship
+  - community
+meanings:
+  upright:
+    - Celebration
+    - Friendship
+    - Community
+    - Reunions
+  reversed:
+    - Gossip
+    - Isolation
+    - Overindulgence
+    - Scandal
+visual_description:
+  background: Three women dance in a circle, raising their cups in a toast.
+  foreground: They are surrounded by a harvest of fruits and flowers.
+visual_description_analysis:
+  - >-
+    The dancing women represent shared joy and celebration. The harvest
+    symbolizes abundance and the fruits of their collaboration.
+symbols:
+  - cup
+  - harvest
+  - flower
+significance: The joy of community and shared emotional experiences.
+description: Represents celebration, friendship, and community.

@@ -1,0 +1,35 @@
+suit: Wands
+number: 11
+name: Page of Wands
+keywords:
+  - inspiration
+  - ideas
+  - discovery
+  - free spirit
+meanings:
+  upright:
+    - New ideas
+    - Inspiration
+    - Discovery
+    - A free spirit
+  reversed:
+    - Creative blocks
+    - Hasty decisions
+    - Lack of direction
+    - Procrastination
+visual_description:
+  background: >-
+    A young man stands in a barren landscape, holding a wand and looking at it
+    with wonder.
+  foreground: His clothes are decorated with salamanders.
+visual_description_analysis:
+  - >-
+    The young man is announcing new ideas. The salamanders on his clothes are
+    symbols of fire and transformation, representing his creative passion.
+symbols:
+  - wand
+  - salamander
+significance: The messenger of the creative world, bringing a spark of inspiration.
+description: >-
+  Represents inspiration, new ideas, and discovery. A new creative opportunity
+  is presenting itself.

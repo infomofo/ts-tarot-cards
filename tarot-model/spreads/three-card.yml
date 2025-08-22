@@ -1,0 +1,27 @@
+name: Three Card Spread
+description: A simple three-card spread representing past, present, and future.
+allow_reversals: true
+preferred_strategy: deal
+layout:
+  - position: 1
+    x: 0
+    y: 0
+  - position: 2
+    x: 1
+    y: 0
+  - position: 3
+    x: 2
+    y: 0
+positions:
+  - position: 1
+    name: Past
+    position_significance: Past influences and events that led to the current situation
+    deal_order: 1
+  - position: 2
+    name: Present
+    position_significance: Current situation and immediate influences
+    deal_order: 2
+  - position: 3
+    name: Future
+    position_significance: Potential outcome and future influences
+    deal_order: 3

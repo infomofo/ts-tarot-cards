@@ -58,7 +58,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
   } = options || {};
 
   const backgroundColor = card.arcana === Arcana.Major
-    ? (card as MajorArcanaCard).backgroundColor || '#ffffff'
+    ? (card as MajorArcanaCard).bg_color || '#ffffff'
     : getSuitColor((card as MinorArcanaCard).suit);
 
   const topText = getTopText(card);

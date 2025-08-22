@@ -1,0 +1,32 @@
+suit: Pentacles
+number: 4
+name: Four of Pentacles
+keywords:
+  - control
+  - stability
+  - security
+  - possessiveness
+meanings:
+  upright:
+    - Financial stability
+    - Security
+    - Control
+    - Saving money
+  reversed:
+    - Greed
+    - Materialism
+    - Fear of loss
+    - Being too controlling
+visual_description:
+  background: A man sits on a stool, clutching a pentacle to his chest.
+  foreground: He balances another on his head and has two more under his feet.
+visual_description_analysis:
+  - >-
+    The man is hoarding his wealth out of a fear of loss. His posture is
+    defensive, showing a possessive and conservative mindset.
+symbols:
+  - pentacle
+  - stool
+  - city
+significance: A desire for control and security, often through material possessions.
+description: Represents control, stability, and possessiveness.

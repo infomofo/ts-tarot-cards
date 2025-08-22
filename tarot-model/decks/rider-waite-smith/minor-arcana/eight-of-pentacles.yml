@@ -1,0 +1,32 @@
+suit: Pentacles
+number: 8
+name: Eight of Pentacles
+keywords:
+  - skill
+  - mastery
+  - diligence
+  - apprenticeship
+meanings:
+  upright:
+    - Mastery of a skill
+    - Diligence
+    - Apprenticeship
+    - Attention to detail
+  reversed:
+    - Lack of focus
+    - Poor quality work
+    - Cutting corners
+    - Perfectionism
+visual_description:
+  background: A craftsman sits at his workbench, diligently carving a pentacle.
+  foreground: He has already completed seven, which are on display.
+visual_description_analysis:
+  - >-
+    This card shows a dedication to one's craft. The craftsman is absorbed in
+    his work, honing his skills through repetition and focus.
+symbols:
+  - craftsman
+  - workbench
+  - pentacle
+significance: Dedication to one's craft and the hard work required to become a master.
+description: Represents skill, mastery, and diligence. It is time for honing your craft.

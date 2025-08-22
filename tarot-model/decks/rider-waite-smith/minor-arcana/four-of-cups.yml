@@ -1,0 +1,34 @@
+suit: Cups
+number: 4
+name: Four of Cups
+keywords:
+  - apathy
+  - contemplation
+  - disconnection
+meanings:
+  upright:
+    - Apathy
+    - Contemplation
+    - Re-evaluation
+    - Missed opportunities
+  reversed:
+    - Sudden awareness
+    - Choosing happiness
+    - Letting go of regret
+    - New motivation
+visual_description:
+  background: >-
+    A young man sits under a tree with his arms crossed, looking at three cups
+    before him.
+  foreground: A fourth cup is offered by a hand from a cloud.
+visual_description_analysis:
+  - >-
+    The man's posture shows apathy and discontent. The fourth cup from the cloud
+    represents a missed opportunity or a blessing being ignored.
+symbols:
+  - tree
+  - cup
+  - hand
+  - cloud
+significance: A moment of emotional stagnation and introspection.
+description: Represents apathy, contemplation, and missed opportunities.

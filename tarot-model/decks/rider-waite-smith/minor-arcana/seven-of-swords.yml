@@ -1,0 +1,36 @@
+suit: Swords
+number: 7
+name: Seven of Swords
+keywords:
+  - deception
+  - theft
+  - strategy
+  - betrayal
+meanings:
+  upright:
+    - Deception
+    - Theft
+    - Strategy
+    - Getting away with something
+  reversed:
+    - Confession
+    - Honesty
+    - Getting caught
+    - Coming clean
+visual_description:
+  background: >-
+    A man sneaks away from a military camp, carrying five swords while two
+    remain behind.
+  foreground: He has a sly expression.
+visual_description_analysis:
+  - >-
+    The man is engaged in trickery or theft. He is acting alone and trying to
+    get away with something, but he has to leave some swords behind, suggesting
+    an incomplete victory.
+symbols:
+  - sword
+  - camp
+significance: A warning of deception, either by you or against you.
+description: >-
+  Represents deception, theft, and strategy. Someone may be trying to get away
+  with something.

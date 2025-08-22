@@ -1,0 +1,31 @@
+suit: Wands
+number: 6
+name: Six of Wands
+keywords:
+  - victory
+  - success
+  - public recognition
+meanings:
+  upright:
+    - Victory
+    - Success
+    - Public recognition
+    - Acclaim
+  reversed:
+    - Lack of recognition
+    - Failure
+    - Arrogance
+    - A hollow victory
+visual_description:
+  background: A victorious man on a white horse rides through a cheering crowd.
+  foreground: He wears a laurel wreath.
+visual_description_analysis:
+  - >-
+    The man is a hero returning from a successful battle. The laurel wreath
+    symbolizes victory, and the cheering crowd represents public acclaim.
+symbols:
+  - laurel wreath
+  - wand
+  - crowd
+significance: A card of victory and public recognition.
+description: Represents victory, success, and public recognition.

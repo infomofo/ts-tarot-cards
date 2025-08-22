@@ -1,0 +1,34 @@
+suit: Wands
+number: 8
+name: Eight of Wands
+keywords:
+  - speed
+  - action
+  - air travel
+  - movement
+meanings:
+  upright:
+    - Rapid action
+    - Sudden progress
+    - Air travel
+    - Receiving news
+  reversed:
+    - Delays
+    - Frustration
+    - Slowing down
+    - Cancelled plans
+visual_description:
+  background: >-
+    Eight wands fly through the air at great speed across a clear sky and a
+    peaceful landscape.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    This card symbolizes rapid movement and the swift completion of events.
+    There are no people, just pure energy and action.
+symbols:
+  - wand
+  - clear sky
+  - landscape
+significance: A card of speed and action, where events are moving quickly.
+description: Represents speed, action, and movement. Things are happening quickly.

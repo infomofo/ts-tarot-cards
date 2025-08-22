@@ -1,0 +1,31 @@
+suit: Swords
+number: 9
+name: Nine of Swords
+keywords:
+  - anxiety
+  - worry
+  - fear
+  - nightmares
+meanings:
+  upright:
+    - Anxiety
+    - Worry
+    - Fear
+    - Nightmares
+  reversed:
+    - Releasing fear
+    - Finding hope
+    - Seeking help
+    - Recovery
+visual_description:
+  background: A person sits up in bed, holding their head in their hands in despair.
+  foreground: Nine swords hang on the wall behind them.
+visual_description_analysis:
+  - >-
+    The nine swords represent the negative thoughts and worries that are causing
+    mental anguish. This is the "dark night of the soul," a card of deep
+    anxiety.
+symbols:
+  - sword
+significance: Mental anguish and the fears that keep us awake at night.
+description: Represents anxiety, worry, and fear. Your thoughts are causing you distress.

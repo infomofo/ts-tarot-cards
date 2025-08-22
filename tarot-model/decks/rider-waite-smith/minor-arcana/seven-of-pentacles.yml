@@ -1,0 +1,32 @@
+suit: Pentacles
+number: 7
+name: Seven of Pentacles
+keywords:
+  - patience
+  - investment
+  - long-term view
+meanings:
+  upright:
+    - Patience
+    - Investment
+    - Evaluating progress
+    - Perseverance
+  reversed:
+    - Impatience
+    - Frustration
+    - Wasted effort
+    - Giving up too soon
+visual_description:
+  background: A man leans on his hoe, looking at the seven pentacles growing on a bush.
+  foreground: He is taking a break to wait for the harvest.
+visual_description_analysis:
+  - >-
+    The man is not harvesting yet; he is patiently waiting for his investments
+    to mature. This card represents a pause to evaluate progress before reaping
+    the rewards.
+symbols:
+  - hoe
+  - pentacle
+  - bush
+significance: The value of patience and long-term investment.
+description: Represents patience, investment, and evaluating your progress.

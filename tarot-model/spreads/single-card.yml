@@ -1,0 +1,13 @@
+name: Single Card Pull
+description: A single card for quick guidance or a daily reading.
+allow_reversals: true
+preferred_strategy: deal
+layout:
+  - position: 1
+    x: 0
+    y: 0
+positions:
+  - position: 1
+    name: Guidance
+    position_significance: A single point of focus or advice
+    deal_order: 1

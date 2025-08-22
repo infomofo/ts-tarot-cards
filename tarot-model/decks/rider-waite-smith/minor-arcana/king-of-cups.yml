@@ -1,0 +1,38 @@
+suit: Cups
+number: 14
+name: King of Cups
+keywords:
+  - emotional balance
+  - compassion
+  - diplomacy
+meanings:
+  upright:
+    - Emotional mastery
+    - Balance
+    - Compassion
+    - Diplomacy
+  reversed:
+    - Emotional manipulation
+    - Moodiness
+    - Volatility
+    - Coldness
+visual_description:
+  background: A king sits on a throne in a turbulent sea, yet he remains calm.
+  foreground: He holds a cup and a scepter.
+visual_description_analysis:
+  - >-
+    The king's calm demeanor in a turbulent sea shows his mastery over his
+    emotions. The cup represents his emotions, while the scepter represents his
+    authority and control.
+symbols:
+  - king
+  - throne
+  - sea
+  - cup
+  - scepter
+  - fish
+  - ship
+significance: The perfect balance of emotion and intellect.
+description: >-
+  Represents emotional balance, compassion, and diplomacy. You are in control of
+  your emotions.

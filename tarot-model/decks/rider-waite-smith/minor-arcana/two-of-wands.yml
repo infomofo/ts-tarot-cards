@@ -1,0 +1,35 @@
+suit: Wands
+number: 2
+name: Two of Wands
+keywords:
+  - planning
+  - decisions
+  - future
+  - potential
+meanings:
+  upright:
+    - Future planning
+    - Making decisions
+    - Exploring potential
+    - Leaving your comfort zone
+  reversed:
+    - Fear of the unknown
+    - Lack of planning
+    - Feeling stuck
+    - Playing it safe
+visual_description:
+  background: >-
+    A man in rich robes stands on a castle rampart, holding a globe and looking
+    out at the world.
+  foreground: He holds one wand and another is fixed to the wall.
+visual_description_analysis:
+  - >-
+    The man is contemplating his future and the world beyond his current
+    situation (the castle). The globe represents his potential to expand his
+    influence.
+symbols:
+  - globe
+  - wand
+  - castle
+significance: Planning for the future and choosing to step out into the world.
+description: Represents future planning, making decisions, and exploring your potential.

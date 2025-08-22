@@ -1,0 +1,32 @@
+suit: Cups
+number: 6
+name: Six of Cups
+keywords:
+  - nostalgia
+  - childhood
+  - reunion
+  - innocence
+meanings:
+  upright:
+    - Nostalgia
+    - Happy memories
+    - Childhood innocence
+    - Reunions
+  reversed:
+    - Stuck in the past
+    - Unrealistic expectations
+    - Naivety
+    - Boring life
+visual_description:
+  background: A young boy offers a cup filled with flowers to a younger girl.
+  foreground: Five other cups are around them.
+visual_description_analysis:
+  - >-
+    This scene evokes a sense of nostalgia and the simple joys of childhood. The
+    giving of flowers is an act of innocent kindness.
+symbols:
+  - cup
+  - flower
+  - village
+significance: A journey back to the sweet memories of the past.
+description: Represents nostalgia, childhood memories, and simple joys.

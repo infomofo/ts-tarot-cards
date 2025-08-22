@@ -1,0 +1,34 @@
+suit: Wands
+number: 9
+name: Nine of Wands
+keywords:
+  - resilience
+  - courage
+  - persistence
+  - boundaries
+meanings:
+  upright:
+    - Resilience
+    - Perseverance
+    - Courage
+    - Setting boundaries
+  reversed:
+    - Feeling overwhelmed
+    - Exhaustion
+    - Giving up
+    - Paranoia
+visual_description:
+  background: >-
+    A wounded but determined man leans on his wand, with eight more wands
+    standing behind him like a fence.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The man has been through a battle but is ready for one final challenge. The
+    wands behind him form a defensive wall, symbolizing his resilience and
+    boundaries.
+symbols:
+  - wounded man
+  - wand
+significance: The final push before victory, requiring resilience and courage.
+description: Represents resilience, courage, and persistence. Do not give up now.

@@ -1,0 +1,31 @@
+suit: Wands
+number: 7
+name: Seven of Wands
+keywords:
+  - challenge
+  - competition
+  - perseverance
+meanings:
+  upright:
+    - Defending your position
+    - Facing a challenge
+    - Perseverance
+    - Holding your ground
+  reversed:
+    - Feeling overwhelmed
+    - Giving up
+    - Being overly defensive
+    - Losing a battle
+visual_description:
+  background: >-
+    A man stands on a hill, using his wand to fight off six other wands being
+    thrust at him from below.
+  foreground: ''
+visual_description_analysis:
+  - >-
+    The man is in a defensive but advantageous position ("holding the high
+    ground"). He is determined to stand up for his beliefs against opposition.
+symbols:
+  - wand
+significance: A test of your convictions, requiring you to defend your position.
+description: Represents challenge, competition, and perseverance. Stand your ground.

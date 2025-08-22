@@ -1,0 +1,34 @@
+suit: Swords
+number: 10
+name: Ten of Swords
+keywords:
+  - failure
+  - betrayal
+  - rock bottom
+  - endings
+meanings:
+  upright:
+    - Painful endings
+    - Betrayal
+    - Rock bottom
+    - Failure
+  reversed:
+    - Recovery
+    - Rebirth
+    - Learning from failure
+    - A new beginning
+visual_description:
+  background: A man lies face down, with ten swords in his back.
+  foreground: The sky above is dark, but the sun is rising on the horizon.
+visual_description_analysis:
+  - >-
+    This card represents a dramatic and painful ending. However, the rising sun
+    suggests that this is the darkest before the dawn, and a new day is coming.
+symbols:
+  - sword
+  - dark sky
+  - rising sun
+significance: A painful and final ending, but one that opens the way for a new beginning.
+description: >-
+  Represents failure, betrayal, and hitting rock bottom. A painful cycle is
+  ending.

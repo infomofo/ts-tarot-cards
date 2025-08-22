@@ -1,0 +1,35 @@
+suit: Swords
+number: 5
+name: Five of Swords
+keywords:
+  - conflict
+  - defeat
+  - winning at all costs
+meanings:
+  upright:
+    - Conflict
+    - Winning at all costs
+    - Betrayal
+    - A hollow victory
+  reversed:
+    - Reconciliation
+    - Compromise
+    - Making amends
+    - A peaceful resolution
+visual_description:
+  background: >-
+    A man with a smug expression holds three swords he has won from two dejected
+    men walking away.
+  foreground: The sky is stormy.
+visual_description_analysis:
+  - >-
+    The man has won the conflict, but at the cost of alienating others. The
+    stormy sky suggests the conflict is not truly over. This is a victory that
+    feels empty.
+symbols:
+  - sword
+  - stormy sky
+significance: A conflict where victory comes at a great cost.
+description: >-
+  Represents conflict, defeat, and winning at all costs. A victory may feel
+  empty.

@@ -1,0 +1,31 @@
+suit: Swords
+number: 11
+name: Page of Swords
+keywords:
+  - curiosity
+  - truth
+  - communication
+  - energy
+meanings:
+  upright:
+    - Curiosity
+    - Speaking the truth
+    - Clear communication
+    - A new idea
+  reversed:
+    - Gossip
+    - Hurtful words
+    - Lack of planning
+    - Deception
+visual_description:
+  background: A young man stands on a grassy hill, holding a sword upright.
+  foreground: The wind blows through his hair.
+visual_description_analysis:
+  - >-
+    The young man is full of restless energy and a thirst for knowledge. The
+    wind and turbulent clouds represent his active and sometimes chaotic mind.
+symbols:
+  - sword
+  - windy hill
+significance: A messenger of truth and ideas, encouraging a quest for knowledge.
+description: Represents curiosity, truth, and communication. A new idea is coming your way.

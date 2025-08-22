@@ -1,0 +1,35 @@
+suit: Swords
+number: 3
+name: Three of Swords
+keywords:
+  - heartbreak
+  - emotional pain
+  - sorrow
+  - grief
+meanings:
+  upright:
+    - Heartbreak
+    - Emotional pain
+    - Sorrow
+    - Grief
+  reversed:
+    - Negative self-talk
+    - Forgiveness
+    - Recovering from heartbreak
+    - Releasing pain
+visual_description:
+  background: A large red heart is pierced by three swords against a stormy gray sky.
+  foreground: Rain falls steadily.
+visual_description_analysis:
+  - >-
+    The pierced heart is a clear symbol of heartbreak and emotional pain. The
+    stormy sky and rain represent the sorrow and tears that accompany this
+    experience.
+symbols:
+  - heart
+  - sword
+  - storm
+  - cloud
+  - rain
+significance: A crucial point where mental clarity requires painful truth.
+description: Represents heartbreak, emotional pain, sorrow, and grief.

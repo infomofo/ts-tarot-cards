@@ -1,0 +1,34 @@
+suit: Swords
+number: 6
+name: Six of Swords
+keywords:
+  - transition
+  - moving on
+  - rite of passage
+meanings:
+  upright:
+    - Transition
+    - Moving on
+    - Rite of passage
+    - Leaving behind baggage
+  reversed:
+    - Feeling stuck
+    - Resistance to change
+    - Unfinished business
+    - Emotional baggage
+visual_description:
+  background: >-
+    A woman and child are being ferried across a calm body of water in a small
+    boat.
+  foreground: Six swords are stuck in the boat.
+visual_description_analysis:
+  - >-
+    The people are moving away from a difficult past towards a more peaceful
+    future. The swords in the boat represent the baggage they carry, but they
+    are still moving forward.
+symbols:
+  - boat
+  - sword
+  - water
+significance: A journey away from conflict towards a more peaceful future.
+description: Represents a transition, moving on, and leaving the past behind.

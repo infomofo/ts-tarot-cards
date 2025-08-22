@@ -1,0 +1,38 @@
+number: 12
+name: The Hanged Man
+keywords:
+  - suspension
+  - restriction
+  - letting go
+  - new perspectives
+meanings:
+  upright:
+    - Surrender
+    - New perspectives
+    - Pausing to reflect
+    - Sacrifice
+  reversed:
+    - Stalling
+    - Resistance to letting go
+    - Martyrdom
+    - Feeling stuck
+visual_description:
+  background: >-
+    A man hangs upside down from a T-shaped cross made of living wood, tied by
+    one foot.
+  foreground: His expression is calm, and his head is surrounded by a halo.
+visual_description_analysis:
+  - >-
+    He has willingly suspended himself to gain a new perspective, indicated by
+    his serene expression and the halo of enlightenment. The T-shaped cross is a
+    symbol of the living world. This is a pause for spiritual insight, not a
+    punishment.
+symbols:
+  - cross
+  - halo
+significance: This card represents a pause in the soul's journey for profound insight.
+description: >-
+  Represents suspension, new perspectives, and letting go. It is time to pause
+  and see things differently.
+emoji: 🙃
+bg_color: '#87CEEB'

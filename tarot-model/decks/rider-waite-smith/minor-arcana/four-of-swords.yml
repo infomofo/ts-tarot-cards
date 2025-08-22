@@ -1,0 +1,31 @@
+suit: Swords
+number: 4
+name: Four of Swords
+keywords:
+  - rest
+  - recuperation
+  - meditation
+meanings:
+  upright:
+    - Rest
+    - Recuperation
+    - Meditation
+    - Contemplation
+  reversed:
+    - Exhaustion
+    - Burnout
+    - Stagnation
+    - Forced rest
+visual_description:
+  background: A knight lies in effigy on a tomb, his hands in prayer.
+  foreground: Three swords hang above him, and one is on the tomb beside him.
+visual_description_analysis:
+  - >-
+    This is a scene of rest and contemplation, not death. The knight is taking a
+    break from conflict to recover and plan his next move.
+symbols:
+  - knight effigy
+  - tomb
+  - sword
+significance: A period of rest and recovery after the pain of the Three of Swords.
+description: Represents rest, recuperation, and meditation. It is time to recharge.

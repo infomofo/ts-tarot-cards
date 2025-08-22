@@ -19,7 +19,13 @@ These are general principles for agentic coding that apply to any project.
 4.  **Write clear and maintainable code.** Your code should be easy for humans to read and understand. Use clear naming, consistent patterns, remove unused code, and apply best practices (like type safety, where available) to prevent errors.
 5.  **Ensure code is well-tested and maintainable for the future.** Write tests to cover all logic branches and prevent regressions, and consider how your code will be understood and maintained by future developers.
 6.  **Adhere to established project conventions.** Follow the specified guidelines for all generated code and content, including style, tone, and structure. These conventions should be enforced with linting and CI whenever possible.
-7.  **Collaborate when blocked.** If unable to complete a task due to a tool limitation, state the limitation and propose a collaborative solution.
+7.  **Collaborate when blocked.** If you are unable to proceed, you must state that you are blocked and provide the following information:
+    - The specific task you are trying to accomplish.
+    - The approaches you have tried.
+    - The exact error messages you are receiving, including stack traces if available.
+    - The relevant code snippets.
+    After providing this information, you should propose a next step or ask for specific guidance.
+8.  **All tests must pass.** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. If you are unable to fix a failing test, you must ask for help before submitting.
 
 ## ts-tarot-cards Laws
 

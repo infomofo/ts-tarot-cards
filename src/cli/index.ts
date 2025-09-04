@@ -17,7 +17,7 @@ export function displayWelcomeMessage() {
   console.log("Speak your desires, and let the command line unveil your destiny!\n");
 }
 
-export async function learnAboutCards(): Promise<void> {
+export async function learnAboutSingleCard(): Promise<boolean> {
   const answer = await inquirer.prompt([
     {
       type: 'list',
@@ -46,14 +46,10 @@ export async function learnAboutCards(): Promise<void> {
     message: '\nWould you like to learn about another card?'
   });
 
-  if (continueAnswer.continue) {
-    return learnAboutCards();
-  } else {
-    return mainMenu();
-  }
+  return continueAnswer.continue;
 }
 
-export async function getAReading(): Promise<void> {
+export async function getSingleReading(): Promise<boolean> {
   const answer = await inquirer.prompt([
     {
       type: 'list',
@@ -92,40 +88,49 @@ export async function getAReading(): Promise<void> {
     message: '\nWould you like another reading?'
   });
 
-  if (continueAnswer.continue) {
-    return getAReading();
-  } else {
-    return mainMenu();
-  }
+  return continueAnswer.continue;
 }
 
 export async function mainMenu(): Promise<void> {
-  const answers = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'choice',
-      message: 'What secrets do you wish to unravel?',
-      choices: [
-        'Learn about the tarot cards',
-        'Get a sample tarot reading',
-        new inquirer.Separator(),
-        'Exit',
-      ],
-    },
-  ]);
+  displayWelcomeMessage();
 
-  switch (answers.choice) {
-    case 'Learn about the tarot cards':
-      return learnAboutCards();
-    case 'Get a sample tarot reading':
-      return getAReading();
-    case 'Exit':
-      console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
-      process.exit(0);
+  let running = true;
+  while(running) {
+    const answers = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'choice',
+        message: 'What secrets do you wish to unravel?',
+        choices: [
+          'Learn about the tarot cards',
+          'Get a sample tarot reading',
+          new inquirer.Separator(),
+          'Exit',
+        ],
+      },
+    ]);
+
+    switch (answers.choice) {
+      case 'Learn about the tarot cards':
+        let keepLearning = true;
+        while(keepLearning) {
+          keepLearning = await learnAboutSingleCard();
+        }
+        break;
+      case 'Get a sample tarot reading':
+        let keepReading = true;
+        while(keepReading) {
+          keepReading = await getSingleReading();
+        }
+        break;
+      case 'Exit':
+        console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
+        running = false;
+        process.exit(0);
+    }
   }
 }
 
 if (require.main === module) {
-  displayWelcomeMessage();
   mainMenu();
 }

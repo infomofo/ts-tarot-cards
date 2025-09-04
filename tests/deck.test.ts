@@ -81,7 +81,7 @@ describe('TarotDeck', () => {
 
   test('should support strategy-based card selection', () => {
     const deck = new TarotDeck();
-    const strategies = deck.getAvailableCardSelectionStrategies();
+    const strategies = TarotDeck.getAvailableCardSelectionStrategies();
     
     expect(strategies).toHaveProperty('deal');
     expect(strategies).toHaveProperty('fanpick');
@@ -96,7 +96,7 @@ describe('TarotDeck', () => {
 
   test('should set and get default strategy', () => {
     const deck = new TarotDeck();
-    const strategies = deck.getAvailableCardSelectionStrategies();
+    const strategies = TarotDeck.getAvailableCardSelectionStrategies();
     
     // Default should be deal strategy
     expect(deck.getDefaultCardSelectionStrategy().name).toBe('deal');
@@ -411,7 +411,7 @@ describe('Shuffle Strategies', () => {
 
   test('should get available shuffle strategies', () => {
     const deck = new TarotDeck();
-    const strategies = deck.getAvailableShuffleStrategies();
+    const strategies = TarotDeck.getAvailableShuffleStrategies();
     
     expect(strategies).toBeDefined();
     expect(Object.keys(strategies)).toContain('fisherYates');

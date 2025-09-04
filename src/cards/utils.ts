@@ -19,6 +19,8 @@ export function getFaceCardEmoji(number: MinorNumber, suit: Suit): string | unde
         return '👸🏽';
       case Suit.Pentacles:
         return '👸🏾';
+      default:
+        return undefined;
     }
   }
   if (number === MinorNumber.King) {
@@ -31,6 +33,8 @@ export function getFaceCardEmoji(number: MinorNumber, suit: Suit): string | unde
         return '🤴🏽';
       case Suit.Pentacles:
         return '🤴🏾';
+      default:
+        return undefined;
     }
   }
   return undefined;

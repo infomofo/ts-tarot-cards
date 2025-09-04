@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
+    "lint": "eslint 'src/**/*.ts'",
     "dev": "tsc --watch",
     "prepare": "npm run build",
     "generate-samples": "ts-node src/generate-samples.ts",
@@ -24,14 +25,20 @@
     "dist/**/*"
   ],
   "devDependencies": {
+    "@types/inquirer": "^8.2.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-plugin-import": "^2.32.0",
     "jest": "^30.0.5",
     "svg-to-img": "^2.0.9",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2",
-    "@types/inquirer": "^8.2.4"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "inquirer": "^8.2.4"

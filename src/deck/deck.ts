@@ -1,4 +1,6 @@
-import { TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy } from '../types';
+import {
+  TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy,
+} from '../types';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
 import { CARD_SELECTION_STRATEGIES } from './card-selection-strategies';
@@ -6,13 +8,21 @@ import { SHUFFLE_STRATEGIES } from './shuffle-strategies';
 
 export class TarotDeck {
   private initialDeck: TarotCard[] = [];
+
   private currentDeck: TarotCard[] = [];
+
   private defaultCardSelectionStrategy: CardSelectionStrategy;
+
   private defaultShuffleStrategy: ShuffleStrategy;
 
-  constructor(defaultCardSelectionStrategy?: CardSelectionStrategy, defaultShuffleStrategy?: ShuffleStrategy) {
-    this.defaultCardSelectionStrategy = defaultCardSelectionStrategy || CARD_SELECTION_STRATEGIES.deal;
-    this.defaultShuffleStrategy = defaultShuffleStrategy || SHUFFLE_STRATEGIES.fisherYates;
+  constructor(
+    defaultCardSelectionStrategy?: CardSelectionStrategy,
+    defaultShuffleStrategy?: ShuffleStrategy,
+  ) {
+    this.defaultCardSelectionStrategy = defaultCardSelectionStrategy
+      || CARD_SELECTION_STRATEGIES.deal;
+    this.defaultShuffleStrategy = defaultShuffleStrategy
+      || SHUFFLE_STRATEGIES.fisherYates;
     this.initializeDeck();
     this.shuffle();
   }
@@ -20,10 +30,10 @@ export class TarotDeck {
   private initializeDeck(): void {
     // Clear existing cards
     this.initialDeck = [];
-    
+
     // Add available major arcana cards
     this.initialDeck.push(...Object.values(MAJOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
-    
+
     // Add available minor arcana cards
     this.initialDeck.push(...Object.values(MINOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
   }
@@ -40,7 +50,7 @@ export class TarotDeck {
    * Stub for biometric randomness - could integrate with hardware or biometric data
    * For now, uses Math.random()
    */
-  private getBiometricRandomIndex(max: number): number {
+  private static getBiometricRandomIndex(max: number): number {
     // TODO: Integrate with biometric randomness source
     // This could use heart rate variability, mouse movement patterns, etc.
     return Math.floor(Math.random() * max);
@@ -51,25 +61,23 @@ export class TarotDeck {
    */
   selectCards(count: number, options?: CardSelectionOptions): CardPosition[] {
     const strategy = options?.strategy || this.defaultCardSelectionStrategy;
-    
+
     const selectedCards = strategy.selectCards([...this.currentDeck], count);
-    
+
     // Convert TarotCard[] to CardPosition[] with position numbering
     // Reversal logic will be handled at the reader/spread level
     const cardPositions: CardPosition[] = selectedCards.map((card, index) => ({
       card,
       position: index + 1,
-      isReversed: false // Default to upright, reversal handled by reader
+      isReversed: false, // Default to upright, reversal handled by reader
     }));
-    
+
     // Remove selected cards from deck
-    const selectedCardIds = new Set(selectedCards.map(card => card.id));
-    this.currentDeck = this.currentDeck.filter(card => !selectedCardIds.has(card.id));
-    
+    const selectedCardIds = new Set(selectedCards.map((card) => card.id));
+    this.currentDeck = this.currentDeck.filter((card) => !selectedCardIds.has(card.id));
+
     return cardPositions;
   }
-
-
 
   /**
    * Set the default card selection strategy
@@ -88,7 +96,7 @@ export class TarotDeck {
   /**
    * Get available card selection strategies
    */
-  getAvailableCardSelectionStrategies(): Record<string, CardSelectionStrategy> {
+  static getAvailableCardSelectionStrategies(): Record<string, CardSelectionStrategy> {
     return CARD_SELECTION_STRATEGIES;
   }
 
@@ -109,7 +117,7 @@ export class TarotDeck {
   /**
    * Get available shuffle strategies
    */
-  getAvailableShuffleStrategies(): Record<string, ShuffleStrategy> {
+  static getAvailableShuffleStrategies(): Record<string, ShuffleStrategy> {
     return SHUFFLE_STRATEGIES;
   }
 

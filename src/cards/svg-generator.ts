@@ -13,7 +13,7 @@ import { getFaceCardEmoji } from './utils';
 import { SUIT_PROPERTIES } from './suit';
 
 function getSuitColor(suit: Suit): string {
-  const element = SUIT_PROPERTIES[suit].element;
+  const { element } = SUIT_PROPERTIES[suit];
   switch (element) {
     case Element.Water:
       return '#a0d2eb'; // Light Blue
@@ -45,14 +45,104 @@ export function getTopText(card: TarotCard): string {
   }
 }
 
+function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
+  const fullWidth = 100;
+  const centerX = fullWidth / 2;
+  const paddingX = 25;
+
+  // New y-coordinate space for the art area
+  const artYStart = 15;
+  const artYEnd = 80;
+  const artHeight = artYEnd - artYStart;
+  const artCenterY = artYStart + artHeight / 2;
+  const artPaddingY = 10;
+
+  const positions: { [key: number]: { x: number; y: number }[] } = {
+    [MinorNumber.Ace]: [{ x: centerX, y: artCenterY }],
+    [MinorNumber.Two]: [
+      { x: centerX, y: artYStart + artPaddingY },
+      { x: centerX, y: artYEnd - artPaddingY },
+    ],
+    [MinorNumber.Three]: [
+      { x: paddingX, y: artYStart + artPaddingY },
+      { x: centerX, y: artCenterY },
+      { x: fullWidth - paddingX, y: artYEnd - artPaddingY },
+    ],
+    [MinorNumber.Four]: [
+      { x: paddingX, y: artYStart + artPaddingY },
+      { x: fullWidth - paddingX, y: artYStart + artPaddingY },
+      { x: paddingX, y: artYEnd - artPaddingY },
+      { x: fullWidth - paddingX, y: artYEnd - artPaddingY },
+    ],
+    [MinorNumber.Five]: [
+      { x: paddingX, y: artYStart + artPaddingY },
+      { x: fullWidth - paddingX, y: artYStart + artPaddingY },
+      { x: centerX, y: artCenterY },
+      { x: paddingX, y: artYEnd - artPaddingY },
+      { x: fullWidth - paddingX, y: artYEnd - artPaddingY },
+    ],
+    [MinorNumber.Six]: [
+      { x: paddingX, y: artYStart + artPaddingY },
+      { x: fullWidth - paddingX, y: artYStart + artPaddingY },
+      { x: paddingX, y: artCenterY },
+      { x: fullWidth - paddingX, y: artCenterY },
+      { x: paddingX, y: artYEnd - artPaddingY },
+      { x: fullWidth - paddingX, y: artYEnd - artPaddingY },
+    ],
+    [MinorNumber.Seven]: [
+      { x: paddingX, y: artYStart + 5 },
+      { x: centerX, y: artYStart + 15 },
+      { x: fullWidth - paddingX, y: artYStart + 5 },
+      { x: paddingX, y: artCenterY + 10 },
+      { x: fullWidth - paddingX, y: artCenterY + 10 },
+      { x: paddingX, y: artYEnd - 5 },
+      { x: fullWidth - paddingX, y: artYEnd - 5 },
+    ],
+    [MinorNumber.Eight]: [
+      { x: paddingX, y: artYStart + 5 },
+      { x: fullWidth - paddingX, y: artYStart + 5 },
+      { x: paddingX, y: artYStart + artHeight / 3 },
+      { x: fullWidth - paddingX, y: artYStart + artHeight / 3 },
+      { x: paddingX, y: artYEnd - artHeight / 3 },
+      { x: fullWidth - paddingX, y: artYEnd - artHeight / 3 },
+      { x: paddingX, y: artYEnd - 5 },
+      { x: fullWidth - paddingX, y: artYEnd - 5 },
+    ],
+    [MinorNumber.Nine]: [
+      { x: paddingX, y: artYStart + 5 },
+      { x: centerX, y: artYStart + 5 },
+      { x: fullWidth - paddingX, y: artYStart + 5 },
+      { x: paddingX, y: artCenterY },
+      { x: centerX, y: artCenterY },
+      { x: fullWidth - paddingX, y: artCenterY },
+      { x: paddingX, y: artYEnd - 5 },
+      { x: centerX, y: artYEnd - 5 },
+      { x: fullWidth - paddingX, y: artYEnd - 5 },
+    ],
+    [MinorNumber.Ten]: [
+      { x: paddingX, y: artYStart + 5 },
+      { x: centerX, y: artYStart + 5 },
+      { x: fullWidth - paddingX, y: artYStart + 5 },
+      { x: paddingX, y: artYStart + artHeight / 3 },
+      { x: fullWidth - paddingX, y: artYStart + artHeight / 3 },
+      { x: centerX, y: artCenterY },
+      { x: paddingX, y: artYEnd - artHeight / 3 },
+      { x: fullWidth - paddingX, y: artYEnd - artHeight / 3 },
+      { x: paddingX, y: artYEnd - 5 },
+      { x: fullWidth - paddingX, y: artYEnd - 5 },
+    ],
+  };
+  return positions[number] || [];
+}
+
 export function generateSvg(card: TarotCard, options?: SVGOptions): string {
   const {
-    art_override_url,
-    hide_number = false,
-    hide_title = false,
-    hide_emoji = false,
+    artOverrideUrl,
+    hideNumber = false,
+    hideTitle = false,
+    hideEmoji = false,
     isReversed = false,
-    inner_svg = false,
+    innerSvg = false,
     animate = false,
     dealDelay = 0,
   } = options || {};
@@ -62,37 +152,39 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     : getSuitColor((card as MinorArcanaCard).suit);
 
   const topText = getTopText(card);
-  const numberContent = hide_number ? '' : `<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">${topText}</text>`;
+  const numberContent = hideNumber ? '' : `<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">${topText}</text>`;
 
   let artContent = '';
-  if (art_override_url) {
-    artContent = `<image href="${art_override_url}" x="10%" y="15%" width="80%" height="65%" preserveAspectRatio="xMidYMid slice"/>`;
-  } else if (!hide_emoji) {
+  if (artOverrideUrl) {
+    artContent = `<image href="${artOverrideUrl}" x="10%" y="15%" width="80%" height="65%" preserveAspectRatio="xMidYMid slice"/>`;
+  } else if (!hideEmoji) {
     if (card.arcana === Arcana.Major) {
-        const emoji = (card as MajorArcanaCard).emoji;
-        if (emoji) {
-            artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${emoji}</text>`;
-        }
+      const { emoji } = (card as MajorArcanaCard);
+      if (emoji) {
+        artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${emoji}</text>`;
+      }
     } else {
-        const minorCard = card as MinorArcanaCard;
-        const suitEmoji = SUIT_PROPERTIES[minorCard.suit].emoji;
-        if (minorCard.number >= MinorNumber.Page) {
-            artContent = `
+      const minorCard = card as MinorArcanaCard;
+      const suitEmoji = SUIT_PROPERTIES[minorCard.suit].emoji;
+      if (minorCard.number >= MinorNumber.Page) {
+        artContent = `
                 <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">${getFaceCardEmoji(minorCard.number, minorCard.suit)}</text>
                 <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-size="60">${suitEmoji}</text>
             `;
-        } else if (minorCard.number === MinorNumber.Ace) {
-            artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${suitEmoji}</text>`;
-        } else {
-            const positions = getEmojiPositions(minorCard.number);
-            artContent = positions
-                .map(pos => `<text x="${pos.x}%" y="${pos.y}%" dominant-baseline="middle" text-anchor="middle" font-size="40">${suitEmoji}</text>`)
-                .join('');
-        }
+      } else if (minorCard.number === MinorNumber.Ace) {
+        artContent = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="100">${suitEmoji}</text>`;
+      } else {
+        const positions = getEmojiPositions(minorCard.number);
+        artContent = positions
+          .map((pos) => `<text x="${pos.x}%" y="${pos.y}%" dominant-baseline="middle" text-anchor="middle" font-size="40">${suitEmoji}</text>`)
+          .join('');
+      }
     }
   }
 
-  const titleContent = hide_title ? '' : `
+  const titleContent = hideTitle
+    ? ''
+    : `
     <rect x="10%" y="80%" width="80%" height="15%" fill="white" stroke="black" stroke-width="2" />
     <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold" fill="black">${card.getName()}</text>
   `;
@@ -106,25 +198,29 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     ${titleContent}
   `;
 
-  const cardBack = `<rect width="100%" height="100%" fill="#00008b" />`;
+  const cardBack = '<rect width="100%" height="100%" fill="#00008b" />';
   let innerContent: string;
 
   if (animate) {
     const flipDelay = dealDelay + 0.5 + 0.5; // dealDelay + dealDuration + pause
     const flipDuration = 0.5;
-    const flipMidpoint = flipDelay + (flipDuration / 2);
+    const flipMidpoint = flipDelay + flipDuration / 2;
 
     innerContent = `
       <g style="transform-origin: center; transform-box: fill-box;">
-        <animateTransform attributeName="transform" type="scale" from="1 1" to="0 1" dur="${flipDuration / 2}s" begin="${flipDelay}s" fill="freeze" />
-        <animateTransform attributeName="transform" type="scale" from="0 1" to="1 1" dur="${flipDuration / 2}s" begin="${flipMidpoint}s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale"
+          from="1 1" to="0 1" dur="${flipDuration / 2}s" begin="${flipDelay}s" fill="freeze" />
+        <animateTransform attributeName="transform" type="scale"
+          from="0 1" to="1 1" dur="${flipDuration / 2}s" begin="${flipMidpoint}s" fill="freeze" />
         <g>
           <g visibility="visible">
-            <animate attributeName="visibility" from="visible" to="hidden" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+            <animate attributeName="visibility" from="visible" to="hidden"
+              dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
             ${cardBack}
           </g>
           <g visibility="hidden" ${transform}>
-            <animate attributeName="visibility" from="hidden" to="visible" dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
+            <animate attributeName="visibility" from="hidden" to="visible"
+              dur="0.01s" begin="${flipMidpoint}s" fill="freeze" />
             ${cardFace}
           </g>
         </g>
@@ -134,7 +230,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
     innerContent = `<g ${transform}>${cardFace}</g>`;
   }
 
-  if (inner_svg) {
+  if (innerSvg) {
     return innerContent;
   }
 
@@ -143,54 +239,4 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
       ${innerContent}
     </svg>
   `;
-}
-
-function getEmojiPositions(number: MinorNumber): { x: number; y: number }[] {
-  const full_width = 100;
-  const center_x = full_width / 2;
-  const padding_x = 25;
-
-  // New y-coordinate space for the art area
-  const art_y_start = 15;
-  const art_y_end = 80;
-  const art_height = art_y_end - art_y_start;
-  const art_center_y = art_y_start + art_height / 2;
-  const art_padding_y = 10;
-
-  const positions: { [key: number]: { x: number; y: number }[] } = {
-    [MinorNumber.Ace]: [{ x: center_x, y: art_center_y }],
-    [MinorNumber.Two]: [{ x: center_x, y: art_y_start + art_padding_y }, { x: center_x, y: art_y_end - art_padding_y }],
-    [MinorNumber.Three]: [{ x: padding_x, y: art_y_start + art_padding_y }, { x: center_x, y: art_center_y }, { x: full_width - padding_x, y: art_y_end - art_padding_y }],
-    [MinorNumber.Four]: [{ x: padding_x, y: art_y_start + art_padding_y }, { x: full_width - padding_x, y: art_y_start + art_padding_y }, { x: padding_x, y: art_y_end - art_padding_y }, { x: full_width - padding_x, y: art_y_end - art_padding_y }],
-    [MinorNumber.Five]: [{ x: padding_x, y: art_y_start + art_padding_y }, { x: full_width - padding_x, y: art_y_start + art_padding_y }, { x: center_x, y: art_center_y }, { x: padding_x, y: art_y_end - art_padding_y }, { x: full_width - padding_x, y: art_y_end - art_padding_y }],
-    [MinorNumber.Six]: [
-        { x: padding_x, y: art_y_start + art_padding_y }, { x: full_width - padding_x, y: art_y_start + art_padding_y },
-        { x: padding_x, y: art_center_y }, { x: full_width - padding_x, y: art_center_y },
-        { x: padding_x, y: art_y_end - art_padding_y }, { x: full_width - padding_x, y: art_y_end - art_padding_y },
-    ],
-    [MinorNumber.Seven]: [
-      { x: padding_x, y: art_y_start + 5 }, { x: center_x, y: art_y_start + 15 }, { x: full_width - padding_x, y: art_y_start + 5 },
-      { x: padding_x, y: art_center_y + 10 }, { x: full_width - padding_x, y: art_center_y + 10 },
-      { x: padding_x, y: art_y_end - 5 }, { x: full_width - padding_x, y: art_y_end - 5 },
-    ],
-    [MinorNumber.Eight]: [
-        { x: padding_x, y: art_y_start + 5 }, { x: full_width - padding_x, y: art_y_start + 5 },
-        { x: padding_x, y: art_y_start + art_height / 3 }, { x: full_width - padding_x, y: art_y_start + art_height / 3 },
-        { x: padding_x, y: art_y_end - art_height / 3 }, { x: full_width - padding_x, y: art_y_end - art_height / 3 },
-        { x: padding_x, y: art_y_end - 5 }, { x: full_width - padding_x, y: art_y_end - 5 },
-    ],
-    [MinorNumber.Nine]: [
-        { x: padding_x, y: art_y_start + 5 }, { x: center_x, y: art_y_start + 5 }, { x: full_width - padding_x, y: art_y_start + 5 },
-        { x: padding_x, y: art_center_y }, { x: center_x, y: art_center_y }, { x: full_width - padding_x, y: art_center_y },
-        { x: padding_x, y: art_y_end - 5 }, { x: center_x, y: art_y_end - 5 }, { x: full_width - padding_x, y: art_y_end - 5 },
-    ],
-    [MinorNumber.Ten]: [
-        { x: padding_x, y: art_y_start + 5 }, { x: center_x, y: art_y_start + 5 }, { x: full_width - padding_x, y: art_y_start + 5 },
-        { x: padding_x, y: art_y_start + art_height / 3 }, { x: full_width - padding_x, y: art_y_start + art_height / 3 },
-        { x: center_x, y: art_center_y },
-        { x: padding_x, y: art_y_end - art_height / 3 }, { x: full_width - padding_x, y: art_y_end - art_height / 3 },
-        { x: padding_x, y: art_y_end - 5 }, { x: full_width - padding_x, y: art_y_end - 5 },
-    ],
-  };
-  return positions[number] || [];
 }

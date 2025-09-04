@@ -22,39 +22,39 @@ export function toRomanNumeral(num: number): string {
     { value: 9, numeral: 'IX' },
     { value: 5, numeral: 'V' },
     { value: 4, numeral: 'IV' },
-    { value: 1, numeral: 'I' }
+    { value: 1, numeral: 'I' },
   ];
 
   let result = '';
   let remaining = num;
 
-  for (const { value, numeral } of values) {
+  values.forEach(({ value, numeral }) => {
     while (remaining >= value) {
       result += numeral;
       remaining -= value;
     }
-  }
+  });
 
   return result;
 }
 
 export enum Arcana {
   Major = 'Major',
-  Minor = 'Minor'
+  Minor = 'Minor',
 }
 
 export enum Suit {
   Cups = 'Cups',
   Pentacles = 'Pentacles',
   Swords = 'Swords',
-  Wands = 'Wands'
+  Wands = 'Wands',
 }
 
 export enum Element {
   Water = 'Water',
   Earth = 'Earth',
   Air = 'Air',
-  Fire = 'Fire'
+  Fire = 'Fire',
 }
 
 // Symbol type for hierarchical tagging of visual elements
@@ -74,7 +74,7 @@ export enum MinorNumber {
   Page = 11,
   Knight = 12,
   Queen = 13,
-  King = 14
+  King = 14,
 }
 
 export enum MajorArcana {
@@ -99,7 +99,7 @@ export enum MajorArcana {
   TheMoon = 18,
   TheSun = 19,
   Judgement = 20,
-  TheWorld = 21
+  TheWorld = 21,
 }
 
 export enum MinorArcana {
@@ -118,7 +118,7 @@ export enum MinorArcana {
   KnightOfCups = 'knight-of-cups',
   QueenOfCups = 'queen-of-cups',
   KingOfCups = 'king-of-cups',
-  
+
   // Pentacles
   AceOfPentacles = 'ace-of-pentacles',
   TwoOfPentacles = 'two-of-pentacles',
@@ -134,7 +134,7 @@ export enum MinorArcana {
   KnightOfPentacles = 'knight-of-pentacles',
   QueenOfPentacles = 'queen-of-pentacles',
   KingOfPentacles = 'king-of-pentacles',
-  
+
   // Swords
   AceOfSwords = 'ace-of-swords',
   TwoOfSwords = 'two-of-swords',
@@ -150,7 +150,7 @@ export enum MinorArcana {
   KnightOfSwords = 'knight-of-swords',
   QueenOfSwords = 'queen-of-swords',
   KingOfSwords = 'king-of-swords',
-  
+
   // Wands
   AceOfWands = 'ace-of-wands',
   TwoOfWands = 'two-of-wands',
@@ -165,7 +165,7 @@ export enum MinorArcana {
   PageOfWands = 'page-of-wands',
   KnightOfWands = 'knight-of-wands',
   QueenOfWands = 'queen-of-wands',
-  KingOfWands = 'king-of-wands'
+  KingOfWands = 'king-of-wands',
 }
 
 // Helper functions to get string names
@@ -184,7 +184,7 @@ export function getMinorNumberName(num: MinorNumber): string {
     [MinorNumber.Page]: 'Page',
     [MinorNumber.Knight]: 'Knight',
     [MinorNumber.Queen]: 'Queen',
-    [MinorNumber.King]: 'King'
+    [MinorNumber.King]: 'King',
   };
   return names[num];
 }
@@ -212,7 +212,7 @@ export function getMajorArcanaName(num: MajorArcana): string {
     [MajorArcana.TheMoon]: 'The Moon',
     [MajorArcana.TheSun]: 'The Sun',
     [MajorArcana.Judgement]: 'Judgement',
-    [MajorArcana.TheWorld]: 'The World'
+    [MajorArcana.TheWorld]: 'The World',
   };
   return names[num];
 }
@@ -226,12 +226,12 @@ export interface SuitProperties {
 
 // SVG generation options
 export interface SVGOptions {
-  art_override_url?: string;
-  hide_number?: boolean;
-  hide_emoji?: boolean;
-  hide_title?: boolean;
+  artOverrideUrl?: string;
+  hideNumber?: boolean;
+  hideEmoji?: boolean;
+  hideTitle?: boolean;
   isReversed?: boolean;
-  inner_svg?: boolean;
+  innerSvg?: boolean;
   animate?: boolean;
   dealOrder?: number;
   dealDelay?: number;
@@ -251,7 +251,7 @@ export interface BaseTarotCard {
   arcana: Arcana; // Overridden by extensions
   number: MajorArcana | MinorNumber; // Overridden by extensions - unified numeric system
   romanNumeral: string; // Derived from number during initialization
-  
+
   // Dynamic name generation for localization support
   getName(locale?: string): string;
 
@@ -340,7 +340,8 @@ export interface CardSelectionStrategy {
   /** Human-readable description of how the strategy works */
   description: string;
   /**
-   * Given an ordered deck of TarotCard, select the specified number of cards according to the strategy's logic.
+   * Given an ordered deck of TarotCard,
+   * select the specified number of cards according to the strategy's logic.
    * @param deck - The ordered deck of tarot cards to select from
    * @param count - The number of cards to select
    * @returns An array of selected tarot cards

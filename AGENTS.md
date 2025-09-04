@@ -25,17 +25,19 @@ These are general principles for agentic coding that apply to any project.
     - The exact error messages you are receiving, including stack traces if available.
     - The relevant code snippets.
     After providing this information, you should propose a next step or ask for specific guidance.
-8.  **All tests must pass.** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. If you are unable to fix a failing test, you must ask for help before submitting.
+8.  **All tests must pass.** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. You must also run the build to ensure there are no compilation errors. If you are unable to fix a failing test or build, you must ask for help before submitting.
+9.  **Acknowledge and Trust User Feedback on Discrepancies.** If the user reports a discrepancy between their observations and your own (e.g., "I see a comment but you don't"), you must assume the user is correct. Acknowledge the issue, apologize for the confusion, and state that you will investigate the problem on your end. Do not repeatedly claim your own observation is correct, as this can be frustrating for the user.
 
 ## ts-tarot-cards Laws
 
 These are specific directives for working with the ts-tarot-cards repository.
 
 1.  **Code must be type-safe.** Maintain full TypeScript coverage with proper type annotations.
-2.  **Generate sample SVG files.** When changing SVG generation logic, run `npm run generate-samples` to create updated samples.
-3.  **Use the strategy pattern for variable behaviors.** This applies to features like card selection and shuffling.
-4.  **Design for localization.** Interfaces should be designed to support future internationalization.
-5.  **Be proactive in SVG verification.** If the provided tools are insufficient to verify a visual change to an SVG, attempt to install and use additional tools through `npm` to create a more robust verification process.
+2.  **All code must pass the linter.** Before submitting a pull request, run `npm run lint` and fix any issues.
+3.  **Generate sample SVG files.** When changing SVG generation logic, run `npm run generate-samples` to create updated samples.
+4.  **Use the strategy pattern for variable behaviors.** This applies to features like card selection and shuffling.
+5.  **Design for localization.** Interfaces should be designed to support future internationalization.
+6.  **Be proactive in SVG verification.** If the provided tools are insufficient to verify a visual change to an SVG, attempt to install and use additional tools through `npm` to create a more robust verification process.
 
 ---
 

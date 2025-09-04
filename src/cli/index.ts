@@ -1,10 +1,16 @@
+/* eslint-disable no-console */
 import inquirer from 'inquirer';
 import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
-import { TarotCard, SpreadReader, SPREADS, SPREAD_NAMES } from '../index';
+import {
+  TarotCard, SpreadReader, SPREAD_NAMES,
+} from '../index';
 import { SpreadRenderer } from '../spreads/renderer';
 
-const allCards: TarotCard[] = [...Object.values(MAJOR_ARCANA_CARDS), ...Object.values(MINOR_ARCANA_CARDS)];
+const allCards: TarotCard[] = [
+  ...Object.values(MAJOR_ARCANA_CARDS),
+  ...Object.values(MINOR_ARCANA_CARDS),
+];
 
 export function clearConsole() {
   console.log('\x1B[2J\x1B[0f');
@@ -12,9 +18,9 @@ export function clearConsole() {
 
 export function displayWelcomeMessage() {
   clearConsole();
-  console.log("Welcome, seeker of truths, to the realm of CLIO, the Command Line Interface Oracle.");
-  console.log("The digital ether hums with ancient secrets, and I am here to channel them for you.");
-  console.log("Speak your desires, and let the command line unveil your destiny!\n");
+  console.log('Welcome, seeker of truths, to the realm of CLIO, the Command Line Interface Oracle.');
+  console.log('The digital ether hums with ancient secrets, and I am here to channel them for you.');
+  console.log('Speak your desires, and let the command line unveil your destiny!\n');
 }
 
 export async function learnAboutSingleCard(): Promise<boolean> {
@@ -23,11 +29,11 @@ export async function learnAboutSingleCard(): Promise<boolean> {
       type: 'list',
       name: 'cardName',
       message: 'Which card do you wish to learn about?',
-      choices: allCards.map(card => card.getName()),
+      choices: allCards.map((card) => card.getName()),
     },
   ]);
 
-  const selectedCard = allCards.find(card => card.getName() === answer.cardName);
+  const selectedCard = allCards.find((card) => card.getName() === answer.cardName);
   if (selectedCard) {
     clearConsole();
     console.log(`\n*** ${selectedCard.getName()} ***`);
@@ -35,15 +41,15 @@ export async function learnAboutSingleCard(): Promise<boolean> {
     console.log(`\nKeywords: ${selectedCard.keywords.join(', ')}`);
     console.log('\nMeanings:');
     console.log('  Upright:');
-    selectedCard.uprightMeanings.forEach(meaning => console.log(`    - ${meaning}`));
+    selectedCard.uprightMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
     console.log('  Reversed:');
-    selectedCard.reversedMeanings.forEach(meaning => console.log(`    - ${meaning}`));
+    selectedCard.reversedMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
   }
 
   const continueAnswer = await inquirer.prompt({
     type: 'confirm',
     name: 'continue',
-    message: '\nWould you like to learn about another card?'
+    message: '\nWould you like to learn about another card?',
   });
 
   return continueAnswer.continue;
@@ -59,7 +65,7 @@ export async function getSingleReading(): Promise<boolean> {
     },
   ]);
 
-  const spreadName = answer.spreadName;
+  const { spreadName } = answer;
   const reader = new SpreadReader();
   const reading = reader.performReading(spreadName);
   const renderer = new SpreadRenderer();
@@ -71,13 +77,18 @@ export async function getSingleReading(): Promise<boolean> {
 
   console.log("\nLet's gaze deeper into the cards...\n");
 
-  reading.cards.forEach(cardPosition => {
-    const spreadPosition = reading.spread.positions.find(p => p.position === cardPosition.position);
+  reading.cards.forEach((cardPosition) => {
+    const spreadPosition = reading.spread.positions.find(
+      (p) => p.position === cardPosition.position,
+    );
     if (spreadPosition) {
       console.log(`*** ${cardPosition.card.getName()} (${spreadPosition.name}) ***`);
       const reversed = cardPosition.isReversed;
       console.log(`This card is ${reversed ? 'reversed' : 'upright'}.`);
-      console.log(`It speaks of: ${reversed ? cardPosition.card.reversedMeanings[0] : cardPosition.card.uprightMeanings[0]}`);
+      const meaning = reversed
+        ? cardPosition.card.reversedMeanings[0]
+        : cardPosition.card.uprightMeanings[0];
+      console.log(`It speaks of: ${meaning}`);
       console.log('\n');
     }
   });
@@ -85,7 +96,7 @@ export async function getSingleReading(): Promise<boolean> {
   const continueAnswer = await inquirer.prompt({
     type: 'confirm',
     name: 'continue',
-    message: '\nWould you like another reading?'
+    message: '\nWould you like another reading?',
   });
 
   return continueAnswer.continue;
@@ -95,7 +106,8 @@ export async function mainMenu(): Promise<void> {
   displayWelcomeMessage();
 
   let running = true;
-  while(running) {
+  while (running) {
+    // eslint-disable-next-line no-await-in-loop
     const answers = await inquirer.prompt([
       {
         type: 'list',
@@ -110,22 +122,28 @@ export async function mainMenu(): Promise<void> {
       },
     ]);
 
+    let keepLearning;
+    let keepReading;
     switch (answers.choice) {
       case 'Learn about the tarot cards':
-        let keepLearning = true;
+        keepLearning = true;
         while (keepLearning) {
+          // eslint-disable-next-line no-await-in-loop
           keepLearning = await learnAboutSingleCard();
         }
         break;
       case 'Get a sample tarot reading':
-        let keepReading = true;
+        keepReading = true;
         while (keepReading) {
+          // eslint-disable-next-line no-await-in-loop
           keepReading = await getSingleReading();
         }
         break;
       case 'Exit':
         console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
         running = false;
+        break;
+      default:
         break;
     }
   }

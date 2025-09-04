@@ -35,11 +35,14 @@
  * - simplePastPresent
  * - cross spread
  */
+/* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import { MAJOR_ARCANA_CARDS, getMajorArcanaCard } from './cards/major-arcana';
-import { MINOR_ARCANA_CARDS, getMinorArcanaCard } from './cards/minor-arcana';
-import { MajorArcana, MinorArcana, SVGOptions, TarotCard } from './types';
+import { getMajorArcanaCard } from './cards/major-arcana';
+import { getMinorArcanaCard } from './cards/minor-arcana';
+import {
+  MajorArcana, MinorArcana, SVGOptions, TarotCard,
+} from './types';
 import { SpreadReader, SPREAD_NAMES } from './spreads/spreads';
 import { SpreadRenderer } from './spreads/renderer';
 
@@ -77,7 +80,12 @@ function generateSamples() {
   const spreadRenderer = new SpreadRenderer();
 
   // --- Generate Individual Cards ---
-  const individualCards: { name: string, card: TarotCard, options?: SVGOptions, isReversed?: boolean }[] = [
+  const individualCards: {
+    name: string,
+    card: TarotCard,
+    options?: SVGOptions,
+    isReversed?: boolean
+  }[] = [
     { name: 'ace-of-cups', card: getMinorArcanaCard(MinorArcana.AceOfCups)! },
     { name: '2-of-cups', card: getMinorArcanaCard(MinorArcana.TwoOfCups)! },
     { name: '3-of-cups-reversed', card: getMinorArcanaCard(MinorArcana.ThreeOfCups)!, isReversed: true },
@@ -100,15 +108,15 @@ function generateSamples() {
         art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
         hide_title: true,
         hide_number: true,
-        hide_emoji: true
-      }
+        hide_emoji: true,
+      },
     },
     {
       name: '9-of-swords-generic-bg',
       card: getMinorArcanaCard(MinorArcana.NineOfSwords)!,
       options: {
-        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png'))
-      }
+        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
+      },
     },
     {
       name: '2-of-swords-generic-bg-no-text',
@@ -116,26 +124,26 @@ function generateSamples() {
       options: {
         art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
         hide_number: true,
-        hide_emoji: true
-      }
+        hide_emoji: true,
+      },
     },
   ];
 
-  for (const sample of individualCards) {
+  individualCards.forEach((sample) => {
     const svg = sample.card.getSvg({ ...sample.options, isReversed: sample.isReversed });
     fs.writeFileSync(path.join(samplesDir, `${sample.name}.svg`), svg);
-  }
+  });
 
   // --- Generate Spreads ---
   const spreadsToGenerate = [
     { name: SPREAD_NAMES.singleCard, interpretation: undefined },
-    { name: SPREAD_NAMES.threeCard, interpretation: "A simple look at the past, present, and future." },
-    { name: SPREAD_NAMES.celticCross, interpretation: "A deep dive into a complex situation." },
+    { name: SPREAD_NAMES.threeCard, interpretation: 'A simple look at the past, present, and future.' },
+    { name: SPREAD_NAMES.celticCross, interpretation: 'A deep dive into a complex situation.' },
     { name: SPREAD_NAMES.simplePastPresent, interpretation: undefined },
-    { name: SPREAD_NAMES.crossSpread, interpretation: "A look at the core of the situation and its challenges." },
+    { name: SPREAD_NAMES.crossSpread, interpretation: 'A look at the core of the situation and its challenges.' },
   ];
 
-  for (const spreadInfo of spreadsToGenerate) {
+  spreadsToGenerate.forEach((spreadInfo) => {
     const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
     if (spreadInfo.interpretation) {
       reading.interpretation = spreadInfo.interpretation;
@@ -148,7 +156,7 @@ function generateSamples() {
     // Generate SVG Representation
     const svgRepresentation = spreadRenderer.renderAsSvg(reading, false);
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-svg.svg`), svgRepresentation);
-  }
+  });
 
   // --- Generate Animated Spreads ---
   const animatedSpreadsToGenerate = [
@@ -156,11 +164,11 @@ function generateSamples() {
     { name: SPREAD_NAMES.celticCross },
   ];
 
-  for (const spreadInfo of animatedSpreadsToGenerate) {
+  animatedSpreadsToGenerate.forEach((spreadInfo) => {
     const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
     const svgRepresentation = spreadRenderer.renderAsSvg(reading, true);
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-animated.svg`), svgRepresentation);
-  }
+  });
 
   console.log('All sample SVGs and spreads generated in ./samples directory.');
 }

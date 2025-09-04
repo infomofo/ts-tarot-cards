@@ -32,10 +32,11 @@ These are general principles for agentic coding that apply to any project.
 These are specific directives for working with the ts-tarot-cards repository.
 
 1.  **Code must be type-safe.** Maintain full TypeScript coverage with proper type annotations.
-2.  **Generate sample SVG files.** When changing SVG generation logic, run `npm run generate-samples` to create updated samples.
-3.  **Use the strategy pattern for variable behaviors.** This applies to features like card selection and shuffling.
-4.  **Design for localization.** Interfaces should be designed to support future internationalization.
-5.  **Be proactive in SVG verification.** If the provided tools are insufficient to verify a visual change to an SVG, attempt to install and use additional tools through `npm` to create a more robust verification process.
+2.  **All code must pass the linter.** Before submitting a pull request, run `npm run lint` and fix any issues.
+3.  **Generate sample SVG files.** When changing SVG generation logic, run `npm run generate-samples` to create updated samples.
+4.  **Use the strategy pattern for variable behaviors.** This applies to features like card selection and shuffling.
+5.  **Design for localization.** Interfaces should be designed to support future internationalization.
+6.  **Be proactive in SVG verification.** If the provided tools are insufficient to verify a visual change to an SVG, attempt to install and use additional tools through `npm` to create a more robust verification process.
 
 ---
 

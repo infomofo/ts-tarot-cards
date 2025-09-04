@@ -113,20 +113,20 @@ export async function mainMenu(): Promise<void> {
     switch (answers.choice) {
       case 'Learn about the tarot cards':
         let keepLearning = true;
-        while(keepLearning) {
+        while (keepLearning) {
           keepLearning = await learnAboutSingleCard();
         }
         break;
       case 'Get a sample tarot reading':
         let keepReading = true;
-        while(keepReading) {
+        while (keepReading) {
           keepReading = await getSingleReading();
         }
         break;
       case 'Exit':
         console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
         running = false;
-        process.exit(0);
+        break;
     }
   }
 }

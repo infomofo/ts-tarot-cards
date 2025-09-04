@@ -17,117 +17,112 @@ export function displayWelcomeMessage() {
   console.log("Speak your desires, and let the command line unveil your destiny!\n");
 }
 
-export function learnAboutCards(): Promise<any> {
-  return inquirer
-    .prompt([
-      {
-        type: 'list',
-        name: 'cardName',
-        message: 'Which card do you wish to learn about?',
-        choices: allCards.map(card => card.getName()),
-      },
-    ])
-    .then(answer => {
-      const selectedCard = allCards.find(card => card.getName() === answer.cardName);
-      if (selectedCard) {
-        clearConsole();
-        console.log(`\n*** ${selectedCard.getName()} ***`);
-        console.log(`\nDescription: ${selectedCard.description}`);
-        console.log(`\nKeywords: ${selectedCard.keywords.join(', ')}`);
-        console.log('\nMeanings:');
-        console.log('  Upright:');
-        selectedCard.uprightMeanings.forEach(meaning => console.log(`    - ${meaning}`));
-        console.log('  Reversed:');
-        selectedCard.reversedMeanings.forEach(meaning => console.log(`    - ${meaning}`));
-      }
-      return inquirer.prompt({
-        type: 'confirm',
-        name: 'continue',
-        message: '\nWould you like to learn about another card?'
-      }).then(answer => {
-        if(answer.continue) {
-          return learnAboutCards();
-        } else {
-          return mainMenu();
-        }
-      })
-    });
+export async function learnAboutCards(): Promise<any> {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'cardName',
+      message: 'Which card do you wish to learn about?',
+      choices: allCards.map(card => card.getName()),
+    },
+  ]);
+
+  const selectedCard = allCards.find(card => card.getName() === answer.cardName);
+  if (selectedCard) {
+    clearConsole();
+    console.log(`\n*** ${selectedCard.getName()} ***`);
+    console.log(`\nDescription: ${selectedCard.description}`);
+    console.log(`\nKeywords: ${selectedCard.keywords.join(', ')}`);
+    console.log('\nMeanings:');
+    console.log('  Upright:');
+    selectedCard.uprightMeanings.forEach(meaning => console.log(`    - ${meaning}`));
+    console.log('  Reversed:');
+    selectedCard.reversedMeanings.forEach(meaning => console.log(`    - ${meaning}`));
+  }
+
+  const continueAnswer = await inquirer.prompt({
+    type: 'confirm',
+    name: 'continue',
+    message: '\nWould you like to learn about another card?'
+  });
+
+  if (continueAnswer.continue) {
+    return learnAboutCards();
+  } else {
+    return mainMenu();
+  }
 }
 
-export function getAReading(): Promise<any> {
-  return inquirer
-    .prompt([
-      {
-        type: 'list',
-        name: 'spreadName',
-        message: 'The veils of fate are thin. Choose a spread to part them:',
-        choices: Object.values(SPREAD_NAMES),
-      },
-    ])
-    .then(async answer => {
-      const spreadName = answer.spreadName;
-      const reader = new SpreadReader();
-      const reading = reader.performReading(spreadName);
-      const renderer = new SpreadRenderer();
-      const textLayout = renderer.renderAsText(reading);
+export async function getAReading(): Promise<any> {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'spreadName',
+      message: 'The veils of fate are thin. Choose a spread to part them:',
+      choices: Object.values(SPREAD_NAMES),
+    },
+  ]);
 
-      clearConsole();
-      console.log(`\nThe cosmos has spoken! Your ${spreadName} reading unfolds:\n`);
-      console.log(textLayout);
+  const spreadName = answer.spreadName;
+  const reader = new SpreadReader();
+  const reading = reader.performReading(spreadName);
+  const renderer = new SpreadRenderer();
+  const textLayout = renderer.renderAsText(reading);
 
-      console.log("\nLet's gaze deeper into the cards...\n");
+  clearConsole();
+  console.log(`\nThe cosmos has spoken! Your ${spreadName} reading unfolds:\n`);
+  console.log(textLayout);
 
-      reading.cards.forEach(cardPosition => {
-        const spreadPosition = reading.spread.positions.find(p => p.position === cardPosition.position);
-        if (spreadPosition) {
-          console.log(`*** ${cardPosition.card.getName()} (${spreadPosition.name}) ***`);
-          const reversed = cardPosition.isReversed;
-          console.log(`This card is ${reversed ? 'reversed' : 'upright'}.`);
-          console.log(`It speaks of: ${reversed ? cardPosition.card.reversedMeanings[0] : cardPosition.card.uprightMeanings[0]}`);
-          console.log('\n');
-        }
-      });
+  console.log("\nLet's gaze deeper into the cards...\n");
 
-      return inquirer.prompt({
-        type: 'confirm',
-        name: 'continue',
-        message: '\nWould you like another reading?'
-      }).then(answer => {
-        if(answer.continue) {
-          return getAReading();
-        } else {
-          return mainMenu();
-        }
-      })
-    });
+  reading.cards.forEach(cardPosition => {
+    const spreadPosition = reading.spread.positions.find(p => p.position === cardPosition.position);
+    if (spreadPosition) {
+      console.log(`*** ${cardPosition.card.getName()} (${spreadPosition.name}) ***`);
+      const reversed = cardPosition.isReversed;
+      console.log(`This card is ${reversed ? 'reversed' : 'upright'}.`);
+      console.log(`It speaks of: ${reversed ? cardPosition.card.reversedMeanings[0] : cardPosition.card.uprightMeanings[0]}`);
+      console.log('\n');
+    }
+  });
+
+  const continueAnswer = await inquirer.prompt({
+    type: 'confirm',
+    name: 'continue',
+    message: '\nWould you like another reading?'
+  });
+
+  if (continueAnswer.continue) {
+    return getAReading();
+  } else {
+    return mainMenu();
+  }
 }
 
-export function mainMenu(): Promise<any> {
-  return inquirer
-    .prompt([
-      {
-        type: 'list',
-        name: 'choice',
-        message: 'What secrets do you wish to unravel?',
-        choices: [
-          'Learn about the tarot cards',
-          'Get a sample tarot reading',
-          new inquirer.Separator(),
-          'Exit',
-        ],
-      },
-    ])
-    .then((answers) => {
-      switch (answers.choice) {
-        case 'Learn about the tarot cards':
-          return learnAboutCards();
-        case 'Get a sample tarot reading':
-          return getAReading();
-        case 'Exit':
-          console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
-          process.exit(0);
-      }
-    });
+export async function mainMenu(): Promise<any> {
+  const answers = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'choice',
+      message: 'What secrets do you wish to unravel?',
+      choices: [
+        'Learn about the tarot cards',
+        'Get a sample tarot reading',
+        new inquirer.Separator(),
+        'Exit',
+      ],
+    },
+  ]);
+
+  switch (answers.choice) {
+    case 'Learn about the tarot cards':
+      return learnAboutCards();
+    case 'Get a sample tarot reading':
+      return getAReading();
+    case 'Exit':
+      console.log('\nThe digital winds whisper farewell. May your path be ever illuminated.\n');
+      process.exit(0);
+  }
 }
 
 if (require.main === module) {

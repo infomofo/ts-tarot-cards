@@ -1,8 +1,3 @@
-jest.mock('inquirer');
-import inquirer from 'inquirer';
-import { mainMenu } from '../src/cli/index';
-import { SpreadReader } from '../src/index';
-
 describe('CLIO CLI', () => {
   let consoleLogSpy: jest.SpyInstance;
   let consoleErrorSpy: jest.SpyInstance;
@@ -10,7 +5,6 @@ describe('CLIO CLI', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    (inquirer.prompt as unknown as jest.Mock).mockClear();
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     processExitSpy = jest.spyOn(process, 'exit').mockImplementation((() => {}) as (code?: any) => never);
@@ -21,8 +15,15 @@ describe('CLIO CLI', () => {
   });
 
   it('should display the main menu and exit', async () => {
-    (inquirer.prompt as unknown as jest.Mock).mockResolvedValue({ choice: 'Exit' });
+    jest.doMock('inquirer', () => ({
+      prompt: jest.fn().mockResolvedValue({ choice: 'Exit' }),
+      Separator: jest.fn(),
+    }));
+
+    const { mainMenu } = require('../src/cli/index');
     await mainMenu();
+
+    const inquirer = require('inquirer');
     expect(inquirer.prompt).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({ name: 'choice' })
@@ -32,7 +33,7 @@ describe('CLIO CLI', () => {
   });
 
   it('should show card details and loop', async () => {
-    (inquirer.prompt as unknown as jest.Mock)
+    const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Learn about the tarot cards' })
       .mockResolvedValueOnce({ cardName: 'The Fool' })
       .mockResolvedValueOnce({ continue: true })
@@ -40,9 +41,15 @@ describe('CLIO CLI', () => {
       .mockResolvedValueOnce({ continue: false })
       .mockResolvedValueOnce({ choice: 'Exit' });
 
+    jest.doMock('inquirer', () => ({
+      prompt: mockPrompt,
+      Separator: jest.fn(),
+    }));
+
+    const { mainMenu } = require('../src/cli/index');
     await mainMenu();
 
-    expect(inquirer.prompt).toHaveBeenCalledTimes(6);
+    expect(mockPrompt).toHaveBeenCalledTimes(6);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool ***'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician ***'));
   });
@@ -59,17 +66,29 @@ describe('CLIO CLI', () => {
       allowReversals: true,
       timestamp: new Date(),
     };
-    jest.spyOn(SpreadReader.prototype, 'performReading').mockReturnValue(mockReading as any);
 
-    (inquirer.prompt as unknown as jest.Mock)
+    jest.doMock('../src/index', () => ({
+      ...jest.requireActual('../src/index'),
+      SpreadReader: jest.fn().mockImplementation(() => ({
+        performReading: jest.fn().mockReturnValue(mockReading),
+      })),
+    }));
+
+    const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Get a sample tarot reading' })
       .mockResolvedValueOnce({ spreadName: 'threeCard' })
       .mockResolvedValueOnce({ continue: false })
       .mockResolvedValueOnce({ choice: 'Exit' });
 
+    jest.doMock('inquirer', () => ({
+      prompt: mockPrompt,
+      Separator: jest.fn(),
+    }));
+
+    const { mainMenu } = require('../src/cli/index');
     await mainMenu();
 
-    expect(inquirer.prompt).toHaveBeenCalledTimes(4);
+    expect(mockPrompt).toHaveBeenCalledTimes(4);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool (Past) ***'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician (Present) ***'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The High Priestess (Future) ***'));

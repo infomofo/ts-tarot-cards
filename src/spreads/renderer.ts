@@ -2,7 +2,7 @@
 import { SpreadReading } from '../types';
 
 export class SpreadRenderer {
-  static renderAsText(reading: SpreadReading): string {
+  renderAsText(reading: SpreadReading): string {
     const { layout } = reading.spread;
     const { cards } = reading;
 
@@ -40,7 +40,7 @@ export class SpreadRenderer {
     return output;
   }
 
-  static renderAsSvg(reading: SpreadReading, animate: boolean = false): string {
+  renderAsSvg(reading: SpreadReading, animate: boolean = false): string {
     const { layout } = reading.spread;
     const { cards } = reading;
 

@@ -226,12 +226,12 @@ export interface SuitProperties {
 
 // SVG generation options
 export interface SVGOptions {
-  art_override_url?: string;
-  hide_number?: boolean;
-  hide_emoji?: boolean;
-  hide_title?: boolean;
+  artOverrideUrl?: string;
+  hideNumber?: boolean;
+  hideEmoji?: boolean;
+  hideTitle?: boolean;
   isReversed?: boolean;
-  inner_svg?: boolean;
+  innerSvg?: boolean;
   animate?: boolean;
   dealOrder?: number;
   dealDelay?: number;

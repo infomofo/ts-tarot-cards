@@ -37,19 +37,19 @@ describe('Card Representations', () => {
   describe('SVG Representation', () => {
     test('should hide title correctly', () => {
         const card = getMinorArcanaCard(MinorArcana.FourOfCups) as MinorArcanaCard;
-        const svg = card.getSvg({ hide_title: true });
+        const svg = card.getSvg({ hideTitle: true });
         expect(svg).not.toContain(card.getName());
     });
 
     test('should hide number correctly for numbered card', () => {
         const card = getMinorArcanaCard(MinorArcana.FourOfCups) as MinorArcanaCard;
-        const svg = card.getSvg({ hide_number: true });
+        const svg = card.getSvg({ hideNumber: true });
         expect(svg).not.toContain(card.romanNumeral);
     });
 
     test('should hide rank correctly for face card', () => {
         const card = getMinorArcanaCard(MinorArcana.PageOfSwords) as MinorArcanaCard;
-        const svg = card.getSvg({ hide_number: true });
+        const svg = card.getSvg({ hideNumber: true });
         const topText = getTopText(card);
         // Check that the top text element is not present
         expect(svg).not.toContain(`<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">${topText}</text>`);
@@ -65,14 +65,14 @@ describe('Card Representations', () => {
 
     test('should not show emojis when hidden', () => {
         const card = getMinorArcanaCard(MinorArcana.ThreeOfWands) as MinorArcanaCard;
-        const svg = card.getSvg({ hide_emoji: true });
+        const svg = card.getSvg({ hideEmoji: true });
         expect(svg).not.toContain(SUIT_PROPERTIES[Suit.Wands].emoji);
     });
 
     test('should embed image with data URI', () => {
         const card = getMajorArcanaCard(MajorArcana.TheFool) as MajorArcanaCard;
         const dummyDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
-        const svg = card.getSvg({ art_override_url: dummyDataUri });
+        const svg = card.getSvg({ artOverrideUrl: dummyDataUri });
         expect(svg).toContain('<image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="');
     });
   });

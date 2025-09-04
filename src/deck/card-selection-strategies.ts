@@ -15,7 +15,7 @@ export class DealStrategy implements CardSelectionStrategy {
    * @param count - The number of cards to select
    * @returns An array of selected tarot cards
    */
-  static selectCards(deck: TarotCard[], count: number): TarotCard[] {
+  selectCards(deck: TarotCard[], count: number): TarotCard[] {
     if (count > deck.length) {
       throw new Error(`Cannot deal ${count} cards, only ${deck.length} available`);
     }

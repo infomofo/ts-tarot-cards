@@ -21,5 +21,6 @@ module.exports = {
   ],
   rules: {
     'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
   },
 };

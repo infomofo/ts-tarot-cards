@@ -11,19 +11,19 @@ export class FisherYatesShuffleStrategy implements ShuffleStrategy {
   description = 'Modern shuffle algorithm that ensures each card has an equal probability '
     + 'of ending up in any position';
 
-  static shuffle(cards: TarotCard[]): TarotCard[] {
+  shuffle(cards: TarotCard[]): TarotCard[] {
     const shuffled = [...cards];
 
     // Fisher-Yates shuffle algorithm
     for (let i = shuffled.length - 1; i > 0; i -= 1) {
-      const j = FisherYatesShuffleStrategy.getBiometricRandomIndex(i + 1);
+      const j = this.getBiometricRandomIndex(i + 1);
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
     return shuffled;
   }
 
-  private static getBiometricRandomIndex(max: number): number {
+  private getBiometricRandomIndex(max: number): number {
     // TODO: Integrate with biometric randomness source
     return Math.floor(Math.random() * max);
   }

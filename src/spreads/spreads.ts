@@ -177,7 +177,7 @@ export class SpreadReader {
   /**
    * Biometric randomness stub - could integrate with hardware or biometric data
    */
-  private static getBiometricRandomIndex(max: number): number {
+  private getBiometricRandomIndex(max: number): number {
     // TODO: Integrate with biometric randomness source
     return Math.floor(Math.random() * max);
   }
@@ -282,7 +282,7 @@ export class SpreadReader {
   /**
    * Generate interpretations for a reading
    */
-  static generateInterpretations(reading: SpreadReading): CardInterpretation[] {
+  generateInterpretations(reading: SpreadReading): CardInterpretation[] {
     return reading.cards.map((cardPosition, index) => {
       const position = reading.spread.positions[index];
       return {
@@ -300,7 +300,7 @@ export class SpreadReader {
   /**
    * Get a specific spread template
    */
-  static getSpread(spreadName: keyof typeof SPREADS): Spread {
+  getSpread(spreadName: keyof typeof SPREADS): Spread {
     const spread = SPREADS[spreadName];
     if (!spread) {
       throw new Error(`Unknown spread: ${spreadName}`);
@@ -311,14 +311,14 @@ export class SpreadReader {
   /**
    * Get all available spread names
    */
-  static getAvailableSpreads(): string[] {
+  getAvailableSpreads(): string[] {
     return Object.keys(SPREADS);
   }
 
   /**
    * Create a custom spread
    */
-  static createCustomSpread(
+  createCustomSpread(
     name: string,
     description: string,
     positions: SpreadPosition[],
@@ -339,7 +339,7 @@ export class SpreadReader {
   /**
    * Get available card selection strategies
    */
-  static getAvailableStrategies(): Record<string, CardSelectionStrategy> {
+  getAvailableStrategies(): Record<string, CardSelectionStrategy> {
     return CARD_SELECTION_STRATEGIES;
   }
 

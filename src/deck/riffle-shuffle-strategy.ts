@@ -14,7 +14,7 @@ export class RiffleShuffleStrategy implements ShuffleStrategy {
     let shuffled = [...cards];
 
     // Perform multiple riffle shuffles (3-7 times is typical)
-    const passes = 3 + RiffleShuffleStrategy.getBiometricRandomIndex(5); // 3-7 passes
+    const passes = 3 + this.getBiometricRandomIndex(5); // 3-7 passes
 
     for (let pass = 0; pass < passes; pass += 1) {
       shuffled = this.singleRiffle(shuffled);
@@ -23,7 +23,7 @@ export class RiffleShuffleStrategy implements ShuffleStrategy {
     return shuffled;
   }
 
-  private static singleRiffle(cards: TarotCard[]): TarotCard[] {
+  private singleRiffle(cards: TarotCard[]): TarotCard[] {
     const mid = Math.floor(cards.length / 2);
     const firstHalf = cards.slice(0, mid);
     const secondHalf = cards.slice(mid);
@@ -40,7 +40,7 @@ export class RiffleShuffleStrategy implements ShuffleStrategy {
       } else if (j >= secondHalf.length) {
         result.push(firstHalf[i]);
         i += 1;
-      } else if (RiffleShuffleStrategy.getBiometricRandomIndex(2) === 0) {
+      } else if (this.getBiometricRandomIndex(2) === 0) {
         result.push(firstHalf[i]);
         i += 1;
       } else {
@@ -52,7 +52,7 @@ export class RiffleShuffleStrategy implements ShuffleStrategy {
     return result;
   }
 
-  private static getBiometricRandomIndex(max: number): number {
+  private getBiometricRandomIndex(max: number): number {
     // TODO: Integrate with biometric randomness source
     return Math.floor(Math.random() * max);
   }

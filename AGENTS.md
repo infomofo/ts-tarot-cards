@@ -25,7 +25,8 @@ These are general principles for agentic coding that apply to any project.
     - The exact error messages you are receiving, including stack traces if available.
     - The relevant code snippets.
     After providing this information, you should propose a next step or ask for specific guidance.
-8.  **All tests must pass.** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. If you are unable to fix a failing test, you must ask for help before submitting.
+8.  **All tests must pass.** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. You must also run the build to ensure there are no compilation errors. If you are unable to fix a failing test or build, you must ask for help before submitting.
+9.  **Acknowledge and Trust User Feedback on Discrepancies.** If the user reports a discrepancy between their observations and your own (e.g., "I see a comment but you don't"), you must assume the user is correct. Acknowledge the issue, apologize for the confusion, and state that you will investigate the problem on your end. Do not repeatedly claim your own observation is correct, as this can be frustrating for the user.
 
 ## ts-tarot-cards Laws
 

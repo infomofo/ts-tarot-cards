@@ -105,26 +105,26 @@ function generateSamples() {
       name: 'the-fool-custom-bg',
       card: getMajorArcanaCard(MajorArcana.TheFool)!,
       options: {
-        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
-        hide_title: true,
-        hide_number: true,
-        hide_emoji: true,
+        artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
+        hideTitle: true,
+        hideNumber: true,
+        hideEmoji: true,
       },
     },
     {
       name: '9-of-swords-generic-bg',
       card: getMinorArcanaCard(MinorArcana.NineOfSwords)!,
       options: {
-        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
+        artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
       },
     },
     {
       name: '2-of-swords-generic-bg-no-text',
       card: getMinorArcanaCard(MinorArcana.TwoOfSwords)!,
       options: {
-        art_override_url: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
-        hide_number: true,
-        hide_emoji: true,
+        artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
+        hideNumber: true,
+        hideEmoji: true,
       },
     },
   ];

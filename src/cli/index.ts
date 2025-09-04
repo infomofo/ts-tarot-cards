@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
-import { MAJOR_ARCANA_CARDS } from '../../src/cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../../src/cards/minor-arcana';
+import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
+import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
 import { TarotCard, SpreadReader, SPREADS, SPREAD_NAMES } from '../index';
 import { SpreadRenderer } from '../spreads/renderer';
 
@@ -17,7 +17,7 @@ export function displayWelcomeMessage() {
   console.log("Speak your desires, and let the command line unveil your destiny!\n");
 }
 
-export async function learnAboutCards(): Promise<any> {
+export async function learnAboutCards(): Promise<void> {
   const answer = await inquirer.prompt([
     {
       type: 'list',
@@ -53,7 +53,7 @@ export async function learnAboutCards(): Promise<any> {
   }
 }
 
-export async function getAReading(): Promise<any> {
+export async function getAReading(): Promise<void> {
   const answer = await inquirer.prompt([
     {
       type: 'list',
@@ -99,7 +99,7 @@ export async function getAReading(): Promise<any> {
   }
 }
 
-export async function mainMenu(): Promise<any> {
+export async function mainMenu(): Promise<void> {
   const answers = await inquirer.prompt([
     {
       type: 'list',

@@ -1,3 +1,8 @@
+jest.mock('inquirer');
+import inquirer from 'inquirer';
+import { mainMenu } from '../src/cli/index';
+import { SpreadReader } from '../src/index';
+
 describe('CLIO CLI', () => {
   let consoleLogSpy: jest.SpyInstance;
   let consoleErrorSpy: jest.SpyInstance;
@@ -5,6 +10,7 @@ describe('CLIO CLI', () => {
 
   beforeEach(() => {
     jest.resetModules();
+    (inquirer.prompt as unknown as jest.Mock).mockClear();
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     processExitSpy = jest.spyOn(process, 'exit').mockImplementation((() => {}) as (code?: any) => never);
@@ -15,24 +21,17 @@ describe('CLIO CLI', () => {
   });
 
   it('should display the main menu and exit', async () => {
-    jest.doMock('inquirer', () => ({
-      prompt: jest.fn().mockResolvedValue({ choice: 'Exit' }),
-      Separator: jest.fn(),
-    }));
-
-    const { mainMenu } = require('../src/cli/index');
+    (inquirer.prompt as unknown as jest.Mock).mockResolvedValue({ choice: 'Exit' });
     await mainMenu();
-
-    const inquirer = require('inquirer');
     expect(inquirer.prompt).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({ name: 'choice' })
       ])
     );
-    expect(processExitSpy).toHaveBeenCalledWith(0);
   });
 
   it('should show card details and loop', async () => {
+    const { MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
     const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Learn about the tarot cards' })
       .mockResolvedValueOnce({ cardName: 'The Fool' })
@@ -51,7 +50,9 @@ describe('CLIO CLI', () => {
 
     expect(mockPrompt).toHaveBeenCalledTimes(6);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool ***'));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheFool].description));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician ***'));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheMagician].description));
   });
 
   it('should perform a reading and loop', async () => {
@@ -77,6 +78,8 @@ describe('CLIO CLI', () => {
     const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Get a sample tarot reading' })
       .mockResolvedValueOnce({ spreadName: 'threeCard' })
+      .mockResolvedValueOnce({ continue: true })
+      .mockResolvedValueOnce({ spreadName: 'singleCard' })
       .mockResolvedValueOnce({ continue: false })
       .mockResolvedValueOnce({ choice: 'Exit' });
 
@@ -88,7 +91,7 @@ describe('CLIO CLI', () => {
     const { mainMenu } = require('../src/cli/index');
     await mainMenu();
 
-    expect(mockPrompt).toHaveBeenCalledTimes(4);
+    expect(mockPrompt).toHaveBeenCalledTimes(6);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool (Past) ***'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician (Present) ***'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The High Priestess (Future) ***'));

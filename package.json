@@ -30,10 +30,10 @@
     "svg-to-img": "^2.0.9",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "@types/inquirer": "^8.2.4"
   },
   "dependencies": {
-    "@types/inquirer": "^8.2.4",
     "inquirer": "^8.2.4"
   }
 }

@@ -49,6 +49,7 @@ lottery:
   position_names:
     bonus: "Bonus"
     bonus_redraw: "Bonus (Redraw)"
+    bonus_redraw_2: "Bonus (Redraw 2)"
   display_text:
     quick_pick_suffix: " + quick pick"
     all_quick_pick: "All quick pick"

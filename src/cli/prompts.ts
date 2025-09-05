@@ -53,6 +53,7 @@ interface Prompts {
     position_names: {
       bonus: string;
       bonus_redraw: string;
+      bonus_redraw_2: string;
     };
     display_text: {
       quick_pick_suffix: string;
@@ -138,6 +139,7 @@ export function loadPrompts(): Prompts {
         position_names: {
           bonus: 'Bonus',
           bonus_redraw: 'Bonus (Redraw)',
+          bonus_redraw_2: 'Bonus (Redraw 2)',
         },
         display_text: {
           quick_pick_suffix: ' + quick pick',

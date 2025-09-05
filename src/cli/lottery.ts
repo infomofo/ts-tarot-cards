@@ -114,9 +114,13 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     const positionName = `Main ${i + 1}`;
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
+    const cardDisplayName = cardPosition.isReversed
+      ? `${cardPosition.card.getName()} (Reversed)`
+      : cardPosition.card.getName();
+
     console.log(formatPrompt(prompts.lottery.card_drawn, {
       position: positionName,
-      card_name: cardPosition.card.getName(),
+      card_name: cardDisplayName,
     }));
 
     // Check if number is in valid range for main numbers
@@ -143,7 +147,7 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
 
   // Draw card(s) for bonus number with special re-draw logic
   let bonusAttempts = 0;
-  while (bonusNumber === null && bonusAttempts < 2) {
+  while (bonusNumber === null && bonusAttempts < 3) {
     const cardPositions = deck.selectCards(1);
     if (cardPositions.length === 0) {
       throw new Error('Not enough cards in deck');
@@ -157,9 +161,13 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
       console.log(prompts.lottery.bonus_redraw);
     }
 
+    const cardDisplayName = cardPosition.isReversed
+      ? `${cardPosition.card.getName()} (Reversed)`
+      : cardPosition.card.getName();
+
     console.log(formatPrompt(prompts.lottery.card_drawn, {
       position: positionName,
-      card_name: cardPosition.card.getName(),
+      card_name: cardDisplayName,
     }));
 
     // Check if number is in valid range for bonus number
@@ -171,18 +179,25 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
       bonusNumber = lotteryNumber;
     } else {
       console.log(prompts.lottery.invalid_number);
-      if (bonusAttempts === 1) {
+      if (bonusAttempts === 2) {
         quickPickCount += 1;
       }
     }
 
     // Always record the card for interpretation purposes
+    let positionNameForCard: string;
+    if (bonusAttempts === 0) {
+      positionNameForCard = prompts.lottery.position_names.bonus;
+    } else if (bonusAttempts === 1) {
+      positionNameForCard = prompts.lottery.position_names.bonus_redraw;
+    } else {
+      positionNameForCard = prompts.lottery.position_names.bonus_redraw_2;
+    }
+
     drawnCards.push({
       card: cardPosition.card,
       position: lotteryType.mainNumbers.count + bonusAttempts + 1,
-      positionName: bonusAttempts > 0
-        ? prompts.lottery.position_names.bonus_redraw
-        : prompts.lottery.position_names.bonus,
+      positionName: positionNameForCard,
       lotteryNumber,
       isReversed: cardPosition.isReversed,
     });

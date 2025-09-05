@@ -1,10 +1,44 @@
 /* eslint-disable no-console */
 import inquirer from 'inquirer';
 import { TarotDeck } from '../deck/deck';
-import { TarotCard } from '../types';
-import { getCardLotteryNumber } from './card-mapping';
+import {
+  TarotCard, Arcana, MinorArcanaCard, Suit,
+} from '../types';
 import { getGenericAiInterpretation, InterpretationContext } from './openai';
 import { loadPrompts, formatPrompt } from './prompts';
+
+/**
+ * Maps a tarot card to its lottery number according to the specified methodology:
+ * - The Fool (0) maps to 0
+ * - Major Arcana 1-21 (The Magician to The World)
+ * - Minor Arcana by suit order: Wands (22-35), Cups (36-49), Swords (50-63), Pentacles (64-77)
+ */
+function getCardLotteryNumber(card: TarotCard): number {
+  if (card.arcana === Arcana.Major) {
+    // The Fool (0) maps to 0, all other Major Arcana map to their numbers
+    return card.number as number;
+  }
+
+  if (card.arcana === Arcana.Minor) {
+    const minorCard = card as MinorArcanaCard;
+
+    // Base number for each suit (starting positions)
+    const suitBase = {
+      [Suit.Wands]: 22, // 22-35
+      [Suit.Cups]: 36, // 36-49
+      [Suit.Swords]: 50, // 50-63
+      [Suit.Pentacles]: 64, // 64-77
+    };
+
+    const base = suitBase[minorCard.suit];
+    // Minor arcana numbers are 1-14 (Ace=1 through King=14)
+    // Subtract 1 to make it 0-indexed for addition to base
+    return base + (minorCard.number as number) - 1;
+  }
+
+  // This should never happen in a properly constructed deck
+  throw new Error('Unknown card arcana');
+}
 
 interface LotteryType {
   name: string;
@@ -50,7 +84,7 @@ interface DrawnCard {
   card: TarotCard;
   position: number;
   positionName: string;
-  lotteryNumber: number | null;
+  lotteryNumber: number;
   isReversed: boolean;
 }
 
@@ -86,8 +120,7 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     }));
 
     // Check if number is in valid range for main numbers
-    const isValidMainNumber = lotteryNumber !== null
-      && lotteryNumber >= lotteryType.mainNumbers.min
+    const isValidMainNumber = lotteryNumber >= lotteryType.mainNumbers.min
       && lotteryNumber <= lotteryType.mainNumbers.max;
 
     if (isValidMainNumber) {
@@ -103,7 +136,7 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
       card: cardPosition.card,
       position: i + 1,
       positionName,
-      lotteryNumber: isValidMainNumber ? lotteryNumber : null,
+      lotteryNumber,
       isReversed: cardPosition.isReversed,
     });
   }
@@ -117,7 +150,7 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     }
     const cardPosition = cardPositions[0];
 
-    const positionName = 'Bonus';
+    const positionName = prompts.lottery.position_names.bonus;
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
     if (bonusAttempts > 0) {
@@ -130,8 +163,7 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     }));
 
     // Check if number is in valid range for bonus number
-    const isValidBonusNumber = lotteryNumber !== null
-      && lotteryNumber >= lotteryType.bonusNumber.min
+    const isValidBonusNumber = lotteryNumber >= lotteryType.bonusNumber.min
       && lotteryNumber <= lotteryType.bonusNumber.max;
 
     if (isValidBonusNumber) {
@@ -148,8 +180,10 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     drawnCards.push({
       card: cardPosition.card,
       position: lotteryType.mainNumbers.count + bonusAttempts + 1,
-      positionName: bonusAttempts > 0 ? 'Bonus (Redraw)' : 'Bonus',
-      lotteryNumber: isValidBonusNumber ? lotteryNumber : null,
+      positionName: bonusAttempts > 0
+        ? prompts.lottery.position_names.bonus_redraw
+        : prompts.lottery.position_names.bonus,
+      lotteryNumber,
       isReversed: cardPosition.isReversed,
     });
 
@@ -173,13 +207,17 @@ function displayLotteryResults(result: LotteryResult): void {
   // Display main numbers
   const validMainNumbers = result.mainNumbers.filter((n) => n !== null);
   const mainNumbersDisplay = validMainNumbers.length > 0
-    ? validMainNumbers.join(', ') + (validMainNumbers.length < result.lotteryType.mainNumbers.count ? ' + quick pick' : '')
-    : 'All quick pick';
+    ? validMainNumbers.join(prompts.lottery.display_text.separator)
+      + (validMainNumbers.length < result.lotteryType.mainNumbers.count
+        ? prompts.lottery.display_text.quick_pick_suffix : '')
+    : prompts.lottery.display_text.all_quick_pick;
 
   console.log(formatPrompt(prompts.lottery.main_numbers, { numbers: mainNumbersDisplay }));
 
   // Display bonus number
-  const bonusDisplay = result.bonusNumber !== null ? result.bonusNumber.toString() : 'Quick pick';
+  const bonusDisplay = result.bonusNumber !== null
+    ? result.bonusNumber.toString()
+    : prompts.lottery.display_text.quick_pick;
   console.log(formatPrompt(prompts.lottery.bonus_number, { number: bonusDisplay }));
 
   // Display quick pick count if any
@@ -201,13 +239,13 @@ async function getLotteryInterpretation(result: LotteryResult): Promise<void> {
       // Build interpretation context
       const context: InterpretationContext = {
         userContext: `Lottery number divination for ${result.lotteryType.name}`,
-        contextType: 'lottery',
+        contextType: 'lottery' as const,
         cards: result.drawnCards.map((drawn) => ({
           card: drawn.card,
           position: drawn.positionName,
-          positionSignificance: drawn.positionName.includes('Bonus')
-            ? 'The bonus number holds special significance and amplifies fortune'
-            : 'One of the main numbers that forms the foundation of this lottery play',
+          positionSignificance: drawn.positionName.includes(prompts.lottery.position_names.bonus)
+            ? prompts.lottery.interpretation.bonus_significance
+            : prompts.lottery.interpretation.main_significance,
           isReversed: drawn.isReversed,
           additionalInfo: {
             positionName: drawn.positionName,

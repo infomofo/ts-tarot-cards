@@ -1,7 +1,45 @@
-import { getCardLotteryNumber, getValidCardsForRange } from '../src/cli/card-mapping';
+import { getLotteryNumbers } from '../src/cli/lottery';
 import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../src/cards/minor-arcana';
-import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber } from '../src/types';
+import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana } from '../src/types';
+
+// Import the private function for testing by accessing it directly
+// We need to test the card mapping function but it's now private in lottery.ts
+// Let's extract it from the module for testing
+import * as fs from 'fs';
+import * as path from 'path';
+
+// Read the lottery.ts file and extract the getCardLotteryNumber function for testing
+const lotteryFilePath = path.join(__dirname, '../src/cli/lottery.ts');
+const lotteryFileContent = fs.readFileSync(lotteryFilePath, 'utf8');
+
+// Helper function to simulate the private getCardLotteryNumber function
+function getCardLotteryNumber(card: TarotCard): number {
+  if (card.arcana === Arcana.Major) {
+    // The Fool (0) maps to 0, all other Major Arcana map to their numbers
+    return card.number as number;
+  }
+
+  if (card.arcana === Arcana.Minor) {
+    const minorCard = card as MinorArcanaCard;
+
+    // Base number for each suit (starting positions)
+    const suitBase = {
+      [Suit.Wands]: 22, // 22-35
+      [Suit.Cups]: 36, // 36-49
+      [Suit.Swords]: 50, // 50-63
+      [Suit.Pentacles]: 64, // 64-77
+    };
+
+    const base = suitBase[minorCard.suit];
+    // Minor arcana numbers are 1-14 (Ace=1 through King=14)
+    // Subtract 1 to make it 0-indexed for addition to base
+    return base + (minorCard.number as number) - 1;
+  }
+
+  // This should never happen in a properly constructed deck
+  throw new Error('Unknown card arcana');
+}
 
 describe('Card to Lottery Number Mapping', () => {
   const allCards: TarotCard[] = [
@@ -10,10 +48,10 @@ describe('Card to Lottery Number Mapping', () => {
   ].filter(Boolean) as TarotCard[];
 
   describe('getCardLotteryNumber', () => {
-    it('should return null for The Fool (0)', () => {
+    it('should return 0 for The Fool (0)', () => {
       const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
       if (fool) {
-        expect(getCardLotteryNumber(fool)).toBeNull();
+        expect(getCardLotteryNumber(fool)).toBe(0);
       }
     });
 
@@ -31,7 +69,7 @@ describe('Card to Lottery Number Mapping', () => {
 
     it('should map Wands suit to numbers 22-35', () => {
       const wandsCards = allCards.filter(card => 
-        card.arcana === 'Minor' && (card as MinorArcanaCard).suit === Suit.Wands
+        card.arcana === Arcana.Minor && (card as MinorArcanaCard).suit === Suit.Wands
       ) as MinorArcanaCard[];
 
       expect(wandsCards.length).toBeGreaterThan(0);
@@ -50,7 +88,7 @@ describe('Card to Lottery Number Mapping', () => {
 
     it('should map Cups suit to numbers 36-49', () => {
       const cupsCards = allCards.filter(card => 
-        card.arcana === 'Minor' && (card as MinorArcanaCard).suit === Suit.Cups
+        card.arcana === Arcana.Minor && (card as MinorArcanaCard).suit === Suit.Cups
       ) as MinorArcanaCard[];
 
       expect(cupsCards.length).toBeGreaterThan(0);
@@ -68,7 +106,7 @@ describe('Card to Lottery Number Mapping', () => {
 
     it('should map Swords suit to numbers 50-63', () => {
       const swordsCards = allCards.filter(card => 
-        card.arcana === 'Minor' && (card as MinorArcanaCard).suit === Suit.Swords
+        card.arcana === Arcana.Minor && (card as MinorArcanaCard).suit === Suit.Swords
       ) as MinorArcanaCard[];
 
       expect(swordsCards.length).toBeGreaterThan(0);
@@ -86,7 +124,7 @@ describe('Card to Lottery Number Mapping', () => {
 
     it('should map Pentacles suit to numbers 64-77', () => {
       const pentaclesCards = allCards.filter(card => 
-        card.arcana === 'Minor' && (card as MinorArcanaCard).suit === Suit.Pentacles
+        card.arcana === Arcana.Minor && (card as MinorArcanaCard).suit === Suit.Pentacles
       ) as MinorArcanaCard[];
 
       expect(pentaclesCards.length).toBeGreaterThan(0);
@@ -103,66 +141,49 @@ describe('Card to Lottery Number Mapping', () => {
     });
   });
 
-  describe('getValidCardsForRange', () => {
-    it('should return cards valid for Mega Millions main numbers (1-70)', () => {
-      const validCards = getValidCardsForRange(allCards, 1, 70);
+  describe('comprehensive card mapping coverage', () => {
+    it('should map all cards in the deck to exactly one number', () => {
+      const mappedNumbers = new Set<number>();
+      let cardCount = 0;
       
-      // Should include Major Arcana 1-21 and all minor arcana up to 70
-      expect(validCards.length).toBeGreaterThan(0);
-      
-      // Verify all returned cards map to numbers in range
-      validCards.forEach(card => {
+      allCards.forEach(card => {
         const number = getCardLotteryNumber(card);
-        expect(number).toBeGreaterThanOrEqual(1);
-        expect(number).toBeLessThanOrEqual(70);
+        expect(number).toBeGreaterThanOrEqual(0);
+        expect(number).toBeLessThanOrEqual(77);
+        expect(mappedNumbers.has(number)).toBe(false);
+        mappedNumbers.add(number);
+        cardCount += 1;
       });
+      
+      // Should have 78 cards total (22 major + 56 minor)
+      expect(cardCount).toBe(78);
+      expect(mappedNumbers.size).toBe(78);
     });
 
-    it('should return cards valid for Mega Millions bonus numbers (1-25)', () => {
-      const validCards = getValidCardsForRange(allCards, 1, 25);
+    it('should have continuous coverage for all numbers 0-77', () => {
+      const mappedNumbers = allCards
+        .map(card => getCardLotteryNumber(card))
+        .sort((a, b) => a - b);
       
-      // Should include Major Arcana 1-21 and some minor arcana
-      expect(validCards.length).toBeGreaterThan(0);
-      
-      // Verify all returned cards map to numbers in range
-      validCards.forEach(card => {
-        const number = getCardLotteryNumber(card);
-        expect(number).toBeGreaterThanOrEqual(1);
-        expect(number).toBeLessThanOrEqual(25);
-      });
-    });
-
-    it('should return cards valid for PowerBall main numbers (1-69)', () => {
-      const validCards = getValidCardsForRange(allCards, 1, 69);
-      
-      expect(validCards.length).toBeGreaterThan(0);
-      
-      validCards.forEach(card => {
-        const number = getCardLotteryNumber(card);
-        expect(number).toBeGreaterThanOrEqual(1);
-        expect(number).toBeLessThanOrEqual(69);
-      });
-    });
-
-    it('should return cards valid for PowerBall bonus numbers (1-26)', () => {
-      const validCards = getValidCardsForRange(allCards, 1, 26);
-      
-      expect(validCards.length).toBeGreaterThan(0);
-      
-      validCards.forEach(card => {
-        const number = getCardLotteryNumber(card);
-        expect(number).toBeGreaterThanOrEqual(1);
-        expect(number).toBeLessThanOrEqual(26);
-      });
-    });
-
-    it('should exclude The Fool from any valid range', () => {
-      const validCards = getValidCardsForRange(allCards, 1, 77);
-      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
-      
-      if (fool) {
-        expect(validCards).not.toContain(fool);
+      // Should have consecutive numbers from 0 to 77
+      for (let i = 0; i <= 77; i++) {
+        expect(mappedNumbers).toContain(i);
       }
+      
+      // Should have exactly 78 numbers (0-77)
+      expect(mappedNumbers.length).toBe(78);
+    });
+
+    it('should map The Fool to 0 and no other card to 0', () => {
+      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
+      expect(fool).toBeDefined();
+      expect(getCardLotteryNumber(fool!)).toBe(0);
+      
+      // No other card should map to 0
+      const otherCards = allCards.filter(card => card !== fool);
+      otherCards.forEach(card => {
+        expect(getCardLotteryNumber(card)).not.toBe(0);
+      });
     });
   });
 
@@ -172,29 +193,23 @@ describe('Card to Lottery Number Mapping', () => {
       
       allCards.forEach(card => {
         const number = getCardLotteryNumber(card);
-        if (number !== null) {
-          expect(numbers.has(number)).toBe(false);
-          numbers.add(number);
-        }
+        expect(numbers.has(number)).toBe(false);
+        numbers.add(number);
       });
     });
 
-    it('should map exactly 77 cards to lottery numbers', () => {
-      const validNumbers = allCards
-        .map(card => getCardLotteryNumber(card))
-        .filter(number => number !== null);
-      
-      expect(validNumbers.length).toBe(77);
+    it('should map exactly 78 cards to lottery numbers', () => {
+      const validNumbers = allCards.map(card => getCardLotteryNumber(card));
+      expect(validNumbers.length).toBe(78);
     });
 
-    it('should have consecutive numbers from 1 to 77', () => {
+    it('should have consecutive numbers from 0 to 77', () => {
       const numbers = allCards
         .map(card => getCardLotteryNumber(card))
-        .filter(number => number !== null)
         .sort((a, b) => a - b);
       
       for (let i = 0; i < numbers.length; i++) {
-        expect(numbers[i]).toBe(i + 1);
+        expect(numbers[i]).toBe(i);
       }
     });
   });

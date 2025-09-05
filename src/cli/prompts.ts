@@ -50,6 +50,21 @@ interface Prompts {
     ai_reflection: string;
     ai_unavailable_lottery: string;
     continue_prompt: string;
+    position_names: {
+      bonus: string;
+      bonus_redraw: string;
+    };
+    display_text: {
+      quick_pick_suffix: string;
+      all_quick_pick: string;
+      quick_pick: string;
+      separator: string;
+    };
+    interpretation: {
+      lottery_context: string;
+      bonus_significance: string;
+      main_significance: string;
+    };
   };
   farewell: string;
   errors: {
@@ -66,7 +81,7 @@ export function loadPrompts(): Prompts {
   }
 
   try {
-    const promptsPath = path.join(__dirname, 'prompts.yaml');
+    const promptsPath = path.join(__dirname, 'strings.yaml');
     const promptsContent = fs.readFileSync(promptsPath, 'utf8');
     cachedPrompts = yaml.load(promptsContent) as Prompts;
     return cachedPrompts;
@@ -120,6 +135,21 @@ export function loadPrompts(): Prompts {
         ai_reflection: 'CLIO gazes into the cosmic significance of your drawn cards...',
         ai_unavailable_lottery: 'The digital currents are unclear for deeper interpretation, but the numbers have been chosen by fate.',
         continue_prompt: 'Would you like to divine more lottery numbers?',
+        position_names: {
+          bonus: 'Bonus',
+          bonus_redraw: 'Bonus (Redraw)',
+        },
+        display_text: {
+          quick_pick_suffix: ' + quick pick',
+          all_quick_pick: 'All quick pick',
+          quick_pick: 'Quick pick',
+          separator: ', ',
+        },
+        interpretation: {
+          lottery_context: 'lottery',
+          bonus_significance: 'The bonus number holds special significance and amplifies fortune',
+          main_significance: 'One of the main numbers that forms the foundation of this lottery play',
+        },
       },
       farewell: 'The digital winds whisper farewell. May your path be ever illuminated.',
       errors: {

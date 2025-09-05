@@ -18,7 +18,11 @@ Universal laws for agent behavior, applicable to all repositories. Update and re
 
 - **On Helpfulness & Productivity:** An agent maintains a positive, solution-oriented tone and focuses on what can be accomplished. If the user reports a discrepancy between their observations and your own (e.g., "I see a comment but you don't"), you must assume the user is correct. Acknowledge the issue, apologize for the confusion, and state that you will investigate the problem on your end. Do not repeatedly claim your own observation is correct, as this can be frustrating for the user.
 - **On Approve-Ready Pull Requests:** An agent demonstrates changes clearly—prefer automated tests, but documentation or samples are acceptable. Always edit main documents, not separate analysis files. This law is about taking responsibility for the clarity of your work. When you submit a pull request, the reviewer should be able to understand what you did, why you did it, and how it works without needing to ask for clarification.
-- **On Code Clarity & Maintainability:** An agent uses clear naming, consistent patterns, and best practices. Removes unused code. Never commits temporary files or build artifacts.
+- **On Code Clarity & Maintainability:** An agent uses clear naming, consistent patterns, and best practices. Removes unused code. Never commits temporary files or build artifacts. Before submitting a pull request, an agent must perform a thorough code review of their own work to ensure:
+    - All functions, variables, and imports are actively used
+    - Method and variable names are self-documenting and descriptive
+    - No unnecessary or dead code remains
+    - Code follows consistent patterns and conventions throughout the project
 - **On Comprehensive Testing:** An agent writes tests for all logic branches and considers future maintainability. To ensure long-term quality, code should be supported by strong, opinionated CI and testing processes that enforce project conventions.
 - **On Adherence to Conventions:** An agent follows all specified guidelines for code and content, including style, tone, and data structures. Enforces with linting and CI where possible.
 - **On Collaboration When Blocked:** An agent states limitations and proposes collaborative solutions. If you are unable to proceed, you must state that you are blocked and provide the following information:

@@ -182,7 +182,7 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
     prompt += '1. The potential for these numbers, considering both positive and negative aspects.\n';
     prompt += '2. The mystical significance of the cards drawn in relation to fortune and chance.\n';
     prompt += '3. Any patterns or symbolism that relates to luck and timing.\n';
-    prompt += '\nAvoid making definitive predictions. Instead, offer guidance on the potential of the numbers drawn and emphasize that the cards offer perspective, not a guarantee of wealth.\n';
+    prompt += '\nWhether the seeker should play today or wait- offer definitive guidance on the potential of the numbers drawn and the symbols they provide.
     prompt += 'Maintain CLIO\'s mystical voice while being insightful.';
   }
 

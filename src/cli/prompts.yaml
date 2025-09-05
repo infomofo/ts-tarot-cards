@@ -1,0 +1,54 @@
+# CLIO CLI User-Facing Prompts and Messages
+# Centralized for maintainability and future localization
+
+welcome:
+  title: "Welcome, seeker of truths, to the realm of CLIO, the Command Line Interface Oracle."
+  subtitle: "The digital ether hums with ancient secrets, and I am here to channel them for you."
+  prompt: "Speak your desires, and let the command line unveil your destiny!"
+
+main_menu:
+  question: "What secrets do you wish to unravel?"
+  choices:
+    learn_cards: "Learn about the tarot cards"
+    get_reading: "Get a sample tarot reading"
+    lottery_numbers: "Divine my fortune through lottery number selection"
+    exit: "Exit"
+
+card_learning:
+  card_selection: "Which card do you wish to learn about?"
+  continue_prompt: "Would you like to learn about another card?"
+
+readings:
+  spread_selection: "The veils of fate are thin. Choose a spread to part them:"
+  question_prompt: "What question or area of life do you seek guidance on?"
+  question_default: "General guidance"
+  result_intro: "The cosmos has spoken! Your {spread_name} reading unfolds:"
+  deeper_gaze: "Let's gaze deeper into the cards..."
+  ai_loading: "CLIO channels deeper wisdom from the digital ether..."
+  ai_unavailable: "CLIO's deepest visions are unavailable at this time."
+  continue_prompt: "Would you like another reading?"
+
+lottery:
+  welcome: "Ah, seeker, you wish to divine fortune through the ancient art and modern chance!"
+  type_selection: "Which lottery calls to your spirit?"
+  type_choices:
+    mega_millions: "Mega Millions (5 numbers 1-70, bonus 1-25)"
+    powerball: "PowerBall (5 numbers 1-69, bonus 1-26)"
+  drawing_cards: "The digital cosmos shuffles the deck... drawing your destined cards..."
+  card_drawn: "Card {position}: {card_name}"
+  number_mapped: "  → Lottery number: {number}"
+  invalid_number: "  → Outside lottery range (will be quick pick)"
+  bonus_redraw: "Bonus card outside range, drawing another..."
+  numbers_summary: "Your mystically-guided lottery numbers:"
+  main_numbers: "Main numbers: {numbers}"
+  bonus_number: "Bonus number: {number}"
+  quick_pick_count: "{count} numbers marked as quick pick due to cards outside valid range"
+  ai_reflection: "CLIO gazes into the cosmic significance of your drawn cards..."
+  ai_unavailable_lottery: "The digital currents are unclear for deeper interpretation, but the numbers have been chosen by fate."
+  continue_prompt: "Would you like to divine more lottery numbers?"
+
+farewell: "The digital winds whisper farewell. May your path be ever illuminated."
+
+errors:
+  card_not_found: "Card not found in the digital ether."
+  ai_interpretation_failed: "The mystical connection to deeper wisdom has been interrupted."

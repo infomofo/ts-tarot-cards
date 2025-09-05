@@ -1,7 +1,9 @@
 import OpenAI from 'openai';
 import * as fs from 'fs';
 import * as path from 'path';
-import { SpreadReading, Arcana, MinorArcanaCard } from '../types';
+import {
+  SpreadReading, Arcana, MinorArcanaCard, TarotCard,
+} from '../types';
 
 function readClioConfig(): string {
   try {
@@ -27,11 +29,35 @@ Provide a cohesive interpretation that addresses the user's question while honor
   }
 }
 
-function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string): string {
-  let prompt = `The seeker asks: "${userQuestion}"\n\n`;
-  prompt += `Reading Type: ${reading.spread.name}\n`;
-  prompt += `Spread Purpose: ${reading.spread.description}\n\n`;
-  prompt += 'Cards drawn:\n';
+// Generic interface for interpretation contexts
+export interface InterpretationContext {
+  userContext: string;
+  spread?: string;
+  spreadDescription?: string;
+  cards: Array<{
+    card: TarotCard;
+    position?: string;
+    positionSignificance?: string;
+    isReversed: boolean;
+    additionalInfo?: Record<string, unknown>;
+  }>;
+  contextType: 'reading' | 'lottery';
+}
+
+function buildGenericInterpretationPrompt(context: InterpretationContext): string {
+  let prompt = `The seeker asks: "${context.userContext}"\n\n`;
+
+  if (context.contextType === 'reading' && context.spread) {
+    prompt += `Reading Type: ${context.spread}\n`;
+    if (context.spreadDescription) {
+      prompt += `Spread Purpose: ${context.spreadDescription}\n`;
+    }
+    prompt += '\nCards drawn:\n';
+  } else if (context.contextType === 'lottery') {
+    prompt += 'Context: Lottery number divination\n';
+    prompt += 'The seeker has drawn cards to divine lottery numbers. Interpret the mystical significance of these cards in relation to fortune, chance, and auspicious timing.\n\n';
+    prompt += 'Cards drawn for lottery positions:\n';
+  }
 
   // Collect information for pattern analysis
   const suits: string[] = [];
@@ -39,46 +65,60 @@ function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string)
   const symbols: string[] = [];
   const arcanas: string[] = [];
 
-  reading.cards.forEach((cardPosition) => {
-    const spreadPosition = reading.spread.positions.find(
-      (p) => p.position === cardPosition.position,
-    );
+  context.cards.forEach((cardInfo, index) => {
+    const { card } = cardInfo;
 
-    if (spreadPosition) {
-      const { card } = cardPosition;
-
-      prompt += `\n=== ${spreadPosition.name}: ${card.getName()} ===`;
-      prompt += ` (${cardPosition.isReversed ? 'Reversed' : 'Upright'})\n`;
-      prompt += `Position Significance: ${spreadPosition.positionSignificance}\n`;
-      prompt += `Arcana: ${card.arcana}\n`;
-      prompt += `Keywords: ${card.keywords.join(', ')}\n`;
-
-      // Include visual description and analysis
-      prompt += `Visual Description: ${card.visualDescription}\n`;
-      prompt += `Visual Analysis: ${card.visualDescriptionAnalysis}\n`;
-      prompt += `Symbols: ${card.symbols.join(', ')}\n`;
-      prompt += `Significance: ${card.significance}\n`;
-      prompt += `Description: ${card.description}\n`;
-
-      const meanings = cardPosition.isReversed
-        ? card.reversedMeanings
-        : card.uprightMeanings;
-      prompt += `Meanings: ${meanings.join(', ')}\n`;
-
-      // Collect data for pattern analysis
-      arcanas.push(card.arcana);
-      symbols.push(...card.symbols);
-
-      if (card.arcana === Arcana.Minor) {
-        const minorCard = card as MinorArcanaCard;
-        if (minorCard.suit) {
-          suits.push(minorCard.suit);
-        }
-      }
-
-      // Collect number information
-      numbers.push(card.number);
+    if (context.contextType === 'reading' && cardInfo.position) {
+      prompt += `\n=== ${cardInfo.position}: ${card.getName()} ===`;
+    } else if (context.contextType === 'lottery') {
+      const positionName = cardInfo.additionalInfo?.positionName || `Position ${index + 1}`;
+      prompt += `\n=== ${positionName}: ${card.getName()} ===`;
+    } else {
+      prompt += `\n=== ${card.getName()} ===`;
     }
+
+    prompt += ` (${cardInfo.isReversed ? 'Reversed' : 'Upright'})\n`;
+
+    if (cardInfo.positionSignificance) {
+      prompt += `Position Significance: ${cardInfo.positionSignificance}\n`;
+    }
+
+    if (context.contextType === 'lottery' && cardInfo.additionalInfo) {
+      if (cardInfo.additionalInfo.lotteryNumber) {
+        prompt += `Lottery Number: ${cardInfo.additionalInfo.lotteryNumber}\n`;
+      } else {
+        prompt += 'Lottery Number: Outside valid range (quick pick)\n';
+      }
+    }
+
+    prompt += `Arcana: ${card.arcana}\n`;
+    prompt += `Keywords: ${card.keywords.join(', ')}\n`;
+
+    // Include visual description and analysis
+    prompt += `Visual Description: ${card.visualDescription}\n`;
+    prompt += `Visual Analysis: ${card.visualDescriptionAnalysis}\n`;
+    prompt += `Symbols: ${card.symbols.join(', ')}\n`;
+    prompt += `Significance: ${card.significance}\n`;
+    prompt += `Description: ${card.description}\n`;
+
+    const meanings = cardInfo.isReversed
+      ? card.reversedMeanings
+      : card.uprightMeanings;
+    prompt += `Meanings: ${meanings.join(', ')}\n`;
+
+    // Collect data for pattern analysis
+    arcanas.push(card.arcana);
+    symbols.push(...card.symbols);
+
+    if (card.arcana === Arcana.Minor) {
+      const minorCard = card as MinorArcanaCard;
+      if (minorCard.suit) {
+        suits.push(minorCard.suit);
+      }
+    }
+
+    // Collect number information
+    numbers.push(card.number);
   });
 
   // Add pattern analysis
@@ -135,9 +175,41 @@ function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string)
     prompt += `Repeated Numbers: ${repeatedNumbers.join(', ')}\n`;
   }
 
-  prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
+  if (context.contextType === 'reading') {
+    prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
+  } else if (context.contextType === 'lottery') {
+    prompt += '\nPlease provide an interpretation focusing on:\n';
+    prompt += '1. The auspiciousness of these numbers for lottery play\n';
+    prompt += '2. Whether the seeker should play today or wait\n';
+    prompt += '3. The mystical significance of the cards drawn\n';
+    prompt += '4. Any patterns or symbolism that relates to fortune and chance\n';
+    prompt += '\nMaintain CLIO\'s mystical voice while being encouraging and insightful.';
+  }
 
   return prompt;
+}
+
+// Legacy function for backward compatibility
+function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string): string {
+  const context: InterpretationContext = {
+    userContext: userQuestion,
+    spread: reading.spread.name,
+    spreadDescription: reading.spread.description,
+    contextType: 'reading',
+    cards: reading.cards.map((cardPosition) => {
+      const spreadPosition = reading.spread.positions.find(
+        (p) => p.position === cardPosition.position,
+      );
+      return {
+        card: cardPosition.card,
+        position: spreadPosition?.name,
+        positionSignificance: spreadPosition?.positionSignificance,
+        isReversed: cardPosition.isReversed,
+      };
+    }),
+  };
+
+  return buildGenericInterpretationPrompt(context);
 }
 
 export async function getAiInterpretation(
@@ -156,6 +228,46 @@ export async function getAiInterpretation(
 
   // Build detailed prompt with all card information
   const prompt = buildInterpretationPrompt(reading, userQuestion);
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: readClioConfig(),
+        },
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      max_tokens: 800,
+      temperature: 0.7,
+    });
+
+    return completion.choices[0]?.message?.content || 'The digital currents are unclear at this time, seeker.';
+  } catch (error) {
+    throw new Error(`Failed to get AI interpretation: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
+}
+
+// New generic function for any interpretation context
+export async function getGenericAiInterpretation(
+  context: InterpretationContext,
+): Promise<string> {
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error('OpenAI API key is not configured');
+  }
+
+  const openai = new OpenAI({
+    apiKey,
+  });
+
+  // Build detailed prompt with all card information
+  const prompt = buildGenericInterpretationPrompt(context);
 
   try {
     const completion = await openai.chat.completions.create({

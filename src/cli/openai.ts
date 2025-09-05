@@ -178,12 +178,11 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
   if (context.contextType === 'reading') {
     prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
   } else if (context.contextType === 'lottery') {
-    prompt += '\nPlease provide an interpretation focusing on:\n';
-    prompt += '1. The auspiciousness of these numbers for lottery play\n';
-    prompt += '2. Whether the seeker should play today or wait\n';
-    prompt += '3. The mystical significance of the cards drawn\n';
-    prompt += '4. Any patterns or symbolism that relates to fortune and chance\n';
-    prompt += '\nIMPORTANT: End with a strong, specific opinion on whether these are good numbers to play today. Avoid generic endings about fate and guidance. Be definitive about the cosmic timing and fortune potential.\n';
+    prompt += '\nPlease provide a balanced interpretation focusing on:\n';
+    prompt += '1. The potential for these numbers, considering both positive and negative aspects.\n';
+    prompt += '2. The mystical significance of the cards drawn in relation to fortune and chance.\n';
+    prompt += '3. Any patterns or symbolism that relates to luck and timing.\n';
+    prompt += '\nAvoid making definitive predictions. Instead, offer guidance on the potential of the numbers drawn and emphasize that the cards offer perspective, not a guarantee of wealth.\n';
     prompt += 'Maintain CLIO\'s mystical voice while being insightful.';
   }
 

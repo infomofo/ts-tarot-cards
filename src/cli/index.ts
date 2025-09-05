@@ -6,6 +6,7 @@ import {
   TarotCard, SpreadReader, SPREAD_NAMES,
 } from '../index';
 import { SpreadRenderer } from '../spreads/renderer';
+import { getAiInterpretation } from './openai';
 
 const allCards: TarotCard[] = [
   ...Object.values(MAJOR_ARCANA_CARDS),
@@ -65,7 +66,18 @@ export async function getSingleReading(): Promise<boolean> {
     },
   ]);
 
+  // Ask for the user's question
+  const questionAnswer = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'question',
+      message: 'What question or area of life do you seek guidance on?',
+      default: 'General guidance',
+    },
+  ]);
+
   const { spreadName } = answer;
+  const { question } = questionAnswer;
   const reader = new SpreadReader();
   const reading = reader.performReading(spreadName);
   const renderer = new SpreadRenderer();
@@ -92,6 +104,20 @@ export async function getSingleReading(): Promise<boolean> {
       console.log('\n');
     }
   });
+
+  // Check for OpenAI API key and provide AI interpretation
+  if (process.env.OPENAI_API_KEY) {
+    console.log('\nCLIO channels deeper wisdom from the digital ether...\n');
+    try {
+      const aiInterpretation = await getAiInterpretation(reading, question);
+      console.log(aiInterpretation);
+      console.log('\n');
+    } catch (error) {
+      console.log("CLIO's deepest visions are unavailable at this time.\n");
+    }
+  } else {
+    console.log("CLIO's deepest visions are unavailable at this time.\n");
+  }
 
   const continueAnswer = await inquirer.prompt({
     type: 'confirm',

@@ -184,7 +184,7 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
     prompt += '3. The mystical significance of the cards drawn\n';
     prompt += '4. Any patterns or symbolism that relates to fortune and chance\n';
     prompt += '\nIMPORTANT: End with a strong, specific opinion on whether these are good numbers to play today. Avoid generic endings about fate and guidance. Be definitive about the cosmic timing and fortune potential.\n';
-    prompt += 'Maintain CLIO\'s mystical voice while being encouraging and insightful.';
+    prompt += 'Maintain CLIO\'s mystical voice while being insightful.';
   }
 
   return prompt;

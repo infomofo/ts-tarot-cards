@@ -1,45 +1,7 @@
-import { getLotteryNumbers } from '../src/cli/lottery';
+import { getLotteryNumbers, getCardLotteryNumber } from '../src/cli/lottery';
 import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../src/cards/minor-arcana';
 import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana } from '../src/types';
-
-// Import the private function for testing by accessing it directly
-// We need to test the card mapping function but it's now private in lottery.ts
-// Let's extract it from the module for testing
-import * as fs from 'fs';
-import * as path from 'path';
-
-// Read the lottery.ts file and extract the getCardLotteryNumber function for testing
-const lotteryFilePath = path.join(__dirname, '../src/cli/lottery.ts');
-const lotteryFileContent = fs.readFileSync(lotteryFilePath, 'utf8');
-
-// Helper function to simulate the private getCardLotteryNumber function
-function getCardLotteryNumber(card: TarotCard): number {
-  if (card.arcana === Arcana.Major) {
-    // The Fool (0) maps to 0, all other Major Arcana map to their numbers
-    return card.number as number;
-  }
-
-  if (card.arcana === Arcana.Minor) {
-    const minorCard = card as MinorArcanaCard;
-
-    // Base number for each suit (starting positions)
-    const suitBase = {
-      [Suit.Wands]: 22, // 22-35
-      [Suit.Cups]: 36, // 36-49
-      [Suit.Swords]: 50, // 50-63
-      [Suit.Pentacles]: 64, // 64-77
-    };
-
-    const base = suitBase[minorCard.suit];
-    // Minor arcana numbers are 1-14 (Ace=1 through King=14)
-    // Subtract 1 to make it 0-indexed for addition to base
-    return base + (minorCard.number as number) - 1;
-  }
-
-  // This should never happen in a properly constructed deck
-  throw new Error('Unknown card arcana');
-}
 
 describe('Card to Lottery Number Mapping', () => {
   const allCards: TarotCard[] = [

@@ -13,7 +13,7 @@ import { loadPrompts, formatPrompt } from './prompts';
  * - Major Arcana 1-21 (The Magician to The World)
  * - Minor Arcana by suit order: Wands (22-35), Cups (36-49), Swords (50-63), Pentacles (64-77)
  */
-function getCardLotteryNumber(card: TarotCard): number {
+export function getCardLotteryNumber(card: TarotCard): number {
   if (card.arcana === Arcana.Major) {
     // The Fool (0) maps to 0, all other Major Arcana map to their numbers
     return card.number as number;

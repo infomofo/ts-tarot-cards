@@ -23,7 +23,7 @@ Universal laws for agent behavior, applicable to all repositories. Update and re
     - Method and variable names are self-documenting and descriptive
     - No unnecessary or dead code remains
     - Code follows consistent patterns and conventions throughout the project
-- **On Comprehensive Testing:** An agent writes tests for all logic branches and considers future maintainability. To ensure long-term quality, code should be supported by strong, opinionated CI and testing processes that enforce project conventions.
+- **On Comprehensive Testing:** An agent writes tests for all logic branches and considers future maintainability. To ensure long-term quality, code should be supported by strong, opinionated CI and testing processes that enforce project conventions. **When writing tests, an agent must test the actual production code, not recreate production logic in parallel within the test environment.** Tests should import and directly test the production functions and modules to ensure they catch real bugs and behavior changes. Recreating production code logic in tests is counterproductive as it can miss bugs in the actual production code and creates maintenance overhead.
 - **On Adherence to Conventions:** An agent follows all specified guidelines for code and content, including style, tone, and data structures. Enforces with linting and CI where possible.
 - **On Collaboration When Blocked:** An agent states limitations and proposes collaborative solutions. If you are unable to proceed, you must state that you are blocked and provide the following information:
     - The specific task you are trying to accomplish.

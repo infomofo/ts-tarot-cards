@@ -219,6 +219,13 @@ function displayLotteryResults(result: LotteryResult): void {
 
   console.log(`\n${prompts.lottery.numbers_summary}`);
 
+  // Display drawn cards
+  const cardsList = result.drawnCards
+    .map((drawn) => (drawn.isReversed ? `${drawn.card.getName()} (Reversed)` : drawn.card.getName()))
+    .join(prompts.lottery.display_text.separator);
+  console.log(formatPrompt(prompts.lottery.drawn_cards_summary, { cards_list: cardsList }));
+  console.log('');
+
   // Display main numbers
   const validMainNumbers = result.mainNumbers.filter((n) => n !== null);
   const mainNumbersDisplay = validMainNumbers.length > 0

@@ -1,0 +1,155 @@
+cards:
+  - name: Ace of Pentacles
+    number: 1
+    keywords: [opportunity, prosperity, new venture]
+    meanings:
+      upright: [New opportunities, Prosperity, Manifestation, Good fortune]
+      reversed: [Missed opportunities, Poor financial planning, Greed, Bad investments]
+    visual_description: A hand emerges from a cloud, holding a large golden pentacle. Below is a lush garden.
+    visual_description_analysis: The hand from the cloud offers a tangible gift or opportunity. The lush garden represents the potential for prosperous new beginnings.
+    symbols: [hand, cloud, pentacle, garden, path]
+    significance: The seed of material prosperity and a new, tangible venture.
+    description: Represents a new opportunity for prosperity and manifestation.
+  - name: Two of Pentacles
+    number: 2
+    keywords: [balancing, juggling, flexibility]
+    meanings:
+      upright: [Balancing priorities, Juggling responsibilities, Adaptability, Time management]
+      reversed: [Feeling overwhelmed, Disorganization, Lack of balance, Dropping the ball]
+    visual_description: A young man dances while juggling two pentacles connected by an infinity loop. Behind him, two ships ride the waves.
+    visual_description_analysis: The juggling act represents the need to balance multiple priorities. The ships on the waves symbolize the ups and downs of life that one must adapt to. The infinity loop (lemniscate) suggests he can handle this indefinitely.
+    symbols: [pentacle, lemniscate, ship, wave]
+    significance: The art of balance in a constantly changing world.
+    description: Represents balancing priorities and adapting to change.
+  - name: Three of Pentacles
+    number: 3
+    keywords: [teamwork, collaboration, skill]
+    meanings:
+      upright: [Teamwork, Collaboration, Mastery of a skill, Recognition]
+      reversed: [Lack of teamwork, Poor quality work, No recognition, Ego]
+    visual_description: A craftsman works on a cathedral archway, consulting with a monk and a nun who hold the plans.
+    visual_description_analysis: This card highlights the importance of teamwork and collaboration, where different skills come together to create something of value.
+    symbols: [craftsman, monk, nun, cathedral, plan]
+    significance: The initial rewards of hard work and collaboration.
+    description: Represents teamwork, collaboration, and skilled craftsmanship.
+  - name: Four of Pentacles
+    number: 4
+    keywords: [control, stability, security, possessiveness]
+    meanings:
+      upright: [Financial stability, Security, Control, Saving money]
+      reversed: [Greed, Materialism, Fear of loss, Being too controlling]
+    visual_description: A man sits on a stool, clutching a pentacle to his chest. He balances another on his head and has two more under his feet.
+    visual_description_analysis: The man is hoarding his wealth out of a fear of loss. His posture is defensive, showing a possessive and conservative mindset.
+    symbols: [pentacle, stool, city]
+    significance: A desire for control and security, often through material possessions.
+    description: Represents control, stability, and possessiveness.
+  - name: Five of Pentacles
+    number: 5
+    keywords: [poverty, hardship, isolation]
+    meanings:
+      upright: [Financial hardship, Poverty, Isolation, Insecurity]
+      reversed: [Recovery, Finding help, Financial improvement, Hope]
+    visual_description: Two people in ragged clothes walk through the snow outside a brightly lit church window. One is on crutches.
+    visual_description_analysis: The people are "left out in the cold," representing hardship and isolation. The lit church window symbolizes a sanctuary or help that is available but being ignored.
+    symbols: [snow, church window]
+    significance: A time of hardship and feeling left out in the cold.
+    description: Represents poverty, hardship, and isolation.
+  - name: Six of Pentacles
+    number: 6
+    keywords: [generosity, charity, giving and receiving]
+    meanings:
+      upright: [Generosity, Charity, Giving and receiving, Financial balance]
+      reversed: [Debt, One-sided charity, Abuse of generosity, Greed]
+    visual_description: A wealthy merchant gives coins to two beggars who kneel at his feet. He holds a scale.
+    visual_description_analysis: The merchant is sharing his wealth, but the scales show that his charity is measured and just, not boundless. It represents a balance of power and resources.
+    symbols: [merchant, beggar, coin, scale]
+    significance: The flow of resources and the balance between giving and receiving.
+    description: Represents generosity, charity, and financial balance.
+  - name: Seven of Pentacles
+    number: 7
+    keywords: [patience, investment, long-term view]
+    meanings:
+      upright: [Patience, Investment, Evaluating progress, Perseverance]
+      reversed: [Impatience, Frustration, Wasted effort, Giving up too soon]
+    visual_description: A man leans on his hoe, looking at the seven pentacles growing on a bush. He is taking a break to wait for the harvest.
+    visual_description_analysis: The man is not harvesting yet; he is patiently waiting for his investments to mature. This card represents a pause to evaluate progress before reaping the rewards.
+    symbols: [hoe, pentacle, bush]
+    significance: The value of patience and long-term investment.
+    description: Represents patience, investment, and evaluating your progress.
+  - name: Eight of Pentacles
+    number: 8
+    keywords: [skill, mastery, diligence, apprenticeship]
+    meanings:
+      upright: [Mastery of a skill, Diligence, Apprenticeship, Attention to detail]
+      reversed: [Lack of focus, Poor quality work, Cutting corners, Perfectionism]
+    visual_description: A craftsman sits at his workbench, diligently carving a pentacle. He has already completed seven, which are on display.
+    visual_description_analysis: This card shows a dedication to one's craft. The craftsman is absorbed in his work, honing his skills through repetition and focus.
+    symbols: [craftsman, workbench, pentacle]
+    significance: Dedication to one's craft and the hard work required to become a master.
+    description: Represents skill, mastery, and diligence. It is time for honing your craft.
+  - name: Nine of Pentacles
+    number: 9
+    keywords: [abundance, luxury, self-sufficiency]
+    meanings:
+      upright: [Financial independence, Abundance, Luxury, Self-sufficiency]
+      reversed: [Financial dependency, Materialism, Reckless spending, Loneliness]
+    visual_description: An elegant woman stands in a lush garden, a falcon perched on her gloved hand. Nine pentacles are arranged on a bush behind her.
+    visual_description_analysis: The woman is self-sufficient and enjoys the fruits of her labor. The falcon represents her intellect and self-control. She has created a life of luxury and independence.
+    symbols: [garden, falcon, pentacle]
+    significance: The satisfaction of a self-made life.
+    description: Represents abundance, luxury, and self-sufficiency.
+  - name: Ten of Pentacles
+    number: 10
+    keywords: [wealth, legacy, family, inheritance]
+    meanings:
+      upright: [Legacy, Family wealth, Inheritance, Financial security]
+      reversed: [Family disputes, Financial loss, Breaking from tradition, Inheritance problems]
+    visual_description: An old man sits with his two white dogs, watching a happy couple and their child under an archway. Ten pentacles are arranged in the Tree of Life formation.
+    visual_description_analysis: This card represents the culmination of material success and the creation of a lasting legacy. The three generations show the passing of wealth and tradition.
+    symbols: [patriarch, dog, couple, pentacle, archway]
+    significance: The pinnacle of material success and the creation of a lasting family legacy.
+    description: Represents wealth, legacy, and family. You are building a secure foundation.
+  - name: Page of Pentacles
+    number: 11
+    keywords: [new opportunities, manifestation, learning]
+    meanings:
+      upright: [New financial opportunities, Manifesting goals, Eagerness to learn, Diligence]
+      reversed: [Lack of commitment, Procrastination, Missed opportunities, Impractical ideas]
+    visual_description: A young man stands in a grassy field, intently studying a pentacle he holds in his hands.
+    visual_description_analysis: The young man is a student of the material world. He is focused and ready to learn, representing the beginning of a new venture or skill.
+    symbols: [pentacle, field]
+    significance: A student of the material world, bringing news of new opportunities.
+    description: Represents new opportunities for manifestation and learning. Be diligent.
+  - name: Knight of Pentacles
+    number: 12
+    keywords: [hard work, responsibility, routine]
+    meanings:
+      upright: [Hard work, Responsibility, Routine, Conservatism]
+      reversed: [Boredom, Stagnation, Feeling stuck in a rut, Resistance to change]
+    visual_description: A knight on a sturdy black horse holds a pentacle, looking at it with focus. He is not moving.
+    visual_description_analysis: This knight is the most hardworking and patient. He is not charging forward but is methodical and reliable, focused on his long-term goals.
+    symbols: [knight, black horse, pentacle]
+    significance: The embodiment of hard work and responsibility.
+    description: Represents hard work, responsibility, and routine. Stay dedicated to your goals.
+  - name: Queen of Pentacles
+    number: 13
+    keywords: [nurturing, practicality, security]
+    meanings:
+      upright: [Nurturing, Practicality, Financial security, Generosity]
+      reversed: [Smothering, Financial insecurity, Work-life imbalance, Materialism]
+    visual_description: A queen sits on a throne adorned with carvings of fruit and animals, holding a large pentacle. A rabbit is at her feet.
+    visual_description_analysis: The queen is a nurturing mother figure of the material world. The rabbit represents fertility and abundance. She creates a warm and secure environment.
+    symbols: [queen, throne, pentacle, garden, rabbit]
+    significance: The nurturing mother of the material world, practical and generous.
+    description: Represents nurturing, practicality, and security. Create a warm and stable home life.
+  - name: King of Pentacles
+    number: 14
+    keywords: [wealth, success, leadership, security]
+    meanings:
+      upright: [Financial success, Abundance, Leadership, Security]
+      reversed: [Greed, Materialism, Authoritarian, Gambling]
+    visual_description: A king sits on a throne decorated with bull carvings, holding a pentacle and a scepter. His castle is behind him.
+    visual_description_analysis: The king is the master of the material world. The bull carvings symbolize his connection to the earth and stubborn determination. He has achieved great success and provides security.
+    symbols: [king, throne, pentacle, scepter, castle, vine]
+    significance: The master of the material world, representing financial success and leadership.
+    description: Represents wealth, success, and leadership. You have reached the pinnacle of your financial goals.

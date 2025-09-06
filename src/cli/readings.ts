@@ -1,19 +1,14 @@
 /* eslint-disable no-console */
 import inquirer from 'inquirer';
-import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
 import {
-  TarotCard, SpreadReader, SPREAD_NAMES,
+  TarotCard, SpreadReader, ALL_CARDS, ALL_SPREADS,
 } from '../index';
 import { SpreadRenderer } from '../spreads/renderer';
 import { getAiInterpretation } from './openai';
 import { clearConsole } from './cli';
 import { loadPrompts, formatPrompt } from './prompts';
 
-const allCards: TarotCard[] = [
-  ...Object.values(MAJOR_ARCANA_CARDS),
-  ...Object.values(MINOR_ARCANA_CARDS),
-];
+const allCards: TarotCard[] = [...ALL_CARDS];
 
 export async function learnAboutSingleCard(): Promise<boolean> {
   const prompts = loadPrompts();
@@ -35,9 +30,9 @@ export async function learnAboutSingleCard(): Promise<boolean> {
     console.log(`\nKeywords: ${selectedCard.keywords.join(', ')}`);
     console.log('\nMeanings:');
     console.log('  Upright:');
-    selectedCard.uprightMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
+    selectedCard.meanings.upright.forEach((meaning) => console.log(`    - ${meaning}`));
     console.log('  Reversed:');
-    selectedCard.reversedMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
+    selectedCard.meanings.reversed.forEach((meaning) => console.log(`    - ${meaning}`));
   }
 
   const continueAnswer = await inquirer.prompt({
@@ -57,7 +52,7 @@ export async function getSingleReading(): Promise<boolean> {
       type: 'list',
       name: 'spreadName',
       message: prompts.readings.spread_selection,
-      choices: Object.values(SPREAD_NAMES),
+      choices: Object.keys(ALL_SPREADS),
     },
   ]);
 
@@ -94,8 +89,8 @@ export async function getSingleReading(): Promise<boolean> {
       const reversed = cardPosition.isReversed ? 'reversed' : 'upright';
       console.log(`This card is ${reversed}.`);
       const meanings = cardPosition.isReversed
-        ? cardPosition.card.reversedMeanings
-        : cardPosition.card.uprightMeanings;
+        ? cardPosition.card.meanings.reversed
+        : cardPosition.card.meanings.upright;
       const meaning = meanings[Math.floor(Math.random() * meanings.length)];
       console.log(`It speaks of: ${meaning}`);
       console.log('\n');

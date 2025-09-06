@@ -1,0 +1,155 @@
+cards:
+  - name: Ace of Wands
+    number: 1
+    keywords: [inspiration, power, creation, beginnings]
+    meanings:
+      upright: [New inspiration, Creative energy, A spark of passion, Taking action]
+      reversed: [Lack of energy, Creative blocks, Delays, False starts]
+    visual_description: A hand emerges from a cloud, holding a sprouting wand. In the distance is a castle.
+    visual_description_analysis: The sprouting wand represents new growth and creative potential. The castle in the distance symbolizes the promise of future success from this initial spark.
+    symbols: [hand, cloud, wand, castle]
+    significance: The seed of creativity and passion.
+    description: Represents new inspiration, creative energy, and taking action.
+  - name: Two of Wands
+    number: 2
+    keywords: [planning, decisions, future, potential]
+    meanings:
+      upright: [Future planning, Making decisions, Exploring potential, Leaving your comfort zone]
+      reversed: [Fear of the unknown, Lack of planning, Feeling stuck, Playing it safe]
+    visual_description: A man in rich robes stands on a castle rampart, holding a globe and looking out at the world. He holds one wand and another is fixed to the wall.
+    visual_description_analysis: The man is contemplating his future and the world beyond his current situation (the castle). The globe represents his potential to expand his influence.
+    symbols: [globe, wand, castle]
+    significance: Planning for the future and choosing to step out into the world.
+    description: Represents future planning, making decisions, and exploring your potential.
+  - name: Three of Wands
+    number: 3
+    keywords: [expansion, foresight, long-term success]
+    meanings:
+      upright: [Expansion, Foresight, Long-term success, Waiting for results]
+      reversed: [Delays, Obstacles, Lack of foresight, Impatience]
+    visual_description: A man stands on a cliff, looking out at three ships on the sea. Three wands are planted in the ground around him.
+    visual_description_analysis: The man is "waiting for his ships to come in," anticipating the results of his initial efforts. The three wands represent the foundation he has built.
+    symbols: [cliff, ship, wand]
+    significance: The initial rewards of your efforts and the anticipation of future success.
+    description: Represents expansion, foresight, and waiting for success.
+  - name: Four of Wands
+    number: 4
+    keywords: [celebration, harmony, marriage, homecoming]
+    meanings:
+      upright: [Celebration, Harmony, Marriage, Homecoming]
+      reversed: [Lack of harmony, Family disputes, Cancelled celebrations, Feeling unwelcome]
+    visual_description: A couple stands under a floral canopy supported by four wands. In the background, a crowd gathers before a castle.
+    visual_description_analysis: The floral canopy represents a celebration, often a wedding or homecoming. The four wands create a stable foundation. The crowd shows this is a community event.
+    symbols: [canopy, wand, castle, crowd]
+    significance: A card of celebration and stable foundations.
+    description: Represents celebration, harmony, and homecoming. A time for joyful gatherings.
+  - name: Five of Wands
+    number: 5
+    keywords: [conflict, competition, disagreement]
+    meanings:
+      upright: [Conflict, Competition, Disagreement, Tension]
+      reversed: [Avoiding conflict, Finding common ground, A peaceful resolution, Releasing tension]
+    visual_description: Five young men are engaged in a mock battle with their wands.
+    visual_description_analysis: The scene is chaotic but not truly violent. It represents the struggles and competition that can arise from creative differences or a clash of egos.
+    symbols: [wand, mock battle]
+    significance: A time of conflict and competition, which can be a source of growth.
+    description: Represents conflict, competition, and disagreement.
+  - name: Six of Wands
+    number: 6
+    keywords: [victory, success, public recognition]
+    meanings:
+      upright: [Victory, Success, Public recognition, Acclaim]
+      reversed: [Lack of recognition, Failure, Arrogance, A hollow victory]
+    visual_description: A victorious man on a white horse rides through a cheering crowd. He wears a laurel wreath.
+    visual_description_analysis: The man is a hero returning from a successful battle. The laurel wreath symbolizes victory, and the cheering crowd represents public acclaim.
+    symbols: [laurel wreath, wand, crowd]
+    significance: A card of victory and public recognition.
+    description: Represents victory, success, and public recognition.
+  - name: Seven of Wands
+    number: 7
+    keywords: [challenge, competition, perseverance]
+    meanings:
+      upright: [Defending your position, Facing a challenge, Perseverance, Holding your ground]
+      reversed: [Feeling overwhelmed, Giving up, Being overly defensive, Losing a battle]
+    visual_description: A man stands on a hill, using his wand to fight off six other wands being thrust at him from below.
+    visual_description_analysis: The man is in a defensive but advantageous position ("holding the high ground"). He is determined to stand up for his beliefs against opposition.
+    symbols: [wand]
+    significance: A test of your convictions, requiring you to defend your position.
+    description: Represents challenge, competition, and perseverance. Stand your ground.
+  - name: Eight of Wands
+    number: 8
+    keywords: [speed, action, air travel, movement]
+    meanings:
+      upright: [Rapid action, Sudden progress, Air travel, Receiving news]
+      reversed: [Delays, Frustration, Slowing down, Cancelled plans]
+    visual_description: Eight wands fly through the air at great speed across a clear sky and a peaceful landscape.
+    visual_description_analysis: This card symbolizes rapid movement and the swift completion of events. There are no people, just pure energy and action.
+    symbols: [wand, clear sky, landscape]
+    significance: A card of speed and action, where events are moving quickly.
+    description: Represents speed, action, and movement. Things are happening quickly.
+  - name: Nine of Wands
+    number: 9
+    keywords: [resilience, courage, persistence, boundaries]
+    meanings:
+      upright: [Resilience, Perseverance, Courage, Setting boundaries]
+      reversed: [Feeling overwhelmed, Exhaustion, Giving up, Paranoia]
+    visual_description: A wounded but determined man leans on his wand, with eight more wands standing behind him like a fence.
+    visual_description_analysis: The man has been through a battle but is ready for one final challenge. The wands behind him form a defensive wall, symbolizing his resilience and boundaries.
+    symbols: [wounded man, wand]
+    significance: The final push before victory, requiring resilience and courage.
+    description: Represents resilience, courage, and persistence. Do not give up now.
+  - name: Ten of Wands
+    number: 10
+    keywords: [burden, extra responsibility, hard work]
+    meanings:
+      upright: [Burden, Extra responsibility, Hard work, Completion]
+      reversed: [Doing too much, Burnout, Overwhelmed, Letting go of burdens]
+    visual_description: A person struggles to carry ten heavy wands toward a nearby village.
+    visual_description_analysis: The person is burdened by the weight of their responsibilities but is close to their destination. This represents the final, difficult stage of a project.
+    symbols: [wand, village, burden, destination]
+    significance: The culmination of the suit of Wands, where success brings heavy responsibilities.
+    description: Represents burden, extra responsibility, hard work, and stress.
+  - name: Page of Wands
+    number: 11
+    keywords: [inspiration, ideas, discovery, free spirit]
+    meanings:
+      upright: [New ideas, Inspiration, Discovery, A free spirit]
+      reversed: [Creative blocks, Hasty decisions, Lack of direction, Procrastination]
+    visual_description: A young man stands in a barren landscape, holding a wand and looking at it with wonder. His clothes are decorated with salamanders.
+    visual_description_analysis: The young man is announcing new ideas. The salamanders on his clothes are symbols of fire and transformation, representing his creative passion.
+    symbols: [wand, salamander]
+    significance: The messenger of the creative world, bringing a spark of inspiration.
+    description: Represents inspiration, new ideas, and discovery. A new creative opportunity is presenting itself.
+  - name: Knight of Wands
+    number: 12
+    keywords: [energy, passion, adventure, impulsiveness]
+    meanings:
+      upright: [Energy, Passion, Adventure, Impulsiveness]
+      reversed: [Recklessness, Impatience, Hasty decisions, Arrogance]
+    visual_description: A knight on a rearing horse charges forward, his wand held out like a lance.
+    visual_description_analysis: This knight is a figure of pure energy and action, moving with passion and determination. He is impulsive and always ready for an adventure.
+    symbols: [knight, horse, wand]
+    significance: The embodiment of action and adventure, pursuing goals with energy.
+    description: Represents energy, passion, and adventure. It is time to take action.
+  - name: Queen of Wands
+    number: 13
+    keywords: [courage, confidence, independence, social]
+    meanings:
+      upright: [Confidence, Courage, Independence, A social personality]
+      reversed: [Jealousy, Insecurity, A short temper, Being demanding]
+    visual_description: A queen sits on a throne decorated with lions and sunflowers. She holds a wand and a sunflower, and a black cat sits at her feet.
+    visual_description_analysis: The lions and sunflowers represent her strength and sunny disposition. The black cat symbolizes her connection to her shadow side and her independence.
+    symbols: [queen, throne, wand, sunflower, lion, black cat]
+    significance: A confident and independent leader with a magnetic personality.
+    description: Represents courage, confidence, and independence. Embrace your passionate nature.
+  - name: King of Wands
+    number: 14
+    keywords: [leadership, vision, creativity, entrepreneur]
+    meanings:
+      upright: [Visionary leadership, Creativity, Entrepreneurial spirit, Inspiring others]
+      reversed: [Ruthless, Authoritarian, Impulsive, Arrogance]
+    visual_description: A king sits on a throne, holding a flowering wand. His robe and throne are decorated with salamanders and lions.
+    visual_description_analysis: The king is a natural leader, full of creative energy. The salamanders and lions are symbols of his mastery over the element of fire and his passion.
+    symbols: [king, throne, wand, salamander, lion]
+    significance: The master of creativity and vision, an inspiring leader.
+    description: Represents leadership, vision, and creativity. It is time to take charge.

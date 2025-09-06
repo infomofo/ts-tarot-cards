@@ -1,0 +1,35 @@
+number: 10
+name: Wheel of Fortune
+keywords:
+  - good luck
+  - karma
+  - life cycles
+  - destiny
+meanings:
+  upright:
+    - Good luck
+    - Karma
+    - Turning points
+    - Unexpected events
+  reversed:
+    - Bad luck
+    - Negative karma
+    - Resistance to change
+    - Feeling powerless
+visual_description:
+  background: A giant wheel in the sky is surrounded by four winged animals a man, an eagle, a lion, and a bull.
+  foreground: On the wheel are letters, a sphinx, a serpent, and a red, devil-like creature.
+visual_description_analysis:
+  - The four animals represent the four fixed signs of the zodiac (Aquarius, Scorpio, Leo, Taurus).
+  - The letters on the wheel can spell ROTA (wheel) or TAROT.
+  - The wheel is constantly turning, symbolizing the ever-changing cycles of life and fate.
+symbols:
+  - wheel
+  - sphinx
+  - serpent
+  - winged creature
+  - letter
+significance: This card signifies the unpredictable nature of fate and the cycles of life.
+description: Represents good luck, karma, and life cycles. A turning point is at hand; embrace the change.
+emoji: 🎡
+bg_color: '#DAA520'

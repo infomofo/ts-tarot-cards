@@ -1,0 +1,35 @@
+number: 21
+name: The World
+keywords:
+  - completion
+  - integration
+  - accomplishment
+  - travel
+meanings:
+  upright:
+    - Completion
+    - Integration
+    - Accomplishment
+    - Fulfillment
+  reversed:
+    - Lack of completion
+    - Unfinished business
+    - Feeling incomplete
+    - Lack of closure
+visual_description:
+  background: A dancing woman is in the center of a large laurel wreath.
+  foreground: She is holding two wands. In the corners are the heads of a man, an eagle, a lion, and a bull.
+visual_description_analysis:
+  - The dancing woman represents the integrated self, in harmony with the universe.
+  - The laurel wreath symbolizes success and completion.
+  - The four heads represent the four fixed signs of the zodiac and the four evangelists, now in balance.
+  - The cycle is complete.
+symbols:
+  - dancing woman
+  - wreath
+  - wand
+  - winged creature
+significance: The final card of the Major Arcana, the World represents the completion of the soul's journey.
+description: Represents completion, integration, and accomplishment. The journey is complete, and it is time to celebrate your success.
+emoji: 🌎
+bg_color: '#87CEFA'

@@ -1,0 +1,36 @@
+number: 2
+name: The High Priestess
+keywords:
+  - intuition
+  - unconscious
+  - inner voice
+  - secrets
+meanings:
+  upright:
+    - Intuition
+    - Sacred knowledge
+    - Subconscious mind
+    - Seeing beyond the obvious
+  reversed:
+    - Ignoring intuition
+    - Secrets and gossip
+    - Hidden agendas
+    - Confusion
+visual_description:
+  background: A woman sits between two pillars, one black and one white. A veil with pomegranates hangs behind her.
+  foreground: She wears a crown, holds a scroll, and has a crescent moon at her feet.
+visual_description_analysis:
+  - The pillars, labeled "B" (Boaz) and "J" (Jachin), represent duality and the entrance to a sacred temple.
+  - The scroll, marked "TORA" (a version of "Torah"), contains hidden wisdom.
+  - The pomegranates on the veil symbolize fertility and the subconscious.
+symbols:
+  - pillar
+  - scroll
+  - moon
+  - pomegranate
+  - veil
+  - crown
+significance: The guardian of the subconscious. She teaches the value of looking inward for answers.
+description: Represents intuition, sacred knowledge, and the subconscious mind. It is time to listen to your inner voice.
+emoji: 🔮
+bg_color: '#E6E6FA'

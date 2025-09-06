@@ -1,8 +1,7 @@
 import {
   TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy,
 } from '../types';
-import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
+import { ALL_CARDS } from '../data';
 import { CARD_SELECTION_STRATEGIES } from './card-selection-strategies';
 import { SHUFFLE_STRATEGIES } from './shuffle-strategies';
 
@@ -28,14 +27,8 @@ export class TarotDeck {
   }
 
   private initializeDeck(): void {
-    // Clear existing cards
-    this.initialDeck = [];
-
-    // Add available major arcana cards
-    this.initialDeck.push(...Object.values(MAJOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
-
-    // Add available minor arcana cards
-    this.initialDeck.push(...Object.values(MINOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
+    // The ALL_CARDS array is readonly, so we create a mutable copy for the deck
+    this.initialDeck = [...ALL_CARDS];
   }
 
   /**
@@ -43,7 +36,7 @@ export class TarotDeck {
    */
   shuffle(shuffleStrategy?: ShuffleStrategy): void {
     const strategy = shuffleStrategy || this.defaultShuffleStrategy;
-    this.currentDeck = strategy.shuffle(this.initialDeck);
+    this.currentDeck = [...strategy.shuffle(this.initialDeck)];
   }
 
   /**
@@ -60,6 +53,9 @@ export class TarotDeck {
    * Select cards using a specified strategy or options
    */
   selectCards(count: number, options?: CardSelectionOptions): CardPosition[] {
+    if (count > this.currentDeck.length) {
+      throw new Error(`Cannot select ${count} cards. Only ${this.currentDeck.length} remaining.`);
+    }
     const strategy = options?.strategy || this.defaultCardSelectionStrategy;
 
     const selectedCards = strategy.selectCards([...this.currentDeck], count);
@@ -139,7 +135,7 @@ export class TarotDeck {
    * Reset the deck to its original state and shuffle
    */
   reset(): void {
-    this.initializeDeck();
+    this.currentDeck = [...this.initialDeck];
     this.shuffle();
   }
 }

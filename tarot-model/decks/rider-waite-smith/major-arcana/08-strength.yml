@@ -1,0 +1,33 @@
+number: 8
+name: Strength
+keywords:
+  - strength
+  - courage
+  - patience
+  - compassion
+meanings:
+  upright:
+    - Inner strength
+    - Courage
+    - Compassion
+    - Taming the ego
+  reversed:
+    - Weakness
+    - Self-doubt
+    - Lack of self-control
+    - Aggression
+visual_description:
+  background: A woman gently closes the jaws of a lion with her bare hands.
+  foreground: She wears a white robe and a floral crown, with an infinity symbol above her head.
+visual_description_analysis:
+  - This card depicts inner strength, not brute force.
+  - The woman's calm demeanor shows that true power comes from compassion.
+  - The infinity symbol, or lemniscate, connects her to the Magician's infinite potential.
+symbols:
+  - lion
+  - lemniscate
+  - floral crown
+significance: This card teaches that true power comes from within. The soul learns to master its primal instincts with compassion.
+description: Represents inner strength, courage, and compassion. Your power comes from a place of love and patience.
+emoji: 🦁
+bg_color: '#F4A460'

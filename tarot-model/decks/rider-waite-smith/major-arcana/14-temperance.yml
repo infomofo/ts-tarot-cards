@@ -1,0 +1,35 @@
+number: 14
+name: Temperance
+keywords:
+  - balance
+  - moderation
+  - patience
+  - purpose
+meanings:
+  upright:
+    - Balance
+    - Patience
+    - Finding a middle ground
+    - Blending opposing forces
+  reversed:
+    - Imbalance
+    - Lack of patience
+    - Conflict
+    - Extremes in behavior
+visual_description:
+  background: An angel with one foot in water and one on land pours water between two cups.
+  foreground: The angel has a triangle in a square on its chest and a sun symbol on its forehead. A path leads to a rising sun.
+visual_description_analysis:
+  - The act of pouring water between two cups symbolizes the blending of opposites to create harmony.
+  - The angel's stance (one foot in water, one on land) represents the connection between the subconscious and the material world.
+  - The path to the rising sun shows the way forward through balance.
+symbols:
+  - angel
+  - cup
+  - water
+  - sun
+  - path
+significance: Temperance teaches the soul the art of balance and integration.
+description: Represents balance, moderation, and patience. It is time to find harmony and a middle ground.
+emoji: 🥂
+bg_color: '#AFEEEE'

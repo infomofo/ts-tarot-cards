@@ -1,0 +1,36 @@
+number: 19
+name: The Sun
+keywords:
+  - positivity
+  - fun
+  - warmth
+  - success
+meanings:
+  upright:
+    - Joy
+    - Success
+    - Clarity
+    - Optimism
+  reversed:
+    - Lack of success
+    - Pessimism
+    - Unrealistic expectations
+    - Feeling sad
+visual_description:
+  background: A naked child rides a white horse under a smiling sun.
+  foreground: The child holds a large red banner. Sunflowers grow over a brick wall behind them.
+visual_description_analysis:
+  - The naked child represents innocence and joy in its purest form.
+  - The smiling sun radiates warmth and positivity.
+  - The sunflowers symbolize growth and abundance.
+  - The white horse represents purity and strength.
+symbols:
+  - sun
+  - child
+  - white horse
+  - sunflower
+  - banner
+significance: Following the uncertainty of the Moon, the Sun brings clarity and joy.
+description: Represents joy, success, and positivity. It is a time of celebration and enlightenment.
+emoji: ☀️
+bg_color: '#FFD700'

@@ -1,0 +1,155 @@
+cards:
+  - name: Ace of Cups
+    number: 1
+    keywords: [love, new relationships, compassion, creativity]
+    meanings:
+      upright: [New love, Emotional beginnings, Compassion, Creativity]
+      reversed: [Emotional loss, Blocked creativity, Emptiness, Instability]
+    visual_description: A hand emerges from a cloud, holding a chalice overflowing with five streams of water. A dove descends toward it, holding a wafer in its beak.
+    visual_description_analysis: The hand from the cloud is a divine gift. The overflowing chalice represents emotional abundance. The dove symbolizes peace and the Holy Spirit, carrying a communion wafer.
+    symbols: [hand, cloud, chalice, water, dove, wafer, lotus]
+    significance: The beginning of the emotional journey, embodying pure emotional potential.
+    description: Represents new love, new relationships, and new beginnings in love.
+  - name: Two of Cups
+    number: 2
+    keywords: [partnership, mutual attraction, connection]
+    meanings:
+      upright: [Unified love, Partnership, Mutual attraction, Harmony]
+      reversed: [Break-ups, Disharmony, Mistrust, Imbalance]
+    visual_description: A man and a woman exchange cups. Above them is a winged lion's head over two intertwined snakes.
+    visual_description_analysis: The exchange of cups symbolizes a partnership or truce. The symbol above them is a Caduceus, a symbol of negotiation and commerce, with a lion's head signifying passion.
+    symbols: [cup, caduceus, lion head]
+    significance: The formation of a connection, bringing emotion into a partnership.
+    description: Represents partnership, mutual attraction, and shared understanding.
+  - name: Three of Cups
+    number: 3
+    keywords: [celebration, friendship, community]
+    meanings:
+      upright: [Celebration, Friendship, Community, Reunions]
+      reversed: [Gossip, Isolation, Overindulgence, Scandal]
+    visual_description: Three women dance in a circle, raising their cups in a toast. They are surrounded by a harvest of fruits and flowers.
+    visual_description_analysis: The dancing women represent shared joy and celebration. The harvest symbolizes abundance and the fruits of their collaboration.
+    symbols: [cup, harvest, flower]
+    significance: The joy of community and shared emotional experiences.
+    description: Represents celebration, friendship, and community.
+  - name: Four of Cups
+    number: 4
+    keywords: [apathy, contemplation, disconnection]
+    meanings:
+      upright: [Apathy, Contemplation, Re-evaluation, Missed opportunities]
+      reversed: [Sudden awareness, Choosing happiness, Letting go of regret, New motivation]
+    visual_description: A young man sits under a tree with his arms crossed, looking at three cups before him. A fourth cup is offered by a hand from a cloud.
+    visual_description_analysis: The man's posture shows apathy and discontent. The fourth cup from the cloud represents a missed opportunity or a blessing being ignored.
+    symbols: [tree, cup, hand, cloud]
+    significance: A moment of emotional stagnation and introspection.
+    description: Represents apathy, contemplation, and missed opportunities.
+  - name: Five of Cups
+    number: 5
+    keywords: [loss, grief, regret, disappointment]
+    meanings:
+      upright: [Loss, Grief, Regret, Disappointment]
+      reversed: [Moving on, Acceptance, Forgiveness, Finding hope]
+    visual_description: A person in a black cloak looks down at three spilled cups. Two full cups stand behind them. A bridge leads to a building in the distance.
+    visual_description_analysis: The spilled cups symbolize loss and regret. The two full cups represent what remains, though they are currently unseen. The bridge shows a path forward.
+    symbols: [cloak, spilled cup, full cup, bridge, building]
+    significance: The pain of loss and the tendency to focus on what is gone.
+    description: Represents loss, grief, and regret. Do not forget what still remains.
+  - name: Six of Cups
+    number: 6
+    keywords: [nostalgia, childhood, reunion, innocence]
+    meanings:
+      upright: [Nostalgia, Happy memories, Childhood innocence, Reunions]
+      reversed: [Stuck in the past, Unrealistic expectations, Naivety, Boring life]
+    visual_description: A young boy offers a cup filled with flowers to a younger girl. Five other cups are around them.
+    visual_description_analysis: This scene evokes a sense of nostalgia and the simple joys of childhood. The giving of flowers is an act of innocent kindness.
+    symbols: [cup, flower, village]
+    significance: A journey back to the sweet memories of the past.
+    description: Represents nostalgia, childhood memories, and simple joys.
+  - name: Seven of Cups
+    number: 7
+    keywords: [choices, illusions, daydreaming]
+    meanings:
+      upright: [Choices, Daydreaming, Illusion, Wishful thinking]
+      reversed: [Clarity, Decisiveness, Avoiding temptation, Focusing on reality]
+    visual_description: A person stands before seven cups on clouds, each containing a different vision a castle, jewels, a laurel wreath, a dragon, a snake, a woman's head, and a shrouded figure.
+    visual_description_analysis: The cups contain various temptations and desires, representing the many choices available, some of which may be illusions. The shrouded figure represents a hidden truth or a mystery.
+    symbols: [cup, cloud, vision]
+    significance: A crossroads of choice, often clouded by illusion.
+    description: Represents choices, illusions, and daydreaming. You must choose wisely.
+  - name: Eight of Cups
+    number: 8
+    keywords: [abandonment, withdrawal, escapism]
+    meanings:
+      upright: [Walking away, Emotional withdrawal, Seeking deeper meaning, Moving on]
+      reversed: [Fear of the unknown, Returning to a bad situation, Feeling trapped, Avoiding change]
+    visual_description: A person with a walking stick turns their back on eight stacked cups and walks away towards mountains under a dark moon.
+    visual_description_analysis: The person is willingly leaving behind emotional fulfillment that is no longer satisfying to seek a higher purpose, represented by the mountains.
+    symbols: [cup, mountain, moon, walking stick]
+    significance: A turning point where one chooses to leave behind what is emotionally unfulfilling.
+    description: Represents walking away, withdrawal, and seeking something more.
+  - name: Nine of Cups
+    number: 9
+    keywords: [wishes fulfilled, satisfaction, contentment]
+    meanings:
+      upright: [Wishes fulfilled, Contentment, Satisfaction, Gratitude]
+      reversed: [Unfulfilled wishes, Dissatisfaction, Greed, Smugness]
+    visual_description: A cheerful man sits on a bench with his arms crossed. Behind him, nine golden cups are arranged on a draped table.
+    visual_description_analysis: Often called the "wish card," the man's smug satisfaction shows that his desires have been met. The cups represent emotional and material fulfillment.
+    symbols: [cup, bench]
+    significance: The attainment of happiness and emotional satisfaction.
+    description: Represents wishes fulfilled, satisfaction, and contentment.
+  - name: Ten of Cups
+    number: 10
+    keywords: [harmony, marriage, happiness, family]
+    meanings:
+      upright: [Harmony, Marriage, Family happiness, Emotional fulfillment]
+      reversed: [Broken relationships, Disharmony, Family strife, A facade of happiness]
+    visual_description: A man and woman stand with their arms around each other, looking at a rainbow with ten cups in the sky. Two children play nearby.
+    visual_description_analysis: The rainbow is a symbol of divine blessing and the end of troubles. The happy family and cozy home represent ultimate emotional fulfillment.
+    symbols: [rainbow, cup, home]
+    significance: The culmination of the suit of Cups, representing ultimate emotional fulfillment.
+    description: Represents harmony, marriage, and family happiness.
+  - name: Page of Cups
+    number: 11
+    keywords: [creative opportunities, intuitive messages, curiosity]
+    meanings:
+      upright: [Creative ideas, Intuitive messages, Emotional sensitivity, Curiosity]
+      reversed: [Emotional immaturity, Creative blocks, Ignoring intuition, Insecurity]
+    visual_description: A young man in flamboyant clothes stands on a seashore, holding a cup with a fish popping out of it.
+    visual_description_analysis: The fish popping out of the cup represents a surprising creative or intuitive message emerging from the subconscious (the sea).
+    symbols: [cup, fish, sea]
+    significance: The messenger of the emotional world, bringing new creative ideas.
+    description: Represents creative opportunities and intuitive messages. Be open to new ideas.
+  - name: Knight of Cups
+    number: 12
+    keywords: [romance, charm, imagination, beauty]
+    meanings:
+      upright: [Romance, Charm, Imagination, An invitation]
+      reversed: [Unrealistic ideals, Jealousy, Emotional manipulation, A player]
+    visual_description: A knight on a white horse moves slowly, holding out a golden cup. His helmet and boots have wings.
+    visual_description_analysis: The knight is a romantic hero, offering his heart (the cup). The wings on his helmet and boots symbolize his active imagination and connection to the divine.
+    symbols: [knight, white horse, cup, wing]
+    significance: A quest guided by the heart and imagination.
+    description: Represents romance, charm, and following your heart. An offer is on its way.
+  - name: Queen of Cups
+    number: 13
+    keywords: [compassion, calm, intuition, nurturing]
+    meanings:
+      upright: [Compassion, Emotional security, Intuition, Nurturing]
+      reversed: [Emotional insecurity, Neediness, Being overly sensitive, Martyrdom]
+    visual_description: A queen sits on a throne at the edge of the sea, holding an ornate, lidded cup.
+    visual_description_analysis: The queen is in tune with her emotions and the subconscious (the sea). The ornate, lidded cup suggests that her feelings are deep and contained, not openly displayed.
+    symbols: [queen, throne, cup, sea]
+    significance: The master of her emotions, compassionate and intuitive.
+    description: Represents compassion, calm, and intuition. Trust your heart and lead with love.
+  - name: King of Cups
+    number: 14
+    keywords: [emotional balance, compassion, diplomacy]
+    meanings:
+      upright: [Emotional mastery, Balance, Compassion, Diplomacy]
+      reversed: [Emotional manipulation, Moodiness, Volatility, Coldness]
+    visual_description: A king sits on a throne in a turbulent sea, yet he remains calm. He holds a cup and a scepter.
+    visual_description_analysis: The king's calm demeanor in a turbulent sea shows his mastery over his emotions. The cup represents his emotions, while the scepter represents his authority and control.
+    symbols: [king, throne, sea, cup, scepter, fish, ship]
+    significance: The perfect balance of emotion and intellect.
+    description: Represents emotional balance, compassion, and diplomacy. You are in control of your emotions.

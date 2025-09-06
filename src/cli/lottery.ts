@@ -96,7 +96,7 @@ interface LotteryResult {
   quickPickCount: number;
 }
 
-function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryResult {
+export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryResult {
   const prompts = loadPrompts();
   const drawnCards: DrawnCard[] = [];
   const mainNumbers: (number | null)[] = [];
@@ -104,16 +104,18 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
   let quickPickCount = 0;
 
   // Draw cards for main numbers
-  for (let i = 0; i < lotteryType.mainNumbers.count; i += 1) {
+  let mainNumberCount = 0;
+  let drawCount = 0;
+  let isRedraw = false;
+  while (mainNumberCount < lotteryType.mainNumbers.count) {
     const cardPositions = deck.selectCards(1);
     if (cardPositions.length === 0) {
       throw new Error('Not enough cards in deck');
     }
     const cardPosition = cardPositions[0];
-
-    const positionName = `Main ${i + 1}`;
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
+    const positionName = `Main ${mainNumberCount + 1}${isRedraw ? ' (Redraw)' : ''}`;
     const cardDisplayName = cardPosition.isReversed
       ? `${cardPosition.card.getName()} (Reversed)`
       : cardPosition.card.getName();
@@ -130,19 +132,21 @@ function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryRes
     if (isValidMainNumber) {
       console.log(formatPrompt(prompts.lottery.number_mapped, { number: lotteryNumber }));
       mainNumbers.push(lotteryNumber);
+      mainNumberCount += 1;
+      isRedraw = false;
     } else {
       console.log(prompts.lottery.invalid_number);
-      mainNumbers.push(null);
-      quickPickCount += 1;
+      isRedraw = true;
     }
 
     drawnCards.push({
       card: cardPosition.card,
-      position: i + 1,
+      position: drawCount + 1,
       positionName,
       lotteryNumber,
       isReversed: cardPosition.isReversed,
     });
+    drawCount += 1;
   }
 
   // Draw card(s) for bonus number with special re-draw logic
@@ -276,7 +280,7 @@ async function getLotteryInterpretation(result: LotteryResult): Promise<void> {
         })),
       };
 
-      const aiInterpretation = await getGenericAiInterpretation(context);
+      const aiInterpretation = await getGenericAiInterpretation({ ...context, contextType: 'lottery' });
       console.log(aiInterpretation);
       console.log('');
     } catch (error) {

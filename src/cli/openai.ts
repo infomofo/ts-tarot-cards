@@ -217,7 +217,7 @@ export async function getGenericAiInterpretation(
         },
       ],
       max_tokens: maxTokens,
-      temperature: 0.7,
+      temperature: context.contextType === 'lottery' ? 0.3 : 0.7,
     });
 
     return completion.choices[0]?.message?.content || 'The digital currents are unclear at this time, seeker.';

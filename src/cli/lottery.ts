@@ -280,7 +280,7 @@ async function getLotteryInterpretation(result: LotteryResult): Promise<void> {
         })),
       };
 
-      const aiInterpretation = await getGenericAiInterpretation(context);
+      const aiInterpretation = await getGenericAiInterpretation({ ...context, contextType: 'lottery' });
       console.log(aiInterpretation);
       console.log('');
     } catch (error) {

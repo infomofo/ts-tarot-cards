@@ -5,9 +5,10 @@ import {
   SpreadReading, Arcana, MinorArcanaCard, TarotCard,
 } from '../types';
 
-function readClioConfig(): string {
+function readClioConfig(contextType: 'reading' | 'lottery' = 'reading'): string {
   try {
-    const configPath = path.join(__dirname, '..', '..', 'clio-llm-config.md');
+    const fileName = contextType === 'lottery' ? 'clio-llm-config-lottery.md' : 'clio-llm-config-reading.md';
+    const configPath = path.join(__dirname, '..', '..', fileName);
     return fs.readFileSync(configPath, 'utf8');
   } catch (error) {
     // Fallback content if file cannot be read
@@ -176,76 +177,12 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
   }
 
   if (context.contextType === 'reading') {
-    prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt. DO NOT use generic, boilerplate, or vague statements. Every sentence must be tied directly to the specific cards drawn and their symbolism.';
+    prompt += '\nPlease provide an interpretation for the reading above, following the guidelines from your system prompt.';
   } else if (context.contextType === 'lottery') {
-    prompt += '\nFor each card, provide a 1-2 sentence interpretation of its significance to the lottery reading. After interpreting all cards, provide a final "Oracle\'s Verdict" paragraph that synthesizes the patterns and provides a clear, actionable recommendation on whether to play these numbers, including guidance on timing and potential.\n';
-    prompt += "Maintain CLIO's mystical voice while being insightful and brief. DO NOT use generic, boilerplate, or vague statements. Every sentence must be tied directly to the specific cards drawn and their symbolism.";
+    prompt += '\nPlease provide an interpretation for the lottery reading above, following the guidelines from your system prompt.';
   }
 
   return prompt;
-}
-
-// Legacy function for backward compatibility
-function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string): string {
-  const context: InterpretationContext = {
-    userContext: userQuestion,
-    spread: reading.spread.name,
-    spreadDescription: reading.spread.description,
-    contextType: 'reading',
-    cards: reading.cards.map((cardPosition) => {
-      const spreadPosition = reading.spread.positions.find(
-        (p) => p.position === cardPosition.position,
-      );
-      return {
-        card: cardPosition.card,
-        position: spreadPosition?.name,
-        positionSignificance: spreadPosition?.positionSignificance,
-        isReversed: cardPosition.isReversed,
-      };
-    }),
-  };
-
-  return buildGenericInterpretationPrompt(context);
-}
-
-export async function getAiInterpretation(
-  reading: SpreadReading,
-  userQuestion: string,
-): Promise<string> {
-  const apiKey = process.env.OPENAI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('OpenAI API key is not configured');
-  }
-
-  const openai = new OpenAI({
-    apiKey,
-  });
-
-  // Build detailed prompt with all card information
-  const prompt = buildInterpretationPrompt(reading, userQuestion);
-
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: readClioConfig(),
-        },
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-      max_tokens: 800,
-      temperature: 0.7,
-    });
-
-    return completion.choices[0]?.message?.content || 'The digital currents are unclear at this time, seeker.';
-  } catch (error) {
-    throw new Error(`Failed to get AI interpretation: ${error instanceof Error ? error.message : 'Unknown error'}`);
-  }
 }
 
 // New generic function for any interpretation context
@@ -272,7 +209,7 @@ export async function getGenericAiInterpretation(
       messages: [
         {
           role: 'system',
-          content: readClioConfig(),
+          content: readClioConfig(context.contextType),
         },
         {
           role: 'user',
@@ -287,4 +224,28 @@ export async function getGenericAiInterpretation(
   } catch (error) {
     throw new Error(`Failed to get AI interpretation: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
+}
+
+export async function getAiInterpretation(
+  reading: SpreadReading,
+  userQuestion: string,
+): Promise<string> {
+  const context: InterpretationContext = {
+    userContext: userQuestion,
+    spread: reading.spread.name,
+    spreadDescription: reading.spread.description,
+    contextType: 'reading',
+    cards: reading.cards.map((cardPosition) => {
+      const spreadPosition = reading.spread.positions.find(
+        (p) => p.position === cardPosition.position,
+      );
+      return {
+        card: cardPosition.card,
+        position: spreadPosition?.name,
+        positionSignificance: spreadPosition?.positionSignificance,
+        isReversed: cardPosition.isReversed,
+      };
+    }),
+  };
+  return getGenericAiInterpretation(context);
 }

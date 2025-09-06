@@ -178,12 +178,12 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
   if (context.contextType === 'reading') {
     prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
   } else if (context.contextType === 'lottery') {
-    prompt += '\nPlease provide a balanced interpretation focusing on:\n';
+    prompt += '\nPlease provide a balanced and concise (2-3 sentences) interpretation focusing on:\n';
     prompt += '1. The potential for these numbers, considering both positive and negative aspects, including the numerology, symbols, and graphical art of the cards.\n';
     prompt += '2. The mystical significance of the cards drawn in relation to fortune and chance.\n';
     prompt += '3. Any patterns or symbolism that relates to luck and timing.\n';
     prompt += '\nMake a definitive statement on if it is a good idea to play these numbers, offering guidance on the timing and potential of the numbers drawn.\n';
-    prompt += "Maintain CLIO's mystical voice while being insightful.";
+    prompt += "Maintain CLIO's mystical voice while being insightful and brief.";
   }
 
   return prompt;
@@ -270,6 +270,7 @@ export async function getGenericAiInterpretation(
   const prompt = buildGenericInterpretationPrompt(context);
 
   try {
+    const maxTokens = context.contextType === 'lottery' ? 150 : 800;
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
@@ -282,7 +283,7 @@ export async function getGenericAiInterpretation(
           content: prompt,
         },
       ],
-      max_tokens: 800,
+      max_tokens: maxTokens,
       temperature: 0.7,
     });
 

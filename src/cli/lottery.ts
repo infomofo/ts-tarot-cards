@@ -106,6 +106,7 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
   // Draw cards for main numbers
   let mainNumberCount = 0;
   let drawCount = 0;
+  let isRedraw = false;
   while (mainNumberCount < lotteryType.mainNumbers.count) {
     const cardPositions = deck.selectCards(1);
     if (cardPositions.length === 0) {
@@ -114,7 +115,7 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
     const cardPosition = cardPositions[0];
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
-    const positionName = `Main ${mainNumberCount + 1}`;
+    const positionName = `Main ${mainNumberCount + 1}${isRedraw ? ' (Redraw)' : ''}`;
     const cardDisplayName = cardPosition.isReversed
       ? `${cardPosition.card.getName()} (Reversed)`
       : cardPosition.card.getName();
@@ -132,8 +133,10 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
       console.log(formatPrompt(prompts.lottery.number_mapped, { number: lotteryNumber }));
       mainNumbers.push(lotteryNumber);
       mainNumberCount += 1;
+      isRedraw = false;
     } else {
       console.log(prompts.lottery.invalid_number);
+      isRedraw = true;
     }
 
     drawnCards.push({

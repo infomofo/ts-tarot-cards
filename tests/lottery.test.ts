@@ -255,4 +255,26 @@ describe('drawLotteryCards', () => {
     expect(result.quickPickCount).toBe(0);
     expect(result.drawnCards.length).toBe(7); // 5 main + 1 invalid bonus + 1 valid bonus
   });
+
+  it('should correctly handle reversed cards', () => {
+    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: true }]) // 1
+      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
+      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: true }]) // 6
+      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
+      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: true }]) // 8
+      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
+
+    const result = drawLotteryCards(deck, megaMillions);
+
+    expect(result.mainNumbers).toEqual([1, 5, 6, 7, 8]);
+    expect(result.bonusNumber).toBe(9);
+    expect(result.quickPickCount).toBe(0);
+    expect(result.drawnCards.length).toBe(6);
+    expect(result.drawnCards[0].isReversed).toBe(true);
+    expect(result.drawnCards[1].isReversed).toBe(false);
+    expect(result.drawnCards[2].isReversed).toBe(true);
+    expect(result.drawnCards[3].isReversed).toBe(false);
+    expect(result.drawnCards[4].isReversed).toBe(true);
+    expect(result.drawnCards[5].isReversed).toBe(false);
+  });
 });

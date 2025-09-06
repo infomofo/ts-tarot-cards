@@ -1,9 +1,14 @@
 import { getLotteryNumbers, getCardLotteryNumber } from '../src/cli/lottery';
+import { getTarotData } from '../src/data-loader';
 import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
 import { MINOR_ARCANA_CARDS } from '../src/cards/minor-arcana';
 import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana } from '../src/types';
 
 describe('Card to Lottery Number Mapping', () => {
+  beforeAll(() => {
+    getTarotData();
+  });
+
   const allCards: TarotCard[] = [
     ...Object.values(MAJOR_ARCANA_CARDS),
     ...Object.values(MINOR_ARCANA_CARDS),

@@ -95,15 +95,15 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
     prompt += `Keywords: ${card.keywords.join(', ')}\n`;
 
     // Include visual description and analysis
-    prompt += `Visual Description: ${card.visualDescription}\n`;
-    prompt += `Visual Analysis: ${card.visualDescriptionAnalysis}\n`;
+    prompt += `Visual Description: ${card.visual_description.background} ${card.visual_description.foreground}\n`;
+    prompt += `Visual Analysis: ${card.visual_description_analysis.join(' ')}\n`;
     prompt += `Symbols: ${card.symbols.join(', ')}\n`;
     prompt += `Significance: ${card.significance}\n`;
     prompt += `Description: ${card.description}\n`;
 
     const meanings = cardInfo.isReversed
-      ? card.reversedMeanings
-      : card.uprightMeanings;
+      ? card.meanings.reversed
+      : card.meanings.upright;
     prompt += `Meanings: ${meanings.join(', ')}\n`;
 
     // Collect data for pattern analysis
@@ -204,7 +204,7 @@ function buildInterpretationPrompt(reading: SpreadReading, userQuestion: string)
       return {
         card: cardPosition.card,
         position: spreadPosition?.name,
-        positionSignificance: spreadPosition?.positionSignificance,
+        positionSignificance: spreadPosition?.position_significance,
         isReversed: cardPosition.isReversed,
       };
     }),

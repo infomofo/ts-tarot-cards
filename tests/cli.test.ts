@@ -2,8 +2,13 @@ jest.mock('inquirer');
 import inquirer from 'inquirer';
 import { mainMenu } from '../src/cli/index';
 import { SpreadReader } from '../src/index';
+import { getTarotData } from '../src/data-loader';
 
 describe('CLIO CLI', () => {
+  beforeAll(() => {
+    getTarotData();
+  });
+
   let consoleLogSpy: jest.SpyInstance;
   let consoleErrorSpy: jest.SpyInstance;
   let processExitSpy: jest.SpyInstance;

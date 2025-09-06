@@ -35,9 +35,9 @@ export async function learnAboutSingleCard(): Promise<boolean> {
     console.log(`\nKeywords: ${selectedCard.keywords.join(', ')}`);
     console.log('\nMeanings:');
     console.log('  Upright:');
-    selectedCard.uprightMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
+    selectedCard.meanings.upright.forEach((meaning: string) => console.log(`    - ${meaning}`));
     console.log('  Reversed:');
-    selectedCard.reversedMeanings.forEach((meaning) => console.log(`    - ${meaning}`));
+    selectedCard.meanings.reversed.forEach((meaning: string) => console.log(`    - ${meaning}`));
   }
 
   const continueAnswer = await inquirer.prompt({
@@ -94,8 +94,8 @@ export async function getSingleReading(): Promise<boolean> {
       const reversed = cardPosition.isReversed ? 'reversed' : 'upright';
       console.log(`This card is ${reversed}.`);
       const meanings = cardPosition.isReversed
-        ? cardPosition.card.reversedMeanings
-        : cardPosition.card.uprightMeanings;
+        ? cardPosition.card.meanings.reversed
+        : cardPosition.card.meanings.upright;
       const meaning = meanings[Math.floor(Math.random() * meanings.length)];
       console.log(`It speaks of: ${meaning}`);
       console.log('\n');

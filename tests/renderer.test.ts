@@ -1,7 +1,12 @@
 import { SpreadReader, SPREAD_NAMES } from '../src/spreads/spreads';
 import { SpreadRenderer } from '../src/spreads/renderer';
+import { getTarotData } from '../src/data-loader';
 
 describe('SpreadRenderer', () => {
+  beforeAll(() => {
+    getTarotData();
+  });
+
   let reader: SpreadReader;
   let renderer: SpreadRenderer;
 

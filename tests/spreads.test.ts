@@ -41,7 +41,7 @@ describe('SpreadReader', () => {
 
         it('should respect the allowReversals setting', () => {
           const reading = reader.performReading(spreadName as keyof typeof SPREADS);
-          expect(reading.allowReversals).toBe(spread.allowReversals);
+          expect(reading.allow_reversals).toBe(spread.allow_reversals);
         });
 
         it('should have a layout', () => {

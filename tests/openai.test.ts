@@ -46,7 +46,7 @@ describe('OpenAI Integration', () => {
       cards: [
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 
@@ -77,7 +77,7 @@ describe('OpenAI Integration', () => {
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheHighPriestess]!, position: 3, isReversed: false },
       ],
-      allowReversals: true,
+      allow_reversals: true,
       timestamp: new Date(),
     };
 
@@ -118,7 +118,7 @@ describe('OpenAI Integration', () => {
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
       ],
-      allowReversals: true,
+      allow_reversals: true,
       timestamp: new Date(),
     };
 
@@ -157,7 +157,7 @@ describe('OpenAI Integration', () => {
       cards: [
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 
@@ -180,7 +180,7 @@ describe('OpenAI Integration', () => {
       cards: [
         { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 

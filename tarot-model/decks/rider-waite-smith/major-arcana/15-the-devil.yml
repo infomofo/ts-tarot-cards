@@ -1,0 +1,33 @@
+number: 15
+name: The Devil
+keywords:
+  - addiction
+  - materialism
+  - bondage
+  - ignorance
+meanings:
+  upright:
+    - Bondage
+    - Addiction
+    - Materialism
+    - Exploring the shadow self
+  reversed:
+    - Breaking free
+    - Releasing negative patterns
+    - Detachment
+    - Gaining awareness
+visual_description:
+  background: A goat-headed being with bat wings sits on a black pedestal.
+  foreground: Two naked people, a man and a woman, are loosely chained to the pedestal. They have small horns and tails.
+visual_description_analysis:
+  - This card is a parody of The Lovers, showing a relationship based on bondage and materialism.
+  - The chains are loose, indicating that the figures are trapped by their own choices and can escape.
+  - The goat-headed being is often identified with Baphomet, representing the primal, shadow self.
+symbols:
+  - devil
+  - chain
+  - pedestal
+significance: The Devil represents the soul's confrontation with its shadow side addiction, materialism, and self-imposed limitations.
+description: Represents addiction, bondage, and materialism. You are chained by your own choices and can break free.
+emoji: 😈
+bg_color: '#DC143C'

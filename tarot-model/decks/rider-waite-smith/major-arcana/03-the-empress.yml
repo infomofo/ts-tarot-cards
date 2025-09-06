@@ -1,0 +1,38 @@
+number: 3
+name: The Empress
+keywords:
+  - femininity
+  - beauty
+  - nature
+  - nurturing
+  - abundance
+meanings:
+  upright:
+    - Femininity
+    - Nurturing
+    - Abundance
+    - Connection to nature
+  reversed:
+    - Creative blocks
+    - Dependence on others
+    - Smothering love
+    - Neglecting self-care
+visual_description:
+  background: A woman with a crown of twelve stars sits on a throne in a golden wheat field.
+  foreground: She holds a scepter. A heart-shaped shield with the symbol for Venus is beside her.
+visual_description_analysis:
+  - The crown of twelve stars represents the zodiac.
+  - The wheat field symbolizes abundance from nature.
+  - The Venus symbol on the shield connects her to the planet of love, beauty, and creation.
+  - She is often seen as the archetypal mother figure.
+symbols:
+  - throne
+  - wheat
+  - crown
+  - scepter
+  - venus symbol
+  - shield
+significance: Symbolizing creation and the material world, she is the embodiment of motherhood.
+description: Represents femininity, nurturing, abundance, and creativity.
+emoji: 👸
+bg_color: '#90EE90'

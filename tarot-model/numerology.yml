@@ -1,0 +1,86 @@
+numbers:
+  1:
+    name: ace
+    meanings:
+      - beginnings
+      - opportunities
+      - potential
+    appearances: []
+    significance: []
+  2:
+    name: two
+    meanings:
+      - balance
+      - partnership
+      - duality
+    appearances: []
+    significance: []
+  3:
+    name: three
+    meanings:
+      - creativity
+      - collaboration
+      - growth
+    appearances: []
+    significance: []
+  4:
+    name: four
+    meanings:
+      - stability
+      - structure
+      - foundations
+    appearances: []
+    significance: []
+  5:
+    name: five
+    meanings:
+      - conflict
+      - change
+      - loss
+    appearances: []
+    significance: []
+  6:
+    name: six
+    meanings:
+      - harmony
+      - community
+      - healing
+    appearances: []
+    significance: []
+  7:
+    name: seven
+    meanings:
+      - introspection
+      - assessment
+      - spirituality
+    appearances: []
+    significance: []
+  8:
+    name: eight
+    meanings:
+      - mastery
+      - progress
+      - accomplishment
+    appearances: []
+    significance: []
+  9:
+    name: nine
+    meanings:
+      - fulfillment
+      - satisfaction
+      - resilience
+    appearances: []
+    significance: []
+  10:
+    name: ten
+    meanings:
+      - completion
+      - culmination
+      - endings
+    appearances: []
+    significance: []
+  32:
+    appearances:
+      - There are 32 rays of light on the Moon card
+    significance:
+      - There are 32 paths of the Kabbalah Tree of Life

@@ -1,3 +1,4 @@
+import { getTarotData } from '../src/data-loader';
 import { TarotDeck } from '../src/deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../src/deck/card-selection-strategies';
 import { SHUFFLE_STRATEGIES } from '../src/deck/shuffle-strategies';
@@ -6,6 +7,10 @@ import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCar
 
 describe('TarotDeck', () => {
   let deck: TarotDeck;
+
+  beforeAll(() => {
+    getTarotData();
+  });
 
   beforeEach(() => {
     deck = new TarotDeck();
@@ -162,8 +167,8 @@ describe('SpreadReader', () => {
       'Custom Test',
       'A test spread',
       [
-        { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
-        { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
+        { position: 1, name: 'First', position_significance: 'First position', deal_order: 1 },
+        { position: 2, name: 'Second', position_significance: 'Second position', deal_order: 2 }
       ],
       [
         { position: 1, x: 0, y: 0 },
@@ -215,10 +220,10 @@ describe('SpreadReader', () => {
     
     // simplePastPresent spread doesn't allow reversals
     expect(readingWithoutReversals.cards.every(card => !card.isReversed)).toBe(true);
-    expect(readingWithoutReversals.spread.allowReversals).toBe(false);
+    expect(readingWithoutReversals.spread.allow_reversals).toBe(false);
     
     // threeCard spread allows reversals
-    expect(readingWithReversals.spread.allowReversals).toBe(true);
+    expect(readingWithReversals.spread.allow_reversals).toBe(true);
   });
 
   test('should include layout in spreads', () => {
@@ -243,10 +248,10 @@ describe('SpreadReader', () => {
 
   test('should use preferred strategy from spread', () => {
     const threeCardSpread = reader.getSpread('threeCard');
-    expect(threeCardSpread.preferredStrategy).toBe('deal');
+    expect(threeCardSpread.preferred_strategy).toBe('deal');
     
     const crossSpread = reader.getSpread('crossSpread');
-    expect(crossSpread.preferredStrategy).toBe('fanpick');
+    expect(crossSpread.preferred_strategy).toBe('fanpick');
     
     // Reading should use preferred strategy when no override provided
     const reading = reader.performReading('threeCard');
@@ -274,8 +279,8 @@ describe('SpreadReader', () => {
       'Custom Strategy Test',
       'A test spread with strategy',
       [
-        { position: 1, name: 'First', positionSignificance: 'First position', dealOrder: 1 },
-        { position: 2, name: 'Second', positionSignificance: 'Second position', dealOrder: 2 }
+        { position: 1, name: 'First', position_significance: 'First position', deal_order: 1 },
+        { position: 2, name: 'Second', position_significance: 'Second position', deal_order: 2 }
       ],
       [
         { position: 1, x: 0, y: 0 },
@@ -285,7 +290,7 @@ describe('SpreadReader', () => {
       'fanpick'
     );
 
-    expect(customSpread.preferredStrategy).toBe('fanpick');
+    expect(customSpread.preferred_strategy).toBe('fanpick');
     
     const reading = reader.performCustomReading(customSpread);
     expect(reading.cards).toHaveLength(2);
@@ -302,7 +307,7 @@ describe('SpreadReader', () => {
     const customSpread = reader.createCustomSpread(
       'Default Strategy Test',
       'A test spread',
-      [{ position: 1, name: 'Only', positionSignificance: 'Only position', dealOrder: 1 }],
+      [{ position: 1, name: 'Only', position_significance: 'Only position', deal_order: 1 }],
       [{ position: 1, x: 0, y: 0 }]
     );
 
@@ -441,10 +446,10 @@ describe('Card Data Conventions', () => {
     const cards = deck.selectCards(deck.getTotalCount());
     cards.forEach(cardPosition => {
       const card = cardPosition.card;
-      expect(card.visualDescription).toBeDefined();
-      expect(card.visualDescription.length).toBeGreaterThan(0);
-      expect(card.visualDescriptionAnalysis).toBeDefined();
-      expect(card.visualDescriptionAnalysis.length).toBeGreaterThan(0);
+      expect(card.visual_description).toBeDefined();
+      expect(card.visual_description.background.length).toBeGreaterThan(0);
+      expect(card.visual_description_analysis).toBeDefined();
+      expect(card.visual_description_analysis.length).toBeGreaterThan(0);
     });
   });
 

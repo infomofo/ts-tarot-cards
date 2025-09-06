@@ -4,8 +4,13 @@ import { SUIT_PROPERTIES } from '../src/cards/suit';
 import { getMajorArcanaCard } from '../src/cards/major-arcana';
 import { getMinorArcanaCard } from '../src/cards/minor-arcana';
 import { getTopText } from '../src/cards/svg-generator';
+import { getTarotData } from '../src/data-loader';
 
 describe('Card Representations', () => {
+  beforeAll(() => {
+    getTarotData();
+  });
+
   describe('Text Representation', () => {
     test('ace of cups should have correct text', () => {
       const card = getMinorArcanaCard(MinorArcana.AceOfCups) as MinorArcanaCard;

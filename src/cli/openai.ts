@@ -176,10 +176,10 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
   }
 
   if (context.contextType === 'reading') {
-    prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
+    prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt. DO NOT use generic, boilerplate, or vague statements. Every sentence must be tied directly to the specific cards drawn and their symbolism.';
   } else if (context.contextType === 'lottery') {
-    prompt += '\nFor each card, provide a 1-2 sentence interpretation of its significance to the lottery reading. After interpreting all cards, provide a summary paragraph that analyzes the patterns and makes a definitive statement on if it is a good idea to play these numbers, offering guidance on timing and potential.\n';
-    prompt += "Maintain CLIO's mystical voice while being insightful and brief.";
+    prompt += '\nFor each card, provide a 1-2 sentence interpretation of its significance to the lottery reading. After interpreting all cards, provide a final "Oracle\'s Verdict" paragraph that synthesizes the patterns and provides a clear, actionable recommendation on whether to play these numbers, including guidance on timing and potential.\n';
+    prompt += "Maintain CLIO's mystical voice while being insightful and brief. DO NOT use generic, boilerplate, or vague statements. Every sentence must be tied directly to the specific cards drawn and their symbolism.";
   }
 
   return prompt;

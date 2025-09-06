@@ -1,14 +1,9 @@
 jest.mock('inquirer');
 import inquirer from 'inquirer';
 import { mainMenu } from '../src/cli/index';
-import { SpreadReader } from '../src/index';
-import { getTarotData } from '../src/data-loader';
+import { ALL_SPREADS, ALL_MAJOR_ARCANA, MajorArcana } from '../src/index';
 
 describe('CLIO CLI', () => {
-  beforeAll(() => {
-    getTarotData();
-  });
-
   let consoleLogSpy: jest.SpyInstance;
   let consoleErrorSpy: jest.SpyInstance;
   let processExitSpy: jest.SpyInstance;
@@ -36,7 +31,6 @@ describe('CLIO CLI', () => {
   });
 
   it('should show card details and loop', async () => {
-    const { MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
     const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Learn about the tarot cards' })
       .mockResolvedValueOnce({ cardName: 'The Fool' })
@@ -55,19 +49,18 @@ describe('CLIO CLI', () => {
 
     expect(mockPrompt).toHaveBeenCalledTimes(6);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool ***'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheFool].description));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(ALL_MAJOR_ARCANA[MajorArcana.TheFool].description));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician ***'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheMagician].description));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(ALL_MAJOR_ARCANA[MajorArcana.TheMagician].description));
   });
 
   it('should perform a reading and loop', async () => {
-    const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
     const mockReading = {
-      spread: SPREADS.threeCard,
+      spread: ALL_SPREADS['threeCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], position: 2, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheHighPriestess], position: 3, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool], position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheMagician], position: 2, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheHighPriestess], position: 3, isReversed: false },
       ],
       allowReversals: true,
       timestamp: new Date(),
@@ -108,11 +101,10 @@ describe('CLIO CLI', () => {
     delete process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
       const mockReading = {
-        spread: SPREADS.singleCard,
+        spread: ALL_SPREADS['singleCard'],
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool], position: 1, isReversed: false },
         ],
         allowReversals: false,
         timestamp: new Date(),
@@ -160,11 +152,10 @@ describe('CLIO CLI', () => {
     const originalEnv = process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
       const mockReading = {
-        spread: SPREADS.singleCard,
+        spread: ALL_SPREADS['singleCard'],
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool], position: 1, isReversed: false },
         ],
         allowReversals: false,
         timestamp: new Date(),
@@ -222,11 +213,10 @@ describe('CLIO CLI', () => {
     const originalEnv = process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
       const mockReading = {
-        spread: SPREADS.singleCard,
+        spread: ALL_SPREADS['singleCard'],
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool], position: 1, isReversed: false },
         ],
         allowReversals: false,
         timestamp: new Date(),

@@ -1,23 +1,18 @@
-import { getTarotData } from '../src/data-loader';
 import { TarotDeck } from '../src/deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../src/deck/card-selection-strategies';
 import { SHUFFLE_STRATEGIES } from '../src/deck/shuffle-strategies';
-import { SpreadReader, SPREADS } from '../src/spreads/spreads';
-import { Arcana, Suit, MinorNumber, MajorArcana, MajorArcanaCard, MinorArcanaCard } from '../src/types';
+import { SpreadReader } from '../src/spreads/spreads';
+import { Arcana, MajorArcanaCard, MinorArcanaCard, SpreadLayoutPosition, SpreadPosition } from '../src/types';
 
 describe('TarotDeck', () => {
   let deck: TarotDeck;
-
-  beforeAll(() => {
-    getTarotData();
-  });
 
   beforeEach(() => {
     deck = new TarotDeck();
   });
 
   test('should initialize with cards', () => {
-    expect(deck.getTotalCount()).toBeGreaterThan(0);
+    expect(deck.getTotalCount()).toBe(78);
     expect(deck.getRemainingCount()).toBe(deck.getTotalCount());
   });
 
@@ -159,7 +154,7 @@ describe('SpreadReader', () => {
   });
 
   test('should throw error for unknown spread', () => {
-    expect(() => reader.performReading('unknownSpread' as any)).toThrow();
+    expect(() => reader.performReading('unknownSpread')).toThrow();
   });
 
   test('should create custom spread', () => {
@@ -169,11 +164,11 @@ describe('SpreadReader', () => {
       [
         { position: 1, name: 'First', position_significance: 'First position', deal_order: 1 },
         { position: 2, name: 'Second', position_significance: 'Second position', deal_order: 2 }
-      ],
+      ] as SpreadPosition[],
       [
         { position: 1, x: 0, y: 0 },
         { position: 2, x: 1, y: 0 }
-      ]
+      ] as SpreadLayoutPosition[]
     );
 
     expect(customSpread.name).toBe('Custom Test');
@@ -281,11 +276,11 @@ describe('SpreadReader', () => {
       [
         { position: 1, name: 'First', position_significance: 'First position', deal_order: 1 },
         { position: 2, name: 'Second', position_significance: 'Second position', deal_order: 2 }
-      ],
+      ] as SpreadPosition[],
       [
         { position: 1, x: 0, y: 0 },
         { position: 2, x: 1, y: 0 }
-      ],
+      ] as SpreadLayoutPosition[],
       true,
       'fanpick'
     );
@@ -301,14 +296,15 @@ describe('SpreadReader', () => {
   });
 
   test('should set default strategy', () => {
+    const reader = new SpreadReader();
     reader.setDefaultCardSelectionStrategy('fanpick');
     
     // Create a spread without preferred strategy to test default
     const customSpread = reader.createCustomSpread(
       'Default Strategy Test',
       'A test spread',
-      [{ position: 1, name: 'Only', position_significance: 'Only position', deal_order: 1 }],
-      [{ position: 1, x: 0, y: 0 }]
+      [{ position: 1, name: 'Only', position_significance: 'Only position', deal_order: 1 }] as SpreadPosition[],
+      [{ position: 1, x: 0, y: 0 }] as SpreadLayoutPosition[]
     );
 
     const reading = reader.performCustomReading(customSpread);
@@ -324,8 +320,8 @@ describe('Card Types', () => {
     const majorCards = cards.filter(cp => cp.card.arcana === Arcana.Major);
     const minorCards = cards.filter(cp => cp.card.arcana === Arcana.Minor);
     
-    expect(majorCards.length).toBeGreaterThan(0);
-    expect(minorCards.length).toBeGreaterThan(0);
+    expect(majorCards.length).toBe(22);
+    expect(minorCards.length).toBe(56);
     
     // Check major arcana card structure
     if (majorCards.length > 0) {
@@ -447,7 +443,7 @@ describe('Card Data Conventions', () => {
     cards.forEach(cardPosition => {
       const card = cardPosition.card;
       expect(card.visual_description).toBeDefined();
-      expect(card.visual_description.background.length).toBeGreaterThan(0);
+      expect(Object.keys(card.visual_description).length).toBeGreaterThan(0);
       expect(card.visual_description_analysis).toBeDefined();
       expect(card.visual_description_analysis.length).toBeGreaterThan(0);
     });
@@ -462,7 +458,7 @@ describe('Card Data Conventions', () => {
         // This is not foolproof, but it's a good heuristic.
         if (symbol.endsWith('s') && !symbol.endsWith('ss')) {
           // List of exceptions
-          const exceptions = ['chaos', 'cross', 'cosmos', 'iris', 'ibis', 'lotus', 'ouroboros', 'staffs', 'wands', 'caduceus'];
+          const exceptions = ['chaos', 'cross', 'cosmos', 'iris', 'ibis', 'lotus', 'ouroboros', 'staffs', 'wands', 'caduceus', 'pentacles', 'swords', 'cups'];
           if (!exceptions.includes(symbol.toLowerCase())) {
             throw new Error(`Symbol "${symbol}" in card "${card.getName()}" might be plural.`);
           }

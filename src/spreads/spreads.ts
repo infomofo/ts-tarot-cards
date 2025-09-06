@@ -1,21 +1,9 @@
 import {
-  Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation, CardSelectionStrategy,
+  Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation, CardSelectionStrategy, SpreadLayoutPosition
 } from '../types';
 import { TarotDeck } from '../deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../deck/card-selection-strategies';
-import { TAROT_DATA } from '../data-init';
-
-// Spread name constants to avoid magic strings
-export const SPREAD_NAMES = {
-  threeCard: 'threeCard',
-  crossSpread: 'crossSpread',
-  simplePastPresent: 'simplePastPresent',
-  singleCard: 'singleCard',
-  celticCross: 'celticCross',
-} as const;
-
-// Pre-defined spread templates
-export const SPREADS: Record<string, Spread> = TAROT_DATA.spreads;
+import { ALL_SPREADS } from '../data';
 
 export class SpreadReader {
   private deck: TarotDeck;
@@ -27,8 +15,8 @@ export class SpreadReader {
   /**
    * Apply reversal logic to cards based on spread settings
    */
-  private applyReversals(cards: CardPosition[], allow_reversals: boolean): CardPosition[] {
-    if (!allow_reversals) {
+  private applyReversals(cards: CardPosition[], allowReversals: boolean): CardPosition[] {
+    if (!allowReversals) {
       return cards.map((cp) => ({ ...cp, isReversed: false }));
     }
 
@@ -50,11 +38,11 @@ export class SpreadReader {
    * Perform a reading using a predefined spread
    */
   performReading(
-    spreadName: keyof typeof SPREADS,
+    spreadName: string,
     strategy?: string | CardSelectionStrategy,
     userContext?: string,
   ): SpreadReading {
-    const spread = SPREADS[spreadName];
+    const spread = ALL_SPREADS[spreadName];
     if (!spread) {
       throw new Error(`Unknown spread: ${spreadName}`);
     }
@@ -91,7 +79,7 @@ export class SpreadReader {
     return {
       spread,
       cards,
-      allow_reversals: spread.allow_reversals,
+      allowReversals: spread.allow_reversals,
       userContext,
       timestamp: new Date(),
     };
@@ -137,7 +125,7 @@ export class SpreadReader {
     return {
       spread,
       cards,
-      allow_reversals: spread.allow_reversals,
+      allowReversals: spread.allow_reversals,
       userContext,
       timestamp: new Date(),
     };
@@ -149,13 +137,15 @@ export class SpreadReader {
   generateInterpretations(reading: SpreadReading): CardInterpretation[] {
     return reading.cards.map((cardPosition, index) => {
       const position = reading.spread.positions[index];
+      const meaning = cardPosition.isReversed
+        ? cardPosition.card.meanings.reversed.join(', ')
+        : cardPosition.card.meanings.upright.join(', ');
+
       return {
         position,
         card: cardPosition.card,
         isReversed: cardPosition.isReversed,
-        meaning: cardPosition.isReversed
-          ? cardPosition.card.meanings.reversed.join(', ')
-          : cardPosition.card.meanings.upright.join(', '),
+        meaning: meaning,
         additionalNotes: `Card drawn for position "${position.name}". ${position.position_significance}`,
       };
     });
@@ -164,8 +154,8 @@ export class SpreadReader {
   /**
    * Get a specific spread template
    */
-  getSpread(spreadName: keyof typeof SPREADS): Spread {
-    const spread = SPREADS[spreadName];
+  getSpread(spreadName: string): Spread {
+    const spread = ALL_SPREADS[spreadName];
     if (!spread) {
       throw new Error(`Unknown spread: ${spreadName}`);
     }
@@ -176,7 +166,7 @@ export class SpreadReader {
    * Get all available spread names
    */
   getAvailableSpreads(): string[] {
-    return Object.keys(SPREADS);
+    return Object.keys(ALL_SPREADS);
   }
 
   /**
@@ -186,7 +176,7 @@ export class SpreadReader {
     name: string,
     description: string,
     positions: SpreadPosition[],
-    layout: Spread['layout'],
+    layout: SpreadLayoutPosition[],
     allow_reversals: boolean = true,
     preferred_strategy?: string,
   ): Spread {

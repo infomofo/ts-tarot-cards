@@ -85,7 +85,6 @@ export class SpreadRenderer {
           const cardSvg = cardPosition.card.getSvg({
             isReversed: cardPosition.isReversed,
             animate,
-            deal_order: spreadPos.deal_order,
             dealDelay,
           });
           const dealDuration = 0.5;

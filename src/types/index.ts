@@ -328,7 +328,7 @@ export interface SpreadReading {
   cardInterpretations?: CardInterpretation[];
   interpretation?: string; // Interpretation of the entire spread reading
   userContext?: string; // User-provided context like "what area of life to explore"
-  allow_reversals: boolean; // Whether this specific reading allows reversals
+  allowReversals: boolean; // Whether this specific reading allows reversals
   timestamp: Date;
 }
 

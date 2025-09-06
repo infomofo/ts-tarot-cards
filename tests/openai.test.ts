@@ -1,5 +1,5 @@
 import { SpreadReading } from '../src/types';
-import { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } from '../src/index';
+import { ALL_SPREADS, ALL_MAJOR_ARCANA, MajorArcana } from '../src/index';
 
 // Mock the entire openai module
 const mockCreate = jest.fn();
@@ -42,11 +42,11 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS['singleCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allow_reversals: false,
+      allowReversals: false,
       timestamp: new Date(),
     };
 
@@ -71,13 +71,13 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.threeCard,
+      spread: ALL_SPREADS['threeCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheHighPriestess]!, position: 3, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheMagician]!, position: 2, isReversed: true },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheHighPriestess]!, position: 3, isReversed: false },
       ],
-      allow_reversals: true,
+      allowReversals: true,
       timestamp: new Date(),
     };
 
@@ -113,12 +113,12 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.threeCard,
+      spread: ALL_SPREADS['threeCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheMagician]!, position: 2, isReversed: true },
       ],
-      allow_reversals: true,
+      allowReversals: true,
       timestamp: new Date(),
     };
 
@@ -153,11 +153,11 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS['singleCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allow_reversals: false,
+      allowReversals: false,
       timestamp: new Date(),
     };
 
@@ -176,11 +176,11 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS['singleCard'],
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_MAJOR_ARCANA[MajorArcana.TheFool]!, position: 1, isReversed: false },
       ],
-      allow_reversals: false,
+      allowReversals: false,
       timestamp: new Date(),
     };
 

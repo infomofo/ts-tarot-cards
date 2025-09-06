@@ -1,18 +1,54 @@
-import { MajorArcanaCard, MajorArcana, getMajorArcanaName } from '../types';
-import { TAROT_DATA } from '../data-init';
+import {
+  MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral, CardSymbol, SVGOptions,
+} from '../types';
+import { generateSvg } from './svg-generator';
 
-const MAJOR_ARCANA_CARDS: Record<string, MajorArcanaCard> = {};
-TAROT_DATA.majorArcana.forEach((card: MajorArcanaCard) => {
-    MAJOR_ARCANA_CARDS[card.number] = card;
-});
+export class MajorArcanaCardImpl implements MajorArcanaCard {
+  public readonly id: string;
+  public readonly arcana: Arcana.Major = Arcana.Major;
+  public readonly number: MajorArcana;
+  public readonly name: string;
+  public readonly romanNumeral: string;
+  public readonly keywords: string[];
+  public readonly meanings: { upright: string[]; reversed: string[]; };
+  public readonly visual_description: { background: string; foreground: string; };
+  public readonly visual_description_analysis: string[];
+  public readonly symbols: CardSymbol[];
+  public readonly significance: string;
+  public readonly description: string;
+  public readonly emoji?: string;
+  public readonly bg_color?: string;
 
-export { MAJOR_ARCANA_CARDS };
+  constructor(cardData: Omit<MajorArcanaCard, 'getName' | 'getSvg' | 'getTextRepresentation'>) {
+    this.id = cardData.id;
+    this.number = cardData.number;
+    this.name = cardData.name;
+    this.romanNumeral = cardData.romanNumeral;
+    this.keywords = cardData.keywords;
+    this.meanings = cardData.meanings;
+    this.visual_description = cardData.visual_description;
+    this.visual_description_analysis = cardData.visual_description_analysis;
+    this.symbols = cardData.symbols;
+    this.significance = cardData.significance;
+    this.description = cardData.description;
+    this.emoji = cardData.emoji;
+    this.bg_color = cardData.bg_color;
+  }
 
-export function getMajorArcanaCard(arcana: MajorArcana): MajorArcanaCard | undefined {
-  return MAJOR_ARCANA_CARDS[arcana];
-}
+  getSvg(options?: SVGOptions): string {
+    return generateSvg(this, options);
+  }
 
-export function createMajorArcanaId(arcana: MajorArcana): string {
-  const cardName = getMajorArcanaName(arcana);
-  return `major-${arcana.toString().padStart(2, '0')}-${cardName.toLowerCase().replace(/\s+/g, '-')}`;
+  getTextRepresentation(isReversed = false): string {
+    const reversedMark = isReversed ? 'r' : '';
+    if (this.emoji) {
+      return `[M${this.number}${this.emoji}${reversedMark}]`;
+    }
+    return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}${reversedMark}]`;
+  }
+
+  getName(locale?: string): string {
+    // Future localization can be added here based on locale parameter
+    return this.name;
+  }
 }

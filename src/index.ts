@@ -1,10 +1,11 @@
 // Core types and enums
 export * from './types';
 
+// Data
+export * from './data';
+
 // Card definitions and utilities
 export * from './cards/suit';
-export * from './cards/major-arcana';
-export * from './cards/minor-arcana';
 
 // Deck functionality
 export * from './deck/deck';
@@ -13,3 +14,6 @@ export * from './deck/shuffle-strategies';
 
 // Spread functionality
 export * from './spreads/spreads';
+
+// SVG Renderer
+export * from './spreads/renderer';

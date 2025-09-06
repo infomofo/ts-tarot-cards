@@ -1,20 +1,80 @@
-import { MinorArcanaCard, MinorArcana, getMinorNumberName, Suit, MinorNumber } from '../types';
-import { TAROT_DATA } from '../data-init';
+import {
+  MinorArcanaCard,
+  Arcana,
+  Suit,
+  MinorNumber,
+  getMinorNumberName,
+  CardSymbol,
+  SVGOptions,
+} from '../types';
+import { generateSvg } from './svg-generator';
 
-const MINOR_ARCANA_CARDS: Record<string, MinorArcanaCard> = {};
-TAROT_DATA.minorArcana.forEach((card: MinorArcanaCard) => {
-    const key = `${card.name.toLowerCase().replace(/\s/g, '-')}` as MinorArcana;
-    MINOR_ARCANA_CARDS[key] = card;
-});
+// Concrete implementation of MinorArcanaCard
+export class MinorArcanaCardImpl implements MinorArcanaCard {
+  public readonly id: string;
+  public readonly arcana: Arcana.Minor = Arcana.Minor;
+  public readonly suit: Suit;
+  public readonly number: MinorNumber;
+  public readonly name: string;
+  public readonly romanNumeral: string;
+  public readonly keywords: string[];
+  public readonly meanings: { upright: string[]; reversed: string[]; };
+  public readonly visual_description: { background: string; foreground: string; };
+  public readonly visual_description_analysis: string[];
+  public readonly symbols: CardSymbol[];
+  public readonly significance: string;
+  public readonly description: string;
+  public readonly faceCardEmoji?: string;
 
-export { MINOR_ARCANA_CARDS };
+  constructor(cardData: Omit<MinorArcanaCard, 'getName' | 'getSvg' | 'getTextRepresentation'>) {
+    this.id = cardData.id;
+    this.suit = cardData.suit;
+    this.number = cardData.number;
+    this.name = cardData.name;
+    this.romanNumeral = cardData.romanNumeral;
+    this.keywords = cardData.keywords;
+    this.meanings = cardData.meanings;
+    this.visual_description = cardData.visual_description;
+    this.visual_description_analysis = cardData.visual_description_analysis;
+    this.symbols = cardData.symbols;
+    this.significance = cardData.significance;
+    this.description = cardData.description;
+    this.faceCardEmoji = cardData.faceCardEmoji;
+  }
 
-export function getMinorArcanaCard(enumValue: MinorArcana): MinorArcanaCard | undefined {
-  return MINOR_ARCANA_CARDS[enumValue];
-}
+  getSvg(options?: SVGOptions): string {
+    return generateSvg(this, options);
+  }
 
-export function createMinorArcanaId(suit: Suit, number: MinorNumber): string {
-  const numberName = getMinorNumberName(number).toLowerCase();
-  const suitName = suit.toLowerCase();
-  return `minor-${numberName}-of-${suitName}`;
+  getTextRepresentation(isReversed = false): string {
+    const reversedMark = isReversed ? 'r' : '';
+    const suitEmoji = this.faceCardEmoji || '?';
+    let numberChar;
+    switch (this.number) {
+      case MinorNumber.Ace:
+        numberChar = 'A';
+        break;
+      case MinorNumber.Page:
+        numberChar = 'P';
+        break;
+      case MinorNumber.Knight:
+        numberChar = 'N';
+        break;
+      case MinorNumber.Queen:
+        numberChar = 'Q';
+        break;
+      case MinorNumber.King:
+        numberChar = 'K';
+        break;
+      default:
+        numberChar = String(this.number);
+        break;
+    }
+    return `[m${numberChar}${suitEmoji}${reversedMark}]`;
+  }
+
+  getName(): string {
+    // Future localization can be added here based on locale parameter
+    return `${getMinorNumberName(this.number)} of ${this.suit}`;
+  }
 }

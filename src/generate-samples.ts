@@ -38,13 +38,12 @@
 /* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import { getMajorArcanaCard } from './cards/major-arcana';
-import { getMinorArcanaCard } from './cards/minor-arcana';
 import {
   MajorArcana, MinorArcana, SVGOptions, TarotCard,
 } from './types';
-import { SpreadReader, SPREAD_NAMES } from './spreads/spreads';
+import { SpreadReader } from './spreads/spreads';
 import { SpreadRenderer } from './spreads/renderer';
+import { ALL_CARDS } from './data';
 
 function imageToDataURI(filePath: string): string {
   const fileContent = fs.readFileSync(filePath);
@@ -86,24 +85,24 @@ function generateSamples() {
     options?: SVGOptions,
     isReversed?: boolean
   }[] = [
-    { name: 'ace-of-cups', card: getMinorArcanaCard(MinorArcana.AceOfCups)! },
-    { name: '2-of-cups', card: getMinorArcanaCard(MinorArcana.TwoOfCups)! },
-    { name: '3-of-cups-reversed', card: getMinorArcanaCard(MinorArcana.ThreeOfCups)!, isReversed: true },
-    { name: '4-of-pentacles', card: getMinorArcanaCard(MinorArcana.FourOfPentacles)! },
-    { name: '5-of-wands', card: getMinorArcanaCard(MinorArcana.FiveOfWands)! },
-    { name: '6-of-wands', card: getMinorArcanaCard(MinorArcana.SixOfWands)! },
-    { name: '7-of-swords', card: getMinorArcanaCard(MinorArcana.SevenOfSwords)! },
-    { name: '8-of-swords', card: getMinorArcanaCard(MinorArcana.EightOfSwords)! },
-    { name: '9-of-cups', card: getMinorArcanaCard(MinorArcana.NineOfCups)! },
-    { name: '10-of-swords', card: getMinorArcanaCard(MinorArcana.TenOfSwords)! },
-    { name: 'page-of-pentacles', card: getMinorArcanaCard(MinorArcana.PageOfPentacles)! },
-    { name: 'knight-of-swords-reversed', card: getMinorArcanaCard(MinorArcana.KnightOfSwords)!, isReversed: true },
-    { name: 'queen-of-cups', card: getMinorArcanaCard(MinorArcana.QueenOfCups)! },
-    { name: 'king-of-wands', card: getMinorArcanaCard(MinorArcana.KingOfWands)! },
-    { name: 'the-fool', card: getMajorArcanaCard(MajorArcana.TheFool)! },
+    { name: 'ace-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-ace-of-cups')! },
+    { name: '2-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-two-of-cups')! },
+    { name: '3-of-cups-reversed', card: ALL_CARDS.find(c => c.id === 'minor-three-of-cups')!, isReversed: true },
+    { name: '4-of-pentacles', card: ALL_CARDS.find(c => c.id === 'minor-four-of-pentacles')! },
+    { name: '5-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-five-of-wands')! },
+    { name: '6-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-six-of-wands')! },
+    { name: '7-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-seven-of-swords')! },
+    { name: '8-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-eight-of-swords')! },
+    { name: '9-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-nine-of-cups')! },
+    { name: '10-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-ten-of-swords')! },
+    { name: 'page-of-pentacles', card: ALL_CARDS.find(c => c.id === 'minor-page-of-pentacles')! },
+    { name: 'knight-of-swords-reversed', card: ALL_CARDS.find(c => c.id === 'minor-knight-of-swords')!, isReversed: true },
+    { name: 'queen-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-queen-of-cups')! },
+    { name: 'king-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-king-of-wands')! },
+    { name: 'the-fool', card: ALL_CARDS.find(c => c.id === 'major-00-the-fool')! },
     {
       name: 'the-fool-custom-bg',
-      card: getMajorArcanaCard(MajorArcana.TheFool)!,
+      card: ALL_CARDS.find(c => c.id === 'major-00-the-fool')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
         hideTitle: true,
@@ -113,14 +112,14 @@ function generateSamples() {
     },
     {
       name: '9-of-swords-generic-bg',
-      card: getMinorArcanaCard(MinorArcana.NineOfSwords)!,
+      card: ALL_CARDS.find(c => c.id === 'minor-nine-of-swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
       },
     },
     {
       name: '2-of-swords-generic-bg-no-text',
-      card: getMinorArcanaCard(MinorArcana.TwoOfSwords)!,
+      card: ALL_CARDS.find(c => c.id === 'minor-two-of-swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
         hideNumber: true,
@@ -136,15 +135,15 @@ function generateSamples() {
 
   // --- Generate Spreads ---
   const spreadsToGenerate = [
-    { name: SPREAD_NAMES.singleCard, interpretation: undefined },
-    { name: SPREAD_NAMES.threeCard, interpretation: 'A simple look at the past, present, and future.' },
-    { name: SPREAD_NAMES.celticCross, interpretation: 'A deep dive into a complex situation.' },
-    { name: SPREAD_NAMES.simplePastPresent, interpretation: undefined },
-    { name: SPREAD_NAMES.crossSpread, interpretation: 'A look at the core of the situation and its challenges.' },
+    { name: 'singleCard', interpretation: undefined },
+    { name: 'threeCard', interpretation: 'A simple look at the past, present, and future.' },
+    { name: 'celticCross', interpretation: 'A deep dive into a complex situation.' },
+    { name: 'simplePastPresent', interpretation: undefined },
+    { name: 'crossSpread', interpretation: 'A look at the core of the situation and its challenges.' },
   ];
 
   spreadsToGenerate.forEach((spreadInfo) => {
-    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    const reading = spreadReader.performReading(spreadInfo.name);
     if (spreadInfo.interpretation) {
       reading.interpretation = spreadInfo.interpretation;
     }
@@ -160,12 +159,12 @@ function generateSamples() {
 
   // --- Generate Animated Spreads ---
   const animatedSpreadsToGenerate = [
-    { name: SPREAD_NAMES.threeCard },
-    { name: SPREAD_NAMES.celticCross },
+    { name: 'threeCard' },
+    { name: 'celticCross' },
   ];
 
   animatedSpreadsToGenerate.forEach((spreadInfo) => {
-    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    const reading = spreadReader.performReading(spreadInfo.name);
     const svgRepresentation = spreadRenderer.renderAsSvg(reading, true);
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-animated.svg`), svgRepresentation);
   });

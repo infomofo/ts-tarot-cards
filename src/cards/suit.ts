@@ -1,8 +1,6 @@
 import { Suit, SuitProperties } from '../types';
-import { TAROT_DATA } from '../data-init';
-
-export const SUIT_PROPERTIES: Record<Suit, SuitProperties> = TAROT_DATA.suitProperties;
+import { ALL_SUIT_PROPERTIES } from '../data';
 
 export function getSuitProperties(suit: Suit): SuitProperties {
-  return SUIT_PROPERTIES[suit];
+  return ALL_SUIT_PROPERTIES[suit];
 }

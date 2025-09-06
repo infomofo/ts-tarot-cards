@@ -1,30 +1,21 @@
 import { getLotteryNumbers, getCardLotteryNumber } from '../src/cli/lottery';
-import { getTarotData } from '../src/data-loader';
-import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../src/cards/minor-arcana';
+import { ALL_CARDS, ALL_MAJOR_ARCANA } from '../src/data';
 import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana } from '../src/types';
 
 describe('Card to Lottery Number Mapping', () => {
-  beforeAll(() => {
-    getTarotData();
-  });
-
-  const allCards: TarotCard[] = [
-    ...Object.values(MAJOR_ARCANA_CARDS),
-    ...Object.values(MINOR_ARCANA_CARDS),
-  ].filter(Boolean) as TarotCard[];
+  const allCards: TarotCard[] = [...ALL_CARDS];
 
   describe('getCardLotteryNumber', () => {
     it('should return 0 for The Fool (0)', () => {
-      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
+      const fool = ALL_MAJOR_ARCANA[MajorArcana.TheFool];
       if (fool) {
         expect(getCardLotteryNumber(fool)).toBe(0);
       }
     });
 
     it('should map Major Arcana cards 1-21 to their numbers', () => {
-      const magician = MAJOR_ARCANA_CARDS[MajorArcana.TheMagician];
-      const world = MAJOR_ARCANA_CARDS[MajorArcana.TheWorld];
+      const magician = ALL_MAJOR_ARCANA[MajorArcana.TheMagician];
+      const world = ALL_MAJOR_ARCANA[MajorArcana.TheWorld];
       
       if (magician) {
         expect(getCardLotteryNumber(magician)).toBe(1);
@@ -142,7 +133,7 @@ describe('Card to Lottery Number Mapping', () => {
     });
 
     it('should map The Fool to 0 and no other card to 0', () => {
-      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
+      const fool = ALL_MAJOR_ARCANA[MajorArcana.TheFool];
       expect(fool).toBeDefined();
       expect(getCardLotteryNumber(fool!)).toBe(0);
       

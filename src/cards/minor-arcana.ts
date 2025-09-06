@@ -2,6 +2,7 @@ import {
   MinorArcanaCard,
   Arcana,
   Suit,
+  Element,
   MinorNumber,
   getMinorNumberName,
   CardSymbol,
@@ -12,23 +13,39 @@ import { generateSvg } from './svg-generator';
 // Concrete implementation of MinorArcanaCard
 export class MinorArcanaCardImpl implements MinorArcanaCard {
   public readonly id: string;
+
   public readonly arcana: Arcana.Minor = Arcana.Minor;
+
   public readonly suit: Suit;
+
+  public readonly element: Element;
+
   public readonly number: MinorNumber;
+
   public readonly name: string;
+
   public readonly romanNumeral: string;
+
   public readonly keywords: string[];
+
   public readonly meanings: { upright: string[]; reversed: string[]; };
+
   public readonly visual_description: { background: string; foreground: string; };
+
   public readonly visual_description_analysis: string[];
+
   public readonly symbols: CardSymbol[];
+
   public readonly significance: string;
+
   public readonly description: string;
+
   public readonly faceCardEmoji?: string;
 
   constructor(cardData: Omit<MinorArcanaCard, 'getName' | 'getSvg' | 'getTextRepresentation'>) {
     this.id = cardData.id;
     this.suit = cardData.suit;
+    this.element = cardData.element;
     this.number = cardData.number;
     this.name = cardData.name;
     this.romanNumeral = cardData.romanNumeral;

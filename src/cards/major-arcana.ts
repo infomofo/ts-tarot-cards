@@ -1,22 +1,35 @@
 import {
-  MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, toRomanNumeral, CardSymbol, SVGOptions,
+  MajorArcanaCard, Arcana, MajorArcana, getMajorArcanaName, CardSymbol, SVGOptions,
 } from '../types';
 import { generateSvg } from './svg-generator';
 
 export class MajorArcanaCardImpl implements MajorArcanaCard {
   public readonly id: string;
+
   public readonly arcana: Arcana.Major = Arcana.Major;
+
   public readonly number: MajorArcana;
+
   public readonly name: string;
+
   public readonly romanNumeral: string;
+
   public readonly keywords: string[];
+
   public readonly meanings: { upright: string[]; reversed: string[]; };
+
   public readonly visual_description: { background: string; foreground: string; };
+
   public readonly visual_description_analysis: string[];
+
   public readonly symbols: CardSymbol[];
+
   public readonly significance: string;
+
   public readonly description: string;
+
   public readonly emoji?: string;
+
   public readonly bg_color?: string;
 
   constructor(cardData: Omit<MajorArcanaCard, 'getName' | 'getSvg' | 'getTextRepresentation'>) {
@@ -47,7 +60,7 @@ export class MajorArcanaCardImpl implements MajorArcanaCard {
     return `[M${this.number}-${getMajorArcanaName(this.number).replace(/\s/g, '')}${reversedMark}]`;
   }
 
-  getName(locale?: string): string {
+  getName(): string {
     // Future localization can be added here based on locale parameter
     return this.name;
   }

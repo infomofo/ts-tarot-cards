@@ -39,7 +39,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import {
-  MajorArcana, MinorArcana, SVGOptions, TarotCard,
+  SVGOptions, TarotCard,
 } from './types';
 import { SpreadReader } from './spreads/spreads';
 import { SpreadRenderer } from './spreads/renderer';
@@ -85,24 +85,24 @@ function generateSamples() {
     options?: SVGOptions,
     isReversed?: boolean
   }[] = [
-    { name: 'ace-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-ace-of-cups')! },
-    { name: '2-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-two-of-cups')! },
-    { name: '3-of-cups-reversed', card: ALL_CARDS.find(c => c.id === 'minor-three-of-cups')!, isReversed: true },
-    { name: '4-of-pentacles', card: ALL_CARDS.find(c => c.id === 'minor-four-of-pentacles')! },
-    { name: '5-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-five-of-wands')! },
-    { name: '6-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-six-of-wands')! },
-    { name: '7-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-seven-of-swords')! },
-    { name: '8-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-eight-of-swords')! },
-    { name: '9-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-nine-of-cups')! },
-    { name: '10-of-swords', card: ALL_CARDS.find(c => c.id === 'minor-ten-of-swords')! },
-    { name: 'page-of-pentacles', card: ALL_CARDS.find(c => c.id === 'minor-page-of-pentacles')! },
-    { name: 'knight-of-swords-reversed', card: ALL_CARDS.find(c => c.id === 'minor-knight-of-swords')!, isReversed: true },
-    { name: 'queen-of-cups', card: ALL_CARDS.find(c => c.id === 'minor-queen-of-cups')! },
-    { name: 'king-of-wands', card: ALL_CARDS.find(c => c.id === 'minor-king-of-wands')! },
-    { name: 'the-fool', card: ALL_CARDS.find(c => c.id === 'major-00-the-fool')! },
+    { name: 'ace-of-cups', card: ALL_CARDS.find((c) => c.id === 'minor-ace-of-cups')! },
+    { name: '2-of-cups', card: ALL_CARDS.find((c) => c.id === 'minor-two-of-cups')! },
+    { name: '3-of-cups-reversed', card: ALL_CARDS.find((c) => c.id === 'minor-three-of-cups')!, isReversed: true },
+    { name: '4-of-pentacles', card: ALL_CARDS.find((c) => c.id === 'minor-four-of-pentacles')! },
+    { name: '5-of-wands', card: ALL_CARDS.find((c) => c.id === 'minor-five-of-wands')! },
+    { name: '6-of-wands', card: ALL_CARDS.find((c) => c.id === 'minor-six-of-wands')! },
+    { name: '7-of-swords', card: ALL_CARDS.find((c) => c.id === 'minor-seven-of-swords')! },
+    { name: '8-of-swords', card: ALL_CARDS.find((c) => c.id === 'minor-eight-of-swords')! },
+    { name: '9-of-cups', card: ALL_CARDS.find((c) => c.id === 'minor-nine-of-cups')! },
+    { name: '10-of-swords', card: ALL_CARDS.find((c) => c.id === 'minor-ten-of-swords')! },
+    { name: 'page-of-pentacles', card: ALL_CARDS.find((c) => c.id === 'minor-page-of-pentacles')! },
+    { name: 'knight-of-swords-reversed', card: ALL_CARDS.find((c) => c.id === 'minor-knight-of-swords')!, isReversed: true },
+    { name: 'queen-of-cups', card: ALL_CARDS.find((c) => c.id === 'minor-queen-of-cups')! },
+    { name: 'king-of-wands', card: ALL_CARDS.find((c) => c.id === 'minor-king-of-wands')! },
+    { name: 'the-fool', card: ALL_CARDS.find((c) => c.id === 'major-00-the-fool')! },
     {
       name: 'the-fool-custom-bg',
-      card: ALL_CARDS.find(c => c.id === 'major-00-the-fool')!,
+      card: ALL_CARDS.find((c) => c.id === 'major-00-the-fool')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
         hideTitle: true,
@@ -112,14 +112,14 @@ function generateSamples() {
     },
     {
       name: '9-of-swords-generic-bg',
-      card: ALL_CARDS.find(c => c.id === 'minor-nine-of-swords')!,
+      card: ALL_CARDS.find((c) => c.id === 'minor-nine-of-swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
       },
     },
     {
       name: '2-of-swords-generic-bg-no-text',
-      card: ALL_CARDS.find(c => c.id === 'minor-two-of-swords')!,
+      card: ALL_CARDS.find((c) => c.id === 'minor-two-of-swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
         hideNumber: true,

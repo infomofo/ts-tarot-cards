@@ -1,5 +1,11 @@
 import {
-  Spread, SpreadPosition, SpreadReading, CardPosition, CardInterpretation, CardSelectionStrategy, SpreadLayoutPosition
+  Spread,
+  SpreadPosition,
+  SpreadReading,
+  CardPosition,
+  CardInterpretation,
+  CardSelectionStrategy,
+  SpreadLayoutPosition,
 } from '../types';
 import { TarotDeck } from '../deck/deck';
 import { CARD_SELECTION_STRATEGIES } from '../deck/card-selection-strategies';
@@ -145,7 +151,7 @@ export class SpreadReader {
         position,
         card: cardPosition.card,
         isReversed: cardPosition.isReversed,
-        meaning: meaning,
+        meaning,
         additionalNotes: `Card drawn for position "${position.name}". ${position.position_significance}`,
       };
     });

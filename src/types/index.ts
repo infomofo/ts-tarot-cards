@@ -278,6 +278,7 @@ export interface MajorArcanaCard extends BaseTarotCard {
 export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
+  element: Element;
   number: MinorNumber;
   faceCardEmoji?: string;
 }

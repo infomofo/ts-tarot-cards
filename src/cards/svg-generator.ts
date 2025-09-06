@@ -4,16 +4,13 @@ import {
   MinorArcanaCard,
   SVGOptions,
   TarotCard,
-  Suit,
   MinorNumber,
   getMinorNumberName,
   Element,
 } from '../types';
 import { getFaceCardEmoji } from './utils';
-import { ALL_SUIT_PROPERTIES } from '../data';
 
-function getSuitColor(suit: Suit): string {
-  const { element } = ALL_SUIT_PROPERTIES[suit];
+function getSuitColor(element: Element): string {
   switch (element) {
     case Element.Water:
       return '#a0d2eb'; // Light Blue
@@ -149,7 +146,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
 
   const backgroundColor = card.arcana === Arcana.Major
     ? (card as MajorArcanaCard).bg_color || '#ffffff'
-    : getSuitColor((card as MinorArcanaCard).suit);
+    : getSuitColor((card as MinorArcanaCard).element);
 
   const topText = getTopText(card);
   const numberContent = hideNumber ? '' : `<text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-size="20" font-weight="bold">${topText}</text>`;
@@ -165,7 +162,7 @@ export function generateSvg(card: TarotCard, options?: SVGOptions): string {
       }
     } else {
       const minorCard = card as MinorArcanaCard;
-      const suitEmoji = ALL_SUIT_PROPERTIES[minorCard.suit].emoji;
+      const suitEmoji = minorCard.faceCardEmoji || '';
       if (minorCard.number >= MinorNumber.Page) {
         artContent = `
                 <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="60">${getFaceCardEmoji(minorCard.number, minorCard.suit)}</text>

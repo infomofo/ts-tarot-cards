@@ -1,0 +1,36 @@
+number: 1
+name: The Magician
+keywords:
+  - manifestation
+  - resourcefulness
+  - power
+  - inspired action
+meanings:
+  upright:
+    - Manifestation
+    - Resourcefulness
+    - Personal power
+    - Inspired action
+  reversed:
+    - Manipulation
+    - Poor planning
+    - Wasted potential
+    - Scattered energy
+visual_description:
+  background: A man stands before a table with a cup, a pentacle, a sword, and a wand on it.
+  foreground: One hand points up, the other points down. An infinity symbol is above his head. He wears a white robe and a red cloak.
+visual_description_analysis:
+  - The four items on the table represent the four suits of the Minor Arcana and the four elements, indicating the man has all the tools needed to manifest his will.
+  - ' The hand gestures signify the connection between the spiritual and material worlds ("as above, so below").'
+  - ' The infinity symbol, or lemniscate, represents eternal potential and mastery.'
+symbols:
+  - cup
+  - pentacle
+  - sword
+  - wand
+  - lemniscate
+  - altar
+significance: The soul's first conscious act of will. As card 1, it transforms potential into directed energy.
+description: Represents manifestation, resourcefulness, and having the tools to accomplish your goals.
+emoji: 🧙‍♂️
+bg_color: '#ADD8E6'

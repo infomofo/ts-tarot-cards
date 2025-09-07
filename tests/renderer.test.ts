@@ -1,4 +1,4 @@
-import { SpreadReader, SPREAD_NAMES } from '../src/spreads/spreads';
+import { SpreadReader } from '../src/spreads/spreads';
 import { SpreadRenderer } from '../src/spreads/renderer';
 
 describe('SpreadRenderer', () => {
@@ -12,7 +12,7 @@ describe('SpreadRenderer', () => {
 
   describe('renderAsText', () => {
     it('should render a spread as text', () => {
-      const reading = reader.performReading(SPREAD_NAMES.threeCard);
+      const reading = reader.performReading('threeCard');
       const text = renderer.renderAsText(reading);
       expect(text).toBeDefined();
       expect(typeof text).toBe('string');
@@ -24,7 +24,7 @@ describe('SpreadRenderer', () => {
 
   describe('renderAsSvg', () => {
     it('should render a non-animated spread as SVG using image tags', () => {
-      const reading = reader.performReading(SPREAD_NAMES.celticCross);
+      const reading = reader.performReading('celticCross');
       const svg = renderer.renderAsSvg(reading, false);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');
@@ -35,7 +35,7 @@ describe('SpreadRenderer', () => {
     });
 
     it('should render an animated spread as SVG using g tags', () => {
-      const reading = reader.performReading(SPREAD_NAMES.celticCross);
+      const reading = reader.performReading('celticCross');
       const svg = renderer.renderAsSvg(reading, true);
       expect(svg).toBeDefined();
       expect(typeof svg).toBe('string');

@@ -96,7 +96,7 @@ interface LotteryResult {
   quickPickCount: number;
 }
 
-export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryResult {
+function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): LotteryResult {
   const prompts = loadPrompts();
   const drawnCards: DrawnCard[] = [];
   const mainNumbers: (number | null)[] = [];
@@ -104,18 +104,16 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
   let quickPickCount = 0;
 
   // Draw cards for main numbers
-  let mainNumberCount = 0;
-  let drawCount = 0;
-  let isRedraw = false;
-  while (mainNumberCount < lotteryType.mainNumbers.count) {
+  for (let i = 0; i < lotteryType.mainNumbers.count; i += 1) {
     const cardPositions = deck.selectCards(1);
     if (cardPositions.length === 0) {
       throw new Error('Not enough cards in deck');
     }
     const cardPosition = cardPositions[0];
+
+    const positionName = `Main ${i + 1}`;
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
-    const positionName = `Main ${mainNumberCount + 1}${isRedraw ? ' (Redraw)' : ''}`;
     const cardDisplayName = cardPosition.isReversed
       ? `${cardPosition.card.getName()} (Reversed)`
       : cardPosition.card.getName();
@@ -132,21 +130,19 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
     if (isValidMainNumber) {
       console.log(formatPrompt(prompts.lottery.number_mapped, { number: lotteryNumber }));
       mainNumbers.push(lotteryNumber);
-      mainNumberCount += 1;
-      isRedraw = false;
     } else {
       console.log(prompts.lottery.invalid_number);
-      isRedraw = true;
+      mainNumbers.push(null);
+      quickPickCount += 1;
     }
 
     drawnCards.push({
       card: cardPosition.card,
-      position: drawCount + 1,
+      position: i + 1,
       positionName,
       lotteryNumber,
       isReversed: cardPosition.isReversed,
     });
-    drawCount += 1;
   }
 
   // Draw card(s) for bonus number with special re-draw logic
@@ -223,13 +219,6 @@ function displayLotteryResults(result: LotteryResult): void {
 
   console.log(`\n${prompts.lottery.numbers_summary}`);
 
-  // Display drawn cards
-  const cardsList = result.drawnCards
-    .map((drawn) => (drawn.isReversed ? `${drawn.card.getName()} (Reversed)` : drawn.card.getName()))
-    .join(prompts.lottery.display_text.separator);
-  console.log(formatPrompt(prompts.lottery.drawn_cards_summary, { cards_list: cardsList }));
-  console.log('');
-
   // Display main numbers
   const validMainNumbers = result.mainNumbers.filter((n) => n !== null);
   const mainNumbersDisplay = validMainNumbers.length > 0
@@ -280,7 +269,7 @@ async function getLotteryInterpretation(result: LotteryResult): Promise<void> {
         })),
       };
 
-      const aiInterpretation = await getGenericAiInterpretation({ ...context, contextType: 'lottery' });
+      const aiInterpretation = await getGenericAiInterpretation(context);
       console.log(aiInterpretation);
       console.log('');
     } catch (error) {

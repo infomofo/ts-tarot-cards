@@ -5,10 +5,9 @@ import {
   SpreadReading, Arcana, MinorArcanaCard, TarotCard,
 } from '../types';
 
-function readClioConfig(contextType: 'reading' | 'lottery' = 'reading'): string {
+function readClioConfig(): string {
   try {
-    const fileName = contextType === 'lottery' ? 'clio-llm-config-lottery.md' : 'clio-llm-config-reading.md';
-    const configPath = path.join(__dirname, '..', '..', fileName);
+    const configPath = path.join(__dirname, '..', '..', 'clio-llm-config.md');
     return fs.readFileSync(configPath, 'utf8');
   } catch (error) {
     // Fallback content if file cannot be read
@@ -177,9 +176,15 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
   }
 
   if (context.contextType === 'reading') {
-    prompt += '\nPlease provide an interpretation for the reading above, following the guidelines from your system prompt.';
+    prompt += '\nPlease provide a cohesive interpretation that weaves these cards together to address the seeker\'s question. Focus on practical insights while maintaining CLIO\'s mystical voice. Pay special attention to any patterns identified above and how the symbolism relates to the querent\'s specific prompt.';
   } else if (context.contextType === 'lottery') {
-    prompt += '\nPlease provide an interpretation for the lottery reading above, following the guidelines from your system prompt.';
+    prompt += '\nPlease provide an interpretation focusing on:\n';
+    prompt += '1. The auspiciousness of these numbers for lottery play\n';
+    prompt += '2. Whether the seeker should play today or wait\n';
+    prompt += '3. The mystical significance of the cards drawn\n';
+    prompt += '4. Any patterns or symbolism that relates to fortune and chance\n';
+    prompt += '\nIMPORTANT: End with a strong, specific opinion on whether these are good numbers to play today. Avoid generic endings about fate and guidance. Be definitive about the cosmic timing and fortune potential.\n';
+    prompt += 'Maintain CLIO\'s mystical voice while being insightful.';
   }
 
   return prompt;
@@ -266,49 +271,24 @@ export async function getGenericAiInterpretation(
   const prompt = buildGenericInterpretationPrompt(context);
 
   try {
-    const maxTokens = context.contextType === 'lottery' ? 700 : 800;
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: readClioConfig(context.contextType),
+          content: readClioConfig(),
         },
         {
           role: 'user',
           content: prompt,
         },
       ],
-      max_tokens: maxTokens,
-      temperature: context.contextType === 'lottery' ? 0.3 : 0.7,
+      max_tokens: 800,
+      temperature: 0.7,
     });
 
     return completion.choices[0]?.message?.content || 'The digital currents are unclear at this time, seeker.';
   } catch (error) {
     throw new Error(`Failed to get AI interpretation: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
-}
-
-export async function getAiInterpretation(
-  reading: SpreadReading,
-  userQuestion: string,
-): Promise<string> {
-  const context: InterpretationContext = {
-    userContext: userQuestion,
-    spread: reading.spread.name,
-    spreadDescription: reading.spread.description,
-    contextType: 'reading',
-    cards: reading.cards.map((cardPosition) => {
-      const spreadPosition = reading.spread.positions.find(
-        (p) => p.position === cardPosition.position,
-      );
-      return {
-        card: cardPosition.card,
-        position: spreadPosition?.name,
-        positionSignificance: spreadPosition?.positionSignificance,
-        isReversed: cardPosition.isReversed,
-      };
-    }),
-  };
-  return getGenericAiInterpretation(context);
 }

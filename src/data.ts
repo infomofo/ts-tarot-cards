@@ -36,8 +36,9 @@ export const ALL_SUIT_PROPERTIES: Readonly<Record<Suit, SuitProperties>> = TAROT
 export const ALL_SPREADS: Readonly<Record<string, Spread>> = TAROT_DATA.spreads;
 
 // Combine all cards into a single array, which is useful for creating the deck
-// eslint-disable-next-line max-len
-export const ALL_CARDS: ReadonlyArray<MajorArcanaCard | MinorArcanaCard> = [
+export const ALL_CARDS: ReadonlyArray<
+  MajorArcanaCard | MinorArcanaCard
+> = [
   ...Object.values(ALL_MAJOR_ARCANA),
   ...Object.values(ALL_MINOR_ARCANA),
 ];

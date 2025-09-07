@@ -44,7 +44,6 @@ interface Prompts {
     invalid_number: string;
     bonus_redraw: string;
     numbers_summary: string;
-    drawn_cards_summary: string;
     main_numbers: string;
     bonus_number: string;
     quick_pick_count: string;
@@ -131,7 +130,6 @@ export function loadPrompts(): Prompts {
         invalid_number: '  → Outside lottery range (will be quick pick)',
         bonus_redraw: 'Bonus card outside range, drawing another...',
         numbers_summary: 'Your mystically-guided lottery numbers:',
-        drawn_cards_summary: 'Cards drawn for this reading: {cards_list}',
         main_numbers: 'Main numbers: {numbers}',
         bonus_number: 'Bonus number: {number}',
         quick_pick_count: '{count} numbers marked as quick pick due to cards outside valid range',

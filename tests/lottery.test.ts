@@ -1,18 +1,6 @@
-
-import { getCardLotteryNumber, drawLotteryCards } from '../src/cli/lottery';
+import { getLotteryNumbers, getCardLotteryNumber } from '../src/cli/lottery';
 import { ALL_CARDS, ALL_MAJOR_ARCANA } from '../src/data';
 import { TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana } from '../src/types';
-import { TarotDeck } from '../src/deck/deck';
-
-// Mock the TarotDeck
-jest.mock('../src/deck/deck', () => ({
-  TarotDeck: jest.fn().mockImplementation(() => ({
-    selectCards: jest.fn(),
-  })),
-}));
-
-// Mock console.log to prevent output during tests
-const mockedConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('Card to Lottery Number Mapping', () => {
   const allCards: TarotCard[] = [...ALL_CARDS];
@@ -182,94 +170,5 @@ describe('Card to Lottery Number Mapping', () => {
         expect(numbers[i]).toBe(i);
       }
     });
-  });
-});
-
-describe('drawLotteryCards', () => {
-  let deck: TarotDeck;
-
-  const megaMillions = {
-    name: 'Mega Millions',
-    mainNumbers: {
-      count: 5, min: 1, max: 70,
-    },
-    bonusNumber: { min: 1, max: 25 },
-  };
-
-  beforeEach(() => {
-    deck = new TarotDeck();
-  });
-
-  it('should draw 5 main numbers and 1 bonus number', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
-
-    const result = drawLotteryCards(deck, megaMillions);
-
-    expect(result.mainNumbers).toEqual([1, 5, 6, 7, 8]);
-    expect(result.bonusNumber).toBe(9);
-    expect(result.quickPickCount).toBe(0);
-    expect(result.drawnCards.length).toBe(6);
-  });
-
-  it('should re-draw main numbers if they are out of range', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MINOR_ARCANA_CARDS[MinorArcana.KingOfPentacles], isReversed: false }]) // 77 (invalid)
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
-
-    const result = drawLotteryCards(deck, megaMillions);
-
-    expect(result.mainNumbers).toEqual([1, 5, 6, 7, 8]);
-    expect(result.bonusNumber).toBe(9);
-    expect(result.quickPickCount).toBe(0);
-    expect(result.drawnCards.length).toBe(7); // 1 invalid + 5 valid main + 1 bonus
-    expect(result.drawnCards[0].lotteryNumber).toBe(77);
-  });
-
-  it('should handle bonus number re-draws correctly', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MINOR_ARCANA_CARDS[MinorArcana.AceOfSwords], isReversed: false }]) // 50 (invalid bonus)
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (valid bonus)
-
-    const result = drawLotteryCards(deck, megaMillions);
-
-    expect(result.mainNumbers).toEqual([1, 5, 6, 7, 8]);
-    expect(result.bonusNumber).toBe(9);
-    expect(result.quickPickCount).toBe(0);
-    expect(result.drawnCards.length).toBe(7); // 5 main + 1 invalid bonus + 1 valid bonus
-  });
-
-  it('should correctly handle reversed cards', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: true }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: true }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: true }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
-
-    const result = drawLotteryCards(deck, megaMillions);
-
-    expect(result.mainNumbers).toEqual([1, 5, 6, 7, 8]);
-    expect(result.bonusNumber).toBe(9);
-    expect(result.quickPickCount).toBe(0);
-    expect(result.drawnCards.length).toBe(6);
-    expect(result.drawnCards[0].isReversed).toBe(true);
-    expect(result.drawnCards[1].isReversed).toBe(false);
-    expect(result.drawnCards[2].isReversed).toBe(true);
-    expect(result.drawnCards[3].isReversed).toBe(false);
-    expect(result.drawnCards[4].isReversed).toBe(true);
-    expect(result.drawnCards[5].isReversed).toBe(false);
   });
 });

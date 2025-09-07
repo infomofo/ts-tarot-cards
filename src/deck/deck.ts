@@ -65,7 +65,7 @@ export class TarotDeck {
     const cardPositions: CardPosition[] = selectedCards.map((card, index) => ({
       card,
       position: index + 1,
-      isReversed: Math.random() > 0.5,
+      isReversed: false, // Default to upright, reversal handled by reader
     }));
 
     // Remove selected cards from deck

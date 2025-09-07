@@ -26,10 +26,8 @@ export class SpreadReader {
       return cards.map((cp) => ({ ...cp, isReversed: false }));
     }
 
-    return cards.map((cp) => ({
-      ...cp,
-      isReversed: this.getBiometricRandomIndex(2) === 1, // 50% chance of reversal
-    }));
+    // The deck now handles the initial reversal, so we just respect it.
+    return cards;
   }
 
   /**

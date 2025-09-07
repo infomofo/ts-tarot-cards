@@ -32,13 +32,11 @@ TAROT_DATA.minorArcana.forEach((rawCardData) => {
 // Export all processed data
 export const ALL_MAJOR_ARCANA: Readonly<Record<string, MajorArcanaCard>> = MAJOR_ARCANA_CARDS;
 export const ALL_MINOR_ARCANA: Readonly<Record<string, MinorArcanaCard>> = MINOR_ARCANA_CARDS;
-export const ALL_SUIT_PROPERTIES: Readonly<Record<Suit, SuitProperties>> = TAROT_DATA.suitProperties;
+export const ALL_SUIT_PROPS: Readonly<Record<Suit, SuitProperties>> = TAROT_DATA.suitProperties;
 export const ALL_SPREADS: Readonly<Record<string, Spread>> = TAROT_DATA.spreads;
 
 // Combine all cards into a single array, which is useful for creating the deck
-export const ALL_CARDS: ReadonlyArray<
-  MajorArcanaCard | MinorArcanaCard
-> = [
+export const ALL_CARDS: ReadonlyArray<MajorArcanaCard | MinorArcanaCard> = [
   ...Object.values(ALL_MAJOR_ARCANA),
   ...Object.values(ALL_MINOR_ARCANA),
 ];

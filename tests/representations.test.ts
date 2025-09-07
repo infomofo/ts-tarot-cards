@@ -1,5 +1,5 @@
 import { Arcana, Suit, MinorArcanaCard, MajorArcanaCard } from '../src/types';
-import { ALL_CARDS, ALL_SUIT_PROPERTIES } from '../src/data';
+import { ALL_CARDS, ALL_SUIT_PROPS } from '../src/data';
 import { getTopText } from '../src/cards/svg-generator';
 
 describe('Card Representations', () => {
@@ -7,12 +7,12 @@ describe('Card Representations', () => {
     test('ace of cups should have correct text', () => {
       const card = ALL_CARDS.find(c => c.id === 'minor-ace-of-cups') as MinorArcanaCard;
       // The old special case '☕️' is gone, now it uses the consistent suit emoji '🍵'
-      expect(card.getTextRepresentation()).toBe(`[mA${ALL_SUIT_PROPERTIES[Suit.Cups].emoji}]`);
+      expect(card.getTextRepresentation()).toBe(`[mA${ALL_SUIT_PROPS[Suit.Cups].emoji}]`);
     });
 
     test('ace of swords should have correct text', () => {
         const card = ALL_CARDS.find(c => c.id === 'minor-ace-of-swords') as MinorArcanaCard;
-        expect(card.getTextRepresentation()).toBe(`[mA${ALL_SUIT_PROPERTIES[Suit.Swords].emoji}]`);
+        expect(card.getTextRepresentation()).toBe(`[mA${ALL_SUIT_PROPS[Suit.Swords].emoji}]`);
     });
 
     test('face cards should have correct single-letter representation', () => {
@@ -20,15 +20,15 @@ describe('Card Representations', () => {
         const knight = ALL_CARDS.find(c => c.id === 'minor-knight-of-wands') as MinorArcanaCard;
         const queen = ALL_CARDS.find(c => c.id === 'minor-queen-of-wands') as MinorArcanaCard;
         const king = ALL_CARDS.find(c => c.id === 'minor-king-of-wands') as MinorArcanaCard;
-        expect(page.getTextRepresentation()).toBe(`[mP${ALL_SUIT_PROPERTIES[Suit.Wands].emoji}]`);
-        expect(knight.getTextRepresentation()).toBe(`[mN${ALL_SUIT_PROPERTIES[Suit.Wands].emoji}]`);
-        expect(queen.getTextRepresentation()).toBe(`[mQ${ALL_SUIT_PROPERTIES[Suit.Wands].emoji}]`);
-        expect(king.getTextRepresentation()).toBe(`[mK${ALL_SUIT_PROPERTIES[Suit.Wands].emoji}]`);
+        expect(page.getTextRepresentation()).toBe(`[mP${ALL_SUIT_PROPS[Suit.Wands].emoji}]`);
+        expect(knight.getTextRepresentation()).toBe(`[mN${ALL_SUIT_PROPS[Suit.Wands].emoji}]`);
+        expect(queen.getTextRepresentation()).toBe(`[mQ${ALL_SUIT_PROPS[Suit.Wands].emoji}]`);
+        expect(king.getTextRepresentation()).toBe(`[mK${ALL_SUIT_PROPS[Suit.Wands].emoji}]`);
     });
 
     test('number cards should have correct numeric representation', () => {
         const card = ALL_CARDS.find(c => c.id === 'minor-two-of-pentacles') as MinorArcanaCard;
-        expect(card.getTextRepresentation()).toBe(`[m2${ALL_SUIT_PROPERTIES[Suit.Pentacles].emoji}]`);
+        expect(card.getTextRepresentation()).toBe(`[m2${ALL_SUIT_PROPS[Suit.Pentacles].emoji}]`);
     });
   });
 
@@ -64,7 +64,7 @@ describe('Card Representations', () => {
     test('should not show emojis when hidden', () => {
         const card = ALL_CARDS.find(c => c.id === 'minor-three-of-wands') as MinorArcanaCard;
         const svg = card.getSvg({ hideEmoji: true });
-        expect(svg).not.toContain(ALL_SUIT_PROPERTIES[Suit.Wands].emoji);
+        expect(svg).not.toContain(ALL_SUIT_PROPS[Suit.Wands].emoji);
     });
 
     test('should embed image with data URI', () => {

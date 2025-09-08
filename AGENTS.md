@@ -46,7 +46,7 @@ Customizations and clarifications for this repository. Specify how general laws 
 
 ## Repo-Specific Clarifications of General Laws
 
-- **On Comprehensive Testing:** Before submitting a pull request, you must run all tests and ensure they pass. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. You must also run the build to ensure there are no compilation errors. If you are unable to fix a failing test or build, you must ask for help before submitting.
+- **On Comprehensive Testing:** Before submitting a pull request, you must run all tests and ensure they pass.  Make sure you are correctly simulating the CI test environment. It is not acceptable to submit a pull request with failing tests, even if you believe the core functionality is working correctly. You must also run the build to ensure there are no compilation errors. **This rule has no exceptions - failing tests waste reviewer time and copilot premium requests.**
 - **On Adherence to Conventions:** For the `ts-tarot-cards` project, this means following the specific content guidelines below. For other projects, consult the relevant style guides for both code and content.
     #### Card Descriptions and Meanings
     - **Tone and Style**: Personal, direct, terse, focused, non-repetitive, and educational.

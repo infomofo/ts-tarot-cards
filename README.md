@@ -39,6 +39,41 @@ This library is built on several key architectural principles that make it both 
 npm install ts-tarot-cards
 ```
 
+### For Local Development
+
+This repository uses a git submodule for the tarot card data model. When cloning the repository for development, you'll need to initialize the submodule:
+
+#### Option 1: Clone with submodules (recommended)
+```bash
+git clone --recurse-submodules https://github.com/infomofo/ts-tarot-cards.git
+cd ts-tarot-cards
+npm install
+```
+
+#### Option 2: Initialize submodules after cloning
+```bash
+git clone https://github.com/infomofo/ts-tarot-cards.git
+cd ts-tarot-cards
+git submodule init
+git submodule update
+npm install
+```
+
+#### Updating the submodule
+To update the tarot data model to the latest version:
+```bash
+git submodule update --remote
+```
+
+To pin the submodule to a specific version (e.g., v1.1.0):
+```bash
+cd tarot-model
+git checkout v1.1.0
+cd ..
+git add tarot-model
+git commit -m "Update tarot-model to v1.1.0"
+```
+
 ## Usage
 
 ### Basic Deck Operations
@@ -421,6 +456,10 @@ This library now includes the full 78-card Rider-Waite-Smith deck.
 ## Development
 
 ```bash
+# Clone with submodules (if not done already)
+git clone --recurse-submodules https://github.com/infomofo/ts-tarot-cards.git
+cd ts-tarot-cards
+
 # Install dependencies
 npm install
 
@@ -432,6 +471,32 @@ npm test
 
 # Development mode (watch)
 npm run dev
+```
+
+### Working with the Tarot Model Submodule
+
+The tarot card data is stored in a separate repository as a git submodule:
+
+- **Submodule location**: `tarot-model/` directory
+- **Repository**: [infomofo/tarot-model](https://github.com/infomofo/tarot-model)
+- **Current version**: v1.0.0
+
+Common submodule tasks:
+```bash
+# Check submodule status
+git submodule status
+
+# Update to latest version from remote
+git submodule update --remote
+
+# Switch to a specific version
+cd tarot-model
+git checkout v1.0.0
+cd ..
+
+# Commit submodule version changes
+git add tarot-model
+git commit -m "Update tarot-model submodule"
 ```
 
 ## Architecture Notes

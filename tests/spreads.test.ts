@@ -1,7 +1,7 @@
-import { SpreadReader, SPREADS, SPREAD_NAMES } from '../src/spreads/spreads';
+import { SpreadReader } from '../src/spreads/spreads';
 import { TarotDeck } from '../src/deck/deck';
-import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
-import { MajorArcana } from '../src/types';
+import { ALL_CARDS, ALL_SPREADS } from '../src/data';
+import { MajorArcana, SpreadPosition } from '../src/types';
 
 // Mock the TarotDeck
 jest.mock('../src/deck/deck', () => ({
@@ -23,33 +23,32 @@ describe('SpreadReader', () => {
 
   describe('getSpread', () => {
     it('should return a specific spread template', () => {
-      const spread = reader.getSpread(SPREAD_NAMES.threeCard);
+      const spread = reader.getSpread('threeCard');
       expect(spread).toBeDefined();
       expect(spread.name).toBe('Three Card Spread');
     });
 
     it('should throw an error for an unknown spread', () => {
-      expect(() => reader.getSpread('unknownSpread' as any)).toThrow('Unknown spread: unknownSpread');
+      expect(() => reader.getSpread('unknownSpread')).toThrow('Unknown spread: unknownSpread');
     });
   });
 
   describe('getAvailableSpreads', () => {
     it('should return an array of available spread names', () => {
       const spreadNames = reader.getAvailableSpreads();
-      expect(spreadNames).toContain(SPREAD_NAMES.threeCard);
-      expect(spreadNames).toContain(SPREAD_NAMES.crossSpread);
+      expect(spreadNames).toContain('threeCard');
+      expect(spreadNames).toContain('crossSpread');
     });
   });
 
   describe('performReading', () => {
-    Object.keys(SPREADS).forEach(spreadName => {
+    Object.keys(ALL_SPREADS).forEach(spreadName => {
       describe(`for ${spreadName} spread`, () => {
-        const spread = SPREADS[spreadName];
+        const spread = ALL_SPREADS[spreadName];
 
         beforeEach(() => {
-          const majorArcanaKeys = Object.keys(MajorArcana).filter(k => isNaN(Number(k))) as (keyof typeof MajorArcana)[];
-          const mockCards = spread.positions.map((p, i) => ({
-            card: MAJOR_ARCANA_CARDS[MajorArcana[majorArcanaKeys[i]]],
+          const mockCards = spread.positions.map((p: SpreadPosition, i: number) => ({
+            card: ALL_CARDS[i],
             position: p.position,
             isReversed: false,
           }));
@@ -57,19 +56,19 @@ describe('SpreadReader', () => {
         });
 
         it('should perform a reading and return a SpreadReading object', () => {
-          const reading = reader.performReading(spreadName as keyof typeof SPREADS);
+          const reading = reader.performReading(spreadName);
           expect(reading).toBeDefined();
           expect(reading.spread.name).toBe(spread.name);
           expect(reading.cards.length).toBe(spread.positions.length);
         });
 
-        it('should respect the allowReversals setting', () => {
-          const reading = reader.performReading(spreadName as keyof typeof SPREADS);
-          expect(reading.allowReversals).toBe(spread.allowReversals);
+        it('should respect the allow_reversals setting', () => {
+          const reading = reader.performReading(spreadName);
+          expect(reading.allow_reversals).toBe(spread.allow_reversals);
         });
 
         it('should have a layout', () => {
-          const reading = reader.performReading(spreadName as keyof typeof SPREADS);
+          const reading = reader.performReading(spreadName);
           expect(reading.spread.layout).toBeDefined();
           expect(Array.isArray(reading.spread.layout)).toBe(true);
           expect(reading.spread.layout.length).toBe(reading.spread.positions.length);
@@ -78,26 +77,26 @@ describe('SpreadReader', () => {
     });
 
     describe('reversal logic', () => {
-      it('should respect the isReversed flag when allowReversals is true', () => {
+      it('should respect the isReversed flag when allow_reversals is true', () => {
         const mockCards = [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: true },
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], position: 2, isReversed: false },
+          { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool), position: 1, isReversed: true },
+          { card: ALL_CARDS.find(c => c.number === MajorArcana.TheMagician), position: 2, isReversed: false },
         ];
         (deck.selectCards as jest.Mock).mockReturnValue(mockCards);
 
-        const reading = reader.performReading(SPREAD_NAMES.threeCard);
+        const reading = reader.performReading('threeCard');
         expect(reading.cards[0].isReversed).toBe(true);
         expect(reading.cards[1].isReversed).toBe(false);
       });
 
-      it('should override the isReversed flag when allowReversals is false', () => {
+      it('should override the isReversed flag when allow_reversals is false', () => {
         const mockCards = [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: true },
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], position: 2, isReversed: false },
+          { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool), position: 1, isReversed: true },
+          { card: ALL_CARDS.find(c => c.number === MajorArcana.TheMagician), position: 2, isReversed: false },
         ];
         (deck.selectCards as jest.Mock).mockReturnValue(mockCards);
 
-        const reading = reader.performReading(SPREAD_NAMES.simplePastPresent);
+        const reading = reader.performReading('simplePastPresent');
         expect(reading.cards[0].isReversed).toBe(false);
         expect(reading.cards[1].isReversed).toBe(false);
       });

@@ -1,9 +1,8 @@
 import { getCardLotteryNumber, drawLotteryCards } from '../src/cli/lottery';
-import { MAJOR_ARCANA_CARDS } from '../src/cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../src/cards/minor-arcana';
 import {
-  TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana, MinorArcana,
+  TarotCard, MajorArcana, MinorArcanaCard, Suit, MinorNumber, Arcana,
 } from '../src/types';
+import { ALL_CARDS } from '../src/data';
 import { TarotDeck } from '../src/deck/deck';
 
 // Mock the TarotDeck
@@ -17,23 +16,20 @@ jest.mock('../src/deck/deck', () => ({
 const mockedConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('Card to Lottery Number Mapping', () => {
-  const allCards: TarotCard[] = [
-    ...Object.values(MAJOR_ARCANA_CARDS),
-    ...Object.values(MINOR_ARCANA_CARDS),
-  ].filter(Boolean) as TarotCard[];
+  const allCards: TarotCard[] = [...ALL_CARDS];
 
   describe('getCardLotteryNumber', () => {
     it('should return 0 for The Fool (0)', () => {
-      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
+      const fool = allCards.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheFool);
       if (fool) {
         expect(getCardLotteryNumber(fool)).toBe(0);
       }
     });
 
     it('should map Major Arcana cards 1-21 to their numbers', () => {
-      const magician = MAJOR_ARCANA_CARDS[MajorArcana.TheMagician];
-      const world = MAJOR_ARCANA_CARDS[MajorArcana.TheWorld];
-      
+      const magician = allCards.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheMagician);
+      const world = allCards.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheWorld);
+
       if (magician) {
         expect(getCardLotteryNumber(magician)).toBe(1);
       }
@@ -150,15 +146,17 @@ describe('Card to Lottery Number Mapping', () => {
     });
 
     it('should map The Fool to 0 and no other card to 0', () => {
-      const fool = MAJOR_ARCANA_CARDS[MajorArcana.TheFool];
+      const fool = allCards.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheFool);
       expect(fool).toBeDefined();
-      expect(getCardLotteryNumber(fool!)).toBe(0);
-      
-      // No other card should map to 0
-      const otherCards = allCards.filter(card => card !== fool);
-      otherCards.forEach(card => {
-        expect(getCardLotteryNumber(card)).not.toBe(0);
-      });
+      if (fool) {
+        expect(getCardLotteryNumber(fool)).toBe(0);
+
+        // No other card should map to 0
+        const otherCards = allCards.filter(card => card.id !== fool.id);
+        otherCards.forEach(card => {
+          expect(getCardLotteryNumber(card)).not.toBe(0);
+        });
+      }
     });
   });
 
@@ -206,12 +204,19 @@ describe('drawLotteryCards', () => {
   });
 
   it('should draw 5 main numbers and 1 bonus number', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
+    const magician = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheMagician)!;
+    const hierophant = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHierophant)!;
+    const lovers = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheLovers)!;
+    const chariot = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheChariot)!;
+    const strength = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.Strength)!;
+    const hermit = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHermit)!;
+
+    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: magician, isReversed: false }]) // 1
+      .mockReturnValueOnce([{ card: hierophant, isReversed: false }]) // 5
+      .mockReturnValueOnce([{ card: lovers, isReversed: false }]) // 6
+      .mockReturnValueOnce([{ card: chariot, isReversed: false }]) // 7
+      .mockReturnValueOnce([{ card: strength, isReversed: false }]) // 8
+      .mockReturnValueOnce([{ card: hermit, isReversed: false }]); // 9 (bonus)
 
     const result = drawLotteryCards(deck, megaMillions);
 
@@ -222,13 +227,21 @@ describe('drawLotteryCards', () => {
   });
 
   it('should re-draw main numbers if they are out of range', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MINOR_ARCANA_CARDS[MinorArcana.KingOfPentacles], isReversed: false }]) // 77 (invalid)
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
+    const kingOfPentacles = ALL_CARDS.find(c => c.arcana === Arcana.Minor && (c as MinorArcanaCard).suit === Suit.Pentacles && (c as MinorArcanaCard).number === MinorNumber.King)!;
+    const magician = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheMagician)!;
+    const hierophant = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHierophant)!;
+    const lovers = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheLovers)!;
+    const chariot = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheChariot)!;
+    const strength = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.Strength)!;
+    const hermit = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHermit)!;
+
+    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: kingOfPentacles, isReversed: false }]) // 77 (invalid)
+      .mockReturnValueOnce([{ card: magician, isReversed: false }]) // 1
+      .mockReturnValueOnce([{ card: hierophant, isReversed: false }]) // 5
+      .mockReturnValueOnce([{ card: lovers, isReversed: false }]) // 6
+      .mockReturnValueOnce([{ card: chariot, isReversed: false }]) // 7
+      .mockReturnValueOnce([{ card: strength, isReversed: false }]) // 8
+      .mockReturnValueOnce([{ card: hermit, isReversed: false }]); // 9 (bonus)
 
     const result = drawLotteryCards(deck, megaMillions);
 
@@ -240,13 +253,21 @@ describe('drawLotteryCards', () => {
   });
 
   it('should handle bonus number re-draws correctly', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: false }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: false }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: false }]) // 8
-      .mockReturnValueOnce([{ card: MINOR_ARCANA_CARDS[MinorArcana.AceOfSwords], isReversed: false }]) // 50 (invalid bonus)
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (valid bonus)
+    const magician = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheMagician)!;
+    const hierophant = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHierophant)!;
+    const lovers = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheLovers)!;
+    const chariot = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheChariot)!;
+    const strength = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.Strength)!;
+    const aceOfSwords = ALL_CARDS.find(c => c.arcana === Arcana.Minor && (c as MinorArcanaCard).suit === Suit.Swords && (c as MinorArcanaCard).number === MinorNumber.Ace)!;
+    const hermit = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHermit)!;
+
+    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: magician, isReversed: false }]) // 1
+      .mockReturnValueOnce([{ card: hierophant, isReversed: false }]) // 5
+      .mockReturnValueOnce([{ card: lovers, isReversed: false }]) // 6
+      .mockReturnValueOnce([{ card: chariot, isReversed: false }]) // 7
+      .mockReturnValueOnce([{ card: strength, isReversed: false }]) // 8
+      .mockReturnValueOnce([{ card: aceOfSwords, isReversed: false }]) // 50 (invalid bonus)
+      .mockReturnValueOnce([{ card: hermit, isReversed: false }]); // 9 (valid bonus)
 
     const result = drawLotteryCards(deck, megaMillions);
 
@@ -257,12 +278,19 @@ describe('drawLotteryCards', () => {
   });
 
   it('should correctly handle reversed cards', () => {
-    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], isReversed: true }]) // 1
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHierophant], isReversed: false }]) // 5
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheLovers], isReversed: true }]) // 6
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheChariot], isReversed: false }]) // 7
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.Strength], isReversed: true }]) // 8
-      .mockReturnValueOnce([{ card: MAJOR_ARCANA_CARDS[MajorArcana.TheHermit], isReversed: false }]); // 9 (bonus)
+    const magician = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheMagician)!;
+    const hierophant = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHierophant)!;
+    const lovers = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheLovers)!;
+    const chariot = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheChariot)!;
+    const strength = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.Strength)!;
+    const hermit = ALL_CARDS.find(c => c.arcana === Arcana.Major && c.number === MajorArcana.TheHermit)!;
+
+    (deck.selectCards as jest.Mock).mockReturnValueOnce([{ card: magician, isReversed: true }]) // 1
+      .mockReturnValueOnce([{ card: hierophant, isReversed: false }]) // 5
+      .mockReturnValueOnce([{ card: lovers, isReversed: true }]) // 6
+      .mockReturnValueOnce([{ card: chariot, isReversed: false }]) // 7
+      .mockReturnValueOnce([{ card: strength, isReversed: true }]) // 8
+      .mockReturnValueOnce([{ card: hermit, isReversed: false }]); // 9 (bonus)
 
     const result = drawLotteryCards(deck, megaMillions);
 

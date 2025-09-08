@@ -1,5 +1,6 @@
 import { SpreadReading } from '../src/types';
-import { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } from '../src/index';
+import { ALL_CARDS, ALL_SPREADS } from '../src/data';
+import { MajorArcana } from '../src/types';
 
 // Mock the entire openai module
 const mockCreate = jest.fn();
@@ -42,11 +43,11 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS.singleCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 
@@ -71,13 +72,13 @@ describe('OpenAI Integration', () => {
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.threeCard,
+      spread: ALL_SPREADS.threeCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheHighPriestess]!, position: 3, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!, position: 1, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheMagician)!, position: 2, isReversed: true },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheHighPriestess)!, position: 3, isReversed: false },
       ],
-      allowReversals: true,
+      allow_reversals: true,
       timestamp: new Date(),
     };
 
@@ -166,12 +167,12 @@ Use this information to craft a concise, cohesive, personalized interpretation t
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.threeCard,
+      spread: ALL_SPREADS.threeCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician]!, position: 2, isReversed: true },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!, position: 1, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheMagician)!, position: 2, isReversed: true },
       ],
-      allowReversals: true,
+      allow_reversals: true,
       timestamp: new Date(),
     };
 
@@ -206,11 +207,11 @@ Use this information to craft a concise, cohesive, personalized interpretation t
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS.singleCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 
@@ -229,11 +230,11 @@ Use this information to craft a concise, cohesive, personalized interpretation t
     const { getAiInterpretation } = require('../src/cli/openai');
 
     const mockReading: SpreadReading = {
-      spread: SPREADS.singleCard,
+      spread: ALL_SPREADS.singleCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool]!, position: 1, isReversed: false },
+        { card: ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!, position: 1, isReversed: false },
       ],
-      allowReversals: false,
+      allow_reversals: false,
       timestamp: new Date(),
     };
 

@@ -1,0 +1,34 @@
+number: 6
+name: The Lovers
+keywords:
+  - love
+  - harmony
+  - relationships
+  - values alignment
+meanings:
+  upright:
+    - Love
+    - Harmony
+    - Making value-based choices
+    - Partnership
+  reversed:
+    - Disharmony
+    - Misalignment of values
+    - Poor choices
+    - Relationship struggles
+visual_description:
+  background: A nude man and woman stand in a garden.
+  foreground: Above them, a large, winged angel with purple robes emerges from a cloud. Behind the woman is a tall fruit tree with a serpent coiled around its trunk. Behind the man is a tree with twelve flames.
+visual_description_analysis:
+  - The man and woman are commonly interpreted as Adam and Eve.
+  - ' The angel is Raphael.'
+  - ' The Tree of Knowledge (behind the woman) and the Tree of Life (behind the man) represent a choice between earthly desire and spiritual union.'
+symbols:
+  - angel
+  - serpent
+  - tree of knowledge
+  - tree of life
+significance: Representing the soul's first major choice, this card is about relationships and values.
+description: Represents love, relationships, and choices. A decision needs to be made based on your personal values.
+emoji: 👩‍❤️‍👨
+bg_color: '#FFB6C1'

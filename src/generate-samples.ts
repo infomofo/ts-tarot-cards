@@ -1,50 +1,20 @@
 /**
  * This script generates a fixed set of sample images and spread representations.
- *
- * Individual Cards:
- * - Ace of Cups
- * - 2 of Cups
- * - 3 of Cups (reversed)
- * - 4 of Pentacles
- * - 5 of Wands
- * - 6 of Wands
- * - 7 of Swords
- * - 8 of Swords
- * - 9 of Cups
- * - 10 of Swords
- * - Page of Pentacles
- * - Knight of Swords (reversed)
- * - Queen of Cups
- * - King of Wands
- * - The Fool
- * - The Fool with fool background image, no title, no number, no emoji
- * - 9 of swords with generic background image, showing title, number and emoji
- * - 2 of swords with generic background image, no number, no emoji
- *
- * Spreads (Text Representation):
- * - single spread
- * - three pick spread (with interpretation)
- * - celtic cross
- * - simplePastPresent
- * - cross spread (with interpretation)
- *
- * Spreads (SVG Representation):
- * - single spread
- * - three pick spread
- * - celtic cross (with interpretation)
- * - simplePastPresent
- * - cross spread
  */
 /* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import { getMajorArcanaCard } from './cards/major-arcana';
-import { getMinorArcanaCard } from './cards/minor-arcana';
 import {
-  MajorArcana, MinorArcana, SVGOptions, TarotCard,
+  SVGOptions, TarotCard,
 } from './types';
-import { SpreadReader, SPREAD_NAMES } from './spreads/spreads';
+import { SpreadReader } from './spreads/spreads';
 import { SpreadRenderer } from './spreads/renderer';
+import { ALL_CARDS } from './data';
+
+// Helper to find a card by its name
+function getCardByName(name: string): TarotCard | undefined {
+  return ALL_CARDS.find((card) => card.getName() === name);
+}
 
 function imageToDataURI(filePath: string): string {
   const fileContent = fs.readFileSync(filePath);
@@ -86,24 +56,24 @@ function generateSamples() {
     options?: SVGOptions,
     isReversed?: boolean
   }[] = [
-    { name: 'ace-of-cups', card: getMinorArcanaCard(MinorArcana.AceOfCups)! },
-    { name: '2-of-cups', card: getMinorArcanaCard(MinorArcana.TwoOfCups)! },
-    { name: '3-of-cups-reversed', card: getMinorArcanaCard(MinorArcana.ThreeOfCups)!, isReversed: true },
-    { name: '4-of-pentacles', card: getMinorArcanaCard(MinorArcana.FourOfPentacles)! },
-    { name: '5-of-wands', card: getMinorArcanaCard(MinorArcana.FiveOfWands)! },
-    { name: '6-of-wands', card: getMinorArcanaCard(MinorArcana.SixOfWands)! },
-    { name: '7-of-swords', card: getMinorArcanaCard(MinorArcana.SevenOfSwords)! },
-    { name: '8-of-swords', card: getMinorArcanaCard(MinorArcana.EightOfSwords)! },
-    { name: '9-of-cups', card: getMinorArcanaCard(MinorArcana.NineOfCups)! },
-    { name: '10-of-swords', card: getMinorArcanaCard(MinorArcana.TenOfSwords)! },
-    { name: 'page-of-pentacles', card: getMinorArcanaCard(MinorArcana.PageOfPentacles)! },
-    { name: 'knight-of-swords-reversed', card: getMinorArcanaCard(MinorArcana.KnightOfSwords)!, isReversed: true },
-    { name: 'queen-of-cups', card: getMinorArcanaCard(MinorArcana.QueenOfCups)! },
-    { name: 'king-of-wands', card: getMinorArcanaCard(MinorArcana.KingOfWands)! },
-    { name: 'the-fool', card: getMajorArcanaCard(MajorArcana.TheFool)! },
+    { name: 'ace-of-cups', card: getCardByName('Ace of Cups')! },
+    { name: '2-of-cups', card: getCardByName('Two of Cups')! },
+    { name: '3-of-cups-reversed', card: getCardByName('Three of Cups')!, isReversed: true },
+    { name: '4-of-pentacles', card: getCardByName('Four of Pentacles')! },
+    { name: '5-of-wands', card: getCardByName('Five of Wands')! },
+    { name: '6-of-wands', card: getCardByName('Six of Wands')! },
+    { name: '7-of-swords', card: getCardByName('Seven of Swords')! },
+    { name: '8-of-swords', card: getCardByName('Eight of Swords')! },
+    { name: '9-of-cups', card: getCardByName('Nine of Cups')! },
+    { name: '10-of-swords', card: getCardByName('Ten of Swords')! },
+    { name: 'page-of-pentacles', card: getCardByName('Page of Pentacles')! },
+    { name: 'knight-of-swords-reversed', card: getCardByName('Knight of Swords')!, isReversed: true },
+    { name: 'queen-of-cups', card: getCardByName('Queen of Cups')! },
+    { name: 'king-of-wands', card: getCardByName('King of Wands')! },
+    { name: 'the-fool', card: getCardByName('The Fool')! },
     {
       name: 'the-fool-custom-bg',
-      card: getMajorArcanaCard(MajorArcana.TheFool)!,
+      card: getCardByName('The Fool')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/publicdomain-00-fool.jpg')),
         hideTitle: true,
@@ -113,14 +83,14 @@ function generateSamples() {
     },
     {
       name: '9-of-swords-generic-bg',
-      card: getMinorArcanaCard(MinorArcana.NineOfSwords)!,
+      card: getCardByName('Nine of Swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
       },
     },
     {
       name: '2-of-swords-generic-bg-no-text',
-      card: getMinorArcanaCard(MinorArcana.TwoOfSwords)!,
+      card: getCardByName('Two of Swords')!,
       options: {
         artOverrideUrl: imageToDataURI(path.join(__dirname, '../tests/resources/generic-tarot-back.png')),
         hideNumber: true,
@@ -130,21 +100,25 @@ function generateSamples() {
   ];
 
   individualCards.forEach((sample) => {
+    if (!sample.card) {
+      console.error(`Card not found for sample: ${sample.name}`);
+      return;
+    }
     const svg = sample.card.getSvg({ ...sample.options, isReversed: sample.isReversed });
     fs.writeFileSync(path.join(samplesDir, `${sample.name}.svg`), svg);
   });
 
   // --- Generate Spreads ---
   const spreadsToGenerate = [
-    { name: SPREAD_NAMES.singleCard, interpretation: undefined },
-    { name: SPREAD_NAMES.threeCard, interpretation: 'A simple look at the past, present, and future.' },
-    { name: SPREAD_NAMES.celticCross, interpretation: 'A deep dive into a complex situation.' },
-    { name: SPREAD_NAMES.simplePastPresent, interpretation: undefined },
-    { name: SPREAD_NAMES.crossSpread, interpretation: 'A look at the core of the situation and its challenges.' },
+    { name: 'singleCard', interpretation: undefined },
+    { name: 'threeCard', interpretation: 'A simple look at the past, present, and future.' },
+    { name: 'celticCross', interpretation: 'A deep dive into a complex situation.' },
+    { name: 'simplePastPresent', interpretation: undefined },
+    { name: 'crossSpread', interpretation: 'A look at the core of the situation and its challenges.' },
   ];
 
   spreadsToGenerate.forEach((spreadInfo) => {
-    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    const reading = spreadReader.performReading(spreadInfo.name);
     if (spreadInfo.interpretation) {
       reading.interpretation = spreadInfo.interpretation;
     }
@@ -160,12 +134,12 @@ function generateSamples() {
 
   // --- Generate Animated Spreads ---
   const animatedSpreadsToGenerate = [
-    { name: SPREAD_NAMES.threeCard },
-    { name: SPREAD_NAMES.celticCross },
+    { name: 'threeCard' },
+    { name: 'celticCross' },
   ];
 
   animatedSpreadsToGenerate.forEach((spreadInfo) => {
-    const reading = spreadReader.performReading(spreadInfo.name as keyof typeof SPREAD_NAMES);
+    const reading = spreadReader.performReading(spreadInfo.name);
     const svgRepresentation = spreadRenderer.renderAsSvg(reading, true);
     fs.writeFileSync(path.join(samplesDir, `${spreadInfo.name}-animated.svg`), svgRepresentation);
   });

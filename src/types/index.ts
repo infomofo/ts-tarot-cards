@@ -57,6 +57,24 @@ export enum Element {
   Fire = 'Fire',
 }
 
+// New Tag interface for structured symbols
+export interface Tag {
+  name: string;
+  lineage: string;
+  appearance: string;
+  interpretation: string;
+  meaning: string;
+  mythological_significance: string;
+}
+
+// New Numerology interface
+export interface Numerology {
+  name: string;
+  meanings: string[];
+  appearances: string[];
+  significance: string[];
+}
+
 // Symbol type for hierarchical tagging of visual elements
 export type CardSymbol = string; // Freeform strings like "bird", "fruit", "sun", "mountain", etc.
 
@@ -219,7 +237,7 @@ export function getMajorArcanaName(num: MajorArcana): string {
 
 export interface SuitProperties {
   element: Element;
-  generalMeaning: string;
+  general_meaning: string;
   keywords: string[];
   emoji: string;
 }
@@ -241,16 +259,21 @@ export interface SVGOptions {
 export interface BaseTarotCard {
   id: string;
   keywords: string[];
-  uprightMeanings: string[]; // Changed from string to array for better structure
-  reversedMeanings: string[]; // Changed from string to array for better structure
-  visualDescription: string; // Description of the traditional Smith artwork
-  visualDescriptionAnalysis: string; // Analysis of the visual description
-  symbols: CardSymbol[]; // Hierarchical symbol tags for visual elements
-  significance: string; // Card's significance and place in the journey
-  description: string; // General description
-  arcana: Arcana; // Overridden by extensions
-  number: MajorArcana | MinorNumber; // Overridden by extensions - unified numeric system
-  romanNumeral: string; // Derived from number during initialization
+  meanings: {
+    upright: string[];
+    reversed: string[];
+  };
+  visual_description: {
+    background: string;
+    foreground: string;
+  };
+  visual_description_analysis: string[];
+  symbols: CardSymbol[]; // This will be mapped to Tag objects in the implementation
+  significance: string;
+  description: string;
+  arcana: Arcana;
+  number: MajorArcana | MinorNumber;
+  romanNumeral: string;
 
   // Dynamic name generation for localization support
   getName(locale?: string): string;
@@ -273,7 +296,8 @@ export interface MinorArcanaCard extends BaseTarotCard {
   arcana: Arcana.Minor;
   suit: Suit;
   number: MinorNumber;
-  faceCardEmoji?: string;
+  element: Element;
+  emoji: string;
 }
 
 // Union type for any tarot card
@@ -288,8 +312,8 @@ export interface CardPosition {
 export interface SpreadPosition {
   position: number;
   name: string;
-  positionSignificance: string; // What this position represents in the spread context
-  dealOrder: number; // Order in which this position is dealt
+  position_significance: string; // What this position represents in the spread context
+  deal_order: number; // Order in which this position is dealt
 }
 
 export interface SpreadLayoutPosition {
@@ -304,8 +328,8 @@ export interface Spread {
   positions: SpreadPosition[];
   description: string;
   layout: SpreadLayoutPosition[];
-  allowReversals: boolean; // Whether this spread uses reversals
-  preferredStrategy?: string; // Preferred card selection strategy name
+  allow_reversals: boolean; // Whether this spread uses reversals
+  preferred_strategy?: string; // Preferred card selection strategy name
 }
 
 export interface CardInterpretation {
@@ -322,7 +346,7 @@ export interface SpreadReading {
   cardInterpretations?: CardInterpretation[];
   interpretation?: string; // Interpretation of the entire spread reading
   userContext?: string; // User-provided context like "what area of life to explore"
-  allowReversals: boolean; // Whether this specific reading allows reversals
+  allow_reversals: boolean; // Whether this specific reading allows reversals
   timestamp: Date;
 }
 

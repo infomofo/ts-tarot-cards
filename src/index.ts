@@ -1,8 +1,8 @@
 // Core types and enums
 export * from './types';
 
-// Card definitions and utilities
-export * from './cards/suit';
+// Card data and implementations
+export * from './data';
 export * from './cards/major-arcana';
 export * from './cards/minor-arcana';
 

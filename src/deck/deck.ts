@@ -1,8 +1,7 @@
 import {
   TarotCard, CardPosition, CardSelectionStrategy, CardSelectionOptions, ShuffleStrategy,
 } from '../types';
-import { MAJOR_ARCANA_CARDS } from '../cards/major-arcana';
-import { MINOR_ARCANA_CARDS } from '../cards/minor-arcana';
+import { ALL_CARDS } from '../data';
 import { CARD_SELECTION_STRATEGIES } from './card-selection-strategies';
 import { SHUFFLE_STRATEGIES } from './shuffle-strategies';
 
@@ -28,14 +27,8 @@ export class TarotDeck {
   }
 
   private initializeDeck(): void {
-    // Clear existing cards
-    this.initialDeck = [];
-
-    // Add available major arcana cards
-    this.initialDeck.push(...Object.values(MAJOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
-
-    // Add available minor arcana cards
-    this.initialDeck.push(...Object.values(MINOR_ARCANA_CARDS).filter(Boolean) as TarotCard[]);
+    // Use the comprehensive list of all cards from the data module
+    this.initialDeck = [...ALL_CARDS];
   }
 
   /**

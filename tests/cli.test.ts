@@ -1,7 +1,8 @@
 jest.mock('inquirer');
 import inquirer from 'inquirer';
 import { mainMenu } from '../src/cli/index';
-import { SpreadReader } from '../src/index';
+import { ALL_CARDS, ALL_SPREADS } from '../src/data';
+import { MajorArcana, SpreadReading } from '../src/types';
 
 describe('CLIO CLI', () => {
   let consoleLogSpy: jest.SpyInstance;
@@ -31,7 +32,8 @@ describe('CLIO CLI', () => {
   });
 
   it('should show card details and loop', async () => {
-    const { MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
+    const fool = ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!;
+    const magician = ALL_CARDS.find(c => c.number === MajorArcana.TheMagician)!;
     const mockPrompt = jest.fn()
       .mockResolvedValueOnce({ choice: 'Learn about the tarot cards' })
       .mockResolvedValueOnce({ cardName: 'The Fool' })
@@ -50,21 +52,24 @@ describe('CLIO CLI', () => {
 
     expect(mockPrompt).toHaveBeenCalledTimes(6);
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Fool ***'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheFool].description));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(fool.description));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('*** The Magician ***'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(MAJOR_ARCANA_CARDS[MajorArcana.TheMagician].description));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining(magician.description));
   });
 
   it('should perform a reading and loop', async () => {
-    const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
-    const mockReading = {
-      spread: SPREADS.threeCard,
+    const fool = ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!;
+    const magician = ALL_CARDS.find(c => c.number === MajorArcana.TheMagician)!;
+    const highPriestess = ALL_CARDS.find(c => c.number === MajorArcana.TheHighPriestess)!;
+
+    const mockReading: SpreadReading = {
+      spread: ALL_SPREADS.threeCard,
       cards: [
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheMagician], position: 2, isReversed: false },
-        { card: MAJOR_ARCANA_CARDS[MajorArcana.TheHighPriestess], position: 3, isReversed: false },
+        { card: fool, position: 1, isReversed: false },
+        { card: magician, position: 2, isReversed: false },
+        { card: highPriestess, position: 3, isReversed: false },
       ],
-      allowReversals: true,
+      allow_reversals: true,
       timestamp: new Date(),
     };
 
@@ -103,13 +108,13 @@ describe('CLIO CLI', () => {
     delete process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
-      const mockReading = {
-        spread: SPREADS.singleCard,
+      const fool = ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!;
+      const mockReading: SpreadReading = {
+        spread: ALL_SPREADS.singleCard,
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: fool, position: 1, isReversed: false },
         ],
-        allowReversals: false,
+        allow_reversals: false,
         timestamp: new Date(),
       };
 
@@ -155,13 +160,13 @@ describe('CLIO CLI', () => {
     const originalEnv = process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
-      const mockReading = {
-        spread: SPREADS.singleCard,
+      const fool = ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!;
+      const mockReading: SpreadReading = {
+        spread: ALL_SPREADS.singleCard,
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: fool, position: 1, isReversed: false },
         ],
-        allowReversals: false,
+        allow_reversals: false,
         timestamp: new Date(),
       };
 
@@ -195,7 +200,7 @@ describe('CLIO CLI', () => {
         expect.objectContaining({
           spread: mockReading.spread,
           cards: mockReading.cards,
-          allowReversals: mockReading.allowReversals,
+          allow_reversals: mockReading.allow_reversals,
         }),
         'What should I focus on today?'
       );
@@ -217,13 +222,13 @@ describe('CLIO CLI', () => {
     const originalEnv = process.env.OPENAI_API_KEY;
 
     try {
-      const { SPREADS, MAJOR_ARCANA_CARDS, MajorArcana } = require('../src/index');
-      const mockReading = {
-        spread: SPREADS.singleCard,
+      const fool = ALL_CARDS.find(c => c.number === MajorArcana.TheFool)!;
+      const mockReading: SpreadReading = {
+        spread: ALL_SPREADS.singleCard,
         cards: [
-          { card: MAJOR_ARCANA_CARDS[MajorArcana.TheFool], position: 1, isReversed: false },
+          { card: fool, position: 1, isReversed: false },
         ],
-        allowReversals: false,
+        allow_reversals: false,
         timestamp: new Date(),
       };
 

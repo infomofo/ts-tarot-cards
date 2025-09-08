@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
+import { Tag, Numerology } from './types';
 
 // Define the structure of the raw data loaded from YAML files
 // These will be different from the final application types
@@ -62,22 +63,6 @@ interface RawSpread {
   positions: RawSpreadPosition[];
 }
 
-interface RawTag {
-  name: string;
-  lineage: string;
-  appearance: string;
-  interpretation: string;
-  meaning: string;
-  mythological_significance: string;
-}
-
-interface RawNumerology {
-  name: string;
-  meanings: string[];
-  appearances: string[];
-  significance: string[];
-}
-
 // Path to the tarot-model directory
 const tarotModelDir = path.join(process.cwd(), 'tarot-model');
 
@@ -114,15 +99,15 @@ function loadSpreads(): Record<string, RawSpread> {
   return data.spreads;
 }
 
-function loadTags(): Record<string, RawTag> {
+function loadTags(): Record<string, Tag> {
   const tagsPath = path.join(tarotModelDir, 'tags.yml');
-  const data = yaml.load(fs.readFileSync(tagsPath, 'utf8')) as { tags: Record<string, RawTag> };
+  const data = yaml.load(fs.readFileSync(tagsPath, 'utf8')) as { tags: Record<string, Tag> };
   return data.tags;
 }
 
-function loadNumerology(): Record<number, RawNumerology> {
+function loadNumerology(): Record<number, Numerology> {
   const numerologyPath = path.join(tarotModelDir, 'numerology.yml');
-  const data = yaml.load(fs.readFileSync(numerologyPath, 'utf8')) as { numbers: Record<number, RawNumerology> };
+  const data = yaml.load(fs.readFileSync(numerologyPath, 'utf8')) as { numbers: Record<number, Numerology> };
   return data.numbers;
 }
 

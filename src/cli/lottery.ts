@@ -53,7 +53,7 @@ interface LotteryType {
   };
 }
 
-const LOTTERY_TYPES: Record<string, LotteryType> = {
+export const LOTTERY_TYPES: Record<string, LotteryType> = {
   mega_millions: {
     name: 'Mega Millions',
     mainNumbers: {
@@ -63,7 +63,7 @@ const LOTTERY_TYPES: Record<string, LotteryType> = {
     },
     bonusNumber: {
       min: 1,
-      max: 25,
+      max: 24,
     },
   },
   powerball: {
@@ -304,16 +304,17 @@ export async function getLotteryNumbers(): Promise<boolean> {
       type: 'list',
       name: 'lotteryType',
       message: prompts.lottery.type_selection,
-      choices: [
-        {
-          name: prompts.lottery.type_choices.mega_millions,
-          value: 'mega_millions',
-        },
-        {
-          name: prompts.lottery.type_choices.powerball,
-          value: 'powerball',
-        },
-      ],
+      choices: Object.entries(LOTTERY_TYPES).map(([key, lottery]) => ({
+        name: formatPrompt(prompts.lottery.lottery_choice_format, {
+          name: lottery.name,
+          main_count: lottery.mainNumbers.count,
+          main_min: lottery.mainNumbers.min,
+          main_max: lottery.mainNumbers.max,
+          bonus_min: lottery.bonusNumber.min,
+          bonus_max: lottery.bonusNumber.max,
+        }),
+        value: key,
+      })),
     },
   ]);
 

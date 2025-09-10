@@ -38,6 +38,7 @@ interface Prompts {
       mega_millions: string;
       powerball: string;
     };
+    lottery_choice_format: string;
     drawing_cards: string;
     card_drawn: string;
     number_mapped: string;
@@ -122,9 +123,10 @@ export function loadPrompts(): Prompts {
         welcome: 'Ah, seeker, you wish to divine fortune through the ancient art and modern chance!',
         type_selection: 'Which lottery calls to your spirit?',
         type_choices: {
-          mega_millions: 'Mega Millions (5 numbers 1-70, bonus 1-25)',
-          powerball: 'PowerBall (5 numbers 1-69, bonus 1-26)',
+          mega_millions: 'Mega Millions',
+          powerball: 'PowerBall',
         },
+        lottery_choice_format: '{name} ({main_count} numbers {main_min}-{main_max}, bonus {bonus_min}-{bonus_max})',
         drawing_cards: 'The digital cosmos shuffles the deck... drawing your destined cards...',
         card_drawn: 'Card {position}: {card_name}',
         number_mapped: '  → Lottery number: {number}',

@@ -53,7 +53,7 @@ interface LotteryType {
   };
 }
 
-const LOTTERY_TYPES: Record<string, LotteryType> = {
+export const LOTTERY_TYPES: Record<string, LotteryType> = {
   mega_millions: {
     name: 'Mega Millions',
     mainNumbers: {
@@ -63,7 +63,7 @@ const LOTTERY_TYPES: Record<string, LotteryType> = {
     },
     bonusNumber: {
       min: 1,
-      max: 25,
+      max: 24,
     },
   },
   powerball: {

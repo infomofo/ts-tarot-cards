@@ -116,26 +116,16 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
 
     const positionName = `Main ${mainNumberCount + 1}${isRedraw ? ' (Redraw)' : ''}`;
-    const cardDisplayName = cardPosition.isReversed
-      ? `${cardPosition.card.getName()} (Reversed)`
-      : cardPosition.card.getName();
-
-    console.log(formatPrompt(prompts.lottery.card_drawn, {
-      position: positionName,
-      card_name: cardDisplayName,
-    }));
 
     // Check if number is in valid range for main numbers
     const isValidMainNumber = lotteryNumber >= lotteryType.mainNumbers.min
       && lotteryNumber <= lotteryType.mainNumbers.max;
 
     if (isValidMainNumber) {
-      console.log(formatPrompt(prompts.lottery.number_mapped, { number: lotteryNumber }));
       mainNumbers.push(lotteryNumber);
       mainNumberCount += 1;
       isRedraw = false;
     } else {
-      console.log(prompts.lottery.invalid_number);
       isRedraw = true;
     }
 
@@ -158,34 +148,16 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
     }
     const cardPosition = cardPositions[0];
 
-    const positionName = prompts.lottery.position_names.bonus;
     const lotteryNumber = getCardLotteryNumber(cardPosition.card);
-
-    if (bonusAttempts > 0) {
-      console.log(prompts.lottery.bonus_redraw);
-    }
-
-    const cardDisplayName = cardPosition.isReversed
-      ? `${cardPosition.card.getName()} (Reversed)`
-      : cardPosition.card.getName();
-
-    console.log(formatPrompt(prompts.lottery.card_drawn, {
-      position: positionName,
-      card_name: cardDisplayName,
-    }));
 
     // Check if number is in valid range for bonus number
     const isValidBonusNumber = lotteryNumber >= lotteryType.bonusNumber.min
       && lotteryNumber <= lotteryType.bonusNumber.max;
 
     if (isValidBonusNumber) {
-      console.log(formatPrompt(prompts.lottery.number_mapped, { number: lotteryNumber }));
       bonusNumber = lotteryNumber;
-    } else {
-      console.log(prompts.lottery.invalid_number);
-      if (bonusAttempts === 2) {
-        quickPickCount += 1;
-      }
+    } else if (bonusAttempts === 2) {
+      quickPickCount += 1;
     }
 
     // Always record the card for interpretation purposes
@@ -221,16 +193,20 @@ export function drawLotteryCards(deck: TarotDeck, lotteryType: LotteryType): Lot
 function displayLotteryResults(result: LotteryResult): void {
   const prompts = loadPrompts();
 
+  // Card-to-number mapping
+  result.drawnCards.forEach((drawn) => {
+    const cardName = drawn.isReversed
+      ? `${drawn.card.getName()} (Reversed)`
+      : drawn.card.getName();
+    console.log(formatPrompt(prompts.lottery.card_line, {
+      card_name: cardName,
+      number: drawn.lotteryNumber,
+    }));
+  });
+
+  // Final numbers
   console.log(`\n${prompts.lottery.numbers_summary}`);
 
-  // Display drawn cards
-  const cardsList = result.drawnCards
-    .map((drawn) => (drawn.isReversed ? `${drawn.card.getName()} (Reversed)` : drawn.card.getName()))
-    .join(prompts.lottery.display_text.separator);
-  console.log(formatPrompt(prompts.lottery.drawn_cards_summary, { cards_list: cardsList }));
-  console.log('');
-
-  // Display main numbers
   const validMainNumbers = result.mainNumbers.filter((n) => n !== null);
   const mainNumbersDisplay = validMainNumbers.length > 0
     ? validMainNumbers.join(prompts.lottery.display_text.separator)
@@ -240,13 +216,11 @@ function displayLotteryResults(result: LotteryResult): void {
 
   console.log(formatPrompt(prompts.lottery.main_numbers, { numbers: mainNumbersDisplay }));
 
-  // Display bonus number
   const bonusDisplay = result.bonusNumber !== null
     ? result.bonusNumber.toString()
     : prompts.lottery.display_text.quick_pick;
   console.log(formatPrompt(prompts.lottery.bonus_number, { number: bonusDisplay }));
 
-  // Display quick pick count if any
   if (result.quickPickCount > 0) {
     console.log(formatPrompt(prompts.lottery.quick_pick_count, { count: result.quickPickCount }));
   }

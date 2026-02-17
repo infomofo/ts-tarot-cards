@@ -95,12 +95,13 @@ function buildGenericInterpretationPrompt(context: InterpretationContext): strin
     prompt += `Arcana: ${card.arcana}\n`;
     prompt += `Keywords: ${card.keywords.join(', ')}\n`;
 
-    // Include visual description and analysis
-    prompt += `Visual Description: ${card.visual_description.background} ${card.visual_description.foreground}\n`;
-    prompt += `Visual Analysis: ${card.visual_description_analysis.join(' ')}\n`;
-    prompt += `Symbols: ${card.symbols.join(', ')}\n`;
-    prompt += `Significance: ${card.significance}\n`;
-    prompt += `Description: ${card.description}\n`;
+    if (context.contextType !== 'lottery') {
+      prompt += `Visual Description: ${card.visual_description.background} ${card.visual_description.foreground}\n`;
+      prompt += `Visual Analysis: ${card.visual_description_analysis.join(' ')}\n`;
+      prompt += `Symbols: ${card.symbols.join(', ')}\n`;
+      prompt += `Significance: ${card.significance}\n`;
+      prompt += `Description: ${card.description}\n`;
+    }
 
     const meanings = cardInfo.isReversed
       ? card.meanings.reversed
@@ -203,7 +204,7 @@ export async function getGenericAiInterpretation(
   const prompt = buildGenericInterpretationPrompt(context);
 
   try {
-    const maxTokens = context.contextType === 'lottery' ? 700 : 800;
+    const maxTokens = context.contextType === 'lottery' ? 400 : 800;
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [

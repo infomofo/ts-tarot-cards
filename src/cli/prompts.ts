@@ -40,12 +40,8 @@ interface Prompts {
     };
     lottery_choice_format: string;
     drawing_cards: string;
-    card_drawn: string;
-    number_mapped: string;
-    invalid_number: string;
-    bonus_redraw: string;
+    card_line: string;
     numbers_summary: string;
-    drawn_cards_summary: string;
     main_numbers: string;
     bonus_number: string;
     quick_pick_count: string;
@@ -128,14 +124,10 @@ export function loadPrompts(): Prompts {
         },
         lottery_choice_format: '{name} ({main_count} numbers {main_min}-{main_max}, bonus {bonus_min}-{bonus_max})',
         drawing_cards: 'The digital cosmos shuffles the deck... drawing your destined cards...',
-        card_drawn: 'Card {position}: {card_name}',
-        number_mapped: '  → Lottery number: {number}',
-        invalid_number: '  → Outside lottery range (will be quick pick)',
-        bonus_redraw: 'Bonus card outside range, drawing another...',
+        card_line: '  {card_name} → {number}',
         numbers_summary: 'Your mystically-guided lottery numbers:',
-        drawn_cards_summary: 'Cards drawn for this reading: {cards_list}',
-        main_numbers: 'Main numbers: {numbers}',
-        bonus_number: 'Bonus number: {number}',
+        main_numbers: '  Main numbers: {numbers}',
+        bonus_number: '  Bonus number: {number}',
         quick_pick_count: '{count} numbers marked as quick pick due to cards outside valid range',
         ai_reflection: 'CLIO gazes into the cosmic significance of your drawn cards...',
         ai_unavailable_lottery: 'The digital currents are unclear for deeper interpretation, but the numbers have been chosen by fate.',
